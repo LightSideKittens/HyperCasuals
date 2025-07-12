@@ -182,7 +182,7 @@ public class FieldManager : MonoBehaviour
             {
                 var appearFxInstance = Instantiate(shapeAppearFx, shape.transform.position, Quaternion.identity);
                 appearFxInstance.transform.localScale = Vector3.zero;
-                appearFxInstance.transform.DOScale(4, 3f); 
+                appearFxInstance.transform.DOScale(4, 3f).KillOnDestroy(); 
             });
         }
     }

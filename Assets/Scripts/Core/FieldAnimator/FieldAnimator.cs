@@ -75,7 +75,7 @@ namespace Core
 
         private void Awake()
         {
-            //fieldManager.ShapePlaced += OnDestroyBlocks;
+            fieldManager.BlocksDestroying += OnDestroyBlocks;
 
             foreach (var handler in handlers.Values)
             {
