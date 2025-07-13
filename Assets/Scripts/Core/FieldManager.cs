@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core;
 using DG.Tweening;
 using LSCore.Extensions.Unity;
 using UnityEngine;
@@ -10,33 +9,33 @@ using Random = UnityEngine.Random;
 
 public class FieldManager : MonoBehaviour
 {
-    [SerializeField] private DifficultyManager difficultyManager;
     public List<Spawner> spawners;
     private List<Shape> activeShapes = new();
-    private Dictionary<SpriteRenderer, Sprite> originalSprites;
+    private Dictionary<Block, Sprite> originalSprites;
     public Vector2Int gridSize;
-
+    
     public ParticleSystem shapeAppearFx;
     
     public float defaultShapeSize = 0.85f;
+    public SpriteRenderer back;
+
+    public Dragger dragger;
     
     private Vector3 gridOffset;
-    private SpriteRenderer[,] grid;
-    public SpriteRenderer back;
+    private Block[,] grid;
     public bool debug;
     private int spawnShapeLock = 0;
     private bool allShapesPlaced;
     private Color shapeColor;
     private Shape currentGhostShape;
-    private Shape currentShape;
-    public ScoreManager scoreManager;
+    private Shape currentShape => dragger.currentShape;
     
     private int? lastUsedSpriteIndex = null;
     
-    [NonSerialized] public List<List<(Vector2Int index, SpriteRenderer block)>> suicidesData = new();
-    [NonSerialized] public List<List<(Vector2Int index, SpriteRenderer block)>> uniqueSuicidesData = new();
-    public List<(Vector2Int, SpriteRenderer)> duplicateIndexes = new();
-    public IEnumerable<(Vector2Int index, SpriteRenderer block)> UniqueSuicidesData
+    [NonSerialized] public List<List<(Vector2Int index, Block block)>> suicidesData = new();
+    [NonSerialized] public List<List<(Vector2Int index, Block block)>> uniqueSuicidesData = new();
+    public List<(Vector2Int, Block)> duplicateIndexes = new();
+    public IEnumerable<(Vector2Int index, Block block)> UniqueSuicidesData
     {
         get
         {
@@ -51,27 +50,83 @@ public class FieldManager : MonoBehaviour
             }
         }
     }
+
     private void Awake()
     {
-        originalSprites = new Dictionary<SpriteRenderer, Sprite>();
-        grid = new SpriteRenderer[gridSize.x, gridSize.y];
+        originalSprites = new Dictionary<Block, Sprite>();
+        grid = new Block[gridSize.x, gridSize.y];
         gridOffset = new Vector3(back.size.x / 2, back.size.y / 2) - LSVector3.half;
         CreateAndInitShape();
+
+        dragger.Started += shape =>
+        {
+            ClearCurrentGhostShape();
+            shape.transform.DOScale(Vector3.one, 0.2f);
+            CreateGhostShape();
+            currentGhostShape.gameObject.SetActive(false);
+        };
+
+        dragger.Ended += shape =>
+        {
+            ClearCurrentGhostShape();
+
+            var gridIndices = new List<Vector2Int>();
+
+            var canPlace = CanPlaceShape(shape, ref gridIndices);
+
+            if (canPlace)
+            {
+                var sequence = DOTween.Sequence();
+
+                for (int j = 0; j < shape.blocks.Count; j++)
+                {
+                    var gridIndex = gridIndices[j];
+                    Vector2 worldPos = gridIndex - (Vector2)gridOffset;
+
+                    var block = shape.blocks[j];
+                    grid[gridIndex.x, gridIndex.y] = block;
+
+                    block.transform.parent = null;
+                    var tween = block.transform.DOMove(back.transform.TransformPoint(worldPos), 0.3f);
+                    sequence.Insert(j * 0.025f, tween);
+                }
+
+                activeShapes.Remove(shape);
+
+                if (ClearFullLines())
+                {
+                    BlocksDestroying?.Invoke(shape.BlockPrefab);
+                }
+
+                CheckLoseCondition();
+
+                spawnShapeLock++;
+                if (spawnShapeLock >= spawners.Count)
+                {
+                    spawnShapeLock = 0;
+                    CreateAndInitShape();
+                }
+
+                Destroy(shape.gameObject);
+            }
+            else
+            {
+                shape.transform.DOMove(dragger.shapeStartPos, 0.6f).SetEase(Ease.InOutExpo);
+                shape.transform.DOScale(Vector3.one * defaultShapeSize, 0.2f);
+            }
+        };
     }
 
     private async void CreateAndInitShape()
     {
         int totalSpawners = spawners.Count;
 
-        // 1. Получаем текущий уровень сложности от 0 до 1
-        float difficulty = difficultyManager.GetDifficultyValue();
-
-        // 2. Собираем все префабы фигур
         List<Shape> allShapes = new();
         foreach (var spawner in spawners)
+        {
             allShapes.AddRange(spawner.GetAllShapePrefabs());
+        }
 
-        // 3. Ищем фигуры, которые реально можно поставить
         List<Shape> validShapes = new();
         foreach (var shapePrefab in allShapes)
         {
@@ -79,13 +134,12 @@ public class FieldManager : MonoBehaviour
             bool canPlace = await CanPlace(temp);
             Destroy(temp.gameObject);
             if (canPlace)
+            {
                 validShapes.Add(shapePrefab);
+            }
         }
 
-        // 4. Выбираем спавнер, который гарантированно получит подходящую фигуру
         int guaranteedIndex = validShapes.Count > 0 ? Random.Range(0, totalSpawners) : -1;
-
-        // 5. Спавним фигуры
         for (int i = 0; i < totalSpawners; i++)
         {
             var spawner = spawners[i];
@@ -100,74 +154,11 @@ public class FieldManager : MonoBehaviour
             else
             {
                 shape = spawner.SpawnRandomShape(ref lastUsedSpriteIndex);
-                Debug.Log($"[SPAWN] Спавнер {i}: случайная фигура (сложность {difficulty:F2})");
             }
 
             activeShapes.Add(shape);
-
-            var dragger = shape.GetComponent<Dragger>();
-            var startPos = shape.transform.position;
+            
             shape.transform.localScale = Vector3.one * defaultShapeSize;
-
-            dragger.Started += () =>
-            {
-                ClearCurrentGhostShape();
-                shape.transform.DOScale(Vector3.one, 0.2f);
-                dragger.fieldManager = this;
-                
-                CreateGhostShape(dragger.transform);
-                currentGhostShape.gameObject.SetActive(false);
-            };
-
-            dragger.Ended += () =>
-            {
-                ClearCurrentGhostShape();
-
-                var gridIndices = new List<Vector2Int>();
-
-                var canPlace = CanPlaceShape(shape, ref gridIndices);
-
-                if (canPlace)
-                {
-                    var sequence = DOTween.Sequence();
-                    
-                    for (int j = 0; j < shape.blocks.Count; j++)
-                    {
-                        var gridIndex = gridIndices[j];
-                        Vector2 worldPos = gridIndex - (Vector2)gridOffset;
-
-                        var block = shape.blocks[j];
-                        grid[gridIndex.x, gridIndex.y] = block;
-
-                        block.transform.parent = null;
-                        var tween = block.transform.DOMove(back.transform.TransformPoint(worldPos), 0.3f);
-                        sequence.Insert(j * 0.025f, tween);
-                    }
-
-                    activeShapes.Remove(shape);
-                    Destroy(dragger.gameObject);
-
-                    difficultyManager.OnShapePlaced();
-                    
-                    if (ClearFullLines())
-                    {
-                        BlocksDestroying?.Invoke(shape.BlockPrefab);
-                    }
-                    CheckLoseCondition();
-
-                    spawnShapeLock++;
-                    if (spawnShapeLock >= spawners.Count)
-                    {
-                        spawnShapeLock = 0;
-                        CreateAndInitShape();
-                    }
-                }
-                else
-                {
-                    shape.transform.DOMove(startPos, 0.6f).SetEase(Ease.InOutExpo);
-                    shape.transform.DOScale(Vector3.one * defaultShapeSize, 0.2f);
-                }
-            };
         }
 
         for (int i = 0; i < activeShapes.Count; i++)
@@ -185,6 +176,11 @@ public class FieldManager : MonoBehaviour
                 appearFxInstance.transform.DOScale(4, 3f).KillOnDestroy(); 
             });
         }
+    }
+
+    private void Update()
+    {
+        UpdateGhost();
     }
 
     private bool CanPlaceShape(Shape shape, ref List<Vector2Int> gridIndices)
@@ -281,24 +277,19 @@ public class FieldManager : MonoBehaviour
         int w = grid.GetLength(0), h = grid.GetLength(1);
         gridIndices = new List<Vector2Int>(shape.blocks.Count);
 
-        // размер одной ячейки в единицах Unity
         float cellWidth  = back.size.x / w;
         float cellHeight = back.size.y / h;
 
         foreach (var block in shape.blocks)
         {
-            // 1) переводим мировую позицию блока в локальные координаты back:
             Vector3 loc = back.transform.InverseTransformPoint(block.transform.position);
-            // 2) сдвигаем локал так, чтобы (0,0) было в левом-нижнем углу:
             loc.x += back.size.x * 0.5f;
             loc.y += back.size.y * 0.5f;
-            // 3) делим на размер ячейки и берём FloorToInt
             int ix = Mathf.FloorToInt(loc.x / cellWidth);
             int iy = Mathf.FloorToInt(loc.y / cellHeight);
             var idx = new Vector2Int(ix, iy);
             gridIndices.Add(idx);
 
-            // проверяем, что внутри границ и не пересекается с уже занятым
             if (ix < 0 || ix >= w || iy < 0 || iy >= h || grid[ix, iy] != null)
                 return false;
         }
@@ -313,16 +304,11 @@ public class FieldManager : MonoBehaviour
         
         Destroy(currentGhostShape.gameObject);
         currentGhostShape = null;
-        currentShape = null;
     }
 
-    private void CreateGhostShape(Transform shapeTransform)
+    private void CreateGhostShape()
     {
-        currentShape = shapeTransform.GetComponent<Shape>();
-        if (currentShape == null || currentShape.blocks == null || currentShape.blocks.Count == 0) return;
-
-        var sprite = currentShape.blocks[0].sprite;
-        currentGhostShape = currentShape.CreateGhost(sprite);
+        currentGhostShape = currentShape.CreateGhost(currentShape);
     }
 
     private async void CheckLoseCondition()
@@ -370,6 +356,7 @@ public class FieldManager : MonoBehaviour
     
     public void UpdateGhost()
     {
+        if(currentGhostShape == null) return;
         currentGhostShape.gameObject.SetActive(true);
         var gridIndices = new List<Vector2Int>();
         var canPlace = CanPlaceShape(currentShape, ref gridIndices);
@@ -539,8 +526,8 @@ public class FieldManager : MonoBehaviour
         
         foreach (int y in rows)
         {
-            var rowsData = new List<(Vector2Int index, SpriteRenderer block)>();
-            var rowsUniqueData = new List<(Vector2Int index, SpriteRenderer block)>();
+            var rowsData = new List<(Vector2Int index, Block block)>();
+            var rowsUniqueData = new List<(Vector2Int index, Block block)>();
             for (int x = 0; x < w; x++)
             {
                 TryAddSuicide(rowsData, rowsUniqueData, new Vector2Int(x, y), grid[x, y]);
@@ -551,8 +538,8 @@ public class FieldManager : MonoBehaviour
         }
         foreach (int x in cols)
         {
-            var colsData = new List<(Vector2Int index, SpriteRenderer block)>();
-            var colsUniqueData = new List<(Vector2Int index, SpriteRenderer block)>();
+            var colsData = new List<(Vector2Int index, Block block)>();
+            var colsUniqueData = new List<(Vector2Int index, Block block)>();
             for (int y = 0; y < h; y++)
             {
                 TryAddSuicide(colsData, colsUniqueData, new Vector2Int(x, y), grid[x, y]);
@@ -568,20 +555,19 @@ public class FieldManager : MonoBehaviour
             for (var j = 0; j < data.Count; j++)
             {
                 var smallData = data[j].index;
-                grid[smallData.x, smallData.y] = null;
+                grid[smallData.x, smallData.y] = data[j].block.next;
             }
         }
 
         if (destroyed > 0)
         {
-            scoreManager.AddScore(destroyed, true);
         }
         
         Debug.Log("[ClearFullLines] Clear full lines");
         return destroyed > 0;
     }
 
-    private void TryAddSuicide(List<(Vector2Int index, SpriteRenderer block)> data, List<(Vector2Int index, SpriteRenderer block)> uniqueData,  Vector2Int index , SpriteRenderer block)
+    private void TryAddSuicide(List<(Vector2Int index, Block block)> data, List<(Vector2Int index, Block block)> uniqueData,  Vector2Int index , Block block)
     {
         if (suicidesData.Any(x => x.Any(y => y.index == index)))
         {
@@ -594,5 +580,5 @@ public class FieldManager : MonoBehaviour
         data.Add((index, block));
     }
 
-    public event Action<SpriteRenderer> BlocksDestroying;
+    public event Action<Block> BlocksDestroying;
 }

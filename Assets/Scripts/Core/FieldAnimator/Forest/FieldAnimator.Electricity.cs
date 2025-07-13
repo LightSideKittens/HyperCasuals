@@ -32,7 +32,7 @@ namespace Core
                             .SetEase(Ease.InCubic));
                         seq.Insert(pos, fxInstance.transform.DOScale(1f, 0.4f)
                             .SetEase(doScaleFx));
-                        seq.Insert(pos  + 0.1f, block.DOFade(0, 0.5f)
+                        seq.Insert(pos  + 0.1f, block.render.DOFade(0, 0.5f)
                             .SetEase(Ease.InCubic).OnComplete(() =>
                             {
                                 Destroy(block.gameObject);

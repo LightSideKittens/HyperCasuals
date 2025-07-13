@@ -31,9 +31,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5026001368822019964}
-  - {fileID: 5705971097317923597}
-  - {fileID: 1815328599214970442}
   - {fileID: 3591295453848966898}
+  - {fileID: 1664517080377785977}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2532437029126287940
@@ -55,9 +54,59 @@ MonoBehaviour:
   - {fileID: -3240041015620403089, guid: 26fe02ba8d3331944b5c46564f5852bc, type: 3}
   - {fileID: -3240041015620403089, guid: 4a6407ee02e8c8243b53ded0215e1d31, type: 3}
   onAwake: []
+  idleMusic:
+    volume: 1
+    pitch: 1
+    loop: 0
+    clip: {fileID: 0}
+    group: {fileID: 0}
   references:
     version: 2
     RefIds: []
+--- !u!1 &4793288554557707873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664517080377785977}
+  - component: {fileID: 6441976828552942104}
+  m_Layer: 0
+  m_Name: Dragger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1664517080377785977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793288554557707873}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8215684415936239094}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6441976828552942104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793288554557707873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 103aa60cc5824538a114e0be7fb79883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4918388204699606087
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,66 +154,92 @@ MonoBehaviour:
   fieldManager: {fileID: 419717446743181706}
   handlers:
     data:
-    - key: {fileID: 1365954192912492377, guid: aeeb5706768354e438aaca827eb384d9, type: 3}
+    - key: {fileID: 8512770957231261250, guid: a4f4528a405237c478ff1e12bd5b95b3, type: 3}
       value:
         handler:
-          rid: 8179719561826009154
-    - key: {fileID: 4285060897174058796, guid: 446f6b554e1e0094dbe2bc13f6c57670, type: 3}
+          rid: 8179719486889525313
+    - key: {fileID: 4591270519534980581, guid: 5043e7aefa3409642afcc93bcb798588, type: 3}
       value:
         handler:
-          rid: 8179719561826009155
-    - key: {fileID: 678259642354553664, guid: 702cd65defc40884da1815a9f6dce06e, type: 3}
+          rid: 8179719486889525314
+    - key: {fileID: 4591270519534980581, guid: e962e13680141b7459984d696cf4d485, type: 3}
       value:
         handler:
-          rid: 8179719561826009156
-    - key: {fileID: 5392397497889999601, guid: 104c4768bc3679749a43475fc454ba7f, type: 3}
+          rid: 8179719486889525315
+    - key: {fileID: 4591270519534980581, guid: 834f86ccf381f5f4a88a829d79a1ead5, type: 3}
       value:
         handler:
-          rid: 8179719561826009157
+          rid: 8179719486889525318
   references:
     version: 2
     RefIds:
-    - rid: 8179719561826009154
-      type: {class: FieldAnimator/Caramel, ns: Core, asm: Core}
+    - rid: 8179719486889525313
+      type: {class: FieldAnimator/BlockHole, ns: Core, asm: Core}
       data:
         fx: {fileID: 0}
-    - rid: 8179719561826009155
-      type: {class: FieldAnimator/Cookie, ns: Core, asm: Core}
+    - rid: 8179719486889525314
+      type: {class: FieldAnimator/Electricity, ns: Core, asm: Core}
       data:
-        fx: {fileID: 0}
-    - rid: 8179719561826009156
-      type: {class: FieldAnimator/Jelly, ns: Core, asm: Core}
+        fx: {fileID: 4559388145620173967, guid: e8a4b09870f8a224bb494b9bff137104, type: 3}
+        doScaleFx:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 8179719486889525315
+      type: {class: FieldAnimator/FireBoom, ns: Core, asm: Core}
       data:
-        fx: {fileID: 0}
-    - rid: 8179719561826009157
-      type: {class: FieldAnimator/Marmalade, ns: Core, asm: Core}
-      data:
-        probabilityEffect: 1
+        probabilityEffect: 0.75
         animationCurve:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 0
-            outSlope: 0
+            inSlope: 8.40448
+            outSlope: 8.40448
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
-            outWeight: 0
+            outWeight: 0.02669736
           - serializedVersion: 3
-            time: 1.0037084
-            value: -0.14908022
-            inSlope: -0.48635134
-            outSlope: -0.48635134
+            time: 1.00177
+            value: 1
+            inSlope: 8.331196
+            outSlope: 8.331196
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.04293179
+            inWeight: 0.02624218
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        fx: {fileID: 565693508082024437, guid: 132e7b411356ff74ca55b43ec12f80fb, type: 3}
+        fx: {fileID: 8673432061344765740, guid: e1f296d3efa7b324a9d9032133e7943a, type: 3}
+    - rid: 8179719486889525318
+      type: {class: FieldAnimator/Nature, ns: Core, asm: Core}
+      data:
+        fx: {fileID: 3395847577906844736, guid: 04aa1feec10d08943a7f80707169428b, type: 3}
+        ofsetFxPos: 1
+        fxScaleSer: 1
 --- !u!1 &7798971749632152360
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555f9b1308234fc79590addfedb44744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyManager: {fileID: 6490657310503764465}
   spawners:
   - {fileID: 0}
   - {fileID: 0}
@@ -218,123 +292,5 @@ MonoBehaviour:
   shapeAppearFx: {fileID: 2924675626361782533, guid: 1d7628660bc647e47846b55b3c4b7bd5, type: 3}
   defaultShapeSize: 0.85
   back: {fileID: 0}
+  dragger: {fileID: 6441976828552942104}
   debug: 0
-  scoreManager: {fileID: 4343334388898896026}
---- !u!1 &7881503264649484388
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1815328599214970442}
-  - component: {fileID: 6490657310503764465}
-  m_Layer: 0
-  m_Name: DifficultManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1815328599214970442
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881503264649484388}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18105516, y: -0.6293713, z: 0.024330495}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8215684415936239094}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6490657310503764465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881503264649484388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b544ab1bc91484eb9fdde1523b5ff99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  difficultyCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  mediumThreshold: 10
-  hardThreshold: 20
---- !u!1 &9016325114604948388
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5705971097317923597}
-  - component: {fileID: 4343334388898896026}
-  m_Layer: 0
-  m_Name: ScoreManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5705971097317923597
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9016325114604948388}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8215684415936239094}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4343334388898896026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9016325114604948388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 324a99a9b3fd4c3f9e9e4b6731dd15f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textScore: {fileID: 0}
-  pointsPerLine: 30
-  enableComboBonus: 1
-  enableSpeedBonus: 1

@@ -175,8 +175,8 @@ SubShader {
 			layerScale /= 1 + ((_UnderlaySoftness * _ScaleRatioC) * layerScale);
 			float layerBias = (.5 - weight) * layerScale - .5 - ((_UnderlayDilate * _ScaleRatioC) * .5 * layerScale);
 
-			float x = -(_UnderlayOffsetX * _ScaleRatioC) * _GradientScale / _TextureWidth * 2;
-			float y = -(_UnderlayOffsetY * _ScaleRatioC) * _GradientScale / _TextureHeight * 2;
+			float x = -(_UnderlayOffsetX * _ScaleRatioC) * _GradientScale / _TextureWidth;
+			float y = -(_UnderlayOffsetY * _ScaleRatioC) * _GradientScale / _TextureHeight;
 			float2 layerOffset = float2(x, y);
 			#endif
 

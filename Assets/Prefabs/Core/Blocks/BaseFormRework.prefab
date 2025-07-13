@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1763148783176101997}
   - component: {fileID: 5195435854233731522}
+  - component: {fileID: -9208452470810988337}
   m_Layer: 0
   m_Name: BaseFormRework
   m_TagString: Untagged
@@ -87,3 +88,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-9208452470810988337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651768286884715249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49203e45056e4ec3a66b08621f8b71ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render: {fileID: 5195435854233731522}
+  next: {fileID: 0}
