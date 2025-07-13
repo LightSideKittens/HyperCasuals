@@ -7,12 +7,12 @@ public class Dragger : MonoBehaviour
 {
     private bool isDragging = false;
     private Vector3 offset;
-    private Vector3 previousGhostPosition;
-    [HideInInspector] public FieldManager fieldManager;
     private Vector2 touchOffset = new (0f, 4f);
-    public event Action Started;
-    public event Action Ended;
+    public event Action<Shape> Started;
+    public event Action<Shape> Ended;
 
+    [NonSerialized] public Vector3 shapeStartPos; 
+    [NonSerialized] public Shape currentShape;
     private bool isStarted = false;
     private Tween tween;
     
@@ -30,21 +30,16 @@ public class Dragger : MonoBehaviour
                     CheckTouch(touchPosition);
                     if (isDragging)
                     {
-                        var pos = transform.position;
+                        var pos = currentShape.transform.position;
                         pos += (Vector3) touchOffset;
-                        tween = transform.DOMove(pos, 0.1f).OnComplete(() =>
+                        tween = currentShape.transform.DOMove(pos, 0.1f).OnComplete(() =>
                         {
-                            Started?.Invoke();
-                            var shape = GetComponent<Shape>();
-                            if (shape != null)
+                            shapeStartPos = currentShape.transform.position;
+                            Started?.Invoke(currentShape);
+                            foreach (var block in currentShape.blocks)
                             {
-                                foreach (var block in shape.blocks)
-                                {
-                                    block.sortingOrder = 10;
-                                }
+                                block.sortingOrder = 10;
                             }
-
-                            previousGhostPosition = transform.position;
                             isStarted = true;
                         });
                     }
@@ -53,13 +48,7 @@ public class Dragger : MonoBehaviour
                 case TouchPhase.Moved:
                     if (isDragging && isStarted)
                     {
-                        transform.position = touchPosition + (Vector3) touchOffset + offset;
-                        if (fieldManager != null &&
-                            Vector3.Distance(transform.position, previousGhostPosition) > 0.001f)
-                        {
-                            fieldManager.UpdateGhost();
-                            previousGhostPosition = transform.position;
-                        }
+                        currentShape.transform.position = touchPosition + (Vector3) touchOffset + offset;
                     }
                     break;
 
@@ -71,19 +60,13 @@ public class Dragger : MonoBehaviour
                         tween = null;
                         isStarted = false;
                         
-                        Ended?.Invoke();
+                        Ended?.Invoke(currentShape);
                         isDragging = false;
-                    }
-
-                    var currentShape = GetComponent<Shape>();
-                    if (currentShape != null)
-                    {
                         foreach (var block in currentShape.blocks)
                         {
                             block.sortingOrder = 0;
                         }
                     }
-
                     break;
             }
         }
@@ -92,29 +75,10 @@ public class Dragger : MonoBehaviour
     private void CheckTouch(Vector3 touchPosition)
     {
         Collider2D hitCollider = Physics2D.OverlapPoint(touchPosition);
-        if (hitCollider != null)
+        if (hitCollider != null && hitCollider.TryGetComponent(out currentShape))
         {
-            var go = hitCollider.gameObject;
-            if (!Check())
-            {
-                if (hitCollider.transform.parent != null)
-                {
-                    go = hitCollider.transform.parent.gameObject;
-                    Check();
-                }
-            }
-
-            bool Check()
-            {
-                if (go == gameObject)
-                {
-                    isDragging = true;
-                    offset = transform.position - touchPosition;
-                    return true;
-                }
-
-                return false;
-            }
+            isDragging = true;
+            offset = hitCollider.transform.position - touchPosition;
         }
     }
 }

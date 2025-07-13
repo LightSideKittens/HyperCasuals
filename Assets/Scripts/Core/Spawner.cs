@@ -4,7 +4,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public List<Shape> shapes;
-    public List<SpriteRenderer> blockPrefabs;
+    public List<Block> blockPrefabs;
 
     public Shape SpawnRandomShape(ref int? lastUsedIndex)
     {

@@ -16,7 +16,7 @@ namespace Core
     public partial class FieldAnimator : MonoBehaviour
     {
         [Serializable]
-        public class HandlerDict : UniDict<SpriteRenderer, HandlerWrapper>
+        public class HandlerDict : UniDict<Block, HandlerWrapper>
         {
             
 #if UNITY_EDITOR
@@ -27,7 +27,7 @@ namespace Core
             }
 
             public class SpritePreviewAttributeDrawer
-                : OdinAttributeDrawer<SpritePreviewAttribute, SpriteRenderer>
+                : OdinAttributeDrawer<SpritePreviewAttribute, Block>
             {
                 protected override void DrawPropertyLayout(GUIContent label)
                 {
@@ -36,8 +36,12 @@ namespace Core
                     {
                         Texture2D tex = sr.sprite.texture;
                         Rect rect = EditorGUILayout.GetControlRect(false, this.Attribute.Size);
-                        ValueEntry.WeakSmartValue = EditorGUI.ObjectField(rect.Split(0, 2), ValueEntry.SmartValue, typeof(SpriteRenderer), true);
+                        ValueEntry.WeakSmartValue = EditorGUI.ObjectField(rect.Split(0, 2), ValueEntry.SmartValue, typeof(Block), true);
                         EditorGUI.DrawTextureTransparent(rect.Split(1, 2), tex, ScaleMode.ScaleToFit);
+                    }
+                    else
+                    {
+                        CallNextDrawer(label);
                     }
                 }
             }
@@ -83,7 +87,7 @@ namespace Core
             }
         }
 
-        private void OnDestroyBlocks(SpriteRenderer blockPrefab)
+        private void OnDestroyBlocks(Block blockPrefab)
         {
             handlers[blockPrefab].handler.Handle();
         }

@@ -31,7 +31,7 @@ namespace Core
                     tr.SetParent(empty, true);
                     seq.Insert(i * 0.02f, empty.DORotate(new Vector3(0, 0, rotation), duration).SetEase(Ease.InCirc));   
                     seq.Insert(i * 0.02f,tr.DOScale(.2f, duration).SetEase(Ease.InCirc));
-                    seq.Insert(i * 0.02f,block.DOFade(0f, duration).SetEase(Ease.InCirc));
+                    seq.Insert(i * 0.02f,block.render.DOFade(0f, duration).SetEase(Ease.InCirc));
                     seq.Insert(i * 0.02f,tr.DOLocalMove(Vector3.zero, duration).SetEase(Ease.InCirc));
                     seq.Insert(i * 0.02f,tr.DORotate(new Vector3(0, 0, rotation), duration).SetEase(Ease.InCirc).OnComplete(() =>
                     {
