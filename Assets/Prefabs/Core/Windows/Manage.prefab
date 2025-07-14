@@ -157,7 +157,7 @@ MonoBehaviour:
     - key: {fileID: 8512770957231261250, guid: a4f4528a405237c478ff1e12bd5b95b3, type: 3}
       value:
         handler:
-          rid: 8179719486889525313
+          rid: 1249993268734722296
     - key: {fileID: 4591270519534980581, guid: 5043e7aefa3409642afcc93bcb798588, type: 3}
       value:
         handler:
@@ -170,13 +170,26 @@ MonoBehaviour:
       value:
         handler:
           rid: 8179719486889525318
+    - key: {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
+      value:
+        handler:
+          rid: 1249993268734722299
   references:
     version: 2
     RefIds:
-    - rid: 8179719486889525313
+    - rid: 1249993268734722296
       type: {class: FieldAnimator/BlockHole, ns: Core, asm: Core}
       data:
         fx: {fileID: 0}
+    - rid: 1249993268734722299
+      type: {class: FieldAnimator/Bomb, ns: Core, asm: Core}
+      data:
+        fx: {fileID: 1931594081780514082, guid: 748401500699eee41b4cb4481c080fd7, type: 3}
+        offsets:
+        - {x: 0, y: 1}
+        - {x: 0, y: -1}
+        - {x: 1, y: 0}
+        - {x: -1, y: 0}
     - rid: 8179719486889525314
       type: {class: FieldAnimator/Electricity, ns: Core, asm: Core}
       data:
@@ -284,13 +297,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555f9b1308234fc79590addfedb44744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawners:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   gridSize: {x: 8, y: 8}
   shapeAppearFx: {fileID: 2924675626361782533, guid: 1d7628660bc647e47846b55b3c4b7bd5, type: 3}
   defaultShapeSize: 0.85
   back: {fileID: 0}
+  selector: {fileID: 8210076731274164301, guid: f4a34e33ea3f06b4a9af8cc1971f0d2e, type: 3}
   dragger: {fileID: 6441976828552942104}
   debug: 0
+  _blockPrefabs:
+  - {fileID: 8512770957231261250, guid: a4f4528a405237c478ff1e12bd5b95b3, type: 3}
+  - {fileID: 4591270519534980581, guid: 5043e7aefa3409642afcc93bcb798588, type: 3}
+  - {fileID: 4591270519534980581, guid: e962e13680141b7459984d696cf4d485, type: 3}
+  - {fileID: 4591270519534980581, guid: 834f86ccf381f5f4a88a829d79a1ead5, type: 3}
+  _specialBlockPrefabs:
+  - {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
