@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    [HideInInspector] public Block prefab;
     public SpriteRenderer render;
-
+    [NonSerialized] public int defaultSortingOrder;
+    
     public Sprite sprite
     {
         get => render.sprite;
@@ -13,21 +16,22 @@ public class Block : MonoBehaviour
     public Color color
     {
         get => render.color;
-        set => render.color = value;
+        set
+        {
+            render.color = value;
+            if(next) next.color = value;
+        }
     }
 
     public int sortingOrder
     {
         get => render.sortingOrder;
-        set => render.sortingOrder = value;
+        set
+        {
+            render.sortingOrder = value;
+            if(next) next.sortingOrder = value - 1;
+        }
     }
-    
+
     public Block next;
-    
-    public void SetNext(Block prefab)
-    {
-        var next = Instantiate(prefab, transform.parent);
-        next.sortingOrder = sortingOrder - 1;
-        this.next = next;
-    }
 }

@@ -32,9 +32,9 @@ public class Dragger : MonoBehaviour
                     {
                         var pos = currentShape.transform.position;
                         pos += (Vector3) touchOffset;
+                        shapeStartPos = currentShape.transform.position;
                         tween = currentShape.transform.DOMove(pos, 0.1f).OnComplete(() =>
                         {
-                            shapeStartPos = currentShape.transform.position;
                             Started?.Invoke(currentShape);
                             foreach (var block in currentShape.blocks)
                             {
@@ -64,7 +64,7 @@ public class Dragger : MonoBehaviour
                         isDragging = false;
                         foreach (var block in currentShape.blocks)
                         {
-                            block.sortingOrder = 0;
+                            block.sortingOrder = block.defaultSortingOrder;
                         }
                     }
                     break;

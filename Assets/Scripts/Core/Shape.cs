@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using Core;
+using LSCore.Extensions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -20,11 +23,27 @@ public class Shape : MonoBehaviour
                 var currBlockTr = currBlock.transform;
                 var siblingIndex = currBlockTr.GetSiblingIndex();
                 var newBlock = Instantiate(value, currBlockTr.position, Quaternion.identity, transform);
+                newBlock.defaultSortingOrder = 1;
+                newBlock.prefab = value;
                 blocks[i] = newBlock;
                 newBlock.transform.SetSiblingIndex(siblingIndex);
                 Destroy(currBlockTr.gameObject);
             }
         }
+    }
+
+    public Block RandomSpawnSpecial(Block specialBlockPrefab)
+    {
+        var currBlock = blocks.Random(out var i);
+        var currBlockTr = currBlock.transform;
+        var newBlock = Instantiate(specialBlockPrefab, currBlockTr.position, Quaternion.identity, currBlockTr.parent);
+        newBlock.prefab = specialBlockPrefab;
+        newBlock.defaultSortingOrder = currBlock.sortingOrder+1;
+        newBlock.sortingOrder = newBlock.defaultSortingOrder;
+        currBlockTr.SetParent(newBlock.transform, true);
+        newBlock.next = currBlock;
+        blocks[i] = newBlock;
+        return newBlock;
     }
 
     [Button]

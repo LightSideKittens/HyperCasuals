@@ -3,30 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
+using LSCore;
+using LSCore.Extensions;
 using LSCore.Extensions.Unity;
+using SourceGenerators;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class FieldManager : MonoBehaviour
+[InstanceProxy]
+public partial class FieldManager : SingleService<FieldManager>
 {
-    public List<Spawner> spawners;
+    [NonSerialized] public List<Spawner> _spawners = new();
     private List<Shape> activeShapes = new();
-    private Dictionary<Block, Sprite> originalSprites;
     public Vector2Int gridSize;
     
     public ParticleSystem shapeAppearFx;
     
     public float defaultShapeSize = 0.85f;
     public SpriteRenderer back;
+    public SpriteRenderer selector;
 
     public Dragger dragger;
     
     private Vector3 gridOffset;
-    private Block[,] grid;
+    public Block[,] grid;
     public bool debug;
     private int spawnShapeLock = 0;
     private bool allShapesPlaced;
-    private Color shapeColor;
     private Shape currentGhostShape;
     private Shape currentShape => dragger.currentShape;
     
@@ -35,6 +38,10 @@ public class FieldManager : MonoBehaviour
     [NonSerialized] public List<List<(Vector2Int index, Block block)>> suicidesData = new();
     [NonSerialized] public List<List<(Vector2Int index, Block block)>> uniqueSuicidesData = new();
     public List<(Vector2Int, Block)> duplicateIndexes = new();
+    
+    public List<Block> _blockPrefabs;
+    public List<Block> _specialBlockPrefabs;
+    
     public IEnumerable<(Vector2Int index, Block block)> UniqueSuicidesData
     {
         get
@@ -51,9 +58,8 @@ public class FieldManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
-        originalSprites = new Dictionary<Block, Sprite>();
         grid = new Block[gridSize.x, gridSize.y];
         gridOffset = new Vector3(back.size.x / 2, back.size.y / 2) - LSVector3.half;
         CreateAndInitShape();
@@ -101,7 +107,7 @@ public class FieldManager : MonoBehaviour
                 CheckLoseCondition();
 
                 spawnShapeLock++;
-                if (spawnShapeLock >= spawners.Count)
+                if (spawnShapeLock >= _spawners.Count)
                 {
                     spawnShapeLock = 0;
                     CreateAndInitShape();
@@ -119,10 +125,10 @@ public class FieldManager : MonoBehaviour
 
     private async void CreateAndInitShape()
     {
-        int totalSpawners = spawners.Count;
+        int totalSpawners = _spawners.Count;
 
         List<Shape> allShapes = new();
-        foreach (var spawner in spawners)
+        foreach (var spawner in _spawners)
         {
             allShapes.AddRange(spawner.GetAllShapePrefabs());
         }
@@ -142,13 +148,12 @@ public class FieldManager : MonoBehaviour
         int guaranteedIndex = validShapes.Count > 0 ? Random.Range(0, totalSpawners) : -1;
         for (int i = 0; i < totalSpawners; i++)
         {
-            var spawner = spawners[i];
+            var spawner = _spawners[i];
             Shape shape;
 
             if (i == guaranteedIndex)
             {
-                shape = spawner.SpawnSpecificShape(validShapes[Random.Range(0, validShapes.Count)],
-                    ref lastUsedSpriteIndex);
+                shape = spawner.SpawnSpecificShape(validShapes.Random(), ref lastUsedSpriteIndex);
                 Debug.Log($"[SPAWN] Спавнер {i}: ГАРАНТИРОВАННАЯ фигура");
             }
             else
@@ -356,6 +361,7 @@ public class FieldManager : MonoBehaviour
     
     public void UpdateGhost()
     {
+        selectionAreas.ReleaseAll();
         if(currentGhostShape == null) return;
         currentGhostShape.gameObject.SetActive(true);
         var gridIndices = new List<Vector2Int>();
@@ -363,19 +369,6 @@ public class FieldManager : MonoBehaviour
 
         if (!canPlace)
         {
-            if (originalSprites != null)
-            {
-                foreach (var kvp in originalSprites)
-                {
-                    if (kvp.Key != null)
-                    {
-                        kvp.Key.sprite = kvp.Value;
-                    }
-                }
-
-                originalSprites.Clear();
-            }
-            
             currentGhostShape.gameObject.SetActive(false);
             return;
         }
@@ -389,115 +382,67 @@ public class FieldManager : MonoBehaviour
 
             currentGhostShape.blocks[i].transform.position = worldPos;
         }
-
-        if (currentShape.blocks.Count > 0)
-        {
-            shapeColor = currentShape.blocks[0].color;
-        }
-
-        HighlightDestroyableLines(gridIndices, shapeColor);
+        
+        HighlightDestroyableLines(gridIndices);
     }
 
-    private void HighlightDestroyableLines(List<Vector2Int> futureIndices, Color highlightColor) {
-        foreach (var kvp in originalSprites)
+    private OnOffPool<SpriteRenderer> selectionAreas => OnOffPool<SpriteRenderer>.GetOrCreatePool(selector, back.transform, shouldStoreActive: true);
+
+    private void HighlightDestroyableLines(List<Vector2Int> gridIndices)
+    {
+        for (int i = 0; i < gridIndices.Count; i++)
         {
-            if (kvp.Key != null)
-            {
-                kvp.Key.sprite = kvp.Value;
-            }
+            var index = gridIndices[i];
+            grid[index.x, index.y] = currentGhostShape.blocks[i];
+        }
+        FillSuicideCandidates();
+        for (int i = 0; i < gridIndices.Count; i++)
+        {
+            var index = gridIndices[i];
+            grid[index.x, index.y] = null;
+        }
+        
+        if (suicidesData.Count == 0)
+        {
+            return;
         }
 
-        originalSprites.Clear();
-
-        int width = grid.GetLength(0);
-        int height = grid.GetLength(1);
-
-        bool[,] simulatedOccupied = new bool[width, height];
-
-        foreach (var index in futureIndices)
+        for (int i = 0; i < suicidesData.Count; i++)
         {
-            if (index.x >= 0 && index.x < width && index.y >= 0 && index.y < height)
+            var list = suicidesData[i];
+            var area = selectionAreas.Get();
+            area.size = Vector2.one;
+            var corner = list[0].index;
+            area.transform.localPosition = corner - (Vector2)gridOffset - LSVector2.half;
+
+            for (int j = 1; j < list.Count; j++)
             {
-                simulatedOccupied[index.x, index.y] = true;
-            }
-        }
-
-        void HighlightCell(int x, int y)
-        {
-            if (x < 0 || x >= width || y < 0 || y >= height) return;
-
-            var sprite = grid[x, y];
-            if (sprite != null)
-            {
-                if (!originalSprites.ContainsKey(sprite))
-                {
-                    originalSprites[sprite] = sprite.sprite;
-                }
-
-                sprite.sprite = currentGhostShape.blocks[0].sprite;
-            }
-            else if (currentGhostShape != null && currentGhostShape.blocks != null)
-            {
-                foreach (var block in currentGhostShape.blocks)
-                {
-                    if (block == null) continue;
-
-                    var localPos = back.transform.InverseTransformPoint(block.transform.position) + gridOffset;
-                    var ghostIndex = new Vector2Int(Mathf.RoundToInt(localPos.x), Mathf.RoundToInt(localPos.y));
-                    if (ghostIndex == new Vector2Int(x, y))
-                    {
-                        block.color = highlightColor;
-                    }
-                }
-            }
-        }
-
-        for (int y = 0; y < height; y++)
-        {
-            bool fullRow = true;
-            for (int x = 0; x < width; x++)
-            {
-                if (!simulatedOccupied[x, y] && grid[x, y] == null)
-                {
-                    fullRow = false;
-                    break;
-                }
-            }
-
-            if (fullRow)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    HighlightCell(x, y);
-                }
-            }
-        }
-
-        for (int x = 0; x < width; x++)
-        {
-            bool fullColumn = true;
-            for (int y = 0; y < height; y++)
-            {
-                if (!simulatedOccupied[x, y] && grid[x, y] == null)
-                {
-                    fullColumn = false;
-                    break;
-                }
-            }
-
-            if (fullColumn)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    HighlightCell(x, y);
-                }
+                var diff = list[j].index - corner;
+                area.size += diff;
+                corner = list[j].index;
             }
         }
     }
 
     private bool ClearFullLines()
     {
-        Debug.Log("[ClearFullLines] Invoke");
+        FillSuicideCandidates();
+        
+        for (var i = 0; i < suicidesData.Count; i++)
+        {
+            var data = suicidesData[i];
+            for (var j = 0; j < data.Count; j++)
+            {
+                var smallData = data[j].index;
+                grid[smallData.x, smallData.y] = data[j].block.next;
+            }
+        }
+        
+        return suicidesData.Count > 0;
+    }
+
+    private void FillSuicideCandidates()
+    {
         suicidesData.Clear();
         duplicateIndexes.Clear();
         uniqueSuicidesData.Clear();
@@ -519,10 +464,6 @@ public class FieldManager : MonoBehaviour
                 if (grid[x, y] == null) { full = false; break; }
             if (full) cols.Add(x);
         }
-
-        int destroyed = 0;
-        
-        Debug.Log("[ClearFullLines] before foreach");
         
         foreach (int y in rows)
         {
@@ -534,7 +475,6 @@ public class FieldManager : MonoBehaviour
             }
             suicidesData.Add(rowsData);
             uniqueSuicidesData.Add(rowsUniqueData);
-            destroyed++;
         }
         foreach (int x in cols)
         {
@@ -546,25 +486,7 @@ public class FieldManager : MonoBehaviour
             }
             suicidesData.Add(colsData);
             uniqueSuicidesData.Add(colsUniqueData);
-            destroyed++;
         }
-        
-        for (var i = 0; i < suicidesData.Count; i++)
-        {
-            var data = suicidesData[i];
-            for (var j = 0; j < data.Count; j++)
-            {
-                var smallData = data[j].index;
-                grid[smallData.x, smallData.y] = data[j].block.next;
-            }
-        }
-
-        if (destroyed > 0)
-        {
-        }
-        
-        Debug.Log("[ClearFullLines] Clear full lines");
-        return destroyed > 0;
     }
 
     private void TryAddSuicide(List<(Vector2Int index, Block block)> data, List<(Vector2Int index, Block block)> uniqueData,  Vector2Int index , Block block)

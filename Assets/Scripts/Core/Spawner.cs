@@ -1,11 +1,19 @@
 using System.Collections.Generic;
+using LSCore.Extensions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
     public List<Shape> shapes;
-    public List<Block> blockPrefabs;
+    public List<Block> blockPrefabs => FieldManager.BlockPrefabs;
+    public List<Block> specialBlockPrefabs => FieldManager.SpecialBlockPrefabs;
 
+    private void Awake()
+    {
+        FieldManager.Spawners.Add(this);
+    }
+    
     public Shape SpawnRandomShape(ref int? lastUsedIndex)
     {
         if (shapes.Count == 0 || blockPrefabs.Count == 0)
@@ -13,7 +21,7 @@ public class Spawner : MonoBehaviour
             return null;
         }
 
-        var shapePrefab = shapes[Random.Range(0, shapes.Count)];
+        var shapePrefab = shapes.Random();
         var shapeInstance = Instantiate(shapePrefab, transform.position, Quaternion.identity);
 
         int newIndex;
@@ -25,7 +33,9 @@ public class Spawner : MonoBehaviour
 
         var prefab = blockPrefabs[newIndex];
         shapeInstance.BlockPrefab = prefab;
-
+        var special = specialBlockPrefabs.Random();
+        shapeInstance.RandomSpawnSpecial(special);
+        
         lastUsedIndex = newIndex;
         return shapeInstance;
     }
