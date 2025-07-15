@@ -58,6 +58,43 @@ public partial class FieldManager : SingleService<FieldManager>
         }
     }
 
+    public void RemoveData((Vector2Int index, Block block) data)
+    {
+        for (int j = 0; j < suicidesData.Count; j++)
+        {
+            var list = suicidesData[j];
+            list.Remove(data);
+        }
+                
+        for (int j = 0; j < uniqueSuicidesData.Count; j++)
+        {
+            var list = uniqueSuicidesData[j];
+            list.Remove(data);
+        }
+    }
+
+    public Dictionary<Block, List<(Vector2Int index, Block block)>> GetSpecialBlocks(
+        IEnumerable<(Vector2Int index, Block block)> data)
+    {
+        var specialBlockPrefabs = new Dictionary<Block, List<(Vector2Int index, Block block)>>();
+            
+        foreach (var valueTuple in data)
+        {
+            var prefab = valueTuple.block.prefab;
+            if (_specialBlockPrefabs.Contains(prefab))
+            {
+                if (!specialBlockPrefabs.TryGetValue(prefab, out var list))
+                {
+                    list = new();
+                    specialBlockPrefabs.Add(prefab, list);
+                }
+                list.Add(valueTuple);
+            }
+        }
+        
+        return specialBlockPrefabs;
+    }
+
     private void Start()
     {
         grid = new Block[gridSize.x, gridSize.y];
@@ -427,17 +464,6 @@ public partial class FieldManager : SingleService<FieldManager>
     private bool ClearFullLines()
     {
         FillSuicideCandidates();
-        
-        for (var i = 0; i < suicidesData.Count; i++)
-        {
-            var data = suicidesData[i];
-            for (var j = 0; j < data.Count; j++)
-            {
-                var smallData = data[j].index;
-                grid[smallData.x, smallData.y] = data[j].block.next;
-            }
-        }
-        
         return suicidesData.Count > 0;
     }
 
