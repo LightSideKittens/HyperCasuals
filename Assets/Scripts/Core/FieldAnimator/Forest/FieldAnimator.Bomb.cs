@@ -20,27 +20,60 @@ namespace Core
                 {
                     var d = blocks[i];
                     var tr = d.block.transform;
+                    tr.GetChild(0).SetParent(tr.parent, true);
+                    var toDestroy = new List<(Vector2Int index, Block block)>();
+                    Grid.Set(d.index, d.block.next);
+
+                    DestroyBlock(d.index);
+                    for (int j = 0; j < offsets.Count; j++)
+                    {
+                        DestroyBlock(d.index + offsets[j]);
+                    }
+
+                    var specialBlocks = fieldManager.GetSpecialBlocks(toDestroy);
+                    
+                    foreach (var list in specialBlocks.Values)
+                    {
+                        for (int j = 0; j < list.Count; j++)
+                        {
+                            toDestroy.Remove(list[j]);
+                        }
+                    }
+
+                    foreach (var (index, _) in toDestroy)
+                    {
+                        Grid.Set(index, null);
+                    }
+                    
                     tr.DOScale(1.3f, 0.4f).OnComplete(() =>
                     {
                         Instantiate(fx, tr.position, Quaternion.identity);
                         Destroy(tr.gameObject);
-                        DestroyBlock(d.index);
-                        for (int j = 0; j < offsets.Count; j++)
+                        for (int j = 0; j < toDestroy.Count; j++)
                         {
-                            DestroyBlock(d.index + offsets[j]);
+                            Destroy(toDestroy[j].block.gameObject);
                         }
-
-                        void DestroyBlock(Vector2Int index)
+                        
+                        foreach (var (prefab, list) in specialBlocks)
                         {
-                            if (!fieldManager.grid.HasIndex(index)) return;
-                            var block = fieldManager.grid.Get(index);
-                            if (block)
-                            { 
-                                Destroy(block.gameObject);
-                            }
-                            fieldManager.grid.Set(index, null);
+                            var h = animator.handlers[prefab].handler as SpecialHandler;
+                            h!.blocks = list;
+                            h.Handle();
                         }
                     });
+                    
+                    void DestroyBlock(Vector2Int index)
+                    {
+                        if (!Grid.HasIndex(index)) return;
+                        var block = Grid.Get(index);
+                        if (block)
+                        {
+                            var data = (index, block);
+                            toDestroy.Add(data);
+                            blocks.Remove(data);
+                            fieldManager.RemoveData(data);
+                        }
+                    }
                 }
             }
         }
