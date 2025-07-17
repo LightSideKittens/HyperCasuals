@@ -17,12 +17,15 @@ namespace Core
             public override void Handle()
             {
                 Sequence seq = DOTween.Sequence();
-                for (var i = 0; i < fieldManager.uniqueSuicidesData.Count; i++)
+                var uniqueBlocks = fieldManager.GetBlockLines(true, true);
+                var blocks = fieldManager.linesIndices;
+                
+                for (var i = 0; i < uniqueBlocks.Count; i++)
                 {
-                    var uniqueData = fieldManager.uniqueSuicidesData[i];
-                    var data = fieldManager.suicidesData[i];
-                    var dir = (data[0].block.transform.position - data[1].block.transform.position).normalized;
-                    var fxPos = data[0].block.transform.position + (dir * ofsetFxPos);
+                    var uniqueData = uniqueBlocks[i];
+                    var data = blocks[i];
+                    var dir = ((Vector2)(data[0] - data[1])).normalized;
+                    var fxPos = fieldManager.ToPos(data[0]) + (dir * ofsetFxPos);
                     
                     var fxScale = Vector3.one * fxScaleSer;
                     fx.transform.localScale = fxScale;

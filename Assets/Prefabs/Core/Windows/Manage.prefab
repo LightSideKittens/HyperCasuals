@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldManager: {fileID: 419717446743181706}
-  handlers:
+  _handlers:
     data:
     - key: {fileID: 8512770957231261250, guid: a4f4528a405237c478ff1e12bd5b95b3, type: 3}
       value:
@@ -174,6 +174,10 @@ MonoBehaviour:
       value:
         handler:
           rid: 1249993268734722299
+    - key: {fileID: 4591270519534980581, guid: 892c80028e4d84f42bff14fa98badf67, type: 3}
+      value:
+        handler:
+          rid: 1249993347411214336
   references:
     version: 2
     RefIds:
@@ -190,6 +194,15 @@ MonoBehaviour:
         - {x: 0, y: -1}
         - {x: 1, y: 0}
         - {x: -1, y: 0}
+    - rid: 1249993347411214336
+      type: {class: FieldAnimator/Stone, ns: Core, asm: Core}
+      data:
+        stages:
+        - {fileID: -6560304105149440702, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
+        - {fileID: -2534019703861781584, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
+        - {fileID: 979633776236109015, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
+        - {fileID: 3912977348029659307, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
+        fx: {fileID: 7602298404741334448, guid: 36dc9502bf9d3dc4aa4e2651f0206e9d, type: 3}
     - rid: 8179719486889525314
       type: {class: FieldAnimator/Electricity, ns: Core, asm: Core}
       data:
@@ -311,3 +324,4 @@ MonoBehaviour:
   - {fileID: 4591270519534980581, guid: 834f86ccf381f5f4a88a829d79a1ead5, type: 3}
   _specialBlockPrefabs:
   - {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
+  - {fileID: 4591270519534980581, guid: 892c80028e4d84f42bff14fa98badf67, type: 3}

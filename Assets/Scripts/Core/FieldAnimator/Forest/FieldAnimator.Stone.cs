@@ -16,20 +16,29 @@ namespace Core
             
             public override void Handle()
             {
-                for (var i = 0; i < blocks.Count; i++)
+                for (var i = 0; i < indices.Count; i++)
                 {
-                    var d = blocks[i];
-                    var stageIndex = stages.IndexOf(d.block.sprite) + 1;
+                    var index = indices[i];
+                    var block = Grid.Get(index);
+                    if(!block) continue;
+                    if(!stages.Contains(block.sprite)) continue;
+
+                    var stageIndex = stages.IndexOf(block.sprite);
+                    stageIndex++;
+                    
                     if (stageIndex == stages.Count)
                     {
-                        Grid.Set(d.index, d.block.next);
+                        block.sprite = null;
+                        block.next.transform.SetParent(block.transform.parent, true);
+                        Destroy(block.gameObject);
+                        Grid.Set(index, block.next);
                     }
                     else
                     {
-                        d.block.sprite = stages[stageIndex];
+                        block.sprite = stages[stageIndex];
                     }
                     
-                    Instantiate(fx, d.block.transform.position, Quaternion.identity);
+                    Instantiate(fx, block.transform.position, Quaternion.identity);
                 }
             }
         }
