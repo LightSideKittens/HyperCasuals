@@ -19,8 +19,8 @@ namespace Core
                 AnimFX();
                 
                 var i = 0;
-                
-                foreach (var (index, block) in fieldManager.UniqueSuicidesData)
+                var blocks = fieldManager.GetBlocks(true, true);
+                foreach (var (index, block) in blocks)
                 {
                     var duration = Random.Range(0.5f,0.8f);
                     var rotation = Random.Range(270,359);

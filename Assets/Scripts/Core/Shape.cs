@@ -4,6 +4,7 @@ using Core;
 using LSCore.Extensions;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Shape : MonoBehaviour
 {
@@ -34,16 +35,26 @@ public class Shape : MonoBehaviour
 
     public Block RandomSpawnSpecial(Block specialBlockPrefab)
     {
-        var currBlock = blocks.Random(out var i);
+        return SpawnSpecial(specialBlockPrefab, Random.Range(0, blocks.Count));
+    }
+    
+    public Block SpawnSpecial(Block specialBlockPrefab, int atIndex)
+    {
+        var currBlock = blocks[atIndex];
         var currBlockTr = currBlock.transform;
         var newBlock = Instantiate(specialBlockPrefab, currBlockTr.position, Quaternion.identity, currBlockTr.parent);
         newBlock.prefab = specialBlockPrefab;
-        newBlock.defaultSortingOrder = currBlock.sortingOrder+1;
-        newBlock.sortingOrder = newBlock.defaultSortingOrder;
-        currBlockTr.SetParent(newBlock.transform, true);
-        newBlock.next = currBlock;
-        blocks[i] = newBlock;
+        OverlayBlock(currBlock, newBlock);
+        blocks[atIndex] = newBlock;
         return newBlock;
+    }
+
+    public static void OverlayBlock(Block existingBlock, Block newBlock)
+    {
+        newBlock.defaultSortingOrder = existingBlock.sortingOrder+1;
+        newBlock.sortingOrder = newBlock.defaultSortingOrder;
+        existingBlock.transform.SetParent(newBlock.transform, true);
+        newBlock.next = existingBlock;
     }
 
     [Button]

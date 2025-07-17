@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
 using LSCore;
@@ -15,6 +14,8 @@ public partial class FieldManager : SingleService<FieldManager>
 {
     [NonSerialized] public List<Spawner> _spawners = new();
     private List<Shape> activeShapes = new();
+    
+    public int blocksInLine = 8;
     public Vector2Int gridSize;
     
     public ParticleSystem shapeAppearFx;
@@ -34,53 +35,21 @@ public partial class FieldManager : SingleService<FieldManager>
     private Shape currentShape => dragger.currentShape;
     
     private int? lastUsedSpriteIndex = null;
-    
-    [NonSerialized] public List<List<(Vector2Int index, Block block)>> suicidesData = new();
-    [NonSerialized] public List<List<(Vector2Int index, Block block)>> uniqueSuicidesData = new();
-    public List<(Vector2Int, Block)> duplicateIndexes = new();
+    [NonSerialized] public List<List<Vector2Int>> linesIndices = new();
     
     public List<Block> _blockPrefabs;
     public List<Block> _specialBlockPrefabs;
-    
-    public IEnumerable<(Vector2Int index, Block block)> UniqueSuicidesData
-    {
-        get
-        {
-            for (int i = 0; i < uniqueSuicidesData.Count; i++)
-            {
-                var data = uniqueSuicidesData[i];
-                for (var j = 0; j < data.Count; j++)
-                {
-                    var smallData = data[j];
-                    yield return smallData;
-                }
-            }
-        }
-    }
 
-    public void RemoveData((Vector2Int index, Block block) data)
+    public Dictionary<Block, List<Vector2Int>> GetSpecialBlocks(
+        IEnumerable<Vector2Int> data)
     {
-        for (int j = 0; j < suicidesData.Count; j++)
-        {
-            var list = suicidesData[j];
-            list.Remove(data);
-        }
-                
-        for (int j = 0; j < uniqueSuicidesData.Count; j++)
-        {
-            var list = uniqueSuicidesData[j];
-            list.Remove(data);
-        }
-    }
-
-    public Dictionary<Block, List<(Vector2Int index, Block block)>> GetSpecialBlocks(
-        IEnumerable<(Vector2Int index, Block block)> data)
-    {
-        var specialBlockPrefabs = new Dictionary<Block, List<(Vector2Int index, Block block)>>();
+        var specialBlockPrefabs = new Dictionary<Block, List<Vector2Int>>();
             
-        foreach (var valueTuple in data)
+        foreach (var index in data)
         {
-            var prefab = valueTuple.block.prefab;
+            var block = grid.Get(index);
+            if(!block) continue;
+            var prefab = block.prefab;
             if (_specialBlockPrefabs.Contains(prefab))
             {
                 if (!specialBlockPrefabs.TryGetValue(prefab, out var list))
@@ -88,7 +57,7 @@ public partial class FieldManager : SingleService<FieldManager>
                     list = new();
                     specialBlockPrefabs.Add(prefab, list);
                 }
-                list.Add(valueTuple);
+                list.Add(index);
             }
         }
         
@@ -124,13 +93,13 @@ public partial class FieldManager : SingleService<FieldManager>
                 for (int j = 0; j < shape.blocks.Count; j++)
                 {
                     var gridIndex = gridIndices[j];
-                    Vector2 worldPos = gridIndex - (Vector2)gridOffset;
+                    Vector2 worldPos = ToPos(gridIndex);
 
                     var block = shape.blocks[j];
-                    grid[gridIndex.x, gridIndex.y] = block;
-
+                    grid.Set(gridIndex, block);
+                    
                     block.transform.parent = null;
-                    var tween = block.transform.DOMove(back.transform.TransformPoint(worldPos), 0.3f);
+                    var tween = block.transform.DOMove(worldPos, 0.3f);
                     sequence.Insert(j * 0.025f, tween);
                 }
 
@@ -225,15 +194,50 @@ public partial class FieldManager : SingleService<FieldManager>
         UpdateGhost();
     }
 
+    public Vector2Int _ToIndex(Vector2 pos)
+    {
+        var localPos = back.transform.InverseTransformPoint(pos);
+        localPos += gridOffset;
+        var gridIndex = new Vector2Int(Mathf.RoundToInt(localPos.x), Mathf.RoundToInt(localPos.y));
+        return gridIndex;
+    }
+    
+    public Vector2 ToPos(Vector2Int index)
+    {
+        var localPos = back.transform.TransformPoint((Vector2)index);
+        localPos -= gridOffset;
+        return localPos;
+    }
+
+    public static bool TryPlaceBlock(Vector2Int index, Block prefab, out Block block) => Instance.Internal_TryPlaceBlock(index, prefab, out block);
+
+    public bool Internal_TryPlaceBlock(Vector2Int index, Block prefab, out Block block)
+    {
+        block = null;
+        if(!grid.HasIndex(index)) return false;
+        block = Instantiate(prefab);
+        _PlaceBlock(index, block);
+        return true;
+    }
+
+    public void _PlaceBlock(Vector2Int index, Block block)
+    {
+        var existingBlock = grid.Get(index);
+        block.transform.position = ToPos(index);
+        if (existingBlock != null)
+        {
+            Shape.OverlayBlock(existingBlock, block);
+        }
+        grid.Set(index, block);
+    }
+    
     private bool CanPlaceShape(Shape shape, ref List<Vector2Int> gridIndices)
     {
         bool canPlace = true;
         for (var j = 0; j < shape.blocks.Count; j++)
         {
             var block = shape.blocks[j];
-            var localPos = back.transform.InverseTransformPoint(block.transform.position);
-            localPos += gridOffset;
-            var gridIndex = new Vector2Int(Mathf.RoundToInt(localPos.x), Mathf.RoundToInt(localPos.y));
+            var gridIndex = _ToIndex(block.transform.position);
             gridIndices.Add(gridIndex);
 
             if (gridIndex.x >= 0 && gridIndex.x < grid.GetLength(0)
@@ -248,9 +252,8 @@ public partial class FieldManager : SingleService<FieldManager>
 
         return canPlace;
     }
-
-
-    public async Task<bool> CanPlace(Shape shape)
+    
+    private async Task<bool> CanPlace(Shape shape)
     {
         var prevScale = shape.transform.localScale;
         var prevPos = shape.transform.position;
@@ -299,9 +302,7 @@ public partial class FieldManager : SingleService<FieldManager>
         for (var i = 0; i < shape.blocks.Count; i++)
         {
             var block = shape.blocks[i];
-            var localPos = back.transform.InverseTransformPoint(block.transform.position);
-            localPos += gridOffset;
-            var gridIndex = new Vector2Int(Mathf.RoundToInt(localPos.x), Mathf.RoundToInt(localPos.y));
+            var gridIndex = _ToIndex(block.transform.position);
 
             if (gridIndex.x < 0 || gridIndex.x >= grid.GetLength(0)
                                 || gridIndex.y < 0 || gridIndex.y >= grid.GetLength(1)
@@ -313,32 +314,6 @@ public partial class FieldManager : SingleService<FieldManager>
 
         return true;
     }
-    
-    private bool TryGetGridIndices(Shape shape, out List<Vector2Int> gridIndices)
-    {
-        int w = grid.GetLength(0), h = grid.GetLength(1);
-        gridIndices = new List<Vector2Int>(shape.blocks.Count);
-
-        float cellWidth  = back.size.x / w;
-        float cellHeight = back.size.y / h;
-
-        foreach (var block in shape.blocks)
-        {
-            Vector3 loc = back.transform.InverseTransformPoint(block.transform.position);
-            loc.x += back.size.x * 0.5f;
-            loc.y += back.size.y * 0.5f;
-            int ix = Mathf.FloorToInt(loc.x / cellWidth);
-            int iy = Mathf.FloorToInt(loc.y / cellHeight);
-            var idx = new Vector2Int(ix, iy);
-            gridIndices.Add(idx);
-
-            if (ix < 0 || ix >= w || iy < 0 || iy >= h || grid[ix, iy] != null)
-                return false;
-        }
-
-        return true;
-    }
-    
     
     private void ClearCurrentGhostShape()
     {
@@ -396,7 +371,7 @@ public partial class FieldManager : SingleService<FieldManager>
         CreateAndInitShape();
     }
     
-    public void UpdateGhost()
+    private void UpdateGhost()
     {
         selectionAreas.ReleaseAll();
         if(currentGhostShape == null) return;
@@ -413,10 +388,7 @@ public partial class FieldManager : SingleService<FieldManager>
         for (int i = 0; i < currentGhostShape.blocks.Count; i++)
         {
             var gridIndex = gridIndices[i];
-            Vector2 worldPos = gridIndex;
-            worldPos -= (Vector2)gridOffset;
-            worldPos = back.transform.TransformPoint(worldPos);
-
+            Vector2 worldPos = ToPos(gridIndex);
             currentGhostShape.blocks[i].transform.position = worldPos;
         }
         
@@ -430,23 +402,23 @@ public partial class FieldManager : SingleService<FieldManager>
         for (int i = 0; i < gridIndices.Count; i++)
         {
             var index = gridIndices[i];
-            grid[index.x, index.y] = currentGhostShape.blocks[i];
+            grid.Set(index, currentGhostShape.blocks[i]);
         }
-        FillSuicideCandidates();
+        var lines = GetBlockLines();
         for (int i = 0; i < gridIndices.Count; i++)
         {
             var index = gridIndices[i];
-            grid[index.x, index.y] = null;
+            grid.Set(index, null);
         }
         
-        if (suicidesData.Count == 0)
+        if (lines.Count == 0)
         {
             return;
         }
 
-        for (int i = 0; i < suicidesData.Count; i++)
+        for (int i = 0; i < lines.Count; i++)
         {
-            var list = suicidesData[i];
+            var list = lines[i];
             var area = selectionAreas.Get();
             area.size = Vector2.one;
             var corner = list[0].index;
@@ -463,69 +435,104 @@ public partial class FieldManager : SingleService<FieldManager>
 
     private bool ClearFullLines()
     {
-        FillSuicideCandidates();
-        return suicidesData.Count > 0;
+        linesIndices.Clear();
+        
+        var lines = GetBlockLines();
+        
+        foreach (var data in lines)
+        {
+            var lineIndices = new List<Vector2Int>(data.Count);
+            linesIndices.Add(lineIndices);
+            for (var i = 0; i < data.Count; i++)
+            {
+                lineIndices.Add(data[i].index);
+            }
+        }
+        return linesIndices.Count > 0;
     }
 
-    private void FillSuicideCandidates()
+    public List<List<(Vector2Int index, Block block)>> GetBlockLines(bool excludeNull, bool excludeSpecial, bool unique = true)
     {
-        suicidesData.Clear();
-        duplicateIndexes.Clear();
-        uniqueSuicidesData.Clear();
+        var result = new List<List<(Vector2Int index, Block block)>>();
+        var set = new HashSet<Vector2Int>();
+        var buffer = new List<(Vector2Int index, Block block)>();
+        for (var i = 0; i < linesIndices.Count; i++)
+        {
+            var line = linesIndices[i];
+            buffer.Clear();
+            for (var j = 0; j < line.Count; j++)
+            {
+                var index = line[j];
+                var block = grid.Get(index);
+                if (excludeNull && block == null) continue;
+                if (excludeSpecial && _specialBlockPrefabs.Contains(block.prefab)) continue;
+                if(unique && !set.Add(index)) continue;
+                buffer.Add((index, block));
+            }
+
+            if (buffer.Count > 0)
+            {
+                result.Add(new(buffer));
+            }
+        }
+
+        return result;
+    }
+
+    public List<(Vector2Int index, Block block)> GetBlocks(bool excludeNull, bool excludeSpecial, bool unique = true)
+    {
+        var result = new List<(Vector2Int index, Block block)>();
+        var lines = GetBlockLines(excludeNull, excludeSpecial, unique);
+        for (var i = 0; i < lines.Count; i++)
+        {
+            var line = lines[i];
+            result.AddRange(line);
+        }
+        return result;
+    }
+
+    private List<List<(Vector2Int index, Block block)>> GetBlockLines()
+    {
         int w = grid.GetLength(0), h = grid.GetLength(1);
-        var rows = new List<int>();
-        var cols = new List<int>();
+        var lines = new List<List<(Vector2Int index, Block block)>>();
+        var buffer = new List<(Vector2Int index, Block block)>();
 
         for (int y = 0; y < h; y++)
         {
-            bool full = true;
+            buffer.Clear();
             for (int x = 0; x < w; x++)
-                if (grid[x, y] == null) { full = false; break; }
-            if (full) rows.Add(y);
-        }
-        for (int x = 0; x < w; x++)
-        {
-            bool full = true;
-            for (int y = 0; y < h; y++)
-                if (grid[x, y] == null) { full = false; break; }
-            if (full) cols.Add(x);
+            {
+                AddLine(x, y);
+            }
         }
         
-        foreach (int y in rows)
+        for (int x = 0; x < w; x++)
         {
-            var rowsData = new List<(Vector2Int index, Block block)>();
-            var rowsUniqueData = new List<(Vector2Int index, Block block)>();
-            for (int x = 0; x < w; x++)
-            {
-                TryAddSuicide(rowsData, rowsUniqueData, new Vector2Int(x, y), grid[x, y]);
-            }
-            suicidesData.Add(rowsData);
-            uniqueSuicidesData.Add(rowsUniqueData);
-        }
-        foreach (int x in cols)
-        {
-            var colsData = new List<(Vector2Int index, Block block)>();
-            var colsUniqueData = new List<(Vector2Int index, Block block)>();
+            buffer.Clear();
             for (int y = 0; y < h; y++)
             {
-                TryAddSuicide(colsData, colsUniqueData, new Vector2Int(x, y), grid[x, y]);
+                AddLine(x, y);
             }
-            suicidesData.Add(colsData);
-            uniqueSuicidesData.Add(colsUniqueData);
         }
-    }
+        
+        return lines;
 
-    private void TryAddSuicide(List<(Vector2Int index, Block block)> data, List<(Vector2Int index, Block block)> uniqueData,  Vector2Int index , Block block)
-    {
-        if (suicidesData.Any(x => x.Any(y => y.index == index)))
+        void AddLine(int x, int y)
         {
-            duplicateIndexes.Add((index, block));
+            if (grid[x, y])
+            {
+                buffer.Add((new(x, y), grid[x, y]));
+                if (buffer.Count == blocksInLine)
+                {
+                    lines.Add(new(buffer));
+                    buffer.Clear();
+                }
+            }
+            else
+            {
+                buffer.Clear();
+            }
         }
-        else
-        {
-            uniqueData.Add((index, block));
-        }
-        data.Add((index, block));
     }
 
     public event Action<Block> BlocksDestroying;

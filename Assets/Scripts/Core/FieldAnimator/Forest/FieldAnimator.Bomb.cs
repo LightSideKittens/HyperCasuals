@@ -16,62 +16,74 @@ namespace Core
 
             public override void Handle()
             {
-                for (var i = 0; i < blocks.Count; i++)
+                for (var i = 0; i < indices.Count; i++)
                 {
-                    var d = blocks[i];
-                    var tr = d.block.transform;
-                    tr.GetChild(0).SetParent(tr.parent, true);
-                    var toDestroy = new List<(Vector2Int index, Block block)>();
-                    Grid.Set(d.index, d.block.next);
-
-                    DestroyBlock(d.index);
-                    for (int j = 0; j < offsets.Count; j++)
-                    {
-                        DestroyBlock(d.index + offsets[j]);
-                    }
-
-                    var specialBlocks = fieldManager.GetSpecialBlocks(toDestroy);
+                    var toDestroy = new HashSet<Vector2Int>();
+                    var toDestroyBlocks = new List<Block>();
                     
-                    foreach (var list in specialBlocks.Values)
-                    {
-                        for (int j = 0; j < list.Count; j++)
-                        {
-                            toDestroy.Remove(list[j]);
-                        }
+                    var index = indices[i];
+                    var block = Grid.Get(index);
+                    Grid.Set(index, block.next);
+                    
+                    var tr = block.transform;
+                    if (tr.childCount > 0)
+                    { 
+                        tr.GetChild(0).SetParent(tr.parent, true);
                     }
-
-                    foreach (var (index, _) in toDestroy)
-                    {
-                        Grid.Set(index, null);
-                    }
+                    
+                    SetupToDestroyBlocks();
                     
                     tr.DOScale(1.3f, 0.4f).OnComplete(() =>
                     {
                         Instantiate(fx, tr.position, Quaternion.identity);
                         Destroy(tr.gameObject);
-                        for (int j = 0; j < toDestroy.Count; j++)
-                        {
-                            Destroy(toDestroy[j].block.gameObject);
-                        }
                         
-                        foreach (var (prefab, list) in specialBlocks)
+                        SetupToDestroyBlocks();
+                        var specialBlocks = fieldManager.GetSpecialBlocks(toDestroy);
+                    
+                        foreach (var (prefab, blocks) in specialBlocks)
                         {
-                            var h = animator.handlers[prefab].handler as SpecialHandler;
-                            h!.blocks = list;
+                            var h = animator._handlers[prefab].handler as SpecialHandler;
+                            h!.indices = blocks;
                             h.Handle();
+                        }
+                    
+                        foreach (var ii in toDestroyBlocks)
+                        {
+                            Destroy(ii.gameObject);
                         }
                     });
                     
-                    void DestroyBlock(Vector2Int index)
+                
+                    void SetupToDestroyBlocks()
                     {
-                        if (!Grid.HasIndex(index)) return;
-                        var block = Grid.Get(index);
-                        if (block)
+                        DestroyBlock(index);
+                        for (int j = 0; j < offsets.Count; j++)
                         {
-                            var data = (index, block);
-                            toDestroy.Add(data);
-                            blocks.Remove(data);
-                            fieldManager.RemoveData(data);
+                            DestroyBlock(index + offsets[j]);
+                        }
+                        
+                        foreach (var ii in toDestroy)
+                        {
+                            var b = Grid.Get(ii);
+                            if (b)
+                            {
+                                if (!FieldManager.SpecialBlockPrefabs.Contains(b.prefab))
+                                { 
+                                    toDestroyBlocks.Add(b);
+                                    Grid.Set(ii, null);
+                                }
+                            }
+                        }
+                    }
+                    
+                    void DestroyBlock(Vector2Int ind)
+                    {
+                        if (!Grid.HasIndex(ind)) return;
+                        var b = Grid.Get(ind);
+                        if (b)
+                        {
+                            toDestroy.Add(ind);
                         }
                     }
                 }

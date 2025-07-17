@@ -16,14 +16,17 @@ namespace Core
             public HashSet<Vector2Int> blocksToExplode = new();
             public override void Handle()
             {
-                foreach (var (index, _) in fieldManager.UniqueSuicidesData)
+                blocksToExplode.Clear();
+                var blocks = fieldManager.GetBlocks(true, true);
+                foreach (var (index, _) in blocks)
                 {
                     if (UnityEngine.Random.value < probabilityEffect)
                     {
                         blocksToExplode.Add(index);
                     }
                 }
-                foreach (var (index, block) in fieldManager.UniqueSuicidesData)
+                
+                foreach (var (index, block) in blocks)
                 {
                     var seq = DOTween.Sequence();
                     var tr = block.transform;

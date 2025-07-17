@@ -33,8 +33,10 @@ public class Spawner : MonoBehaviour
 
         var prefab = blockPrefabs[newIndex];
         shapeInstance.BlockPrefab = prefab;
-        var special = specialBlockPrefabs.Random();
-        shapeInstance.RandomSpawnSpecial(special);
+        shapeInstance.SpawnSpecial(specialBlockPrefabs[0], 0);
+        shapeInstance.SpawnSpecial(specialBlockPrefabs[1], 1);
+        shapeInstance.SpawnSpecial(specialBlockPrefabs[0], 2);
+        shapeInstance.SpawnSpecial(specialBlockPrefabs[1], 3);
         
         lastUsedIndex = newIndex;
         return shapeInstance;

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using LSCore;
 using LSCore.Attributes;
 using LSCore.DataStructs;
 using LSCore.Extensions;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using SourceGenerators;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -60,7 +63,8 @@ namespace Core
 #endif
     }
     
-    public partial class FieldAnimator : MonoBehaviour
+    [InstanceProxy]
+    public partial class FieldAnimator : SingleService<FieldAnimator>
     {
         [Serializable]
         public class HandlerDict : BaseBlockDict<HandlerWrapper> { }
@@ -78,7 +82,7 @@ namespace Core
         [Serializable]
         public abstract class SpecialHandler : Handler
         {
-            [NonSerialized] public List<(Vector2Int index, Block block)> blocks;
+            [NonSerialized] public List<Vector2Int> indices;
         }
 
         [Serializable]
@@ -89,13 +93,14 @@ namespace Core
         
         public FieldManager fieldManager;
         
-        public HandlerDict handlers = new();
+        public HandlerDict _handlers = new();
 
-        private void Awake()
+        protected override void Init()
         {
+            base.Init();
             fieldManager.BlocksDestroying += OnDestroyBlocks;
 
-            foreach (var handler in handlers.Values)
+            foreach (var handler in _handlers.Values)
             {
                 handler.handler.fieldManager = fieldManager;
                 handler.handler.animator = this;
@@ -104,31 +109,25 @@ namespace Core
 
         private void OnDestroyBlocks(Block block)
         {
-            var specialBlockPrefabs = fieldManager.GetSpecialBlocks(fieldManager.UniqueSuicidesData);
+            var specialBlockPrefabs = fieldManager.GetSpecialBlocks(
+                fieldManager.GetBlocks(false, false)
+                    .Select(x => x.index));
 
             foreach (var (prefab, specialBlocks) in specialBlockPrefabs)
             {
-                for (int i = 0; i < specialBlocks.Count; i++)
-                {
-                    var data = specialBlocks[i];
-                    fieldManager.RemoveData(data);
-                }
-                
-                var h = handlers[prefab].handler as SpecialHandler;
-                h!.blocks = specialBlocks;
+                var h = _handlers[prefab].handler as SpecialHandler;
+                h!.indices = specialBlocks;
                 h.Handle();
             }
-            
-            for (int j = 0; j < fieldManager.uniqueSuicidesData.Count; j++)
-            {
-                var list = fieldManager.uniqueSuicidesData[j];
-                for (int i = 0; i < list.Count; i++)
-                {
-                    fieldManager.grid.Set(list[i].index, null);
-                }
-            }
 
-            handlers[block].handler.Handle();
+            _handlers[block].handler.Handle();
+
+            var blocks = fieldManager.GetBlocks(true, true);
+            for (int j = 0; j < blocks.Count; j++)
+            {
+                var d = blocks[j];
+                fieldManager.grid.Set(d.index, null);
+            }
         }
     }
 }

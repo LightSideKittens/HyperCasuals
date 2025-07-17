@@ -21,6 +21,7 @@ public class Dragger : MonoBehaviour
         if (LSInput.TouchCount > 0)
         {
             LSTouch touch = LSInput.GetTouch(0);
+            if(touch.IsPointerOverUI) return;
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
 
