@@ -44,8 +44,9 @@ public class Bomb : Booster
                 {
                     UIViewBoss.GoBack();
                     var h = FieldAnimator.Handlers[prefab].handler as FieldAnimator.SpecialHandler;
-                    h!.indices = new List<Vector2Int> {index};
-                    h.Handle();
+                    h!.blocks = new List<(Vector2Int index, Block block)> { (index, block)};
+                    h.Handle(); 
+                    h.Animate();
                 }
             }
         }

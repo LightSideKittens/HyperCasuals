@@ -40,10 +40,10 @@ public partial class FieldManager : SingleService<FieldManager>
     public List<Block> _blockPrefabs;
     public List<Block> _specialBlockPrefabs;
 
-    public Dictionary<Block, List<Vector2Int>> GetSpecialBlocks(
+    public Dictionary<Block, List<(Vector2Int index, Block block)>> GetSpecialBlocks(
         IEnumerable<Vector2Int> data)
     {
-        var specialBlockPrefabs = new Dictionary<Block, List<Vector2Int>>();
+        var specialBlockPrefabs = new Dictionary<Block, List<(Vector2Int index, Block block)>>();
             
         foreach (var index in data)
         {
@@ -57,7 +57,7 @@ public partial class FieldManager : SingleService<FieldManager>
                     list = new();
                     specialBlockPrefabs.Add(prefab, list);
                 }
-                list.Add(index);
+                list.Add((index, block));
             }
         }
         
@@ -88,8 +88,6 @@ public partial class FieldManager : SingleService<FieldManager>
 
             if (canPlace)
             {
-                var sequence = DOTween.Sequence();
-
                 for (int j = 0; j < shape.blocks.Count; j++)
                 {
                     var gridIndex = gridIndices[j];
@@ -98,9 +96,14 @@ public partial class FieldManager : SingleService<FieldManager>
                     var block = shape.blocks[j];
                     grid.Set(gridIndex, block);
                     
-                    block.transform.parent = null;
-                    var tween = block.transform.DOMove(worldPos, 0.3f);
-                    sequence.Insert(j * 0.025f, tween);
+                    var parent = new GameObject("BlockParent").transform;
+                    parent.position = block.transform.position;
+                    block.transform.SetParent(parent, true);
+                    parent.DOMove(worldPos, 0.3f).SetDelay(j * 0.025f).OnComplete(() =>
+                    {
+                        parent.DetachChildren();
+                        Destroy(parent.gameObject);
+                    });
                 }
 
                 activeShapes.Remove(shape);
@@ -108,6 +111,7 @@ public partial class FieldManager : SingleService<FieldManager>
                 if (ClearFullLines())
                 {
                     BlocksDestroying?.Invoke(shape.BlockPrefab);
+                    linesIndices.Clear();
                 }
 
                 CheckLoseCondition();
@@ -493,23 +497,23 @@ public partial class FieldManager : SingleService<FieldManager>
 
     private List<List<(Vector2Int index, Block block)>> GetBlockLines()
     {
-        int w = grid.GetLength(0), h = grid.GetLength(1);
+        var size = grid.GetSize();
         var lines = new List<List<(Vector2Int index, Block block)>>();
         var buffer = new List<(Vector2Int index, Block block)>();
 
-        for (int y = 0; y < h; y++)
+        for (int y = 0; y < size.y; y++)
         {
             buffer.Clear();
-            for (int x = 0; x < w; x++)
+            for (int x = 0; x < size.x; x++)
             {
                 AddLine(x, y);
             }
         }
         
-        for (int x = 0; x < w; x++)
+        for (int x = 0; x < size.x; x++)
         {
             buffer.Clear();
-            for (int y = 0; y < h; y++)
+            for (int y = 0; y < size.y; y++)
             {
                 AddLine(x, y);
             }

@@ -178,6 +178,14 @@ MonoBehaviour:
       value:
         handler:
           rid: 1249993347411214336
+    - key: {fileID: 2791755575516428673, guid: 02f0bb752399d8e4191bd9cf19b1a790, type: 3}
+      value:
+        handler:
+          rid: 1249993439254413391
+    - key: {fileID: 6035388817502845878, guid: 7d047efc315aac84cb39c3d6ec31c2b0, type: 3}
+      value:
+        handler:
+          rid: 1249993439254413392
   references:
     version: 2
     RefIds:
@@ -198,11 +206,21 @@ MonoBehaviour:
       type: {class: FieldAnimator/Stone, ns: Core, asm: Core}
       data:
         stages:
-        - {fileID: -6560304105149440702, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
-        - {fileID: -2534019703861781584, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
         - {fileID: 979633776236109015, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
         - {fileID: 3912977348029659307, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
         fx: {fileID: 7602298404741334448, guid: 36dc9502bf9d3dc4aa4e2651f0206e9d, type: 3}
+    - rid: 1249993439254413391
+      type: {class: FieldAnimator/Rocket, ns: Core, asm: Core}
+      data:
+        axis: 1
+        leftRocket: {fileID: 3741038372231485751, guid: b0ee2c53b7e71b9419b6961ee9925b89, type: 3}
+        rightRocket: {fileID: 7713360199236600861, guid: 57986c114463ddc489a18ecc4b02a9e2, type: 3}
+    - rid: 1249993439254413392
+      type: {class: FieldAnimator/Rocket, ns: Core, asm: Core}
+      data:
+        axis: 2
+        leftRocket: {fileID: 3741038372231485751, guid: b0ee2c53b7e71b9419b6961ee9925b89, type: 3}
+        rightRocket: {fileID: 7713360199236600861, guid: 57986c114463ddc489a18ecc4b02a9e2, type: 3}
     - rid: 8179719486889525314
       type: {class: FieldAnimator/Electricity, ns: Core, asm: Core}
       data:
@@ -310,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555f9b1308234fc79590addfedb44744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blocksInLine: 8
   gridSize: {x: 8, y: 8}
   shapeAppearFx: {fileID: 2924675626361782533, guid: 1d7628660bc647e47846b55b3c4b7bd5, type: 3}
   defaultShapeSize: 0.85
@@ -325,3 +344,5 @@ MonoBehaviour:
   _specialBlockPrefabs:
   - {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
   - {fileID: 4591270519534980581, guid: 892c80028e4d84f42bff14fa98badf67, type: 3}
+  - {fileID: 2791755575516428673, guid: 02f0bb752399d8e4191bd9cf19b1a790, type: 3}
+  - {fileID: 6035388817502845878, guid: 7d047efc315aac84cb39c3d6ec31c2b0, type: 3}
