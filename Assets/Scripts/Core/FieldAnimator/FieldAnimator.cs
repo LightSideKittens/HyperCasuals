@@ -82,7 +82,18 @@ namespace Core
         [Serializable]
         public abstract class SpecialHandler : Handler
         {
-            [NonSerialized] public List<Vector2Int> indices;
+            [NonSerialized] public List<(Vector2Int index, Block block)> blocks;
+            public List<(Block block, Action action)> anim = new();
+            public virtual int Priority => 0;
+            public void Animate()
+            {
+                foreach (var data in anim)
+                {
+                    data.action?.Invoke();
+                }
+
+                anim.Clear();
+            }
         }
 
         [Serializable]
@@ -107,19 +118,38 @@ namespace Core
             }
         }
 
-        private void OnDestroyBlocks(Block block)
+        private void _Simulate()
         {
-            var specialBlockPrefabs = fieldManager.GetSpecialBlocks(
+            var blocks = fieldManager.GetBlocks(true, true);
+            for (int j = 0; j < blocks.Count; j++)
+            {
+                var d = blocks[j];
+                fieldManager.grid.Set(d.index, null);
+            }
+            
+            currentSpecialBlocks = fieldManager.GetSpecialBlocks(
                 fieldManager.GetBlocks(false, false)
                     .Select(x => x.index));
 
-            foreach (var (prefab, specialBlocks) in specialBlockPrefabs)
+            foreach (var (prefab, specialBlocks) in currentSpecialBlocks)
             {
                 var h = _handlers[prefab].handler as SpecialHandler;
-                h!.indices = specialBlocks;
+                h!.blocks = specialBlocks;
                 h.Handle();
+                h.anim.Clear();
             }
+            currentSpecialBlocks.Clear();
+        }
 
+        public Dictionary<Block, List<(Vector2Int index, Block block)>> currentSpecialBlocks = new();
+
+        public bool ContainsInSpecialBlocks(Block block)
+        {
+            return currentSpecialBlocks.Any(x => x.Value.Any(y => y.block == block));
+        }
+        
+        private void OnDestroyBlocks(Block block)
+        {
             _handlers[block].handler.Handle();
 
             var blocks = fieldManager.GetBlocks(true, true);
@@ -128,6 +158,25 @@ namespace Core
                 var d = blocks[j];
                 fieldManager.grid.Set(d.index, null);
             }
+            
+            currentSpecialBlocks = fieldManager.GetSpecialBlocks(
+                fieldManager.GetBlocks(false, false)
+                    .Select(x => x.index));
+
+            foreach (var (prefab, specialBlocks) in currentSpecialBlocks.OrderByDescending(x =>
+                     {
+                         var h = _handlers[x.Key].handler as SpecialHandler;
+                         return h!.Priority;
+                     }))
+            {
+                var h = _handlers[prefab].handler as SpecialHandler;
+                h!.blocks = specialBlocks;
+                h.anim.Clear();
+                h.Handle();
+                h.Animate();
+            }
+            currentSpecialBlocks.Clear();
+
         }
     }
 }
