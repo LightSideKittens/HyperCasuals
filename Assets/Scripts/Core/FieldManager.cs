@@ -39,6 +39,8 @@ public partial class FieldManager : SingleService<FieldManager>
     
     public List<Block> _blockPrefabs;
     public List<Block> _specialBlockPrefabs;
+    
+    public static Bounds FieldRect => new(Instance.back.transform.position, (Vector2)Instance.gridSize);
 
     public Dictionary<Block, List<(Vector2Int index, Block block)>> GetSpecialBlocks(
         IEnumerable<Vector2Int> data)
@@ -88,6 +90,11 @@ public partial class FieldManager : SingleService<FieldManager>
 
             if (canPlace)
             {
+                var tween = DOTween.TweensByTarget(shape.transform, true);
+                if (tween is { Count: > 0 })
+                {
+                    tween[0].Complete();
+                }
                 for (int j = 0; j < shape.blocks.Count; j++)
                 {
                     var gridIndex = gridIndices[j];
@@ -122,7 +129,7 @@ public partial class FieldManager : SingleService<FieldManager>
                     spawnShapeLock = 0;
                     CreateAndInitShape();
                 }
-
+                
                 Destroy(shape.gameObject);
             }
             else

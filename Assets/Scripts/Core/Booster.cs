@@ -13,13 +13,14 @@ using Object = UnityEngine.Object;
 public abstract class Booster : DoIt { }
 
 [Serializable]
-public class Bomb : Booster
+public abstract class BaseSpecialBlockBooster : Booster
 {
     public UIView view;
-    public Block prefab;
+    public abstract Block Prefab { get; }
     
     public override void Do()
     {
+        World.Destroyed += OnWorldDestroyed;
         World.Updated += Update;
         view.Manager.Hiding += OnHiding;
     }
@@ -28,10 +29,19 @@ public class Bomb : Booster
     {
         view.Manager.Hiding -= OnHiding;
         World.Updated -= Update;
+        World.Destroyed -= OnWorldDestroyed;
+    }
+
+    private void OnWorldDestroyed()
+    {
+        World.Destroyed -= OnWorldDestroyed;
+        World.Updated -= Update;
     }
     
     private void Update()
     {
+        if(!Prefab) return;
+        
         if (LSInput.TouchCount > 0)
         {
             LSTouch touch = LSInput.GetTouch(0);
@@ -40,10 +50,10 @@ public class Bomb : Booster
             if (touch.phase == TouchPhase.Began)
             {
                 var index = FieldManager.ToIndex(touchPosition);
-                if (FieldManager.TryPlaceBlock(index, prefab, out var block))
+                if (FieldManager.TryPlaceBlock(index, Prefab, out var block))
                 {
                     UIViewBoss.GoBack();
-                    var h = FieldAnimator.Handlers[prefab].handler as FieldAnimator.SpecialHandler;
+                    var h = FieldAnimator.Handlers[Prefab].handler as FieldAnimator.SpecialHandler;
                     h!.blocks = new List<(Vector2Int index, Block block)> { (index, block)};
                     h.Handle(); 
                     h.Animate();
@@ -51,6 +61,24 @@ public class Bomb : Booster
             }
         }
     }
+}
+
+[Serializable]
+public class Bomb : BaseSpecialBlockBooster
+{
+    public Block prefab;
+    public override Block Prefab => prefab;
+}
+
+[Serializable]
+public class Rocket : BaseSpecialBlockBooster
+{
+    public Block xRocket;
+    public Block yRocket;
+    public LSToggle xRocketToggle;
+    public LSToggle yRocketToggle;
+    
+    public override Block Prefab => xRocketToggle.IsOn ? xRocket : (yRocketToggle.IsOn ? yRocket : null);
 }
 
 [Serializable]

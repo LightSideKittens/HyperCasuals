@@ -135,20 +135,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: onShowing.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: 'onShowing.Array.data[0]'
       value: 1249993390588428288
       objectReference: {fileID: 0}
     - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
+      propertyPath: 'onShowing.Array.data[1]'
+      value: 1249993439254413460
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: 'managedReferences[1249993390588428288]'
       value: Core Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
+      propertyPath: 'managedReferences[1249993439254413460]'
+      value: Core Core.RectToFieldFitter
       objectReference: {fileID: 0}
     - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: managedReferences[1249993390588428288].view
       value: 
       objectReference: {fileID: 1805466206585280858}
+    - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
+      propertyPath: managedReferences[1249993439254413460].rect
+      value: 
+      objectReference: {fileID: 1704212140712261305}
     - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: managedReferences[1249993390588428288].prefab
       value: 
@@ -491,6 +503,11 @@ PrefabInstance:
       addedObject: {fileID: 4337071408546724067}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
+--- !u!224 &1704212140712261305 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6739369253570913966, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
+  m_PrefabInstance: {fileID: 5341725766843846679}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1805466206585280858 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
