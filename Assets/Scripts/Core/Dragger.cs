@@ -1,7 +1,9 @@
 using System;
 using DG.Tweening;
 using LSCore;
+using UnityEditor.DeviceSimulation;
 using UnityEngine;
+using TouchPhase = UnityEngine.TouchPhase;
 
 public class Dragger : MonoBehaviour
 {
@@ -21,7 +23,7 @@ public class Dragger : MonoBehaviour
         if (LSInput.TouchCount > 0)
         {
             LSTouch touch = LSInput.GetTouch(0);
-            if(touch.IsPointerOverUI) return;
+            if(touch.IsPointerOverUI && !isDragging) return;
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
 
