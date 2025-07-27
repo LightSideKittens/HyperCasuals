@@ -13,10 +13,9 @@ using Object = UnityEngine.Object;
 public abstract class Booster : DoIt { }
 
 [Serializable]
-public abstract class BaseSpecialBlockBooster : Booster
+public abstract class BaseFieldClickBooster : Booster
 {
     public UIView view;
-    public abstract Block Prefab { get; }
     
     public override void Do()
     {
@@ -40,8 +39,6 @@ public abstract class BaseSpecialBlockBooster : Booster
     
     private void Update()
     {
-        if(!Prefab) return;
-        
         if (LSInput.TouchCount > 0)
         {
             LSTouch touch = LSInput.GetTouch(0);
@@ -50,16 +47,31 @@ public abstract class BaseSpecialBlockBooster : Booster
             if (touch.phase == TouchPhase.Began)
             {
                 var index = FieldManager.ToIndex(touchPosition);
-                if (FieldManager.TryPlaceBlock(index, Prefab, out var block))
-                {
-                    UIViewBoss.GoBack();
-                    var h = FieldAnimator.Handlers[Prefab].handler as FieldAnimator.SpecialHandler;
-                    h!.blocks = new List<(Vector2Int index, Block block)> { (index, block)};
-                    h.Handle(); 
-                    h.Animate();
+                if (FieldManager.Grid.HasIndex(index))
+                { 
+                    OnClicked(index);
                 }
             }
         }
+    }
+
+    protected abstract void OnClicked(Vector2Int index);
+}
+
+[Serializable]
+public abstract class BaseSpecialBlockBooster : BaseFieldClickBooster
+{
+    public abstract Block Prefab { get; }
+
+    protected override void OnClicked(Vector2Int index)
+    {
+        if(!Prefab) return;
+        FieldManager.PlaceBlock(index, Prefab, out var block);
+        UIViewBoss.GoBack();
+        var h = FieldAnimator.Handlers[Prefab].handler as FieldAnimator.SpecialHandler;
+        h!.blocks = new List<(Vector2Int index, Block block)> { (index, block)};
+        h.Handle(); 
+        h.Animate();
     }
 }
 
@@ -79,6 +91,23 @@ public class Rocket : BaseSpecialBlockBooster
     public LSToggle yRocketToggle;
     
     public override Block Prefab => xRocketToggle.IsOn ? xRocket : (yRocketToggle.IsOn ? yRocket : null);
+}
+
+[Serializable]
+public class Hummer : BaseFieldClickBooster
+{
+    public ParticleSystem fx;
+    
+    protected override void OnClicked(Vector2Int index)
+    {
+        var block = FieldManager.Grid.Get(index);
+        if (block == null) return;
+        UIViewBoss.GoBack();
+        var fxPos = FieldManager.ToPos(index);
+        Object.Instantiate(fx, fxPos, Quaternion.identity);
+        FieldManager.Grid.Set(index, null);
+        Object.Destroy(block.gameObject);
+    }
 }
 
 [Serializable]
@@ -158,7 +187,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
     {
         availableDoIts.Do();
         if(lastCanvas != null) lastCanvas.sortingOrder--;
-        lastCanvas =  canvas;
+        lastCanvas = canvas;
         canvas.sortingOrder++;
     }
 }

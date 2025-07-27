@@ -25,7 +25,7 @@ namespace Core
                     var uniqueData = uniqueBlocks[i];
                     var data = blocks[i];
                     var dir = ((Vector2)(data[0] - data[1])).normalized;
-                    var fxPos = fieldManager.ToPos(data[0]) + (dir * ofsetFxPos);
+                    var fxPos = fieldManager._ToPos(data[0]) + (dir * ofsetFxPos);
                     
                     var fxScale = Vector3.one * fxScaleSer;
                     fx.transform.localScale = fxScale;
