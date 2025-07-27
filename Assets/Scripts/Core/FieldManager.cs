@@ -41,7 +41,8 @@ public partial class FieldManager : SingleService<FieldManager>
     public List<Block> _specialBlockPrefabs;
     
     public static Bounds FieldRect => new(Instance.back.transform.position, (Vector2)Instance.gridSize);
-
+    public static Block[,] Grid => Instance.grid;
+    
     public Dictionary<Block, List<(Vector2Int index, Block block)>> GetSpecialBlocks(
         IEnumerable<Vector2Int> data)
     {
@@ -98,7 +99,7 @@ public partial class FieldManager : SingleService<FieldManager>
                 for (int j = 0; j < shape.blocks.Count; j++)
                 {
                     var gridIndex = gridIndices[j];
-                    Vector2 worldPos = ToPos(gridIndex);
+                    Vector2 worldPos = _ToPos(gridIndex);
 
                     var block = shape.blocks[j];
                     grid.Set(gridIndex, block);
@@ -213,28 +214,26 @@ public partial class FieldManager : SingleService<FieldManager>
         return gridIndex;
     }
     
-    public Vector2 ToPos(Vector2Int index)
+    public Vector2 _ToPos(Vector2Int index)
     {
         var localPos = back.transform.TransformPoint((Vector2)index);
         localPos -= gridOffset;
         return localPos;
     }
 
-    public static bool TryPlaceBlock(Vector2Int index, Block prefab, out Block block) => Instance.Internal_TryPlaceBlock(index, prefab, out block);
+    public static void PlaceBlock(Vector2Int index, Block prefab, out Block block) => Instance.Internal_PlaceBlock(index, prefab, out block);
 
-    public bool Internal_TryPlaceBlock(Vector2Int index, Block prefab, out Block block)
+    public void Internal_PlaceBlock(Vector2Int index, Block prefab, out Block block)
     {
         block = null;
-        if(!grid.HasIndex(index)) return false;
         block = Instantiate(prefab);
         _PlaceBlock(index, block);
-        return true;
     }
 
     public void _PlaceBlock(Vector2Int index, Block block)
     {
         var existingBlock = grid.Get(index);
-        block.transform.position = ToPos(index);
+        block.transform.position = _ToPos(index);
         if (existingBlock != null)
         {
             Shape.OverlayBlock(existingBlock, block);
@@ -399,7 +398,7 @@ public partial class FieldManager : SingleService<FieldManager>
         for (int i = 0; i < currentGhostShape.blocks.Count; i++)
         {
             var gridIndex = gridIndices[i];
-            Vector2 worldPos = ToPos(gridIndex);
+            Vector2 worldPos = _ToPos(gridIndex);
             currentGhostShape.blocks[i].transform.position = worldPos;
         }
         

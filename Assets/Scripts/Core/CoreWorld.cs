@@ -60,10 +60,14 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     protected override void Awake()
     {
         base.Awake();
-        Init();
 #if DEBUG
         DebugData.Init();  
 #endif
+    }
+
+    private void Start()
+    {
+        Init();
     }
 
     protected override void OnDestroy()

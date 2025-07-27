@@ -34,4 +34,11 @@ public class Block : MonoBehaviour
     }
 
     public Block next;
+    public bool IsSpecial => FieldManager.SpecialBlockPrefabs.Contains(prefab);
+    public static event Action<Block> Destroyed;
+    
+    private void OnDestroy()
+    {
+        Destroyed?.Invoke(this);
+    }
 }
