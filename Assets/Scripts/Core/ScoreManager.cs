@@ -1,90 +1,178 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using LSCore;
+using LSCore.Extensions;
+using Sirenix.OdinInspector;
+using SourceGenerators;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-
-public class ScoreManager : MonoBehaviour
+namespace Core
 {
-    public TMP_Text textScore;
-    private int score;
-    public int pointsPerLine = 30;
-    public bool enableComboBonus;
-    public bool enableSpeedBonus;
-    private int comboMultiplier = 1;
-    private int comboAttempts = 0;
-    private const int maxAttemptsWithoutBreak = 6;
-    private float lastBreakTime = 999f;
-    private const float speedBonusWindow = 5f;
-
-    private void Start()
+    [InstanceProxy]
+    public partial class ScoreManager : SingleService<ScoreManager>
     {
-        score = 0;
-        UpdateText();
-    }
+        public int forLineDestroying = 20;
+        public int forCombo = 10;
+        public int forBlockPlacing = 5;
+        public int forBonusBlockDestroying = 20;
+        public int forBlockDestroying = 5;
+        public int turnsForComboReset = 3;
+        public int bonusizeEveryTurns = 9;
+        public int maxBonusBlock = 3;
+        
+        [MinMaxSlider(0, 12)] public Vector2Int bonusLevelRange;
+        public TextMeshPro bonusPrefab;
+        private Dictionary<Block, TextMeshPro> bonuses = new(); 
+        
+        private int _lastScore;
+        private int _currentScore;
+        private int _currentCombo;
+        private int currentTurn;
+        private int turnsForBonus;
 
-    public void AddScore(int linesDestroyed, bool wasLineBroken)
-    {
-        if (enableComboBonus)
+        public static event Action ScoreChanged;
+        public static event Action ComboChanged;
+        
+        protected override void Init()
         {
-            if (wasLineBroken)
-            {
-                comboAttempts = 0;
-                comboMultiplier++;
+            base.Init();
+            FieldManager.Placed += OnPlace;
+        }
+
+        protected override void DeInit()
+        {
+            base.DeInit();
+            FieldManager.Placed -= OnPlace;
+        }
+
+        public void OnPlace(FieldManager.PlaceData data)
+        {
+            if (bonuses.Count == 0)
+            { 
+                turnsForBonus++;
             }
-            else
+            
+            DecreaseBonuses();
+            if (turnsForBonus >= bonusizeEveryTurns)
             {
-                comboAttempts++;
-                if (comboAttempts >= maxAttemptsWithoutBreak)
+                turnsForBonus = 0;
+                Bonusize();
+            }
+            
+            var placedScore = 0;
+            foreach (var block in data.shape.blocks)
+            {
+                if(block.ContainsRegular) placedScore += forBlockPlacing;
+            }
+            
+            int linesCount = data.lines?.Count ?? 0;
+            if (linesCount == 0)
+            {
+                currentTurn++;
+                if (currentTurn >= turnsForComboReset)
                 {
-                    comboMultiplier = 1;
-                    comboAttempts = 0;
+                    _currentCombo = 0;
+                    currentTurn = 0;
+                }
+                _lastScore = _currentScore;
+                _currentScore += placedScore;
+                ScoreChanged?.Invoke();
+                return;
+            }
+            
+            currentTurn = 0;
+            var destroyedBlocks = 0;
+            var bonusScore = 0;
+            
+            var size = data.lastGrid.GetSize();
+            for (int x = 0; x < size.x; x++)
+            {
+                for (int y = 0; y < size.y; y++)
+                {
+                    var index = new Vector2Int(x, y);
+                    var lastBlock = data.lastGrid.Get(index);
+                    if(lastBlock is null) continue;
+                    var currentBlock = data.currentGrid.Get(index);
+                    if (currentBlock is null)
+                    {
+                        if (bonuses.Remove(lastBlock, out var bonus))
+                        {
+                            bonusScore += forBonusBlockDestroying * int.Parse(bonus.text);
+                            Destroy(bonus.gameObject);
+                        }
+                        
+                        if (lastBlock.ContainsRegular)
+                        {
+                            destroyedBlocks++;
+                        }
+                    }
+                }
+            }
+
+            _lastScore = _currentScore;
+            _currentScore += linesCount * (forLineDestroying + _currentCombo * forCombo) 
+                             + (_currentCombo + 1) * forBlockDestroying * destroyedBlocks
+                             + bonusScore
+                             + placedScore;
+            
+            _currentCombo++;
+            ScoreChanged?.Invoke();
+            if (_currentCombo > 1)
+            { 
+                ComboChanged?.Invoke();
+            }
+        }
+        
+        private void Update()
+        {
+            foreach (var (block, text) in bonuses)
+            {
+                text.transform.position = block.transform.position;
+            }
+        }
+
+        private void DecreaseBonuses()
+        {
+            foreach (var (block, text) in bonuses)
+            {
+                var level = int.Parse(text.text);
+                text.text = (level - 1).ToString();
+                if (level == 1)
+                {
+                    Destroy(text.gameObject);
+                    bonuses.Remove(block);
                 }
             }
         }
-        else
+        
+        private void Bonusize()
         {
-            comboMultiplier = 1;
-        }
-
-        int baseScore = linesDestroyed * pointsPerLine;
-        int finalScore = baseScore * comboMultiplier;
-
-        string bonusInfo = $"Combo x{comboMultiplier}";
-
-        if (enableSpeedBonus && wasLineBroken)
-        {
-            float timeNow = Time.time;
-            float timeSinceLastBreak = timeNow - lastBreakTime;
-
-            if (lastBreakTime > 0 && timeSinceLastBreak <= speedBonusWindow)
+            if(bonuses.Count > 0) return;
+            
+            var set = new HashSet<Vector2Int>();
+            var size = FieldManager.Grid.GetSize();
+            for (int i = 0; i < maxBonusBlock; i++)
             {
-                finalScore += 50; // фиксированный бонус
-                bonusInfo += $" + SpeedBonus (+50 in {timeSinceLastBreak:F2}s)";
+                var index = FieldManager.Grid.RandomIndex();
+                while (!set.Add(index))
+                {
+                    if (index.x >= size.x)
+                    {
+                        index.x = 0;
+                        index.y++;
+                        index.y %= size.y;
+                    }
+                    index.x++;
+                }
+                var block = FieldManager.Grid.Get(index);
+                if(block == null) continue;
+                var bonus = Instantiate(bonusPrefab, block.transform.position, Quaternion.identity);
+                bonus.text = Random.Range(bonusLevelRange.x, bonusLevelRange.y).ToString();
+                bonuses[block] = bonus;
             }
-            else
-            {
-                bonusInfo += $" (no speed bonus, {timeSinceLastBreak:F2}s)";
-            }
-
-            lastBreakTime = timeNow;
-        }
-
-        if (wasLineBroken && !enableSpeedBonus)
-            lastBreakTime = Time.time;
-
-        score += finalScore;
-
-        // ДЕБАГ
-        //Debug.Log($"[SCORE] Lines: {linesDestroyed}, Base: {baseScore}, {bonusInfo} → +{finalScore} → Total: {score}");
-
-        UpdateText();
-    }
-
-
-    private void UpdateText()
-    {
-        if (textScore != null)
-        {
-            textScore.text = score.ToString();
         }
     }
 }
