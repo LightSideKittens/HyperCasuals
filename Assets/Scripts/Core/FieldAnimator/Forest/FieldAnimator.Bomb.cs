@@ -83,7 +83,7 @@ namespace Core
                             var b = Grid.Get(ii);
                             if (b)
                             {
-                                if (!FieldManager.SpecialBlockPrefabs.Contains(b.prefab))
+                                if (!b.IsSpecial)
                                 { 
                                     toDestroyBlocks.Add(b);
                                     Grid.Set(ii, null);

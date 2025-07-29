@@ -2,8 +2,8 @@
 
 namespace Core
 {
-    public class Goal : MonoBehaviour
+    public abstract class Goal : MonoBehaviour
     {
-        
+        public abstract bool IsReached { get; }
     }
 }

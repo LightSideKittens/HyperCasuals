@@ -138,7 +138,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
     public override void Do()
     {
         button.Submitted += OnSubmit;
-        lockLeveText.Localize(unlockLevel);
+        lockLeveText.LocalizeArguments(unlockLevel);
         states = CoreWorld.Config.AsJ<JObject>("states");
         states.As(id.ToString(), false);
         if (states[id.ToString()].ToBool())

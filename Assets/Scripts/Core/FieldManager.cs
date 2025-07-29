@@ -20,7 +20,7 @@ public partial class FieldManager : SingleService<FieldManager>
     
     public ParticleSystem shapeAppearFx;
     
-    public float defaultShapeSize = 0.85f;
+    public float defaultShapeSize = 0.7f;
     public SpriteRenderer back;
     public SpriteRenderer selector;
 
@@ -115,13 +115,20 @@ public partial class FieldManager : SingleService<FieldManager>
                 }
 
                 activeShapes.Remove(shape);
-
+                var placeData = new PlaceData();
+                placeData.shape = shape;
+                placeData.lastGrid = CopyGrid();
+                
                 if (ClearFullLines())
                 {
                     BlocksDestroying?.Invoke(shape.BlockPrefab);
+                    placeData.lines = new List<List<Vector2Int>>(linesIndices);
                     linesIndices.Clear();
                 }
 
+                placeData.currentGrid = grid;
+                Placed?.Invoke(placeData);
+                
                 CheckLoseCondition();
 
                 spawnShapeLock++;
@@ -139,6 +146,20 @@ public partial class FieldManager : SingleService<FieldManager>
                 shape.transform.DOScale(Vector3.one * defaultShapeSize, 0.2f);
             }
         };
+    }
+
+    private Block[,] CopyGrid()
+    {
+        var size = grid.GetSize();
+        var copiedGrid = new Block[size.x, size.y];
+        for (int x = 0; x < size.x; x++)
+        {
+            for (int y = 0; y < size.y; y++)
+            {
+                copiedGrid[x, y] = grid[x, y];
+            }
+        }
+        return copiedGrid;
     }
 
     private async void CreateAndInitShape()
@@ -546,4 +567,13 @@ public partial class FieldManager : SingleService<FieldManager>
     }
 
     public event Action<Block> BlocksDestroying;
+    public static event Action<PlaceData> Placed;
+    
+    public struct PlaceData
+    {
+        public Shape shape;
+        public Block[,] lastGrid;
+        public Block[,] currentGrid;
+        public List<List<Vector2Int>> lines;
+    }
 }
