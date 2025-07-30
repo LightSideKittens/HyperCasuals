@@ -7,6 +7,7 @@ using LSCore.Extensions;
 using LSCore.Extensions.Unity;
 using Sirenix.OdinInspector;
 using SourceGenerators;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -28,6 +29,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public SpriteRenderer selector => FieldAppearance.Selector;
 
     public Dragger dragger;
+    public Shape initialShape;
     
     private Vector3 gridOffset;
     private Vector3 defaultScale;
@@ -46,6 +48,26 @@ public partial class FieldManager : SingleService<FieldManager>
     
     public static Bounds FieldRect => new(Instance.back.transform.position, 8f.ToVector2());
     public static Block[,] Grid => Instance.grid;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if(World.IsPlaying) return;
+        EditorApplication.update -= EditorUpdate;
+        EditorApplication.update += EditorUpdate;
+    }
+
+    private void EditorUpdate()
+    {
+        if (initialShape)
+        {
+            InitBack();
+            initialShape.transform.position = back.transform.position - (Vector3)4f.ToVector2();
+            initialShape.transform.SetScale(defaultScale);
+            initialShape.AddBlocks();
+        }
+    }
+#endif
     
     private Dictionary<Block, List<(Vector2Int index, Block block)>> _GetSpecialBlocks(
         IEnumerable<Vector2Int> data)
@@ -71,15 +93,42 @@ public partial class FieldManager : SingleService<FieldManager>
         return specialBlockPrefabs;
     }
 
-    private void Start()
+    private void InitBack()
     {
-        grid = new Block[gridSize.x, gridSize.y];
         back.size = gridSize;
         defaultScale = new Vector3(8f / gridSize.x, 8f / gridSize.y, 1);
         back.transform.localScale = defaultScale;
         gridOffset = new Vector3(back.size.x / 2, back.size.y / 2) - LSVector3.half;
-        CreateAndInitShape();
+    }
 
+    private void ApplyInitialShape()
+    {
+        if (initialShape)
+        {
+            if (initialShape.blocks.Count > 0)
+            {
+                for (int j = 0; j < initialShape.blocks.Count; j++)
+                {
+                    var block = initialShape.blocks[j];
+                    var gridIndex = _ToIndex(block.transform.position);
+                    grid.Set(gridIndex, block);
+                    block.transform.SetParent(null, true);
+                }
+
+                InitialShapePlaced?.Invoke(initialShape);
+                initialShape.transform.DetachChildren();
+                Destroy(initialShape.gameObject);
+            }
+        }
+    }
+    
+    private void Start()
+    {
+        grid = new Block[gridSize.x, gridSize.y]; 
+        InitBack();
+        CreateAndInitShape();
+        ApplyInitialShape();
+        
         dragger.Started += shape =>
         {
             ClearCurrentGhostShape();
@@ -155,6 +204,14 @@ public partial class FieldManager : SingleService<FieldManager>
         };
     }
 
+    protected override void DeInit()
+    {
+        base.DeInit();
+#if UNITY_EDITOR
+        EditorApplication.update -= EditorUpdate;
+#endif
+    }
+
     public static Block[,] CopyGrid() => Instance.Internal_CopyGrid();
     private Block[,] Internal_CopyGrid()
     {
@@ -184,7 +241,7 @@ public partial class FieldManager : SingleService<FieldManager>
         foreach (var shapePrefab in allShapes)
         {
             Shape temp = Instantiate(shapePrefab, transform.position, Quaternion.identity);
-            bool canPlace = await CanPlace(temp);
+            bool canPlace = await HasPlaceForShape(temp);
             Destroy(temp.gameObject);
             if (canPlace)
             {
@@ -201,11 +258,13 @@ public partial class FieldManager : SingleService<FieldManager>
             if (i == guaranteedIndex)
             {
                 shape = spawner.SpawnSpecificShape(validShapes.Random(), ref lastUsedSpriteIndex);
+                spawner.currentShape = shape;
                 Debug.Log($"[SPAWN] Спавнер {i}: ГАРАНТИРОВАННАЯ фигура");
             }
             else
             {
                 shape = spawner.SpawnRandomShape(ref lastUsedSpriteIndex);
+                spawner.currentShape = shape;
             }
 
             activeShapes.Add(shape);
@@ -255,7 +314,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public void Internal_PlaceBlock(Vector2Int index, Block prefab, out Block block)
     {
         block = null;
-        block = Block.Create(prefab);
+        block = Instantiate(prefab);
         _PlaceBlock(index, block);
     }
 
@@ -291,7 +350,7 @@ public partial class FieldManager : SingleService<FieldManager>
         return canPlace;
     }
     
-    private async Task<bool> CanPlace(Shape shape)
+    private async Task<bool> HasPlaceForShape(Shape shape)
     {
         var prevScale = shape.transform.localScale;
         var prevPos = shape.transform.position;
@@ -308,7 +367,7 @@ public partial class FieldManager : SingleService<FieldManager>
             shape.transform.localScale = defaultScale;
 
             Vector2 r = shape.ratio;
-            var tp = back.transform.position - (gridOffset + LSVector3.half) + ((Vector3)r / 2);
+            var tp = back.transform.position - Vector3.Scale(gridOffset + LSVector3.half, defaultScale) + Vector3.Scale(r, defaultScale) / 2;
             shape.transform.position = tp;
 
             int xCount = grid.GetLength(0) - (shape.ratio.x - 1);
@@ -318,13 +377,13 @@ public partial class FieldManager : SingleService<FieldManager>
             {
                 for (int y = 0; y < yCount; y++)
                 {
-                    shape.transform.position = tp + new Vector3(x, y);
+                    shape.transform.position = tp + Vector3.Scale(new Vector3(x, y), defaultScale);
                     if (debug)
                     {
                         await Task.Delay(200);
                     }
 
-                    if (Check(shape))
+                    if (Check())
                     {
                         return true;
                     }
@@ -333,24 +392,22 @@ public partial class FieldManager : SingleService<FieldManager>
         
             return false;
         }
-    }
-    
-    private bool Check(Shape shape)
-    {
-        for (var i = 0; i < shape.blocks.Count; i++)
+        
+        bool Check()
         {
-            var block = shape.blocks[i];
-            var gridIndex = _ToIndex(block.transform.position);
-
-            if (gridIndex.x < 0 || gridIndex.x >= grid.GetLength(0)
-                                || gridIndex.y < 0 || gridIndex.y >= grid.GetLength(1)
-                                || grid[gridIndex.x, gridIndex.y] != null)
+            for (var i = 0; i < shape.blocks.Count; i++)
             {
-                return false;
-            }
-        }
+                var block = shape.blocks[i];
+                var gridIndex = _ToIndex(block.transform.position);
 
-        return true;
+                if (!grid.HasIndex(gridIndex) || grid.Get(gridIndex))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
     
     private void ClearCurrentGhostShape()
@@ -375,7 +432,7 @@ public partial class FieldManager : SingleService<FieldManager>
         foreach (var shape in activeShapes)
         {
             if (shape == null) continue;
-            if (await CanPlace(shape))
+            if (await HasPlaceForShape(shape))
             {
                 Debug.Log("[CheckLoseCondition] At least one shape can be placed");
                 return;
@@ -582,6 +639,7 @@ public partial class FieldManager : SingleService<FieldManager>
 
     public static event Action<Block> BlocksDestroying;
     public static event Action<PlaceData> Placed;
+    public static event Action<Shape> InitialShapePlaced;
     
     public struct PlaceData
     {

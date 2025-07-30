@@ -1,9 +1,12 @@
 ﻿using System;
+using LSCore;
+using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    [HideInInspector] public Block prefab;
+    [ReadOnly] public Block prefab;
     public SpriteRenderer render;
     [NonSerialized] public int defaultSortingOrder;
     
@@ -46,12 +49,11 @@ public class Block : MonoBehaviour
         }
     }
 
-    public static Block Create(Block prefab, Vector3 pos, Quaternion rot, Transform parent)
+#if UNITY_EDITOR
+    private void OnValidate()
     {
-        var block = Instantiate(prefab, pos, rot, parent);
-        block.prefab = prefab;
-        return block;
+        if(World.IsPlaying) return;
+        prefab = PrefabUtility.GetCorrespondingObjectFromSource(this);
     }
-    
-    public static Block Create(Block prefab) => Create(prefab, Vector3.zero, Quaternion.identity, null);
+#endif
 }

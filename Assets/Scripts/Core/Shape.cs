@@ -1,8 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Core;
-using LSCore.Extensions;
-using LSCore.Extensions.Unity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -39,26 +35,13 @@ public class Shape : MonoBehaviour
                 var currBlock = blocks[i];
                 var currBlockTr = currBlock.transform;
                 var siblingIndex = currBlockTr.GetSiblingIndex();
-                var newBlock = Block.Create(value, currBlockTr.position, Quaternion.identity, transform);
+                var newBlock = Instantiate(value, currBlockTr.position, Quaternion.identity, transform);
                 newBlock.defaultSortingOrder = -10;
                 blocks[i] = newBlock;
                 newBlock.transform.SetSiblingIndex(siblingIndex);
                 Destroy(currBlockTr.gameObject);
             }
         }
-    }
-
-    private Vector2 defaultBoxSize;
-    
-    private void Awake()
-    {
-        defaultBoxSize = Vector2Int.one * 3;
-        boxCollider = GetComponent<BoxCollider2D>();
-    }
-
-    private void Update()
-    {
-        boxCollider.size = defaultBoxSize.Divide(transform.localScale);
     }
 
     public Block RandomSpawnSpecial(Block specialBlockPrefab)
@@ -70,7 +53,7 @@ public class Shape : MonoBehaviour
     {
         var currBlock = blocks[atIndex];
         var currBlockTr = currBlock.transform;
-        var newBlock = Block.Create(specialBlockPrefab, currBlockTr.position, specialBlockPrefab.transform.rotation, currBlockTr.parent);
+        var newBlock = Instantiate(specialBlockPrefab, currBlockTr.position, specialBlockPrefab.transform.rotation, currBlockTr.parent);
         OverlayBlock(currBlock, newBlock);
         blocks[atIndex] = newBlock;
         return newBlock;
@@ -87,7 +70,16 @@ public class Shape : MonoBehaviour
     [Button]
     public void AddBlocks()
     {
-        blocks = new List<Block>(GetComponentsInChildren<Block>());
+        blocks = new List<Block>();
+        var childCount = transform.childCount;
+        for (int i = 0; i < childCount; i++)
+        {
+            var child = transform.GetChild(i);
+            if (child.TryGetComponent(out Block block))
+            {
+                blocks.Add(block);
+            }
+        }
     }
 
     public Shape CreateGhost(Shape shape)

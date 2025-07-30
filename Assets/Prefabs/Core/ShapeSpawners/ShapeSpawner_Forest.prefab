@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2100100443651692334}
   - component: {fileID: 4841226287611981766}
+  - component: {fileID: -4865433491575525}
   m_Layer: 0
   m_Name: ShapeSpawner_Forest
   m_TagString: Untagged
@@ -86,15 +87,49 @@ MonoBehaviour:
   - {fileID: 6245424791155680371, guid: f5904721a373364479ccf7d2cabcbfe0, type: 3}
   - {fileID: 6245424791155680371, guid: 7e59849d3f9e4db4480bc157dd5c0acf, type: 3}
   - {fileID: 6245424791155680371, guid: 8d873271a118eb2448105130e905c6d3, type: 3}
-  blockPrefabs:
-  - {fileID: 8512770957231261250, guid: a4f4528a405237c478ff1e12bd5b95b3, type: 3}
-  - {fileID: 4591270519534980581, guid: e962e13680141b7459984d696cf4d485, type: 3}
-  - {fileID: 4591270519534980581, guid: e962e13680141b7459984d696cf4d485, type: 3}
-  - {fileID: 4591270519534980581, guid: 834f86ccf381f5f4a88a829d79a1ead5, type: 3}
-  specialBlockPrefabs:
-  - {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
-  specialSpawnDict:
-    data:
-    - key: {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
-      value:
-        shouldReplace: 1
+--- !u!61 &-4865433491575525
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790875988351647174}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3, y: 3}
+  m_EdgeRadius: 0
