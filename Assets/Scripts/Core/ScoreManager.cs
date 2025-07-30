@@ -47,7 +47,7 @@ namespace Core
             FieldManager.Placed -= OnPlace;
         }
 
-        public void OnPlace(FieldManager.PlaceData data)
+        private void OnPlace(FieldManager.PlaceData data)
         {
             if (bonuses.Count == 0)
             { 
@@ -83,18 +83,35 @@ namespace Core
             }
             
             currentTurn = 0;
+            var (destroyedBlocks, bonusScore) = CountDestroyedBlocksScore(data.lastGrid, data.currentGrid);
+            _lastScore = _currentScore;
+            _currentScore += linesCount * (forLineDestroying + _currentCombo * forCombo) 
+                             + (_currentCombo + 1) * forBlockDestroying * destroyedBlocks
+                             + bonusScore
+                             + placedScore;
+            
+            _currentCombo++;
+            ScoreChanged?.Invoke();
+            if (_currentCombo > 1)
+            { 
+                ComboChanged?.Invoke();
+            }
+        }
+
+        private (int destroyedBlocks, int bonusScore) CountDestroyedBlocksScore(Block[,] lastGrid, Block[,] currentGrid)
+        {
             var destroyedBlocks = 0;
             var bonusScore = 0;
             
-            var size = data.lastGrid.GetSize();
+            var size = lastGrid.GetSize();
             for (int x = 0; x < size.x; x++)
             {
                 for (int y = 0; y < size.y; y++)
                 {
                     var index = new Vector2Int(x, y);
-                    var lastBlock = data.lastGrid.Get(index);
+                    var lastBlock = lastGrid.Get(index);
                     if(lastBlock is null) continue;
-                    var currentBlock = data.currentGrid.Get(index);
+                    var currentBlock = currentGrid.Get(index);
                     if (currentBlock is null)
                     {
                         if (bonuses.Remove(lastBlock, out var bonus))
@@ -110,18 +127,20 @@ namespace Core
                     }
                 }
             }
-
-            _lastScore = _currentScore;
-            _currentScore += linesCount * (forLineDestroying + _currentCombo * forCombo) 
-                             + (_currentCombo + 1) * forBlockDestroying * destroyedBlocks
-                             + bonusScore
-                             + placedScore;
             
-            _currentCombo++;
-            ScoreChanged?.Invoke();
-            if (_currentCombo > 1)
+            return (destroyedBlocks, bonusScore);
+        }
+
+        public static void OnBoosterUsed(Block[,] lastGrid, Block[,] currentGrid) => Instance.Internal_OnBoosterUsed(lastGrid, currentGrid);
+        private void Internal_OnBoosterUsed(Block[,] lastGrid, Block[,] currentGrid)
+        {
+            var (destroyedBlocks, bonusScore) = CountDestroyedBlocksScore(lastGrid, currentGrid);
+            _lastScore = _currentScore;
+            _currentScore += forBlockDestroying * destroyedBlocks
+                             + bonusScore;
+            if (_lastScore != _currentScore)
             { 
-                ComboChanged?.Invoke();
+                ScoreChanged?.Invoke();
             }
         }
         

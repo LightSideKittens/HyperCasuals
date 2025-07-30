@@ -45,4 +45,13 @@ public class Block : MonoBehaviour
             return next.ContainsRegular;
         }
     }
+
+    public static Block Create(Block prefab, Vector3 pos, Quaternion rot, Transform parent)
+    {
+        var block = Instantiate(prefab, pos, rot, parent);
+        block.prefab = prefab;
+        return block;
+    }
+    
+    public static Block Create(Block prefab) => Create(prefab, Vector3.zero, Quaternion.identity, null);
 }
