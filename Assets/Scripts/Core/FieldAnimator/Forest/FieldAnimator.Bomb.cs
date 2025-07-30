@@ -35,7 +35,7 @@ namespace Core
                     var toDestroy = new HashSet<Vector2Int>();
                     var toDestroyBlocks = new List<Block>();   
                     SetupToDestroyBlocks();
-                    var specialBlocks = fieldManager.GetSpecialBlocks(toDestroy);
+                    var specialBlocks = FieldManager.GetSpecialBlocks(toDestroy);
                     List<(Block block, Action action)> internalAnim = new();
                     
                     foreach (var (prefab, blockss) in specialBlocks)
@@ -144,7 +144,7 @@ namespace Core
 
             public override void Handle()
             {
-                var size = fieldManager.grid.GetSize(); 
+                var size = FieldManager.Grid.GetSize(); 
                 var offset = new Vector2Int(0, 0);
                 Offsets.Clear();
                 if (axis == LSVector2.Axis.X)

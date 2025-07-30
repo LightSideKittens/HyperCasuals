@@ -17,7 +17,7 @@ namespace Core
             public override void Handle()
             {
                 blocksToExplode.Clear();
-                var blocks = fieldManager.GetBlocks(true, true);
+                var blocks = FieldManager.GetBlocks(true, true);
                 foreach (var (index, _) in blocks)
                 {
                     if (UnityEngine.Random.value < probabilityEffect)

@@ -9,7 +9,7 @@ public class Dragger : MonoBehaviour
 {
     private bool isDragging = false;
     private Vector3 offset;
-    private Vector2 touchOffset = new (0f, 4f);
+    private Vector2 touchOffset = new (0f, 2f);
     public event Action<Shape> Started;
     public event Action<Shape> Ended;
 
@@ -36,15 +36,13 @@ public class Dragger : MonoBehaviour
                         var pos = currentShape.transform.position;
                         pos += (Vector3) touchOffset;
                         shapeStartPos = currentShape.transform.position;
-                        tween = currentShape.transform.DOMove(pos, 0.1f).OnComplete(() =>
+                        Started?.Invoke(currentShape);
+                        foreach (var block in currentShape.blocks)
                         {
-                            Started?.Invoke(currentShape);
-                            foreach (var block in currentShape.blocks)
-                            {
-                                block.sortingOrder = 10;
-                            }
-                            isStarted = true;
-                        });
+                            block.sortingOrder = 10;
+                        }
+                        isStarted = true;
+                        tween = currentShape.transform.DOMove(pos, 0.2f);
                     }
                     break;
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core;
 using LSCore.Extensions;
+using LSCore.Extensions.Unity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,6 +12,21 @@ public class Shape : MonoBehaviour
     public List<Block> blocks = new();
     public Vector2Int ratio;
     private Block blockPrefab;
+    private BoxCollider2D boxCollider;
+
+    public int MaxSide
+    {
+        get
+        {
+            var x = ratio.x; var y = ratio.y;
+            if (x > y)
+            {
+                return x;
+            }
+            
+            return y;
+        }
+    }
 
     public Block BlockPrefab
     {
@@ -31,6 +47,19 @@ public class Shape : MonoBehaviour
                 Destroy(currBlockTr.gameObject);
             }
         }
+    }
+
+    private Vector2 defaultBoxSize;
+    
+    private void Awake()
+    {
+        defaultBoxSize = Vector2Int.one * 3;
+        boxCollider = GetComponent<BoxCollider2D>();
+    }
+
+    private void Update()
+    {
+        boxCollider.size = defaultBoxSize.Divide(transform.localScale);
     }
 
     public Block RandomSpawnSpecial(Block specialBlockPrefab)

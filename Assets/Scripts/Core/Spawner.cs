@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public List<Shape> shapes;
-    public List<Block> blockPrefabs => FieldManager.BlockPrefabs;
-    public List<Block> specialBlockPrefabs => FieldManager.SpecialBlockPrefabs;
+    public List<Block> blockPrefabs => FieldAppearance.BlockPrefabs;
+    public List<Block> specialBlockPrefabs => FieldAppearance.SpecialBlockPrefabs;
 
     private void Awake()
     {

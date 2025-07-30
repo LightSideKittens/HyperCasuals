@@ -72,10 +72,9 @@ namespace Core
         [Serializable]
         public abstract class Handler
         {
-            [NonSerialized] public FieldManager fieldManager;
             [NonSerialized] public FieldAnimator animator;
             
-            public Block[,] Grid => fieldManager.grid;
+            public Block[,] Grid => FieldManager.Grid;
             public abstract void Handle();
         }
         
@@ -102,33 +101,36 @@ namespace Core
             [SerializeReference] public Handler handler;
         }
         
-        public FieldManager fieldManager;
-        
         public HandlerDict _handlers = new();
 
         protected override void Init()
         {
             base.Init();
-            fieldManager.BlocksDestroying += OnDestroyBlocks;
+            FieldManager.BlocksDestroying += OnDestroyBlocks;
 
             foreach (var handler in _handlers.Values)
             {
-                handler.handler.fieldManager = fieldManager;
                 handler.handler.animator = this;
             }
         }
 
+        protected override void DeInit()
+        {
+            base.DeInit();
+            FieldManager.BlocksDestroying -= OnDestroyBlocks;
+        }
+
         private void _Simulate()
         {
-            var blocks = fieldManager.GetBlocks(true, true);
+            var blocks = FieldManager.GetBlocks(true, true);
             for (int j = 0; j < blocks.Count; j++)
             {
                 var d = blocks[j];
-                fieldManager.grid.Set(d.index, null);
+                FieldManager.Grid.Set(d.index, null);
             }
             
-            currentSpecialBlocks = fieldManager.GetSpecialBlocks(
-                fieldManager.GetBlocks(false, false)
+            currentSpecialBlocks = FieldManager.GetSpecialBlocks(
+                FieldManager.GetBlocks(false, false)
                     .Select(x => x.index));
 
             foreach (var (prefab, specialBlocks) in currentSpecialBlocks)
@@ -152,15 +154,15 @@ namespace Core
         {
             _handlers[block].handler.Handle();
 
-            var blocks = fieldManager.GetBlocks(true, true);
+            var blocks = FieldManager.GetBlocks(true, true);
             for (int j = 0; j < blocks.Count; j++)
             {
                 var d = blocks[j];
-                fieldManager.grid.Set(d.index, null);
+                FieldManager.Grid.Set(d.index, null);
             }
             
-            currentSpecialBlocks = fieldManager.GetSpecialBlocks(
-                fieldManager.GetBlocks(false, false)
+            currentSpecialBlocks = FieldManager.GetSpecialBlocks(
+                FieldManager.GetBlocks(false, false)
                     .Select(x => x.index));
 
             foreach (var (prefab, specialBlocks) in currentSpecialBlocks.OrderByDescending(x =>

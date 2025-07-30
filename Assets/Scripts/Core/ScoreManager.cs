@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using LSCore;
 using LSCore.Extensions;
 using Sirenix.OdinInspector;
@@ -25,7 +24,7 @@ namespace Core
         
         [MinMaxSlider(0, 12)] public Vector2Int bonusLevelRange;
         public TextMeshPro bonusPrefab;
-        private Dictionary<Block, TextMeshPro> bonuses = new(); 
+        private Dictionary<Block, TextMeshPro> bonuses = new();
         
         private int _lastScore;
         private int _currentScore;
