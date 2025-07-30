@@ -1,7 +1,6 @@
 using System;
 using DG.Tweening;
 using LSCore;
-using UnityEditor.DeviceSimulation;
 using UnityEngine;
 using TouchPhase = UnityEngine.TouchPhase;
 
@@ -13,11 +12,12 @@ public class Dragger : MonoBehaviour
     public event Action<Shape> Started;
     public event Action<Shape> Ended;
 
-    [NonSerialized] public Vector3 shapeStartPos; 
-    [NonSerialized] public Shape currentShape;
+    [NonSerialized] public Vector3 shapeStartPos;
+    [NonSerialized] public Spawner currentSpawner;
     private bool isStarted = false;
     private Tween tween;
-    
+    public Shape currentShape => currentSpawner.currentShape;
+
     private void Update()
     {
         if (LSInput.TouchCount > 0)
@@ -76,7 +76,7 @@ public class Dragger : MonoBehaviour
     private void CheckTouch(Vector3 touchPosition)
     {
         Collider2D hitCollider = Physics2D.OverlapPoint(touchPosition);
-        if (hitCollider != null && hitCollider.TryGetComponent(out currentShape))
+        if (hitCollider != null && hitCollider.TryGetComponent(out currentSpawner))
         {
             isDragging = true;
             offset = hitCollider.transform.position - touchPosition;

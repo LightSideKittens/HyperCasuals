@@ -38,23 +38,38 @@ namespace Core
         protected override void Init()
         {
             base.Init();
-            FieldManager.Placed += OnPlace;
+            FieldManager.Placed += OnPlaced;
+            FieldManager.InitialShapePlaced += OnInitialShapePlaced;
         }
 
         protected override void DeInit()
         {
             base.DeInit();
-            FieldManager.Placed -= OnPlace;
+            FieldManager.Placed -= OnPlaced;
+            FieldManager.InitialShapePlaced -= OnInitialShapePlaced;
         }
 
-        private void OnPlace(FieldManager.PlaceData data)
+        private void OnInitialShapePlaced(Shape shape)
+        {
+            for (var i = 0; i < shape.blocks.Count; i++)
+            {
+                var block = shape.blocks[i];
+                var bonus = block.GetComponentInChildren<TextMeshPro>();
+                if (bonus)
+                {
+                    bonuses[block] = bonus;
+                    bonus.transform.SetParent(null, true);
+                }
+            }
+        }
+
+        private void OnPlaced(FieldManager.PlaceData data)
         {
             if (bonuses.Count == 0)
             { 
                 turnsForBonus++;
             }
             
-            DecreaseBonuses();
             if (turnsForBonus >= bonusizeEveryTurns)
             {
                 turnsForBonus = 0;
@@ -79,6 +94,7 @@ namespace Core
                 _lastScore = _currentScore;
                 _currentScore += placedScore;
                 ScoreChanged?.Invoke();
+                DecreaseBonuses();
                 return;
             }
             
@@ -96,6 +112,7 @@ namespace Core
             { 
                 ComboChanged?.Invoke();
             }
+            DecreaseBonuses();
         }
 
         private (int destroyedBlocks, int bonusScore) CountDestroyedBlocksScore(Block[,] lastGrid, Block[,] currentGrid)
