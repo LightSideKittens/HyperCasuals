@@ -34,7 +34,7 @@ public class Block : MonoBehaviour
     }
 
     public Block next;
-    public bool IsSpecial => FieldManager.SpecialBlockPrefabs.Contains(prefab);
+    public bool IsSpecial => FieldAppearance.SpecialBlockPrefabs.Contains(prefab);
 
     public bool ContainsRegular
     {

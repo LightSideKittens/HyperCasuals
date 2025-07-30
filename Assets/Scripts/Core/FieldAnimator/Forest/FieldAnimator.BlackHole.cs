@@ -19,7 +19,7 @@ namespace Core
                 AnimFX();
                 
                 var i = 0;
-                var blocks = fieldManager.GetBlocks(true, true);
+                var blocks = FieldManager.GetBlocks(true, true);
                 foreach (var (index, block) in blocks)
                 {
                     var duration = Random.Range(0.5f,0.8f);

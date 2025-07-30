@@ -5,6 +5,7 @@ using DG.Tweening;
 using LSCore;
 using LSCore.Extensions;
 using LSCore.Extensions.Unity;
+using Sirenix.OdinInspector;
 using SourceGenerators;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,18 +16,21 @@ public partial class FieldManager : SingleService<FieldManager>
     [NonSerialized] public List<Spawner> _spawners = new();
     private List<Shape> activeShapes = new();
     
-    public int blocksInLine = 8;
-    public Vector2Int gridSize;
+    [MinValue(4)] [MaxValue("$MaxBlocksInLine")] public int blocksInLine = 8;
+    [MinValue(4)] public Vector2Int gridSize;
+    
+    private int MaxBlocksInLine => Math.Min(gridSize.x, gridSize.y);
     
     public ParticleSystem shapeAppearFx;
     
-    public float defaultShapeSize = 0.7f;
-    public SpriteRenderer back;
-    public SpriteRenderer selector;
+    public float defaultShapeSize = 1.4f;
+    public SpriteRenderer back => FieldAppearance.Back;
+    public SpriteRenderer selector => FieldAppearance.Selector;
 
     public Dragger dragger;
     
     private Vector3 gridOffset;
+    private Vector3 defaultScale;
     public Block[,] grid;
     public bool debug;
     private int spawnShapeLock = 0;
@@ -35,15 +39,15 @@ public partial class FieldManager : SingleService<FieldManager>
     private Shape currentShape => dragger.currentShape;
     
     private int? lastUsedSpriteIndex = null;
-    [NonSerialized] public List<List<Vector2Int>> linesIndices = new();
+    [NonSerialized] public List<List<Vector2Int>> _linesIndices = new();
     
-    public List<Block> _blockPrefabs;
-    public List<Block> _specialBlockPrefabs;
+    public List<Block> blockPrefabs => FieldAppearance.BlockPrefabs;
+    public List<Block> specialBlockPrefabs => FieldAppearance.SpecialBlockPrefabs;
     
     public static Bounds FieldRect => new(Instance.back.transform.position, (Vector2)Instance.gridSize);
     public static Block[,] Grid => Instance.grid;
     
-    public Dictionary<Block, List<(Vector2Int index, Block block)>> GetSpecialBlocks(
+    private Dictionary<Block, List<(Vector2Int index, Block block)>> _GetSpecialBlocks(
         IEnumerable<Vector2Int> data)
     {
         var specialBlockPrefabs = new Dictionary<Block, List<(Vector2Int index, Block block)>>();
@@ -53,7 +57,7 @@ public partial class FieldManager : SingleService<FieldManager>
             var block = grid.Get(index);
             if(!block) continue;
             var prefab = block.prefab;
-            if (_specialBlockPrefabs.Contains(prefab))
+            if (this.specialBlockPrefabs.Contains(prefab))
             {
                 if (!specialBlockPrefabs.TryGetValue(prefab, out var list))
                 {
@@ -70,13 +74,16 @@ public partial class FieldManager : SingleService<FieldManager>
     private void Start()
     {
         grid = new Block[gridSize.x, gridSize.y];
+        back.size = gridSize;
+        defaultScale = new Vector3(8f / gridSize.x, 8f / gridSize.y, 1);
+        back.transform.localScale = defaultScale;
         gridOffset = new Vector3(back.size.x / 2, back.size.y / 2) - LSVector3.half;
         CreateAndInitShape();
 
         dragger.Started += shape =>
         {
             ClearCurrentGhostShape();
-            shape.transform.DOScale(Vector3.one, 0.2f);
+            shape.transform.DOScale(defaultScale, 0.2f);
             CreateGhostShape();
             currentGhostShape.gameObject.SetActive(false);
         };
@@ -122,8 +129,8 @@ public partial class FieldManager : SingleService<FieldManager>
                 if (ClearFullLines())
                 {
                     BlocksDestroying?.Invoke(shape.BlockPrefab);
-                    placeData.lines = new List<List<Vector2Int>>(linesIndices);
-                    linesIndices.Clear();
+                    placeData.lines = new List<List<Vector2Int>>(_linesIndices);
+                    _linesIndices.Clear();
                 }
 
                 placeData.currentGrid = grid;
@@ -142,8 +149,8 @@ public partial class FieldManager : SingleService<FieldManager>
             }
             else
             {
-                shape.transform.DOMove(dragger.shapeStartPos, 0.6f).SetEase(Ease.InOutExpo);
-                shape.transform.DOScale(Vector3.one * defaultShapeSize, 0.2f);
+                shape.transform.DOMove(dragger.shapeStartPos, 0.2f).SetEase(Ease.InOutExpo);
+                shape.transform.DOScale(defaultShapeSize / shape.MaxSide, 0.2f).SetEase(Ease.InOutExpo);
             }
         };
     }
@@ -202,21 +209,20 @@ public partial class FieldManager : SingleService<FieldManager>
 
             activeShapes.Add(shape);
             
-            shape.transform.localScale = Vector3.one * defaultShapeSize;
+            shape.transform.SetScale(defaultShapeSize / shape.MaxSide);
         }
 
         for (int i = 0; i < activeShapes.Count; i++)
         {
             var shape = activeShapes[i];
             
-            shape.transform.localScale = Vector3.zero;
-            shapeAppearFx.transform.localScale = Vector3.zero;
+            shape.transform.SetScale(0);
+            shapeAppearFx.transform.SetScale(0);
             
-            
-            shape.transform.DOScale(Vector3.one * defaultShapeSize, 0.2f).OnComplete(() =>
+            shape.transform.DOScale(defaultShapeSize / shape.MaxSide, 0.2f).OnComplete(() =>
             {
                 var appearFxInstance = Instantiate(shapeAppearFx, shape.transform.position, Quaternion.identity);
-                appearFxInstance.transform.localScale = Vector3.zero;
+                appearFxInstance.transform.SetScale(0);
                 appearFxInstance.transform.DOScale(4, 3f).KillOnDestroy(); 
             });
         }
@@ -237,8 +243,9 @@ public partial class FieldManager : SingleService<FieldManager>
     
     public Vector2 _ToPos(Vector2Int index)
     {
-        var localPos = back.transform.TransformPoint((Vector2)index);
-        localPos -= gridOffset;
+        var pos = (Vector2)index;
+        pos -= (Vector2)gridOffset;
+        var localPos = back.transform.TransformPoint(pos);
         return localPos;
     }
 
@@ -270,12 +277,10 @@ public partial class FieldManager : SingleService<FieldManager>
             var block = shape.blocks[j];
             var gridIndex = _ToIndex(block.transform.position);
             gridIndices.Add(gridIndex);
-
-            if (gridIndex.x >= 0 && gridIndex.x < grid.GetLength(0)
-                                 && gridIndex.y >= 0 && gridIndex.y < grid.GetLength(1))
+            
+            if (grid.HasIndex(gridIndex))
             {
-                if (grid[gridIndex.x, gridIndex.y] == null)
-                    continue;
+                if (grid.Get(gridIndex) == null) continue;
             }
 
             canPlace = false;
@@ -298,7 +303,7 @@ public partial class FieldManager : SingleService<FieldManager>
         
         async Task<bool> CheckCanPlace()
         {
-            shape.transform.localScale = Vector3.one;
+            shape.transform.localScale = defaultScale;
 
             Vector2 r = shape.ratio;
             var tp = back.transform.position - (gridOffset + LSVector3.half) + ((Vector3)r / 2);
@@ -357,6 +362,7 @@ public partial class FieldManager : SingleService<FieldManager>
     private void CreateGhostShape()
     {
         currentGhostShape = currentShape.CreateGhost(currentShape);
+        currentGhostShape.transform.SetScale(defaultScale);
     }
 
     private async void CheckLoseCondition()
@@ -466,37 +472,40 @@ public partial class FieldManager : SingleService<FieldManager>
 
     private bool ClearFullLines()
     {
-        linesIndices.Clear();
+        _linesIndices.Clear();
         
         var lines = GetBlockLines();
         
         foreach (var data in lines)
         {
             var lineIndices = new List<Vector2Int>(data.Count);
-            linesIndices.Add(lineIndices);
+            _linesIndices.Add(lineIndices);
             for (var i = 0; i < data.Count; i++)
             {
                 lineIndices.Add(data[i].index);
             }
         }
-        return linesIndices.Count > 0;
+        return _linesIndices.Count > 0;
     }
-
-    public List<List<(Vector2Int index, Block block)>> GetBlockLines(bool excludeNull, bool excludeSpecial, bool unique = true)
+    
+    public static List<List<(Vector2Int index, Block block)>> GetBlockLines(bool excludeNull, bool excludeSpecial, bool unique = true) 
+        => Instance.Internal_GetBlockLines(excludeNull, excludeSpecial, unique);
+    
+    private List<List<(Vector2Int index, Block block)>> Internal_GetBlockLines(bool excludeNull, bool excludeSpecial, bool unique = true)
     {
         var result = new List<List<(Vector2Int index, Block block)>>();
         var set = new HashSet<Vector2Int>();
         var buffer = new List<(Vector2Int index, Block block)>();
-        for (var i = 0; i < linesIndices.Count; i++)
+        for (var i = 0; i < _linesIndices.Count; i++)
         {
-            var line = linesIndices[i];
+            var line = _linesIndices[i];
             buffer.Clear();
             for (var j = 0; j < line.Count; j++)
             {
                 var index = line[j];
                 var block = grid.Get(index);
                 if (excludeNull && block == null) continue;
-                if (excludeSpecial && _specialBlockPrefabs.Contains(block.prefab)) continue;
+                if (excludeSpecial && specialBlockPrefabs.Contains(block.prefab)) continue;
                 if(unique && !set.Add(index)) continue;
                 buffer.Add((index, block));
             }
@@ -510,10 +519,13 @@ public partial class FieldManager : SingleService<FieldManager>
         return result;
     }
 
-    public List<(Vector2Int index, Block block)> GetBlocks(bool excludeNull, bool excludeSpecial, bool unique = true)
+    public static List<(Vector2Int index, Block block)>
+        GetBlocks(bool excludeNull, bool excludeSpecial, bool unique = true) => Instance.Internal_GetBlocks(excludeNull, excludeSpecial, unique);
+    
+    private List<(Vector2Int index, Block block)> Internal_GetBlocks(bool excludeNull, bool excludeSpecial, bool unique = true)
     {
         var result = new List<(Vector2Int index, Block block)>();
-        var lines = GetBlockLines(excludeNull, excludeSpecial, unique);
+        var lines = Internal_GetBlockLines(excludeNull, excludeSpecial, unique);
         for (var i = 0; i < lines.Count; i++)
         {
             var line = lines[i];
@@ -566,7 +578,7 @@ public partial class FieldManager : SingleService<FieldManager>
         }
     }
 
-    public event Action<Block> BlocksDestroying;
+    public static event Action<Block> BlocksDestroying;
     public static event Action<PlaceData> Placed;
     
     public struct PlaceData

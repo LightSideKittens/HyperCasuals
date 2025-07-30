@@ -16,7 +16,7 @@ namespace Core
             public override void Handle()
             {
                 Sequence seq = DOTween.Sequence();
-                var lines = fieldManager.GetBlockLines(true, true);
+                var lines = FieldManager.GetBlockLines(true, true);
                 foreach (var data in lines)
                 {
                     var fxInstance = Instantiate(fx, data[0].block.transform.position, Quaternion.identity);

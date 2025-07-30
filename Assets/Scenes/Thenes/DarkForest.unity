@@ -921,7 +921,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1664008167}
   - {fileID: 2096066673}
@@ -1396,8 +1396,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1100507201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1450,7 +1450,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1466,6 +1466,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 419717446743181706, guid: 6c031361552f44d4aa4118de45517136, type: 3}
       propertyPath: back
+      value: 
+      objectReference: {fileID: 2096066674}
+    - target: {fileID: 585123438693303186, guid: 6c031361552f44d4aa4118de45517136, type: 3}
+      propertyPath: _back
       value: 
       objectReference: {fileID: 2096066674}
     - target: {fileID: 933985807315863830, guid: 6c031361552f44d4aa4118de45517136, type: 3}
