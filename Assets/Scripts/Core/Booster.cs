@@ -70,8 +70,10 @@ public abstract class BaseSpecialBlockBooster : BaseFieldClickBooster
         UIViewBoss.GoBack();
         var h = FieldAnimator.Handlers[Prefab].handler as FieldAnimator.SpecialHandler;
         h!.blocks = new List<(Vector2Int index, Block block)> { (index, block)};
-        h.Handle(); 
+        var lastGrid = FieldManager.CopyGrid();
+        h.Handle();
         h.Animate();
+        ScoreManager.OnBoosterUsed(lastGrid, FieldManager.Grid);
     }
 }
 
@@ -105,8 +107,10 @@ public class Hummer : BaseFieldClickBooster
         UIViewBoss.GoBack();
         var fxPos = FieldManager.ToPos(index);
         Object.Instantiate(fx, fxPos, Quaternion.identity);
+        var lastGrid = FieldManager.CopyGrid();
         FieldManager.Grid.Set(index, null);
         Object.Destroy(block.gameObject);
+        ScoreManager.OnBoosterUsed(lastGrid, FieldManager.Grid);
     }
 }
 

@@ -118,7 +118,8 @@ namespace Core
             protected override void AnimateDestroying(Block self, List<Block> toDestroy, List<(Block block, Action action)> specialBlockAnims)
             {
                 var tr = self.transform;
-                tr.DOScale(1.3f, 0.4f).OnComplete(() =>
+                var factor = tr.localScale.x;
+                tr.DOScale(factor * 1.3f, 0.4f).OnComplete(() =>
                 {
                     Instantiate(fx, tr.position, Quaternion.identity);
                     Destroy(tr.gameObject);
@@ -177,6 +178,9 @@ namespace Core
                 var tr = self.transform;
                 var left = Instantiate(leftRocket, tr.position, tr.rotation).transform;
                 var right = Instantiate(rightRocket, tr.position, tr.rotation).transform;
+                var scale = tr.localScale.x.ToVector3();
+                left.localScale = scale;
+                right.localScale = scale;
                 var copiedToDestroy = new List<Block>(toDestroy);
                 var copiedSpecialBlockAnims = new List<(Block block, Action action)>(specialBlockAnims);
                 self.render.enabled = false;

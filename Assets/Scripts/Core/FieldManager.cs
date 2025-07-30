@@ -44,7 +44,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public List<Block> blockPrefabs => FieldAppearance.BlockPrefabs;
     public List<Block> specialBlockPrefabs => FieldAppearance.SpecialBlockPrefabs;
     
-    public static Bounds FieldRect => new(Instance.back.transform.position, (Vector2)Instance.gridSize);
+    public static Bounds FieldRect => new(Instance.back.transform.position, 8f.ToVector2());
     public static Block[,] Grid => Instance.grid;
     
     private Dictionary<Block, List<(Vector2Int index, Block block)>> _GetSpecialBlocks(
@@ -124,7 +124,7 @@ public partial class FieldManager : SingleService<FieldManager>
                 activeShapes.Remove(shape);
                 var placeData = new PlaceData();
                 placeData.shape = shape;
-                placeData.lastGrid = CopyGrid();
+                placeData.lastGrid = Internal_CopyGrid();
                 
                 if (ClearFullLines())
                 {
@@ -155,7 +155,8 @@ public partial class FieldManager : SingleService<FieldManager>
         };
     }
 
-    private Block[,] CopyGrid()
+    public static Block[,] CopyGrid() => Instance.Internal_CopyGrid();
+    private Block[,] Internal_CopyGrid()
     {
         var size = grid.GetSize();
         var copiedGrid = new Block[size.x, size.y];
@@ -254,7 +255,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public void Internal_PlaceBlock(Vector2Int index, Block prefab, out Block block)
     {
         block = null;
-        block = Instantiate(prefab);
+        block = Block.Create(prefab);
         _PlaceBlock(index, block);
     }
 
@@ -262,6 +263,7 @@ public partial class FieldManager : SingleService<FieldManager>
     {
         var existingBlock = grid.Get(index);
         block.transform.position = _ToPos(index);
+        block.transform.SetScale(defaultScale);
         if (existingBlock != null)
         {
             Shape.OverlayBlock(existingBlock, block);
