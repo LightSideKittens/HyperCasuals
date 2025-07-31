@@ -1,5 +1,6 @@
 ﻿using LSCore;
 using LSCore.Extensions;
+using TMPro;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -40,6 +41,11 @@ public class BlockPlaceholder : MonoBehaviour
         block.sortingOrder = block.sortingOrder;
         if (World.IsPlaying)
         {
+            var bonus = GetComponentInChildren<TextMeshPro>();
+            if (bonus)
+            {
+                bonus.transform.SetParent(block.transform, true);
+            }
             block.transform.SetParent(transform.parent, true);
             var shape = GetComponentInParent<Shape>();
             shape.blocks.Add(block);
