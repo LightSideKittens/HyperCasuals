@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LSCore;
 using LSCore.Extensions;
 using Sirenix.OdinInspector;
@@ -171,7 +172,8 @@ namespace Core
 
         private void DecreaseBonuses()
         {
-            foreach (var (block, text) in bonuses)
+            var list = bonuses.ToList();
+            foreach (var (block, text) in list)
             {
                 var level = int.Parse(text.text);
                 text.text = (level - 1).ToString();

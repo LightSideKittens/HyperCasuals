@@ -1,8 +1,12 @@
 ﻿using System;
 using LSCore;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.SceneManagement;
+#endif
 
 public class Block : MonoBehaviour
 {
@@ -53,7 +57,35 @@ public class Block : MonoBehaviour
     private void OnValidate()
     {
         if(World.IsPlaying) return;
-        prefab = PrefabUtility.GetCorrespondingObjectFromSource(this);
+        var stage = PrefabStageUtility.GetCurrentPrefabStage();
+        GameObject root;
+        try
+        {
+            root = stage != null ? stage.prefabContentsRoot : null;
+        }
+        catch (Exception)
+        {
+            return;
+        }
+        
+        if (!AssetDatabase.Contains(gameObject) && root != gameObject)
+        {
+            var newPrefab = PrefabUtility.GetCorrespondingObjectFromSource(this);
+            if (prefab != newPrefab)
+            {
+                prefab = newPrefab;
+                EditorUtility.SetDirty(this);
+            }
+        }
     }
 #endif
+    
+    public static Block Create(Block prefab, Vector3 pos, Quaternion rot, Transform parent)
+    {
+        var block = Instantiate(prefab, pos, rot, parent);
+        block.prefab = prefab;
+        return block;
+    }
+    
+    public static Block Create(Block prefab) => Create(prefab, Vector3.zero, Quaternion.identity, null);
 }
