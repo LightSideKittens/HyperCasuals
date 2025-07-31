@@ -67,21 +67,6 @@ public class Shape : MonoBehaviour
         newBlock.next = existingBlock;
     }
 
-    [Button]
-    public void AddBlocks()
-    {
-        blocks = new List<Block>();
-        var childCount = transform.childCount;
-        for (int i = 0; i < childCount; i++)
-        {
-            var child = transform.GetChild(i);
-            if (child.TryGetComponent(out Block block))
-            {
-                blocks.Add(block);
-            }
-        }
-    }
-
     public Shape CreateGhost(Shape shape)
     {
         var ghost = Instantiate(shape, shape.transform.position, Quaternion.identity, shape.transform.parent);

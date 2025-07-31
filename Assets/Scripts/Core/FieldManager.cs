@@ -64,7 +64,6 @@ public partial class FieldManager : SingleService<FieldManager>
             InitBack();
             initialShape.transform.position = back.transform.position - (Vector3)4f.ToVector2();
             initialShape.transform.SetScale(defaultScale);
-            initialShape.AddBlocks();
         }
     }
 #endif
