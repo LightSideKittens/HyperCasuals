@@ -37,14 +37,10 @@ public class Block : MonoBehaviour
     public Block next;
     public bool IsSpecial => FieldAppearance.SpecialBlockPrefabs.Contains(prefab);
 
-    public bool ContainsRegular
+    public Block GetRegular()
     {
-        get
-        {
-            if(!IsSpecial) return true;
-            if(next is null) return false;
-            return next.ContainsRegular;
-        }
+        if(!IsSpecial) return this;
+        return next?.GetRegular();
     }
     
     public static Block Create(Block prefab, Vector3 pos, Quaternion rot, Transform parent)

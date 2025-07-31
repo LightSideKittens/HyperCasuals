@@ -113,7 +113,7 @@ public partial class FieldManager : SingleService<FieldManager>
                     grid.Set(gridIndex, block);
                     block.transform.SetParent(null, true);
                 }
-
+                
                 InitialShapePlaced?.Invoke(initialShape);
                 initialShape.transform.DetachChildren();
                 Destroy(initialShape.gameObject);

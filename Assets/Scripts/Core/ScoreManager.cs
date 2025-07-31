@@ -58,8 +58,12 @@ namespace Core
                 var bonus = block.GetComponentInChildren<TextMeshPro>();
                 if (bonus)
                 {
-                    bonuses[block] = bonus;
-                    bonus.transform.SetParent(null, true);
+                    var regular = block.GetRegular();
+                    if (regular)
+                    {
+                        bonuses[regular] = bonus;
+                        bonus.transform.SetParent(null, true);
+                    }
                 }
             }
         }
@@ -80,7 +84,7 @@ namespace Core
             var placedScore = 0;
             foreach (var block in data.shape.blocks)
             {
-                if(block.ContainsRegular) placedScore += forBlockPlacing;
+                if(block.GetRegular()) placedScore += forBlockPlacing;
             }
             
             int linesCount = data.lines?.Count ?? 0;
@@ -132,14 +136,15 @@ namespace Core
                     var currentBlock = currentGrid.Get(index);
                     if (currentBlock is null)
                     {
-                        if (bonuses.Remove(lastBlock, out var bonus))
+                        var regular = lastBlock.GetRegular();
+                        if (regular)
                         {
-                            bonusScore += forBonusBlockDestroying * int.Parse(bonus.text);
-                            Destroy(bonus.gameObject);
-                        }
-                        
-                        if (lastBlock.ContainsRegular)
-                        {
+                            if (bonuses.Remove(regular, out var bonus))
+                            {
+                                bonusScore += forBonusBlockDestroying * int.Parse(bonus.text);
+                                Destroy(bonus.gameObject);
+                            }
+                            
                             destroyedBlocks++;
                         }
                     }
@@ -204,7 +209,7 @@ namespace Core
                     }
                     index.x++;
                 }
-                var block = FieldManager.Grid.Get(index);
+                var block = FieldManager.Grid.Get(index).GetRegular();
                 if(block == null) continue;
                 var bonus = Instantiate(bonusPrefab, block.transform.position, Quaternion.identity);
                 bonus.text = Random.Range(bonusLevelRange.x, bonusLevelRange.y).ToString();
