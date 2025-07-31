@@ -21,7 +21,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
 
         public static void DeInit()
         {
-            SRDebug.Instance.RemoveOptionContainer(instance);
+            SRDebug.Instance?.RemoveOptionContainer(instance);
         }
         
         [Category("Core")]

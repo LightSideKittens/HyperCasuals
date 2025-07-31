@@ -314,7 +314,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public void Internal_PlaceBlock(Vector2Int index, Block prefab, out Block block)
     {
         block = null;
-        block = Instantiate(prefab);
+        block = Block.Create(prefab);
         _PlaceBlock(index, block);
     }
 

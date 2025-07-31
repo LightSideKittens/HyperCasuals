@@ -35,7 +35,7 @@ public class Shape : MonoBehaviour
                 var currBlock = blocks[i];
                 var currBlockTr = currBlock.transform;
                 var siblingIndex = currBlockTr.GetSiblingIndex();
-                var newBlock = Instantiate(value, currBlockTr.position, Quaternion.identity, transform);
+                var newBlock = Block.Create(value, currBlockTr.position, Quaternion.identity, transform);
                 newBlock.defaultSortingOrder = -10;
                 blocks[i] = newBlock;
                 newBlock.transform.SetSiblingIndex(siblingIndex);
@@ -53,7 +53,7 @@ public class Shape : MonoBehaviour
     {
         var currBlock = blocks[atIndex];
         var currBlockTr = currBlock.transform;
-        var newBlock = Instantiate(specialBlockPrefab, currBlockTr.position, specialBlockPrefab.transform.rotation, currBlockTr.parent);
+        var newBlock = Block.Create(specialBlockPrefab, currBlockTr.position, specialBlockPrefab.transform.rotation, currBlockTr.parent);
         OverlayBlock(currBlock, newBlock);
         blocks[atIndex] = newBlock;
         return newBlock;
