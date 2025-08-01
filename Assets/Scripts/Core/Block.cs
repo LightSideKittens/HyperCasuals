@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -41,6 +42,20 @@ public class Block : MonoBehaviour
     {
         if(!IsSpecial) return this;
         return next?.GetRegular();
+    }
+    
+    public IEnumerable<Block> AllBlocks
+    {
+        get
+        {
+            var block = this;
+            while (block.next is not null)
+            {
+                yield return block;
+                block = block.next;
+            }
+            yield return block;
+        }
     }
     
     public static Block Create(Block prefab, Vector3 pos, Quaternion rot, Transform parent)

@@ -1,8 +1,6 @@
-﻿using DG.Tweening;
-using LSCore;
+﻿using LSCore;
 using LSCore.AnimationsModule;
 using LSCore.AnimationsModule.Animations.Text;
-using UnityEngine;
 
 namespace Core
 {
@@ -47,7 +45,8 @@ namespace Core
             {
                 lastScore = ScoreManager.LastScore;
             }
-            current.text = $"{ScoreManager.CurrentScore}/";
+            current.Number = ScoreManager.CurrentScore;
+            IsReached = current.Number >= target.Number;
             needAnimate = true;
         }
 
@@ -56,7 +55,5 @@ namespace Core
             comboText.LocalizeArguments(ScoreManager.CurrentCombo);
             comboAnim.Animate();
         }
-
-        public override bool IsReached => current.Number >= target.Number;
     }
 }

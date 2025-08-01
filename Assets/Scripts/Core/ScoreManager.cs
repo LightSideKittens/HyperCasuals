@@ -41,6 +41,7 @@ namespace Core
             base.Init();
             FieldManager.Placed += OnPlaced;
             FieldManager.InitialShapePlaced += OnInitialShapePlaced;
+            Booster.Used += OnBoosterUsed;
         }
 
         protected override void DeInit()
@@ -48,6 +49,7 @@ namespace Core
             base.DeInit();
             FieldManager.Placed -= OnPlaced;
             FieldManager.InitialShapePlaced -= OnInitialShapePlaced;
+            Booster.Used -= OnBoosterUsed;
         }
 
         private void OnInitialShapePlaced(Shape shape)
@@ -125,37 +127,25 @@ namespace Core
             var destroyedBlocks = 0;
             var bonusScore = 0;
             
-            var size = lastGrid.GetSize();
-            for (int x = 0; x < size.x; x++)
+            var destroyedBlocksSet = FieldManager.GetDestroyedBlocks(lastGrid, currentGrid);
+            foreach (var block in destroyedBlocksSet)
             {
-                for (int y = 0; y < size.y; y++)
+                if (!block.IsSpecial)
                 {
-                    var index = new Vector2Int(x, y);
-                    var lastBlock = lastGrid.Get(index);
-                    if(lastBlock is null) continue;
-                    var currentBlock = currentGrid.Get(index);
-                    if (currentBlock is null)
+                    if (bonuses.Remove(block, out var bonus))
                     {
-                        var regular = lastBlock.GetRegular();
-                        if (regular)
-                        {
-                            if (bonuses.Remove(regular, out var bonus))
-                            {
-                                bonusScore += forBonusBlockDestroying * int.Parse(bonus.text);
-                                Destroy(bonus.gameObject);
-                            }
-                            
-                            destroyedBlocks++;
-                        }
+                        bonusScore += forBonusBlockDestroying * int.Parse(bonus.text);
+                        Destroy(bonus.gameObject);
                     }
+                    
+                    destroyedBlocks++;
                 }
             }
             
             return (destroyedBlocks, bonusScore);
         }
-
-        public static void OnBoosterUsed(Block[,] lastGrid, Block[,] currentGrid) => Instance.Internal_OnBoosterUsed(lastGrid, currentGrid);
-        private void Internal_OnBoosterUsed(Block[,] lastGrid, Block[,] currentGrid)
+        
+        private void OnBoosterUsed(Block[,] lastGrid, Block[,] currentGrid)
         {
             var (destroyedBlocks, bonusScore) = CountDestroyedBlocksScore(lastGrid, currentGrid);
             _lastScore = _currentScore;
