@@ -199,8 +199,9 @@ namespace Core
                     }
                     index.x++;
                 }
-                var block = FieldManager.Grid.Get(index).GetRegular();
+                var block = FieldManager.Grid.Get(index);
                 if(block == null) continue;
+                block = block.GetRegular();
                 var bonus = Instantiate(bonusPrefab, block.transform.position, Quaternion.identity);
                 bonus.text = Random.Range(bonusLevelRange.x, bonusLevelRange.y).ToString();
                 bonuses[block] = bonus;
