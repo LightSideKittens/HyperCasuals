@@ -1,4 +1,5 @@
-﻿using LSCore;
+﻿using System;
+using LSCore;
 using LSCore.AnimationsModule;
 using UnityEditor;
 
@@ -25,17 +26,26 @@ namespace Core
                 }
             }
         }
-            
+
+        private void Awake()
+        {
+            UpdateSprite();
+        }
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
             if(World.IsPlaying) return;
+            UpdateSprite();
+        }
+#endif
+
+        private void UpdateSprite()
+        {
             if (image.sprite != target.Block.sprite)
             { 
                 image.sprite = target.Block.sprite;
-                EditorUtility.SetDirty(image);
             }
         }
-#endif
     }
 }
