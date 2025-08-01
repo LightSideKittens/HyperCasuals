@@ -78,6 +78,7 @@ public class Dragger : MonoBehaviour
         Collider2D hitCollider = Physics2D.OverlapPoint(touchPosition);
         if (hitCollider != null && hitCollider.TryGetComponent(out currentSpawner))
         {
+            if(!currentSpawner.currentShape) return;
             isDragging = true;
             offset = hitCollider.transform.position - touchPosition;
         }
