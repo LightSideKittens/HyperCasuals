@@ -8,7 +8,9 @@ using UnityEngine;
 
 public class TimeGoal : MonoBehaviour
 {
-    [TimeSpan] public long time;
+    [TimeSpan(options = TimeAttribute.Options.Minute | TimeAttribute.Options.Second)] 
+    public long time;
+    
     public LSText timeText;
     private Tween timer; 
     private int pauseCount;
