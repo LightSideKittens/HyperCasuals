@@ -131,6 +131,7 @@ public partial class FieldManager : SingleService<FieldManager>
         
         dragger.Started += shape =>
         {
+            DragStarted?.Invoke();
             ClearCurrentGhostShape();
             shape.transform.DOScale(defaultScale, 0.2f);
             CreateGhostShape();
@@ -667,6 +668,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public static event Action<Block> BlocksDestroying;
     public static event Action<PlaceData> Placed;
     public static event Action<Shape> InitialShapePlaced;
+    public static event Action DragStarted;
     
     public struct PlaceData
     {

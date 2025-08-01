@@ -1,5 +1,4 @@
 ﻿using LSCore;
-using LSCore.Extensions;
 using TMPro;
 using UnityEngine;
 
