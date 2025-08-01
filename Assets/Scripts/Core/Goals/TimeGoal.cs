@@ -12,7 +12,7 @@ public class TimeGoal : MonoBehaviour
     public long time;
     
     public LSText timeText;
-    private Tween timer; 
+    private Tween timer;
     private int pauseCount;
     
     protected void Awake()
