@@ -1,7 +1,5 @@
-﻿using System;
-using LSCore;
+﻿using LSCore;
 using LSCore.AnimationsModule;
-using UnityEditor;
 
 namespace Core
 {
