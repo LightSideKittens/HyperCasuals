@@ -10,7 +10,10 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 [Serializable]
-public abstract class Booster : DoIt { }
+public abstract class Booster : DoIt
+{
+    public static Action<Block[,], Block[,]> Used;
+}
 
 [Serializable]
 public abstract class BaseFieldClickBooster : Booster
@@ -51,6 +54,11 @@ public abstract class BaseFieldClickBooster : Booster
                 { 
                     OnClicked(index);
                 }
+
+                if (!touch.IsPointerOverUI)
+                { 
+                    UIViewBoss.GoBack();
+                }
             }
         }
     }
@@ -67,13 +75,12 @@ public abstract class BaseSpecialBlockBooster : BaseFieldClickBooster
     {
         if(!Prefab) return;
         FieldManager.PlaceBlock(index, Prefab, out var block);
-        UIViewBoss.GoBack();
         var h = FieldAnimator.Handlers[Prefab].handler as FieldAnimator.SpecialHandler;
         h!.blocks = new List<(Vector2Int index, Block block)> { (index, block)};
         var lastGrid = FieldManager.CopyGrid();
         h.Handle();
         h.Animate();
-        ScoreManager.OnBoosterUsed(lastGrid, FieldManager.Grid);
+        Used?.Invoke(lastGrid, FieldManager.Grid);
     }
 }
 
@@ -104,13 +111,12 @@ public class Hummer : BaseFieldClickBooster
     {
         var block = FieldManager.Grid.Get(index);
         if (block == null) return;
-        UIViewBoss.GoBack();
         var fxPos = FieldManager.ToPos(index);
         Object.Instantiate(fx, fxPos, Quaternion.identity);
         var lastGrid = FieldManager.CopyGrid();
         FieldManager.Grid.Set(index, null);
         Object.Destroy(block.gameObject);
-        ScoreManager.OnBoosterUsed(lastGrid, FieldManager.Grid);
+        Used?.Invoke(lastGrid, FieldManager.Grid);
     }
 }
 

@@ -317,6 +317,10 @@ PrefabInstance:
       value: 'LSCore.DoIt FromBuffer`1[[UnityEngine.Transform, UnityEngine.CoreModule]]'
       objectReference: {fileID: 0}
     - target: {fileID: 3380572957214711661, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
+      propertyPath: 'managedReferences[1249993701842747504]'
+      value: LSCore.WindowModule LSCore.GoBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380572957214711661, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
       propertyPath: 'managedReferences[5237655153313054966]'
       value: LSCore.WindowModule LSCore.CreateOrShowUIView
       objectReference: {fileID: 0}
@@ -437,6 +441,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3380572957214711661, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
+      propertyPath: managedReferences[1249993701842747504].id
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380572957214711661, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
       propertyPath: managedReferences[5237655153313054951].id
       value: 
       objectReference: {fileID: -6750239444755058063, guid: 412e16312d3768a409fe217bd46c751f, type: 3}
@@ -529,8 +537,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3380572957214711661, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
+      propertyPath: managedReferences[5237655153313054951].unDoIts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380572957214711661, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
       propertyPath: managedReferences[1249993579436179542].showOnlyWhenCreated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380572957214711661, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
+      propertyPath: 'managedReferences[5237655153313054951].unDoIts.Array.data[0]'
+      value: 1249993701842747504
       objectReference: {fileID: 0}
     - target: {fileID: 3380572957214711661, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
       propertyPath: managedReferences[1249993579436179542].transformActions.Array.size
@@ -563,6 +579,10 @@ PrefabInstance:
     - target: {fileID: 6512707127276127014, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230721684662577106, guid: 0ec66c3ec71a8be4698600330f95520e, type: 3}
+      propertyPath: m_fontSize
+      value: 36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

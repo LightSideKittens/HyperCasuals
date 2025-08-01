@@ -6,6 +6,7 @@ using LSCore;
 using LSCore.Extensions;
 using LSCore.Extensions.Unity;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using SourceGenerators;
 using UnityEditor;
 using UnityEngine;
@@ -634,6 +635,33 @@ public partial class FieldManager : SingleService<FieldManager>
                 buffer.Clear();
             }
         }
+    }
+
+    public static HashSet<Block> GetDestroyedBlocks(Block[,] lastGrid, Block[,] currentGrid)
+    {
+        var size = lastGrid.GetSize();
+        var lastSet = new HashSet<Block>();
+        var currentSet = new HashSet<Block>();
+        for (int x = 0; x < size.x; x++)
+        {
+            for (int y = 0; y < size.y; y++)
+            {
+                var index = new Vector2Int(x, y);
+                var lastBlock = lastGrid.Get(index);
+                if (lastBlock is not null)
+                { 
+                    lastSet.AddRange(lastBlock.AllBlocks);
+                }
+                var currentBlock = currentGrid.Get(index);
+                if (currentBlock is not null)
+                {
+                    currentSet.AddRange(currentBlock.AllBlocks);
+                }
+            }
+        }
+        
+        lastSet.ExceptWith(currentSet);
+        return lastSet;
     }
 
     public static event Action<Block> BlocksDestroying;

@@ -6,8 +6,7 @@ using UnityEngine;
 [ExecuteAlways]
 public class BlockPlaceholder : MonoBehaviour
 {
-    public int index;
-    public bool isSpecial;
+    public FieldAppearance.BlockData data;
     [HideInInspector] public Block block;
     public BlockPlaceholder next;
     private static bool isEdited;
@@ -28,7 +27,7 @@ public class BlockPlaceholder : MonoBehaviour
     private void InitBlock()
     {
         if(block) return;
-        var prefab = isSpecial ? FieldAppearance.SpecialBlockPrefabs.GetCyclic(index) : FieldAppearance.BlockPrefabs.GetCyclic(index);
+        var prefab = data.Block;
         block = Block.Create(prefab);
         block.transform.SetParent(transform);
         block.transform.localPosition = Vector3.zero;
@@ -46,9 +45,16 @@ public class BlockPlaceholder : MonoBehaviour
             {
                 bonus.transform.SetParent(block.transform, true);
             }
-            block.transform.SetParent(transform.parent, true);
-            var shape = GetComponentInParent<Shape>();
-            shape.blocks.Add(block);
+            
+            var shape = transform.parent.GetComponent<Shape>();
+            if (block.next)
+            {
+                block.next.transform.SetParent(block.transform, true);
+            }
+            if (shape)
+            { 
+                shape.blocks.Add(block);
+            }
         }
     }
     
