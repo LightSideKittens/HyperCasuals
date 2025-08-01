@@ -16,8 +16,8 @@ PlayerSettings:
   productName: Tetra Crush
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
-  m_ShowUnitySplashScreen: 0
+  m_SplashScreenBackgroundColor: {r: 0.37254903, g: 0.2509804, b: 0.53333336, a: 1}
+  m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 0
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 0
@@ -39,7 +39,9 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos: []
+  m_SplashScreenLogos:
+  - logo: {fileID: 21300000, guid: 42325e9662ddd86408196b302ded90a3, type: 3}
+    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
@@ -165,7 +167,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Android: com.friendlypixels.littleland
+    Android: com.lightside.tetracrush
     Lumin: com.DefaultCompany.com.unity.template.mobile2D
     Standalone: com.DefaultCompany.com.unity.template.mobile2D
     iPhone: com.lightside.multiwars
@@ -267,9 +269,9 @@ PlayerSettings:
   useCustomGradlePropertiesTemplate: 0
   useCustomGradleSettingsTemplate: 0
   useCustomProguardFile: 1
-  AndroidTargetArchitectures: 3
+  AndroidTargetArchitectures: 2
   AndroidSplashScreenScale: 2
-  androidSplashScreen: {fileID: 2800000, guid: d27950059efe97f4192240102e86f4f8, type: 3}
+  androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: '{inproject}: user.keystore'
   AndroidKeyaliasName: 123456
   AndroidEnableArmv9SecurityFeatures: 0
@@ -783,8 +785,8 @@ PlayerSettings:
   ps4IncludedModules: []
   ps4attribVROutputEnabled: 0
   monoEnv: 
-  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: d27950059efe97f4192240102e86f4f8, type: 3}
-  splashScreenBackgroundSourcePortrait: {fileID: 21300000, guid: d27950059efe97f4192240102e86f4f8, type: 3}
+  splashScreenBackgroundSourceLandscape: {fileID: 0}
+  splashScreenBackgroundSourcePortrait: {fileID: 0}
   blurSplashScreenBackground: 0
   spritePackerPolicy: 
   webGLMemorySize: 32
