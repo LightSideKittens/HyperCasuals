@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 1bc95df3d7ef1454693c570bbf94d802
+guid: 7931a1ec6828b9540a66271d91b14684
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8709907082945067856
-    second: GradeBlocks_Chain_0
-  - first:
-      213: 5229480935483291613
-    second: GradeBlocks_Chain_1
-  - first:
-      213: -6462468001035399064
-    second: GradeBlocks_Chain_2
-  - first:
-      213: 7507274093076269718
-    second: GradeBlocks_Chain_3
+      213: 2266083152926010982
+    second: GradeBlock_Default_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +51,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 470
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -135,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GradeBlocks_Chain_0
+      name: GradeBlock_Default_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 512
-        width: 512
-        height: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,52 +141,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0b48666b7a1302780800000000000000
-      internalID: -8709907082945067856
+      spriteID: 66ee6a11f9eb27f10800000000000000
+      internalID: 2266083152926010982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GradeBlocks_Chain_1
+      name: GradeBlock_Default_1
       rect:
         serializedVersion: 2
-        x: 512
-        y: 512
-        width: 512
-        height: 512
+        x: 256
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dd7b82f2439d29840800000000000000
-      internalID: 5229480935483291613
+      spriteID: 417cc557557f9d544a4f3a2397927065
+      internalID: -502764772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GradeBlocks_Chain_2
+      name: GradeBlock_Default_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 860d4f9b793b056a0800000000000000
-      internalID: -6462468001035399064
+      spriteID: a243a38e68a5a8141bb67b2dc3a09da8
+      internalID: 1810104093
       vertices: []
       indices: 
       edges: []
@@ -214,12 +205,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":256.0,"y":256.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      GradeBlocks_Chain_0: -8709907082945067856
-      GradeBlocks_Chain_1: 5229480935483291613
-      GradeBlocks_Chain_2: -6462468001035399064
-      GradeBlocks_Chain_3: 7507274093076269718
+      GradeBlock_Default_0: 2266083152926010982
+      GradeBlock_Default_1: -502764772
+      GradeBlock_Default_2: 1810104093
+      GradeBlock_Default_3: 866902334
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
