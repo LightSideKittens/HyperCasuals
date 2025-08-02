@@ -1,20 +1,19 @@
 using System;
 using DG.Tweening;
 using LSCore;
+using LSCore.Async;
 using UnityEngine;
-using TouchPhase = UnityEngine.TouchPhase;
 
 public class Dragger : MonoBehaviour
 {
     private bool isDragging = false;
     private Vector3 offset;
-    private Vector2 touchOffset = new (0f, 2f);
+    private Vector2 touchOffset = new (0f, 3f);
     public event Action<Shape> Started;
     public event Action<Shape> Ended;
 
     [NonSerialized] public Vector3 shapeStartPos;
     [NonSerialized] public Spawner currentSpawner;
-    private bool isStarted = false;
     private Tween tween;
     public Shape currentShape => currentSpawner.currentShape;
 
@@ -26,40 +25,32 @@ public class Dragger : MonoBehaviour
             if(touch.IsPointerOverUI && !isDragging) return;
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
-
+            var needMove = (touch.phase == TouchPhase.Moved && isDragging) || (tween?.active ?? false);
             switch (touch.phase)
             {
                 case TouchPhase.Began:
                     CheckTouch(touchPosition);
                     if (isDragging)
                     {
-                        var pos = currentShape.transform.position;
-                        pos += (Vector3) touchOffset;
                         shapeStartPos = currentShape.transform.position;
                         Started?.Invoke(currentShape);
                         foreach (var block in currentShape.blocks)
                         {
                             block.sortingOrder = 10;
                         }
-                        isStarted = true;
-                        tween = currentShape.transform.DOMove(pos, 0.2f);
+                        var lastTouchOffset = touchOffset;
+                        tween = Wait.FromTo(0, 1, 0.2f, value =>
+                        {
+                            touchOffset = value * lastTouchOffset;
+                        }).SetEase(Ease.InOutCubic);
                     }
                     break;
-
-                case TouchPhase.Moved:
-                    if (isDragging && isStarted)
-                    {
-                        currentShape.transform.position = touchPosition + (Vector3) touchOffset + offset;
-                    }
-                    break;
-
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:
                     if (isDragging)
                     {
-                        tween?.Kill();
+                        tween?.Complete();
                         tween = null;
-                        isStarted = false;
                         
                         Ended?.Invoke(currentShape);
                         isDragging = false;
@@ -69,6 +60,11 @@ public class Dragger : MonoBehaviour
                         }
                     }
                     break;
+            }
+            
+            if (needMove)
+            {
+                currentShape.transform.position = touchPosition + (Vector3) touchOffset + offset;
             }
         }
     }
