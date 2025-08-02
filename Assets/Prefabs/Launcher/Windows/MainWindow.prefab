@@ -876,16 +876,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
+      propertyPath: 'managedReferences[6254766537536176207]'
+      value: LSCore.WindowModule LSCore.ShowTooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
       propertyPath: submittable.doIter.onSubmit.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
       propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
       value: 6254766537536176207
-      objectReference: {fileID: 0}
-    - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
-      propertyPath: 'managedReferences[6254766537536176207]'
-      value: LSCore.WindowModule LSCore.ShowTooltip
       objectReference: {fileID: 0}
     - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
       propertyPath: managedReferences[6254766537536176207].prefab
@@ -908,8 +908,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
+      propertyPath: managedReferences[1249993174685319866].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
+      propertyPath: managedReferences[6254766537536176207].localizationData.id
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
       propertyPath: managedReferences[6254766537536176207].localizationData.key
       value: trophiesTooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
+      propertyPath: 'managedReferences[1249993174685319866].onSubmit.Array.data[0]'
+      value: 6254766537536176207
       objectReference: {fileID: 0}
     - target: {fileID: -2587232780979559735, guid: ab2bf3356f499134289ccbc9fcc5695b, type: 3}
       propertyPath: managedReferences[6254766537536176207].localizationData.tableData
@@ -1135,20 +1147,20 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 3302317731496591640
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[3302317731496591640]'
       value: LSCore.UIModule Animatable.PopupTextAction
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[3573401271353475113]'
       value: LSCore.WindowModule LSCore.CreateOrShowUIView
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 3302317731496591640
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475113].option
@@ -1162,6 +1174,14 @@ PrefabInstance:
       propertyPath: managedReferences[3302317731496591640].messagePrefab
       value: 
       objectReference: {fileID: 7523752681592951660, guid: c397d4d93f40b5341ad27bab65df1d58, type: 3}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 3302317731496591640
+      objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475113].transformActions.Array.size
       value: 0
@@ -1537,14 +1557,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 3573401114223575415
-      objectReference: {fileID: 0}
-    - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
       propertyPath: 'managedReferences[3573401114223575415]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -1553,8 +1565,16 @@ PrefabInstance:
       value: LSCore.AudioModule PlayOneShotSound
       objectReference: {fileID: 0}
     - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
       propertyPath: managedReferences[3573401114223575415].id
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 3573401114223575415
       objectReference: {fileID: 0}
     - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
       propertyPath: managedReferences[3573401114223575415].option
@@ -1581,8 +1601,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
       propertyPath: managedReferences[3573401114223575415].showOnlyWhenCreated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 3573401114223575415
       objectReference: {fileID: 0}
     - target: {fileID: 8646902945834300080, guid: 106e7ffe55ee85f42bbb099f19d90428, type: 3}
       propertyPath: managedReferences[3573401114223575415].transformActions.Array.size
@@ -2016,14 +2044,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 3302317731496591639
-      objectReference: {fileID: 0}
-    - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
       propertyPath: 'managedReferences[3302317731496591639]'
       value: LSCore.UIModule Animatable.PopupTextAction
       objectReference: {fileID: 0}
@@ -2038,6 +2058,14 @@ PrefabInstance:
     - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
       propertyPath: 'managedReferences[4216534958489993267]'
       value: LSCore.AudioModule PlayOneShotSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 3302317731496591639
       objectReference: {fileID: 0}
     - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
       propertyPath: managedReferences[3573401271353475099].root
@@ -2078,6 +2106,14 @@ PrefabInstance:
     - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
       propertyPath: managedReferences[3573401271353475099].worldPositionStays
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 3302317731496591639
       objectReference: {fileID: 0}
     - target: {fileID: 3204500533403239482, guid: 7625a988913bd7645b79ca16325919ea, type: 3}
       propertyPath: managedReferences[3573401271353475079].transformActions.Array.size
@@ -2264,20 +2300,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: dfa109612dacd244093a8aaf26717b37, type: 2}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 6254766537536176212
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: 'managedReferences[6254766537536176212]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[6254766537536176212].id
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 6254766537536176212
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[6254766537536176212].option
@@ -2288,8 +2324,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4609436186739142513, guid: fec1cfcadf4ac5145a10aa2a8db57fb5, type: 3}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[6254766537536176212].showOnlyWhenCreated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 6254766537536176212
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[6254766537536176212].transformActions.Array.size
@@ -2368,6 +2412,10 @@ PrefabInstance:
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: m_fontSizeMax
       value: 159.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
+      propertyPath: localizationData.id
+      value: 703562267021317
       objectReference: {fileID: 0}
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: localizationData.key
@@ -2633,12 +2681,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 3dad81800fb10ca42b09612842157d04, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 3dad81800fb10ca42b09612842157d04, type: 3}
       propertyPath: 'managedReferences[4216534958489993266]'
       value: LSCore.AudioModule PlayOneShotSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859483897607432842, guid: 3dad81800fb10ca42b09612842157d04, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 3dad81800fb10ca42b09612842157d04, type: 3}
       propertyPath: managedReferences[4216534958489993266].settings.clip
@@ -2655,6 +2703,14 @@ PrefabInstance:
     - target: {fileID: 1859483897607432842, guid: 3dad81800fb10ca42b09612842157d04, type: 3}
       propertyPath: managedReferences[4216534958489993266].settings.volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859483897607432842, guid: 3dad81800fb10ca42b09612842157d04, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859483897607432842, guid: 3dad81800fb10ca42b09612842157d04, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4137401002241462822, guid: 3dad81800fb10ca42b09612842157d04, type: 3}
       propertyPath: m_Sprite
@@ -2889,14 +2945,6 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 3302317731496591638
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[3302317731496591638]'
       value: LSCore.UIModule Animatable.PopupTextAction
       objectReference: {fileID: 0}
@@ -2907,6 +2955,14 @@ PrefabInstance:
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[4216535028436042369]'
       value: LSCore.AudioModule PlayOneShotSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 3302317731496591638
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475103].option
@@ -2935,6 +2991,14 @@ PrefabInstance:
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[4216535028436042369].settings.volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 3302317731496591638
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475103].transformActions.Array.size
@@ -3159,14 +3223,6 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 3302317731496591637
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[3302317731496591637]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -3183,8 +3239,16 @@ PrefabInstance:
       value: LSCore.AudioModule PlayOneShotSound
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3302317731496591637].id
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 3302317731496591637
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3302317731496591637].option
@@ -3227,8 +3291,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3302317731496591637].showOnlyWhenCreated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 3302317731496591637
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3302317731496591637].transformActions.Array.size
@@ -3641,14 +3713,6 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 3573401271353475102
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[3573401271353475102]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -3657,8 +3721,16 @@ PrefabInstance:
       value: LSCore.AudioModule PlayOneShotSound
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475102].id
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 3573401271353475102
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475102].option
@@ -3685,8 +3757,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475102].showOnlyWhenCreated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 3573401271353475102
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475102].transformActions.Array.size
@@ -3983,6 +4063,10 @@ PrefabInstance:
       value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
+      propertyPath: localizationData.id
+      value: 58040343953723393
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: localizationData.key
       value: levelX
       objectReference: {fileID: 0}
@@ -4117,16 +4201,16 @@ PrefabInstance:
       value: 39.05
       objectReference: {fileID: 0}
     - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
+      propertyPath: 'managedReferences[6254766690713469062]'
+      value: LSCore.WindowModule LSCore.ShowTooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
       propertyPath: submittable.doIter.onSubmit.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
       propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
       value: 6254766690713469062
-      objectReference: {fileID: 0}
-    - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
-      propertyPath: 'managedReferences[6254766690713469062]'
-      value: LSCore.WindowModule LSCore.ShowTooltip
       objectReference: {fileID: 0}
     - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
       propertyPath: managedReferences[6254766690713469062].prefab
@@ -4149,8 +4233,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
+      propertyPath: managedReferences[6254766690713469062].localizationData.id
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
       propertyPath: managedReferences[6254766690713469062].localizationData.key
       value: levelTooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 6254766690713469062
       objectReference: {fileID: 0}
     - target: {fileID: 7212445680505388668, guid: 5dcd9ac92d71cf44e9108560e4a34402, type: 3}
       propertyPath: managedReferences[6254766690713469062].localizationData.tableData
@@ -4203,20 +4299,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -1800077625115593775, guid: b347b783cbd427f428cb63bd8c487f1c, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -1800077625115593775, guid: b347b783cbd427f428cb63bd8c487f1c, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 6254766799571386575
-      objectReference: {fileID: 0}
-    - target: {fileID: -1800077625115593775, guid: b347b783cbd427f428cb63bd8c487f1c, type: 3}
       propertyPath: 'managedReferences[6254766799571386575]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
     - target: {fileID: -1800077625115593775, guid: b347b783cbd427f428cb63bd8c487f1c, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1800077625115593775, guid: b347b783cbd427f428cb63bd8c487f1c, type: 3}
       propertyPath: managedReferences[6254766799571386575].id
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -1800077625115593775, guid: b347b783cbd427f428cb63bd8c487f1c, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 6254766799571386575
       objectReference: {fileID: 0}
     - target: {fileID: -1800077625115593775, guid: b347b783cbd427f428cb63bd8c487f1c, type: 3}
       propertyPath: managedReferences[6254766799571386575].option
@@ -4927,18 +5023,6 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 8269775029662384208
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[1]'
-      value: 3519437871986245980
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[3519437871986245980]'
       value: LSCore.UIModule LSCore.ChangeLocale
       objectReference: {fileID: 0}
@@ -4961,6 +5045,18 @@ PrefabInstance:
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[8269775029662384208]'
       value: LSCore.UIModule Animatable.PopupTextAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 8269775029662384208
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[1]'
+      value: 3519437871986245980
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475111].root
@@ -5017,6 +5113,18 @@ PrefabInstance:
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475111].worldPositionStays
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 8269775029662384208
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[1]'
+      value: 3519437871986245980
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475110].transformActions.Array.size
@@ -5785,14 +5893,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: dfa109612dacd244093a8aaf26717b37, type: 2}
     - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 4229860960537411670
-      objectReference: {fileID: 0}
-    - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
       propertyPath: 'managedReferences[4229860960537411593]'
       value: LSCore.WindowModule LSCore.ShowTooltip
       objectReference: {fileID: 0}
@@ -5801,8 +5901,16 @@ PrefabInstance:
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
     - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
       propertyPath: managedReferences[4229860960537411670].id
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 4229860960537411670
       objectReference: {fileID: 0}
     - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
       propertyPath: managedReferences[4229860960537411593].prefab
@@ -5839,6 +5947,10 @@ PrefabInstance:
     - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
       propertyPath: managedReferences[4229860960537411593].localizationData.key
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 4229860960537411670
       objectReference: {fileID: 0}
     - target: {fileID: 2620019421241368976, guid: 38395a873166bbc4c8334708b63313a4, type: 3}
       propertyPath: managedReferences[4229860960537411593].localizationData.tableData
@@ -6540,20 +6652,20 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 3302317731496591641
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[3302317731496591641]'
       value: LSCore.UIModule Animatable.PopupTextAction
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: 'managedReferences[3573401271353475112]'
       value: LSCore.WindowModule LSCore.CreateOrShowUIView
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 3302317731496591641
       objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475112].option
@@ -6567,6 +6679,14 @@ PrefabInstance:
       propertyPath: managedReferences[3302317731496591641].messagePrefab
       value: 
       objectReference: {fileID: 7523752681592951660, guid: c397d4d93f40b5341ad27bab65df1d58, type: 3}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 3302317731496591641
+      objectReference: {fileID: 0}
     - target: {fileID: 2886244060689609250, guid: d413b71f8f7c07e4b89344b7b99e0da1, type: 3}
       propertyPath: managedReferences[3573401271353475112].transformActions.Array.size
       value: 0
@@ -7006,20 +7126,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: dfa109612dacd244093a8aaf26717b37, type: 2}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
-      value: 3573401271353475122
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: 'managedReferences[3573401271353475122]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: submittable.doIter.onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[3573401271353475122].id
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      value: 3573401271353475122
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[3573401271353475122].option
@@ -7030,8 +7150,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7360943859682042979, guid: 05be05a7ca7b8854ab1bb650a2ad9994, type: 3}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[3573401271353475122].showOnlyWhenCreated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
+      value: 3573401271353475122
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[3573401271353475122].transformActions.Array.size

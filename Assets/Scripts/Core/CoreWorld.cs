@@ -50,6 +50,12 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
         get => Config.As("level", 1);
         set => Config["level"] = value;
     }
+    
+    public static int Theme
+    {
+        get => Config.As("theme", 0);
+        set => Config["theme"] = value;
+    }
 
     private void _StopIdleMusic()
     {
