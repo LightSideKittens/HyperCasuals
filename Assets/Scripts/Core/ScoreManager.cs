@@ -24,8 +24,8 @@ namespace Core
         public int maxBonusBlock = 3;
         
         [MinMaxSlider(0, 12)] public Vector2Int bonusLevelRange;
-        public TextMeshPro bonusPrefab;
-        private Dictionary<Block, TextMeshPro> bonuses = new();
+        public BonusBlock bonusPrefab;
+        private Dictionary<Block, BonusBlock> bonuses = new();
         
         private int _lastScore;
         private int _currentScore;
@@ -57,7 +57,7 @@ namespace Core
             for (var i = 0; i < shape.blocks.Count; i++)
             {
                 var block = shape.blocks[i];
-                var bonus = block.GetComponentInChildren<TextMeshPro>();
+                var bonus = block.GetComponentInChildren<BonusBlock>();
                 if (bonus)
                 {
                     var regular = block.GetRegular();
@@ -134,7 +134,7 @@ namespace Core
                 {
                     if (bonuses.Remove(block, out var bonus))
                     {
-                        bonusScore += forBonusBlockDestroying * int.Parse(bonus.text);
+                        bonusScore += forBonusBlockDestroying * bonus.Value;
                         Destroy(bonus.gameObject);
                     }
                     
@@ -170,11 +170,9 @@ namespace Core
             var list = bonuses.ToList();
             foreach (var (block, text) in list)
             {
-                var level = int.Parse(text.text);
-                text.text = (level - 1).ToString();
-                if (level == 1)
+                text.Value--;
+                if (text.Value == 1)
                 {
-                    Destroy(text.gameObject);
                     bonuses.Remove(block);
                 }
             }
@@ -203,7 +201,8 @@ namespace Core
                 if(block == null) continue;
                 block = block.GetRegular();
                 var bonus = Instantiate(bonusPrefab, block.transform.position, Quaternion.identity);
-                bonus.text = Random.Range(bonusLevelRange.x, bonusLevelRange.y).ToString();
+                bonus.appearAnim.Animate();
+                bonus.Value = Random.Range(bonusLevelRange.x, bonusLevelRange.y);
                 bonuses[block] = bonus;
             }
         }

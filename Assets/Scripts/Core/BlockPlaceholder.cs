@@ -39,7 +39,7 @@ public class BlockPlaceholder : MonoBehaviour
         block.sortingOrder = block.sortingOrder;
         if (World.IsPlaying)
         {
-            var bonus = GetComponentInChildren<TextMeshPro>();
+            var bonus = GetComponentInChildren<BonusBlock>();
             if (bonus)
             {
                 bonus.transform.SetParent(block.transform, true);

@@ -18,48 +18,21 @@ public abstract class Booster : DoIt
 [Serializable]
 public abstract class BaseFieldClickBooster : Booster
 {
-    public UIView view;
+    public LSButton button;
     
     public override void Do()
     {
-        World.Destroyed += OnWorldDestroyed;
-        World.Updated += Update;
-        view.Manager.Hiding += OnHiding;
-    }
-
-    private void OnHiding()
-    {
-        view.Manager.Hiding -= OnHiding;
-        World.Updated -= Update;
-        World.Destroyed -= OnWorldDestroyed;
-    }
-
-    private void OnWorldDestroyed()
-    {
-        World.Destroyed -= OnWorldDestroyed;
-        World.Updated -= Update;
+        button.submittable.Submitted += OnSubmitted;
     }
     
-    private void Update()
+    private void OnSubmitted()
     {
-        if (LSInput.TouchCount > 0)
-        {
-            LSTouch touch = LSInput.GetTouch(0);
-            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                var index = FieldManager.ToIndex(touchPosition);
-                if (FieldManager.Grid.HasIndex(index))
-                { 
-                    OnClicked(index);
-                }
-
-                if (!touch.IsPointerOverUI)
-                { 
-                    UIViewBoss.GoBack();
-                }
-            }
+        LSTouch touch = LSInput.GetTouch(0);
+        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+        var index = FieldManager.ToIndex(touchPosition);
+        if (FieldManager.Grid.HasIndex(index))
+        { 
+            OnClicked(index);
         }
     }
 
