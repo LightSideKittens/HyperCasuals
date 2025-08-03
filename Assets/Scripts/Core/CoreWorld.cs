@@ -4,6 +4,7 @@ using LSCore;
 using LSCore.ConfigModule;
 using LSCore.Extensions;
 using SourceGenerators;
+using UnityEngine;
 using UnityEngine.Scripting;
 
 [InstanceProxy]
@@ -59,8 +60,8 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
 
     private void _StopIdleMusic()
     {
-        var source = idleMusic.LastSource;
-        source.DOFade(0, 0.5f).OnComplete(source.Stop);
+        var source = idleMusic.CurrentSource;
+        source?.DOFade(0, 0.5f).OnComplete(source.Stop);
     }
 
     protected override void Awake()

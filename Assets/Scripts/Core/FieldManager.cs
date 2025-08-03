@@ -208,6 +208,7 @@ public partial class FieldManager : SingleService<FieldManager>
     protected override void DeInit()
     {
         base.DeInit();
+        selectionAreas?.Clear();
 #if UNITY_EDITOR
         EditorApplication.update -= EditorUpdate;
 #endif
@@ -470,7 +471,7 @@ public partial class FieldManager : SingleService<FieldManager>
     
     private void UpdateGhost()
     {
-        selectionAreas.ReleaseAll();
+        SelectionAreas.ReleaseAll();
         if(currentGhostShape == null) return;
         currentGhostShape.gameObject.SetActive(true);
         var gridIndices = new List<Vector2Int>();
@@ -492,7 +493,8 @@ public partial class FieldManager : SingleService<FieldManager>
         HighlightDestroyableLines(gridIndices);
     }
 
-    private OnOffPool<SpriteRenderer> selectionAreas => OnOffPool<SpriteRenderer>.GetOrCreatePool(selector, back.transform, shouldStoreActive: true);
+    private OnOffPool<SpriteRenderer> selectionAreas;
+    private OnOffPool<SpriteRenderer> SelectionAreas => selectionAreas ?? OnOffPool<SpriteRenderer>.GetOrCreatePool(selector, back.transform, shouldStoreActive: true);
 
     private void HighlightDestroyableLines(List<Vector2Int> gridIndices)
     {
@@ -516,7 +518,7 @@ public partial class FieldManager : SingleService<FieldManager>
         for (int i = 0; i < lines.Count; i++)
         {
             var list = lines[i];
-            var area = selectionAreas.Get();
+            var area = SelectionAreas.Get();
             area.size = Vector2.one;
             var corner = list[0].index;
             area.transform.localPosition = corner - (Vector2)gridOffset - LSVector2.half;
