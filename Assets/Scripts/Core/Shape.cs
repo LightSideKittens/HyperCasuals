@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,6 +38,7 @@ public class Shape : MonoBehaviour
                 newBlock.defaultSortingOrder = -10;
                 blocks[i] = newBlock;
                 newBlock.transform.SetSiblingIndex(siblingIndex);
+                currBlockTr.SetParent(null, true);
                 Destroy(currBlockTr.gameObject);
             }
         }

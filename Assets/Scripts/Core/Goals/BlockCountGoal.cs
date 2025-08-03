@@ -13,7 +13,7 @@ namespace Core
         {
             if (block.prefab == target.Block)
             {
-                if (count > 0)
+                if (count > 1)
                 {
                     count -= 1;
                 }
