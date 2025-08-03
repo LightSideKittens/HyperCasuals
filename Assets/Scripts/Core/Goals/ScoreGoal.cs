@@ -44,13 +44,18 @@ namespace Core
             {
                 lastScore = ScoreManager.LastScore;
             }
+            ChangeScoreText();
+            needAnimate = true;
+        }
+
+        protected virtual void ChangeScoreText()
+        {
             target.Number -= ScoreManager.CurrentScore - ScoreManager.LastScore;
             if (target.Number <= 0)
             { 
                 IsReached = true;
                 target.Number = 0;
             }
-            needAnimate = true;
         }
 
         private void OnComboChanged()
