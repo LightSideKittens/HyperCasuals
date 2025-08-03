@@ -7,7 +7,6 @@ namespace Core
     public class ScoreGoal : Goal
     {
         public LSNumber target;
-        public LSNumber current;
         public LocalizationText comboText;
         public AnimSequencer scoreAnim;
         public AnimSequencer comboAnim;
@@ -45,8 +44,12 @@ namespace Core
             {
                 lastScore = ScoreManager.LastScore;
             }
-            current.Number = ScoreManager.CurrentScore;
-            IsReached = current.Number >= target.Number;
+            target.Number -= ScoreManager.CurrentScore - ScoreManager.LastScore;
+            if (target.Number <= 0)
+            { 
+                IsReached = true;
+                target.Number = 0;
+            }
             needAnimate = true;
         }
 

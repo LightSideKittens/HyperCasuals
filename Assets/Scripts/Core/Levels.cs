@@ -17,9 +17,15 @@ public partial class Levels : SingleScriptableObject<Levels>
     
     private void _LoadCurrentLevel()
     {
-        var levels = SingleAssets.Get<Levels>("Levels").levels;
-        var themes = Themes.List[CoreWorld.Theme];
-        SceneManager.LoadScene(themes, LoadSceneMode.Single);
-        SceneManager.LoadScene(levels.GetWrapped(CoreWorld.Level-1, 10), LoadSceneMode.Additive);
+        SceneManager.sceneLoaded += OnThemeLoaded;
+        var themeScene = Themes.List[CoreWorld.Theme];
+        SceneManager.LoadScene(themeScene, LoadSceneMode.Single);
+    }
+
+    private void OnThemeLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnThemeLoaded;
+        var lvlScene = levels.GetWrapped(CoreWorld.Level - 1, 10);
+        SceneManager.LoadScene(lvlScene, LoadSceneMode.Additive);
     }
 }
