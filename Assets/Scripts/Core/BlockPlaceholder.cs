@@ -9,6 +9,7 @@ public class BlockPlaceholder : MonoBehaviour
     [HideInInspector] public Block block;
     public BlockPlaceholder next;
     private static bool isEdited;
+    private SpriteRenderer dummySpriteRenderer;
     
     private void Awake()
     {
@@ -61,6 +62,13 @@ public class BlockPlaceholder : MonoBehaviour
     private void OnValidate()
     {
         if(World.IsPlaying) return;
+        if (dummySpriteRenderer == null)
+        {
+            dummySpriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+            dummySpriteRenderer.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
+            dummySpriteRenderer.sprite = data.Block.sprite;
+            dummySpriteRenderer.color = Color.clear;
+        }
         isEdited = true;
     }
     
