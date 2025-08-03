@@ -113,7 +113,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        needInit: 0
+        needInit: 1
         duration: 1
         startValue: 0
         endValue: 1
@@ -131,7 +131,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        needInit: 0
+        needInit: 1
         duration: 0.5
         startValue: {x: 1, y: 1, z: 1}
         endValue: {x: 1.1, y: 1.1, z: 1.1}
@@ -149,7 +149,7 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        needInit: 0
+        needInit: 1
         duration: 10
         startValue: 10
         endValue: 0
@@ -921,7 +921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'

@@ -16,23 +16,20 @@ public class LoseWindow : BaseWindow<LoseWindow>
     {
         CoreWorld.StopIdleMusic();
         base.OnShowing();
-        watchButton.Submitted += onReviveClicked;
         watchButton.Submitted += Reload;
         sequence = timerAnim.Animate();
     }
 
     private void Reload()
     {
-        var currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        UIViewBoss.GoBack();
+        onReviveClicked?.Invoke();
     }
 
     protected override void OnHiding()
     {
         base.OnHiding();
-        watchButton.Submitted -= onReviveClicked;
-        watchButton.Submitted -= UIViewBoss.GoBack;
-
+        watchButton.Submitted -= Reload;
         sequence?.Kill();
     }
 }

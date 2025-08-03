@@ -213,14 +213,21 @@ public partial class FieldManager : SingleService<FieldManager>
             else
             {
                 shape.transform.DOMove(dragger.shapeStartPos, 0.2f).SetEase(Ease.InOutExpo);
-                shape.transform.DOScale(defaultShapeSize / shape.MaxSide, 0.2f).SetEase(Ease.InOutExpo);
+                shape.transform.DOScale(shapeSpawnerScale, 0.2f).SetEase(Ease.InOutExpo);
             }
         };
+    }
+
+    protected override void Init()
+    {
+        base.Init();
+        LoseWindow.onReviveClicked += Revive;
     }
 
     protected override void DeInit()
     {
         base.DeInit();
+        LoseWindow.onReviveClicked -= Revive;
         selectionAreas?.Clear();
 #if UNITY_EDITOR
         EditorApplication.update -= EditorUpdate;
@@ -319,7 +326,7 @@ public partial class FieldManager : SingleService<FieldManager>
             shape.transform.SetScale(0);
             shapeAppearFx.transform.SetScale(0);
             
-            shape.transform.DOScale(defaultShapeSize / shape.MaxSide, 0.2f).OnComplete(() =>
+            shape.transform.DOScale(shapeSpawnerScale, 0.2f).OnComplete(() =>
             {
                 var appearFxInstance = Instantiate(shapeAppearFx, shape.transform.position, Quaternion.identity);
                 appearFxInstance.transform.SetScale(0);
@@ -495,22 +502,12 @@ public partial class FieldManager : SingleService<FieldManager>
         }
 
         Debug.Log("[CheckLoseCondition] All shapes blocked -> Game Over");
-        LoseWindow.Hiding -= ClearLoseWindow;
-        LoseWindow.onReviveClicked -= Revive;
-        LoseWindow.Hiding += ClearLoseWindow;
-        LoseWindow.onReviveClicked += Revive;
         LoseWindow.Show();
     }
-
-    private void ClearLoseWindow()
-    {
-        LoseWindow.onReviveClicked -= Revive;
-        LoseWindow.Hiding -= ClearLoseWindow;
-    }
+    
     private void Revive()
     {
         Debug.Log("[Revive] called!");
-        LoseWindow.onReviveClicked -= Revive;
         for (int i = activeShapes.Count - 1; i >= 0; i--)
         {
             var shape = activeShapes[i];
