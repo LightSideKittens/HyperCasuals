@@ -1,5 +1,5 @@
 ﻿using LSCore;
-using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -13,6 +13,7 @@ public class BlockPlaceholder : MonoBehaviour
     
     private void Awake()
     {
+        block = null;
         InitBlock();
     }
 
@@ -29,6 +30,12 @@ public class BlockPlaceholder : MonoBehaviour
         if(block) return;
         var prefab = data.Block;
         block = Block.Create(prefab);
+#if UNITY_EDITOR
+        if (World.IsEditMode)
+        { 
+            block.gameObject.hideFlags = HideFlags.HideAndDontSave;
+        }
+#endif
         block.transform.SetParent(transform);
         block.transform.localPosition = Vector3.zero;
         block.transform.localScale = Vector3.one;
@@ -62,21 +69,26 @@ public class BlockPlaceholder : MonoBehaviour
     private void OnValidate()
     {
         if(World.IsPlaying) return;
-        if (dummySpriteRenderer == null)
-        {
-            dummySpriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-            dummySpriteRenderer.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
-            dummySpriteRenderer.sprite = data.Block.sprite;
-            dummySpriteRenderer.color = Color.clear;
-        }
+        EditorApplication.update += OnUpdate;
         isEdited = true;
+
+        void OnUpdate()
+        {
+            EditorApplication.update -= OnUpdate;
+            if (dummySpriteRenderer == null)
+            {
+                dummySpriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+                dummySpriteRenderer.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
+                dummySpriteRenderer.sprite = data.Block.sprite;
+                dummySpriteRenderer.color = Color.clear;
+            }
+        }
     }
     
     private void Update()
     {
         if (World.IsPlaying) return;
         InitBlock();
-        block.gameObject.hideFlags = HideFlags.HideAndDontSave;
         
         if (block != null && isEdited)
         {

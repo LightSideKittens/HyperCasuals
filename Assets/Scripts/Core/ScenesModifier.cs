@@ -45,6 +45,11 @@ namespace Core
         protected override bool Modify(GameObject go, out bool needBreak)
         {
             needBreak = false;
+            if (go.TryGetComponent<BlockPlaceholder>(out var blockPlaceholder))
+            {
+                blockPlaceholder.enabled = true;
+                return true;
+            }
             
             /*if (go.TryGetComponent<Shape>(out var shape))
             {
