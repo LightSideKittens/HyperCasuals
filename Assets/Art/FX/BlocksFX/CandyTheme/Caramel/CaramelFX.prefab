@@ -151,8 +151,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 15
-      minScalar: 7
+      scalar: 25
+      minScalar: 15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -539,7 +539,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 4
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -592,8 +592,8 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
-    angle: 30
+    type: 4
+    angle: 40
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -1492,8 +1492,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 3
-    tilesY: 3
+    tilesX: 4
+    tilesY: 4
     animationType: 0
     rowIndex: 0
     cycles: 1

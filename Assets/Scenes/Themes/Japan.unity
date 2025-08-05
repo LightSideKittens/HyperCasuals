@@ -337,12 +337,12 @@ GameObject:
   - component: {fileID: 474053717}
   - component: {fileID: 474053718}
   m_Layer: 0
-  m_Name: FieldAnimator_1
+  m_Name: FieldAnimator
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 827643247c5396045ab168f4d32a7e92, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &474053717
 Transform:
   m_ObjectHideFlags: 0
@@ -1354,6 +1354,10 @@ PrefabInstance:
       propertyPath: idleMusic.clip
       value: 
       objectReference: {fileID: 8300000, guid: 9e0a83d2030bd8043bd61d6cba340557, type: 3}
+    - target: {fileID: 4918388204699606087, guid: 6c031361552f44d4aa4118de45517136, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6605774656334161755, guid: 6c031361552f44d4aa4118de45517136, type: 3}
       propertyPath: _handlers.data.Array.size
       value: 4
