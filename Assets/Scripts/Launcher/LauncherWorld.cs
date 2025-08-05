@@ -7,6 +7,7 @@ namespace Launcher
         protected override void Awake()
         {
             base.Awake();
+            BaseInitializer.Initialize();
             Init();
         }
 

@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using DG.Tweening;
 using LSCore;
 using LSCore.ConfigModule;
 using LSCore.Extensions;
+using Newtonsoft.Json.Linq;
 using SourceGenerators;
 using UnityEngine;
 using UnityEngine.Scripting;
@@ -57,6 +59,31 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
         get => Config.As("theme", 0);
         set => Config["theme"] = value;
     }
+    
+    private static JHashSet<int> themesSet;
+    private static int id;
+
+    private static void InitThemesSet(JArray themes)
+    {
+        if (World.IsDiff(ref id))
+        {
+            themesSet = new JHashSet<int>(themes);
+        }
+    }
+    
+    public static bool BuyTheme(int theme)
+    {
+        var themes = Config.AsJ<JArray>("themes");
+        InitThemesSet(themes);
+        return themesSet.Add(theme);
+    }
+
+    public static bool HasTheme(int theme)
+    {
+        var themes = Config.AsJ<JArray>("themes");
+        InitThemesSet(themes);
+        return themesSet.Contains(theme) || Theme == theme;
+    }
 
     private void _StopIdleMusic()
     {
@@ -67,6 +94,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     protected override void Awake()
     {
         base.Awake();
+        BaseInitializer.Initialize();
 #if DEBUG
         DebugData.Init();  
 #endif

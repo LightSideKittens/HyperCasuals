@@ -25,20 +25,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248903443095826973}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.9, y: 1.9, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6424608368227536019}
   - {fileID: 215695341815190533}
   m_Father: {fileID: 3571121226226231599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1732329137262504170
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -84,8 +84,6 @@ MonoBehaviour:
   ignoreSLAAAAYout: 0
   onOffAnim:
     rid: 1249993464767316241
-  on: []
-  off: []
   isOn:
     rid: 1249993464767316247
   submittable:
@@ -111,7 +109,7 @@ MonoBehaviour:
         anim:
           rid: -2
         doIter:
-          rid: -2
+          rid: 2877981696179568724
         selectBehaviour:
           rid: -2
     - rid: 1249993464767316247
@@ -148,6 +146,10 @@ MonoBehaviour:
       type: {class: 'SerializeField`1[[UnityEngine.UI.Graphic, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
       data:
         data: {fileID: 8064796061521427323}
+    - rid: 2877981696179568724
+      type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        onSubmit: []
 --- !u!1 &1901485822636821581
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,20 +275,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7026544506489293301}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.9, y: 1.9, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8638932489887083612}
   - {fileID: 7475482318045001522}
   m_Father: {fileID: 3571121226226231599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7736977261901722796
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -332,8 +334,6 @@ MonoBehaviour:
   ignoreSLAAAAYout: 0
   onOffAnim:
     rid: 1249993464767316241
-  on: []
-  off: []
   isOn:
     rid: 1249993464767316247
   submittable:
@@ -359,7 +359,7 @@ MonoBehaviour:
         anim:
           rid: -2
         doIter:
-          rid: -2
+          rid: 2877981696179568725
         selectBehaviour:
           rid: -2
     - rid: 1249993464767316247
@@ -396,6 +396,10 @@ MonoBehaviour:
       type: {class: 'SerializeField`1[[UnityEngine.UI.Graphic, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
       data:
         data: {fileID: 4692897426662267828}
+    - rid: 2877981696179568725
+      type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        onSubmit: []
 --- !u!1001 &2209406844335578396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -492,6 +496,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c53d455a51739049ab9442239b58cf6, type: 3}
+    - target: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -864,55 +872,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 992.8662
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 369.93604
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2794384938282545792, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_AnchoredPosition.y
