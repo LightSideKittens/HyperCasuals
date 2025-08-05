@@ -85,17 +85,28 @@ MonoBehaviour:
   ignoreSLAAAAYout: 0
   onOffAnim:
     rid: 3302317731496591862
-  clickActions:
-    actions: []
-    isClickSoundOverride: 0
-  on: []
-  off: []
-  isOn: 0
+  isOn:
+    rid: -2
+  submittable:
+    rid: 1000
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 1000
+      type: {class: DefaultSubmittable, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        anim:
+          rid: -2
+        doIter:
+          rid: 2877981690709147994
+        selectBehaviour:
+          rid: -2
+    - rid: 2877981690709147994
+      type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        onSubmit: []
     - rid: 3302317731496591862
       type: {class: InOutShowHideAnim, ns: LSCore, asm: LSCore.UIModule}
       data:
@@ -112,6 +123,7 @@ MonoBehaviour:
           - timeOffset: 0
             anim:
               rid: 3302317827636854964
+          editor_options: []
     - rid: 3302317827636854960
       type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
       data:
@@ -127,11 +139,6 @@ MonoBehaviour:
       type: {class: PivotPosXAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
         id: 
-        mainOptions: []
-        needInit: 1
-        duration: 0.3
-        startValue: -0.1
-        endValue: 1.1
         options: []
         targets:
         - rid: 5237654985255682370
@@ -142,11 +149,14 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+        needInit: 1
+        duration: 0.3
+        startValue: -0.1
+        endValue: 1.1
     - rid: 3302317827636854963
       type: {class: AlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
         id: 
-        mainOptions: []
         canvasGroupAnim:
           rid: -2
         graphicAnim:
@@ -155,11 +165,6 @@ MonoBehaviour:
       type: {class: FilledAmountAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
         id: 
-        mainOptions: []
-        needInit: 1
-        duration: 0.3
-        startValue: 0
-        endValue: 1
         options: []
         targets:
         - rid: 5237654985255682372
@@ -169,15 +174,14 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    - rid: 3302317827636854965
-      type: {class: GraphicAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
-      data:
-        id: 
-        mainOptions: []
         needInit: 1
         duration: 0.3
         startValue: 0
         endValue: 1
+    - rid: 3302317827636854965
+      type: {class: GraphicAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
         options: []
         targets:
         - rid: 5237654985255682373
@@ -188,6 +192,10 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+        needInit: 1
+        duration: 0.3
+        startValue: 0
+        endValue: 1
     - rid: 5237654985255682370
       type: {class: 'SerializeField`1[[UnityEngine.RectTransform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
       data:
