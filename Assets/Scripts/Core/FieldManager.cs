@@ -124,7 +124,9 @@ public partial class FieldManager : SingleService<FieldManager>
         }
     }
 
-    public List<Shape> shapes;
+    public List<Shape> easyShapes;
+    public List<Shape> mediumShapes;
+    public List<Shape> hardShapes;
     
     private void Start()
     {
@@ -153,13 +155,6 @@ public partial class FieldManager : SingleService<FieldManager>
 
             if (canPlace)
             {
-                totalTurns++;
-                if (totalTurns % offsetPickRangeEveryTurns == 0)
-                {
-                    var tempShape = allTempShapes[0];
-                    allTempShapes.RemoveAt(0);
-                    allTempShapes.Add(tempShape);
-                }
                 var tween = DOTween.TweensByTarget(shape.transform, true);
                 if (tween is { Count: > 0 })
                 {
@@ -248,21 +243,27 @@ public partial class FieldManager : SingleService<FieldManager>
         }
         return copiedGrid;
     }
-
-    public int offsetPickRangeEveryTurns = 3;
-    public int shapeToPickRange = 10;
-    private List<Shape> allTempShapes = new();
-    private int totalTurns;
+    
+    private List<List<Shape>> allTempShapes = new();
     
     private void InitTempShapes()
     {
         var tempShapesParent = new GameObject("TempShapesParent").transform;
         allTempShapes.Clear();
-        foreach (var shape in shapes)
+        AddShapes(hardShapes);
+        AddShapes(mediumShapes);
+        AddShapes(easyShapes);
+
+        void AddShapes(List<Shape> shapes)
         {
-            var temp = Instantiate(shape, new Vector3(30, 30, 0), Quaternion.identity, tempShapesParent);
-            temp.BlockPrefab = FieldAppearance.BlockPrefabs[0];
-            allTempShapes.Add(temp);
+            var tempList = new List<Shape>();
+            allTempShapes.Add(tempList);
+            foreach (var shape in shapes)
+            {
+                var temp = Instantiate(shape, new Vector3(30, 30, 0), Quaternion.identity, tempShapesParent);
+                temp.BlockPrefab = FieldAppearance.BlockPrefabs[0];
+                tempList.Add(temp);
+            }
         }
     }
     
@@ -273,16 +274,19 @@ public partial class FieldManager : SingleService<FieldManager>
         activeShapes.Clear();
         for (int i = 0; i < _spawners.Count; i++)
         {
-            var spawned = false;
-            var tempShapes = new List<Shape>(allTempShapes);
+            int shapeListIndex = 0;
+            if (Random.value > 0.5f)
+            {
+                (allTempShapes[0], allTempShapes[1]) = (allTempShapes[1], allTempShapes[0]);
+            }
+            var tempShapes = new List<Shape>(allTempShapes[shapeListIndex]);
             
             Shape tempShape;
             do
             {
-                tempShape = tempShapes.RandomSafe(0, shapeToPickRange, out var index);
+                tempShape = tempShapes.Random(out var index);
                 if (await HasPlaceForShape(tempShape, true))
                 {
-                    spawned = true;
                     SpawnShape();
                     if (GetFullLines())
                     {
@@ -295,18 +299,16 @@ public partial class FieldManager : SingleService<FieldManager>
                 }
                 tempShape.transform.position = new Vector3(30, 30, 0);
                 tempShapes.RemoveAt(index);
-            } while (tempShapes.Count > 0);
-
-            if (!spawned)
-            {
-                tempShapes = new List<Shape>(allTempShapes);
-                for (; i < _spawners.Count; i++)
+                if (tempShapes.Count == 0)
                 {
-                    tempShape = tempShapes.Random(0, shapeToPickRange);
-                    SpawnShape();
+                    shapeListIndex++;
+                    if (shapeListIndex >= allTempShapes.Count)
+                    {
+                        break;   
+                    }
+                    tempShapes = new List<Shape>(allTempShapes[shapeListIndex]);
                 }
-                break;
-            }
+            } while (true);
             
             void SpawnShape()
             {
