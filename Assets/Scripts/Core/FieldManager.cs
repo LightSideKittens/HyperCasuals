@@ -294,10 +294,8 @@ public partial class FieldManager : SingleService<FieldManager>
                         _linesIndices.Clear();
                     }
                     
-                    tempShape.transform.position = new Vector3(30, 30, 0);
                     break;
                 }
-                tempShape.transform.position = new Vector3(30, 30, 0);
                 tempShapes.RemoveAt(index);
                 if (tempShapes.Count == 0)
                 {
@@ -408,7 +406,7 @@ public partial class FieldManager : SingleService<FieldManager>
 
         var result = await CheckCanPlace();
 
-        if (placeIfCan)
+        if (result && placeIfCan)
         {
             for (int j = 0; j < shape.blocks.Count; j++)
             {
@@ -417,11 +415,9 @@ public partial class FieldManager : SingleService<FieldManager>
                 grid.Set(gridIndex, block);
             }
         }
-        else
-        {
-            shape.transform.localScale = prevScale;
-            shape.transform.position = prevPos;
-        }
+        
+        shape.transform.localScale = prevScale;
+        shape.transform.position = prevPos;
         
         return result;
         
