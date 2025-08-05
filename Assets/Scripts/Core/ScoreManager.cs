@@ -113,7 +113,7 @@ namespace Core
                              + bonusScore
                              + placedScore;
             
-            _currentCombo++;
+            _currentCombo += linesCount;
             ScoreChanged?.Invoke();
             if (_currentCombo > 1)
             { 
