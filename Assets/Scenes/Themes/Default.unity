@@ -456,6 +456,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1606478562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606478563}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1606478563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606478562}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.44856, y: -0.96313, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1664008166
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,15 +874,15 @@ PrefabInstance:
     - target: {fileID: 585123438693303186, guid: 6c031361552f44d4aa4118de45517136, type: 3}
       propertyPath: '_specialBlockPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 4591270519534980581, guid: 3920bdc2ecb99ec4abe27f3c02ccb3db, type: 3}
+      objectReference: {fileID: 4591270519534980581, guid: ea8f7cb930a129b48ab6fbd9cddd09b2, type: 3}
     - target: {fileID: 585123438693303186, guid: 6c031361552f44d4aa4118de45517136, type: 3}
       propertyPath: '_specialBlockPrefabs.Array.data[1]'
       value: 
-      objectReference: {fileID: 4591270519534980581, guid: 615fb06b88cabf243a704d48169b8b29, type: 3}
+      objectReference: {fileID: 4591270519534980581, guid: 3920bdc2ecb99ec4abe27f3c02ccb3db, type: 3}
     - target: {fileID: 585123438693303186, guid: 6c031361552f44d4aa4118de45517136, type: 3}
       propertyPath: '_specialBlockPrefabs.Array.data[2]'
       value: 
-      objectReference: {fileID: 4591270519534980581, guid: ea8f7cb930a129b48ab6fbd9cddd09b2, type: 3}
+      objectReference: {fileID: 4591270519534980581, guid: 615fb06b88cabf243a704d48169b8b29, type: 3}
     - target: {fileID: 585123438693303186, guid: 6c031361552f44d4aa4118de45517136, type: 3}
       propertyPath: '_specialBlockPrefabs.Array.data[3]'
       value: 
@@ -1247,3 +1278,4 @@ SceneRoots:
   - {fileID: 1552415833}
   - {fileID: 329637361}
   - {fileID: 918917033}
+  - {fileID: 1606478563}
