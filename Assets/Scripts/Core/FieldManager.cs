@@ -551,7 +551,7 @@ public partial class FieldManager : SingleService<FieldManager>
     }
 
     private OnOffPool<SpriteRenderer> selectionAreas;
-    private OnOffPool<SpriteRenderer> SelectionAreas => selectionAreas ?? OnOffPool<SpriteRenderer>.GetOrCreatePool(selector, back.transform, shouldStoreActive: true);
+    private OnOffPool<SpriteRenderer> SelectionAreas => selectionAreas ??= OnOffPool<SpriteRenderer>.GetOrCreatePool(selector, back.transform, shouldStoreActive: true);
 
     private Vector2 selectionAreaSizeOffset = 0.7f.ToVector2();
     
