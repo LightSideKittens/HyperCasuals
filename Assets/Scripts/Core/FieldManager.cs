@@ -41,6 +41,7 @@ public partial class FieldManager : SingleService<FieldManager>
     private int spawnShapeLock = 0;
     private bool allShapesPlaced;
     private Shape currentGhostShape;
+    private Vector2Int lastGhostBlockIndex = new(-1, -1);
     private Shape currentShape => dragger.currentShape;
     
     private int? lastUsedSpriteIndex = null;
@@ -219,6 +220,11 @@ public partial class FieldManager : SingleService<FieldManager>
         LoseWindow.onReviveClicked += Revive;
     }
 
+    private void Update()
+    {
+        UpdateGhost();
+    }
+    
     protected override void DeInit()
     {
         base.DeInit();
@@ -335,11 +341,6 @@ public partial class FieldManager : SingleService<FieldManager>
         }
         
         grid = lastGrid;
-    }
-
-    private void Update()
-    {
-        UpdateGhost();
     }
 
     public Vector2Int _ToIndex(Vector2 pos)
@@ -472,9 +473,11 @@ public partial class FieldManager : SingleService<FieldManager>
     private void ClearCurrentGhostShape()
     {
         if (currentGhostShape == null) return;
-        
+
         Destroy(currentGhostShape.gameObject);
         currentGhostShape = null;
+        lastGhostBlockIndex.x = -1;
+        SelectionAreas.ReleaseAll();
     }
 
     private void CreateGhostShape()
@@ -518,31 +521,40 @@ public partial class FieldManager : SingleService<FieldManager>
     
     private void UpdateGhost()
     {
-        SelectionAreas.ReleaseAll();
         if(currentGhostShape == null) return;
-        currentGhostShape.gameObject.SetActive(true);
+        
         var gridIndices = new List<Vector2Int>();
         var canPlace = CanPlaceShape(currentShape, ref gridIndices);
 
         if (!canPlace)
         {
+            SelectionAreas.ReleaseAll();
+            lastGhostBlockIndex.x = -1;
             currentGhostShape.gameObject.SetActive(false);
             return;
         }
 
-        for (int i = 0; i < currentGhostShape.blocks.Count; i++)
+        if (lastGhostBlockIndex != gridIndices[0])
         {
-            var gridIndex = gridIndices[i];
-            Vector2 worldPos = _ToPos(gridIndex);
-            currentGhostShape.blocks[i].transform.position = worldPos;
+            SelectionAreas.ReleaseAll();
+            currentGhostShape.gameObject.SetActive(true);
+            for (int i = 0; i < currentGhostShape.blocks.Count; i++)
+            {
+                var gridIndex = gridIndices[i];
+                Vector2 worldPos = _ToPos(gridIndex);
+                currentGhostShape.blocks[i].transform.position = worldPos;
+            }
+            HighlightDestroyableLines(gridIndices);
         }
         
-        HighlightDestroyableLines(gridIndices);
+        lastGhostBlockIndex = gridIndices[0];
     }
 
     private OnOffPool<SpriteRenderer> selectionAreas;
     private OnOffPool<SpriteRenderer> SelectionAreas => selectionAreas ?? OnOffPool<SpriteRenderer>.GetOrCreatePool(selector, back.transform, shouldStoreActive: true);
 
+    private Vector2 selectionAreaSizeOffset = 0.7f.ToVector2();
+    
     private void HighlightDestroyableLines(List<Vector2Int> gridIndices)
     {
         for (int i = 0; i < gridIndices.Count; i++)
@@ -566,16 +578,23 @@ public partial class FieldManager : SingleService<FieldManager>
         {
             var list = lines[i];
             var area = SelectionAreas.Get();
-            area.size = Vector2.one;
-            var corner = list[0].index;
-            area.transform.localPosition = corner - (Vector2)gridOffset - LSVector2.half;
-
-            for (int j = 1; j < list.Count; j++)
+            var index1 = list[0].index;
+            var index2 = list[^1].index;
+            var size = index2 - index1;
+            if (size.x == 0)
             {
-                var diff = list[j].index - corner;
-                area.size += diff;
-                corner = list[j].index;
+                area.transform.eulerAngles = 0f.ToVector3();
+                area.transform.localScale = 1f.ToVector3();
             }
+            else
+            {
+                (size.x, size.y) = (size.y, size.x);
+                area.transform.eulerAngles = new Vector3(0, 0, -90);
+                area.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            area.size = size + Vector2Int.one;
+            area.transform.localPosition = index1 - (Vector2)gridOffset - LSVector2.half - selectionAreaSizeOffset / 2;
+            area.size += selectionAreaSizeOffset;
         }
     }
 

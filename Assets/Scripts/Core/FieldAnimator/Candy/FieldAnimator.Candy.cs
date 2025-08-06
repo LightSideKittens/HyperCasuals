@@ -13,7 +13,7 @@ namespace Core
         {
             public ParticleSystem fx;
             public AnimationCurve anim;
-            public float durScale = .5f;
+            public float durScale = .3f;
 
             public override void Handle()
             {
@@ -26,7 +26,7 @@ namespace Core
                     foreach (var (index, block) in data)
                     {
                         var tr = block.transform;
-                        var pos = (index.x + index.y) / 2f * 0.05f;
+                        var pos = (index.x + index.y) / 4f * 0.05f;
                         seq.Insert(pos, tr.DOScale(0f, durScale)
                             .SetEase(anim).OnComplete(() =>
                             {

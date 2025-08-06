@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 06ac1315e0d4e754f957f703b7bde588
+guid: 1b2dbeea6bbfcac41996817acaa382cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7399533318584292489
-    second: tile_0
+      213: 714215498287398411
+    second: spawner-back_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -42,18 +42,18 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 0
-  alignment: 9
-  spritePivot: {x: 0, y: 0}
-  spritePixelsToUnits: 512
-  spriteBorder: {x: 200, y: 220, z: 200, w: 220}
-  spriteGenerateFallbackPhysicsShape: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -65,7 +65,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  ignorePngGamma: 1
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
   cookieLightType: 0
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile_0
+      name: spawner-back_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 10
-        width: 492
-        height: 492
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 98452ed495c60b660800000000000000
-      internalID: 7399533318584292489
+      spriteID: b0ebf7c263769e900800000000000000
+      internalID: 714215498287398411
       vertices: []
       indices: 
       edges: []
@@ -152,7 +152,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tile_0: 7399533318584292489
+      spawner-back_0: 714215498287398411
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
