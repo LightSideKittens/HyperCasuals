@@ -161,6 +161,7 @@ public partial class FieldManager : SingleService<FieldManager>
                 {
                     tween[0].Complete();
                 }
+                float delayConst = 0.1f / shape.blocks.Count;
                 for (int j = 0; j < shape.blocks.Count; j++)
                 {
                     var gridIndex = gridIndices[j];
@@ -173,7 +174,7 @@ public partial class FieldManager : SingleService<FieldManager>
                     var parent = new GameObject("BlockParent").transform;
                     parent.position = block.transform.position;
                     block.transform.SetParent(parent, true);
-                    parent.DOMove(worldPos, 0.3f).SetDelay(j * 0.025f).OnComplete(() =>
+                    parent.DOMove(worldPos, 0.2f).SetDelay(j * delayConst).OnComplete(() =>
                     {
                         parent.DetachChildren();
                         Destroy(parent.gameObject);

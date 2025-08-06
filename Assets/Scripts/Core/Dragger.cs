@@ -14,6 +14,7 @@ public class Dragger : MonoBehaviour
 
     [NonSerialized] public Vector3 shapeStartPos;
     [NonSerialized] public Spawner currentSpawner;
+    private Vector3 startTouchPos;
     private Tween tween;
     public Shape currentShape => currentSpawner.currentShape;
 
@@ -29,6 +30,7 @@ public class Dragger : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
+                    startTouchPos = touchPosition;
                     CheckTouch(touchPosition);
                     if (isDragging)
                     {
@@ -64,7 +66,7 @@ public class Dragger : MonoBehaviour
             
             if (needMove)
             {
-                currentShape.transform.position = touchPosition + (Vector3) touchOffset + offset;
+                currentShape.transform.position = touchPosition + (Vector3) touchOffset + offset + (touchPosition - startTouchPos);
             }
         }
     }
