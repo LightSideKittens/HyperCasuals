@@ -17,6 +17,12 @@ public class WinWindow : BaseWindow<WinWindow>
     }
     
     [Serializable]
+    public class TutorialLevelUp : DoIt
+    {
+        public override void Do() => CoreWorld.TutorialLevel++;
+    }
+    
+    [Serializable]
     public class LevelUp : DoIt
     {
         public override void Do() => CoreWorld.Level++;
