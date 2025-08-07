@@ -62,8 +62,12 @@ namespace Core
                     anim.Add((block, () =>
                     {
                         if (tr.childCount > 0)
-                        { 
-                            tr.GetChild(0).SetParent(tr.parent, true);
+                        {
+                            var b = tr.FindComponentInChildren<Block>();
+                            if (b)
+                            {
+                                b.transform.SetParent(tr.parent, true);
+                            }
                         }
                         
                         AnimateDestroying(block, toDestroyBlocks, internalAnim);
@@ -176,6 +180,7 @@ namespace Core
             protected override void AnimateDestroying(Block self, List<Block> toDestroy, List<(Block block, Action action)> specialBlockAnims)
             {
                 var tr = self.transform;
+                Destroy(tr.GetChild(0).gameObject);
                 var left = Instantiate(leftRocket, tr.position, tr.rotation).transform;
                 var right = Instantiate(rightRocket, tr.position, tr.rotation).transform;
                 var scale = tr.localScale.x.ToVector3();
