@@ -1,12 +1,15 @@
 ﻿using System;
 using LSCore;
 using LSCore.Attributes;
+using LSCore.ConditionModule;
 using SourceGenerators;
 using UnityEngine.SceneManagement;
 
 [Serializable]
-public class LoadClassicLevel : DoIt
+public abstract class BaseLevelLoader : DoIt
 {
+    protected abstract string Level { get; }
+    
     public override void Do() => Load();
 
     private void Load()
@@ -19,33 +22,38 @@ public class LoadClassicLevel : DoIt
     private void OnThemeLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnThemeLoaded;
-        SceneManager.LoadScene("ClassicLevel", LoadSceneMode.Additive);
+        SceneManager.LoadScene(Level, LoadSceneMode.Additive);
     }
 }
-
-
-[InstanceProxy]
-public partial class Levels : SingleScriptableObject<Levels>
+public class Levels : SingleScriptableObject<Levels>
 {
     [Serializable]
-    public class LoadCurrent : DoIt
+    public class IsTutorialCompleted : If
     {
-        public override void Do() => LoadCurrentLevel();
+        public static bool Is => CoreWorld.TutorialLevel >= TutorialList.Length;
+        protected override bool Check() => Is;
     }
     
-    [SceneSelector] public string[] levels;
-    
-    private void _LoadCurrentLevel()
+    [Serializable]
+    public class LoadCurrentTutorial : BaseLevelLoader
     {
-        SceneManager.sceneLoaded += OnThemeLoaded;
-        var themeScene = Themes.List[CoreWorld.Theme];
-        SceneManager.LoadScene(themeScene, LoadSceneMode.Single);
+        protected override string Level => TutorialList[CoreWorld.TutorialLevel];
+    }
+    
+    [Serializable]
+    public class LoadClassic : BaseLevelLoader
+    {
+        protected override string Level => "ClassicLevel";
+    }
+    
+    [Serializable]
+    public class LoadCurrent : BaseLevelLoader
+    {
+        protected override string Level => List.GetWrapped(CoreWorld.Level - 1, 10);
     }
 
-    private void OnThemeLoaded(Scene scene, LoadSceneMode mode)
-    {
-        SceneManager.sceneLoaded -= OnThemeLoaded;
-        var lvlScene = levels.GetWrapped(CoreWorld.Level - 1, 10);
-        SceneManager.LoadScene(lvlScene, LoadSceneMode.Additive);
-    }
+    [SceneSelector] public string[] tutorialLevels;
+    [SceneSelector] public string[] levels;
+    public static string[] List => Instance.levels;
+    public static string[] TutorialList => Instance.tutorialLevels;
 }

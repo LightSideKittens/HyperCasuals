@@ -11,7 +11,7 @@ public class BlockPlaceholder : MonoBehaviour
     private static bool isEdited;
     private SpriteRenderer dummySpriteRenderer;
     
-    private void Awake()
+    protected virtual void Awake()
     {
         block = null;
         InitBlock();

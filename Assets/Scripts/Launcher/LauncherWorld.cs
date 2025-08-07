@@ -8,6 +8,11 @@ namespace Launcher
         {
             base.Awake();
             BaseInitializer.Initialize();
+            if (!Levels.IsTutorialCompleted.Is)
+            {
+                new Levels.LoadCurrentTutorial().Do();
+                return;
+            }
             Init();
         }
 

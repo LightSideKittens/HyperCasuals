@@ -273,6 +273,16 @@ public partial class FieldManager : SingleService<FieldManager>
             }
         }
     }
+
+    private void _DeleteSpawners()
+    {
+        for (var i = 0; i < _spawners.Count; i++)
+        {
+            Destroy(_spawners[i].gameObject);
+        }
+
+        _spawners.Clear();
+    }
     
     private async void CreateAndInitShape()
     {

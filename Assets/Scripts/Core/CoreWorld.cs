@@ -54,6 +54,12 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
         set => Config["level"] = value;
     }
     
+    public static int TutorialLevel
+    {
+        get => Config.As("tutorialLevel", 0);
+        set => Config["tutorialLevel"] = value;
+    }
+    
     public static int Theme
     {
         get => Config.As("theme", 0);
