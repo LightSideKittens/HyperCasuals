@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3591295453848966898}
-  - component: {fileID: 6605774656334161755}
+  - component: {fileID: 3271427655114686334}
   m_Layer: 0
   m_Name: FieldAnimator
   m_TagString: Untagged
@@ -95,7 +95,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8215684415936239094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6605774656334161755
+--- !u!114 &3271427655114686334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,136 +109,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _handlers:
     data:
-    - key: {fileID: 8512770957231261250, guid: a4f4528a405237c478ff1e12bd5b95b3, type: 3}
+    - key: {fileID: 3265167700204404526, guid: 3aea1329a65cf064d9fe52f55d2a4e85, type: 3}
       value:
         handler:
-          rid: 1249993268734722296
-    - key: {fileID: 4591270519534980581, guid: 5043e7aefa3409642afcc93bcb798588, type: 3}
+          rid: 2877981760105218121
+    - key: {fileID: 17412411538972307, guid: 254957766d36cf848b2f773f729dd91e, type: 3}
       value:
         handler:
-          rid: 8179719486889525314
-    - key: {fileID: 4591270519534980581, guid: e962e13680141b7459984d696cf4d485, type: 3}
+          rid: 2877981760105218122
+    - key: {fileID: 8017901039161304009, guid: a4aa3dfdb4e2b754d9a1fac45d3d68c9, type: 3}
       value:
         handler:
-          rid: 8179719486889525315
-    - key: {fileID: 4591270519534980581, guid: 834f86ccf381f5f4a88a829d79a1ead5, type: 3}
+          rid: 2877981760105218123
+    - key: {fileID: -1900454177841485043, guid: 6eded3b9a09efdc46ae7646e8cce0ac9, type: 3}
       value:
         handler:
-          rid: 8179719486889525318
+          rid: 2877981760105218124
     - key: {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
       value:
         handler:
-          rid: 1249993268734722299
-    - key: {fileID: 4591270519534980581, guid: 892c80028e4d84f42bff14fa98badf67, type: 3}
-      value:
-        handler:
-          rid: 1249993347411214336
+          rid: 2877981760105218125
     - key: {fileID: 2791755575516428673, guid: 02f0bb752399d8e4191bd9cf19b1a790, type: 3}
       value:
         handler:
-          rid: 1249993439254413391
+          rid: 2877981760105218126
     - key: {fileID: 6035388817502845878, guid: 7d047efc315aac84cb39c3d6ec31c2b0, type: 3}
       value:
         handler:
-          rid: 1249993439254413392
+          rid: 2877981760105218127
   references:
     version: 2
     RefIds:
-    - rid: 1249993268734722296
-      type: {class: FieldAnimator/BlockHole, ns: Core, asm: Core}
-      data:
-        fx: {fileID: 0}
-    - rid: 1249993268734722299
+    - rid: 2877981760105218121
+      type: {class: FieldAnimator/DefaultDestroyLine, ns: Core, asm: Core}
+      data: 
+    - rid: 2877981760105218122
+      type: {class: FieldAnimator/DefaultDestroyLine, ns: Core, asm: Core}
+      data: 
+    - rid: 2877981760105218123
+      type: {class: FieldAnimator/DefaultDestroyLine, ns: Core, asm: Core}
+      data: 
+    - rid: 2877981760105218124
+      type: {class: FieldAnimator/DefaultDestroyLine, ns: Core, asm: Core}
+      data: 
+    - rid: 2877981760105218125
       type: {class: FieldAnimator/Bomb, ns: Core, asm: Core}
       data:
         fx: {fileID: 1931594081780514082, guid: 748401500699eee41b4cb4481c080fd7, type: 3}
         offsets:
+        - {x: -1, y: 0}
+        - {x: 1, y: 0}
         - {x: 0, y: 1}
         - {x: 0, y: -1}
-        - {x: 1, y: 0}
-        - {x: -1, y: 0}
-    - rid: 1249993347411214336
-      type: {class: FieldAnimator/Stone, ns: Core, asm: Core}
-      data:
-        stages:
-        - {fileID: 979633776236109015, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
-        - {fileID: 3912977348029659307, guid: 8b1bb7659d265a0419356fe833ad19bf, type: 3}
-        fx: {fileID: 7602298404741334448, guid: 36dc9502bf9d3dc4aa4e2651f0206e9d, type: 3}
-    - rid: 1249993439254413391
+    - rid: 2877981760105218126
       type: {class: FieldAnimator/Rocket, ns: Core, asm: Core}
       data:
         axis: 1
         leftRocket: {fileID: 3741038372231485751, guid: b0ee2c53b7e71b9419b6961ee9925b89, type: 3}
         rightRocket: {fileID: 7713360199236600861, guid: 57986c114463ddc489a18ecc4b02a9e2, type: 3}
-    - rid: 1249993439254413392
+    - rid: 2877981760105218127
       type: {class: FieldAnimator/Rocket, ns: Core, asm: Core}
       data:
         axis: 2
         leftRocket: {fileID: 3741038372231485751, guid: b0ee2c53b7e71b9419b6961ee9925b89, type: 3}
         rightRocket: {fileID: 7713360199236600861, guid: 57986c114463ddc489a18ecc4b02a9e2, type: 3}
-    - rid: 8179719486889525314
-      type: {class: FieldAnimator/Electricity, ns: Core, asm: Core}
-      data:
-        fx: {fileID: 4559388145620173967, guid: e8a4b09870f8a224bb494b9bff137104, type: 3}
-        doScaleFx:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 1
-            outSlope: 1
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 1
-            outSlope: 1
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-    - rid: 8179719486889525315
-      type: {class: FieldAnimator/FireBoom, ns: Core, asm: Core}
-      data:
-        probabilityEffect: 0.75
-        animationCurve:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 8.40448
-            outSlope: 8.40448
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.02669736
-          - serializedVersion: 3
-            time: 1.00177
-            value: 1
-            inSlope: 8.331196
-            outSlope: 8.331196
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.02624218
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        fx: {fileID: 8673432061344765740, guid: e1f296d3efa7b324a9d9032133e7943a, type: 3}
-    - rid: 8179719486889525318
-      type: {class: FieldAnimator/Nature, ns: Core, asm: Core}
-      data:
-        fx: {fileID: 3395847577906844736, guid: 04aa1feec10d08943a7f80707169428b, type: 3}
-        ofsetFxPos: 1
-        fxScaleSer: 1
 --- !u!1 &7798971749632152360
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,12 +221,14 @@ MonoBehaviour:
   _shapeAppearFx: {fileID: 2924675626361782533, guid: 1d7628660bc647e47846b55b3c4b7bd5, type: 3}
   _selector: {fileID: 8210076731274164301, guid: f4a34e33ea3f06b4a9af8cc1971f0d2e, type: 3}
   _blockPrefabs:
-  - {fileID: 8512770957231261250, guid: a4f4528a405237c478ff1e12bd5b95b3, type: 3}
-  - {fileID: 4591270519534980581, guid: 5043e7aefa3409642afcc93bcb798588, type: 3}
-  - {fileID: 4591270519534980581, guid: e962e13680141b7459984d696cf4d485, type: 3}
-  - {fileID: 4591270519534980581, guid: 834f86ccf381f5f4a88a829d79a1ead5, type: 3}
+  - {fileID: 3265167700204404526, guid: 3aea1329a65cf064d9fe52f55d2a4e85, type: 3}
+  - {fileID: 17412411538972307, guid: 254957766d36cf848b2f773f729dd91e, type: 3}
+  - {fileID: 8017901039161304009, guid: a4aa3dfdb4e2b754d9a1fac45d3d68c9, type: 3}
+  - {fileID: -1900454177841485043, guid: 6eded3b9a09efdc46ae7646e8cce0ac9, type: 3}
   _specialBlockPrefabs:
   - {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
-  - {fileID: 4591270519534980581, guid: 892c80028e4d84f42bff14fa98badf67, type: 3}
   - {fileID: 2791755575516428673, guid: 02f0bb752399d8e4191bd9cf19b1a790, type: 3}
   - {fileID: 6035388817502845878, guid: 7d047efc315aac84cb39c3d6ec31c2b0, type: 3}
+  - {fileID: 4591270519534980581, guid: ea8f7cb930a129b48ab6fbd9cddd09b2, type: 3}
+  - {fileID: 4591270519534980581, guid: 3920bdc2ecb99ec4abe27f3c02ccb3db, type: 3}
+  - {fileID: 4591270519534980581, guid: 615fb06b88cabf243a704d48169b8b29, type: 3}

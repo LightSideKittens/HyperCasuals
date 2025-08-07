@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core;
+using LSCore;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    [Id(typeof(BlockIdGroup))] public Id id;
     [ReadOnly] public Block prefab;
     public SpriteRenderer render;
     [NonSerialized] public int defaultSortingOrder;
