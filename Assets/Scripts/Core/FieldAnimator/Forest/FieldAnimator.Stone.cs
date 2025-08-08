@@ -38,10 +38,9 @@ namespace Core
                     Action action;
                     if (stageIndex == stages.Count)
                     {
-                        cache[index] = null;
+                        cache.Remove(index);
                         action = () =>
                         {
-                            cache.Remove(index);
                             if (block.next)
                             { 
                                 block.next.transform.SetParent(block.transform.parent, true);

@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using DG.Tweening;
 using LSCore;
 using LSCore.ConfigModule;
 using LSCore.Extensions;
 using Newtonsoft.Json.Linq;
 using SourceGenerators;
-using UnityEngine;
 using UnityEngine.Scripting;
 
 [InstanceProxy]
@@ -46,7 +44,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     public static RJObject Config => config ?? JTokenGameConfig.Get("GameCoreData");
     private static RJObject config;
     
-    public LaLa.Settings idleMusic;
+    public LaLa.PlayClip idleMusic;
 
     public static int Level
     {
@@ -93,7 +91,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
 
     private void _StopIdleMusic()
     {
-        var source = idleMusic.CurrentSource;
+        var source = idleMusic.obj;
         source?.DOFade(0, 0.5f).OnComplete(source.Stop);
     }
 
@@ -123,6 +121,6 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     private void Init()
     {
         CoreWindow.Show();
-        idleMusic.Play();
+        idleMusic.Do();
     }
 }

@@ -61,8 +61,7 @@ MonoBehaviour:
   initShowHideAnim: 0
   showHideAnim:
     rid: 1724297501560799844
-  onShowing:
-  - rid: 1249993031389282696
+  onShowing: []
   onShowed:
   - rid: 5237655153313055433
   - rid: 5237655153313055434
@@ -71,15 +70,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1249993031389282696
-      type: {class: PlayOneShotSound, ns: , asm: LSCore.AudioModule}
-      data:
-        settings:
-          volume: 1
-          pitch: 1
-          loop: 0
-          clip: {fileID: 8300000, guid: 0d20a6aa8098fb946aa58e464acb7046, type: 3}
-          group: {fileID: -1021249835221574111, guid: 72496f9913afa6746a6f16a28a67d8b3, type: 2}
     - rid: 1724297501560799844
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:

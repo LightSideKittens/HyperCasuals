@@ -55,148 +55,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e35f37f63d34936ad429280fd9722be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initShowHideAnim: 0
   showHideAnim:
-    rid: 1724297501560799844
-  onShowing:
-  - rid: 1249993031389282690
+    rid: 2877981760105218852
+  onShowing: []
   onShowed: []
   onHiding: []
   onHidden: []
   watchButton: {fileID: 6983757328725076511}
   timerAnim:
-    rid: 1724297709363134601
+    rid: -2
   references:
     version: 2
     RefIds:
-    - rid: 1249993031389282690
-      type: {class: PlayOneShotSound, ns: , asm: LSCore.AudioModule}
-      data:
-        settings:
-          volume: 1
-          pitch: 1
-          loop: 0
-          clip: {fileID: 8300000, guid: 5851c4752a9631a46b8fcfa5da0bcf46, type: 3}
-          group: {fileID: -1021249835221574111, guid: 72496f9913afa6746a6f16a28a67d8b3, type: 2}
-    - rid: 1724297501560799844
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2877981760105218852
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:
         canvasGroup: {fileID: 1011038207463600823}
         duration: 0.2
-    - rid: 1724297709363134601
-      type: {class: AnimSequencer, ns: LSCore.AnimationsModule, asm: LSCore.AnimationsModule}
-      data:
-        options: []
-        animsData:
-        - timeOffset: 0
-          anim:
-            rid: 1724297709363134646
-        - timeOffset: 0
-          anim:
-            rid: 1724297709363134645
-        - timeOffset: 0.5
-          anim:
-            rid: 1724297709363134648
-        editor_options: []
-    - rid: 1724297709363134645
-      type: {class: FilledAmountAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
-      data:
-        id: 
-        options:
-        - rid: 2877981638842908750
-        - rid: 2877981638842908754
-        targets:
-        - rid: 5237655027965231568
-        timeOffsetPerTarget:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        needInit: 1
-        duration: 1
-        startValue: 0
-        endValue: 1
-    - rid: 1724297709363134646
-      type: {class: ScaleAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
-      data:
-        id: 
-        options:
-        - rid: 2877981638842908760
-        targets:
-        - rid: 5237655027965231570
-        timeOffsetPerTarget:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        needInit: 1
-        duration: 0.5
-        startValue: {x: 1, y: 1, z: 1}
-        endValue: {x: 1.1, y: 1.1, z: 1.1}
-    - rid: 1724297709363134648
-      type: {class: TextNumberAnim, ns: LSCore.AnimationsModule.Animations.Text, asm: LSCore.UIModule}
-      data:
-        id: 
-        options:
-        - rid: 2877981638842908752
-        targets:
-        - rid: 2877981638842908744
-        timeOffsetPerTarget:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        needInit: 1
-        duration: 10
-        startValue: 10
-        endValue: 0
-    - rid: 2877981638842908744
-      type: {class: 'SerializeField`1[[LSCore.LSNumber, LSCore.UIModule]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 2407402369954000523}
-    - rid: 2877981638842908750
-      type: {class: SetLoops, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
-      data:
-        loopsCount: 10
-        loopType: 0
-    - rid: 2877981638842908752
-      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
-      data:
-        useCustom: 0
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        ease: 1
-    - rid: 2877981638842908754
-      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
-      data:
-        useCustom: 0
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        ease: 1
-    - rid: 2877981638842908760
-      type: {class: SetLoops, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
-      data:
-        loopsCount: 20
-        loopType: 1
-    - rid: 5237655027965231568
-      type: {class: 'SerializeField`1[[UnityEngine.UI.Image, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 2292493687889280867}
-    - rid: 5237655027965231570
-      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 4554041171710844630}
 --- !u!223 &1011038207463600821
 Canvas:
   m_ObjectHideFlags: 0
@@ -580,17 +457,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56eebe4fe52b8314094e7f45ff2ff40d, type: 3}
---- !u!114 &2407402369954000523 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 205861021706631520, guid: 56eebe4fe52b8314094e7f45ff2ff40d, type: 3}
-  m_PrefabInstance: {fileID: 2572560553380059115}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f49e5375dc6d4ae8a398c5943985aece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &4276139005872742612 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1793690443273877311, guid: 56eebe4fe52b8314094e7f45ff2ff40d, type: 3}
@@ -798,17 +664,6 @@ PrefabInstance:
       addedObject: {fileID: 4276139005872742612}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
---- !u!114 &2292493687889280867 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
-  m_PrefabInstance: {fileID: 7967457374136129796}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2959903789755615371 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
