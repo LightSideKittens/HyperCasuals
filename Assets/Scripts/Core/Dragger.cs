@@ -43,7 +43,7 @@ public class Dragger : MonoBehaviour
                         Started?.Invoke(currentShape);
                         foreach (var block in currentShape.blocks)
                         {
-                            block.sortingOrder = 10;
+                            block.sortingOrder = 200;
                         }
                         var lastTouchOffset = touchOffset;
                         tween = Wait.FromTo(0, 1, 0.2f, value =>
