@@ -137,6 +137,18 @@ MonoBehaviour:
       value:
         handler:
           rid: 2877981760105218127
+    - key: {fileID: 4591270519534980581, guid: 615fb06b88cabf243a704d48169b8b29, type: 3}
+      value:
+        handler:
+          rid: 2877981760105218361
+    - key: {fileID: 4591270519534980581, guid: 3920bdc2ecb99ec4abe27f3c02ccb3db, type: 3}
+      value:
+        handler:
+          rid: 2877981760105218362
+    - key: {fileID: 4591270519534980581, guid: ea8f7cb930a129b48ab6fbd9cddd09b2, type: 3}
+      value:
+        handler:
+          rid: 2877981760105218363
   references:
     version: 2
     RefIds:
@@ -173,6 +185,27 @@ MonoBehaviour:
         axis: 2
         leftRocket: {fileID: 3741038372231485751, guid: b0ee2c53b7e71b9419b6961ee9925b89, type: 3}
         rightRocket: {fileID: 7713360199236600861, guid: 57986c114463ddc489a18ecc4b02a9e2, type: 3}
+    - rid: 2877981760105218361
+      type: {class: FieldAnimator/Stone, ns: Core, asm: Core}
+      data:
+        stages:
+        - {fileID: 2854755135288014583, guid: bb76b97817e679e418d43435c8b2157f, type: 3}
+        fx: {fileID: 7602298404741334448, guid: 36dc9502bf9d3dc4aa4e2651f0206e9d, type: 3}
+    - rid: 2877981760105218362
+      type: {class: FieldAnimator/Stone, ns: Core, asm: Core}
+      data:
+        stages:
+        - {fileID: 5923611203233960498, guid: b5455d5e6dfa39344b2dab9af95b86b1, type: 3}
+        - {fileID: 1954430239668638598, guid: b5455d5e6dfa39344b2dab9af95b86b1, type: 3}
+        fx: {fileID: 7602298404741334448, guid: 36dc9502bf9d3dc4aa4e2651f0206e9d, type: 3}
+    - rid: 2877981760105218363
+      type: {class: FieldAnimator/Stone, ns: Core, asm: Core}
+      data:
+        stages:
+        - {fileID: 4361647509721467367, guid: a2c70f5c682df18448940f562600b86f, type: 3}
+        - {fileID: 2095279210, guid: a2c70f5c682df18448940f562600b86f, type: 3}
+        - {fileID: -2012186933, guid: a2c70f5c682df18448940f562600b86f, type: 3}
+        fx: {fileID: 7602298404741334448, guid: 36dc9502bf9d3dc4aa4e2651f0206e9d, type: 3}
 --- !u!1 &7798971749632152360
 GameObject:
   m_ObjectHideFlags: 0
