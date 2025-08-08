@@ -99,9 +99,17 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     {
         base.Awake();
         BaseInitializer.Initialize();
+        LoseWindow.onReviveClicked += OnReviveClicked;
 #if DEBUG
         DebugData.Init();  
 #endif
+    }
+
+    private void OnReviveClicked()
+    {
+        DOTween.Kill(idleMusic.obj);
+        idleMusic.obj.volume = 1;
+        idleMusic.Do();
     }
 
     private void Start()

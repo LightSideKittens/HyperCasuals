@@ -13,9 +13,23 @@ namespace Core
         [Serializable]
         public abstract class BaseDestroyer : SpecialHandler
         {
+            public Feel.SoundAndHaptic feel;
             public abstract List<Vector2Int> Offsets { get; } 
             public static HashSet<Block> handled = new();
+            public static HashSet<Block> simulateHandled;
             
+            public override void StartSimulate()
+            {
+                base.StartSimulate();
+                simulateHandled = new HashSet<Block>(handled);
+            }
+
+            public override void StopSimulate()
+            {
+                base.StopSimulate();
+                handled = simulateHandled;
+            }
+
             public override void Handle()
             {
                 var offsets = Offsets;
@@ -110,6 +124,12 @@ namespace Core
 
             protected abstract void AnimateDestroying(Block self, List<Block> toDestroy,
                 List<(Block block, Action action)> specialBlockAnims);
+
+            protected override void OnAnimate()
+            {
+                base.OnAnimate();
+                feel.Do();
+            }
         }
 
         [Serializable]
