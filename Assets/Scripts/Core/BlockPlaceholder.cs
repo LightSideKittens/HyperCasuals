@@ -47,6 +47,7 @@ public class BlockPlaceholder : MonoBehaviour
         block.sortingOrder = block.sortingOrder;
         if (World.IsPlaying)
         {
+            block.transform.SetParent(null, true);
             var bonus = GetComponentInChildren<BonusBlock>();
             if (bonus)
             {

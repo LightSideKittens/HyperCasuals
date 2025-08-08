@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Dragger : MonoBehaviour
 {
+    public Feel.SoundAndHaptic pickFeel;
+    public Feel.SoundAndHaptic releaseFeel;
+    
     private bool isDragging = false;
     private Vector3 offset;
     private Vector2 touchOffset = new (0f, 3f);
@@ -14,6 +17,7 @@ public class Dragger : MonoBehaviour
 
     [NonSerialized] public Vector3 shapeStartPos;
     [NonSerialized] public Spawner currentSpawner;
+    
     private Vector3 startTouchPos;
     private Tween tween;
     public Shape currentShape => currentSpawner.currentShape;
@@ -34,6 +38,7 @@ public class Dragger : MonoBehaviour
                     CheckTouch(touchPosition);
                     if (isDragging)
                     {
+                        //pickFeel.Do();
                         shapeStartPos = currentShape.transform.position;
                         Started?.Invoke(currentShape);
                         foreach (var block in currentShape.blocks)
@@ -51,6 +56,7 @@ public class Dragger : MonoBehaviour
                 case TouchPhase.Canceled:
                     if (isDragging)
                     {
+                        //releaseFeel.Do();
                         tween?.Complete();
                         tween = null;
                         
