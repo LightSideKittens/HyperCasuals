@@ -217,12 +217,7 @@ public partial class FieldManager : SingleService<FieldManager>
             }
         };
     }
-
-    protected override void Init()
-    {
-        base.Init();
-    }
-
+    
     private void Update()
     {
         UpdateGhost();
