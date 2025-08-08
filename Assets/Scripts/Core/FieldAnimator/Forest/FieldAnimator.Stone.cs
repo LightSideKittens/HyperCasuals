@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DG.Tweening;
 using LSCore.Extensions;
 using UnityEngine;
 
@@ -11,10 +10,24 @@ namespace Core
         [Serializable]
         public class Stone : SpecialHandler
         {
+            public Feel.SoundAndHaptic feel;
             public List<Sprite> stages;
             public ParticleSystem fx;
             private Dictionary<Vector2Int, Sprite> cache = new();
+            private Dictionary<Vector2Int, Sprite> simulateCache;
             public override int Priority => 1;
+
+            public override void StartSimulate()
+            {
+                base.StartSimulate();
+                simulateCache = new Dictionary<Vector2Int, Sprite>(cache);
+            }
+
+            public override void StopSimulate()
+            {
+                base.StopSimulate();
+                cache = simulateCache;
+            }
 
             public override void Handle()
             {
@@ -61,10 +74,19 @@ namespace Core
 
                     action += () =>
                     {
-                        if (block) Instantiate(fx, block.transform.position, Quaternion.identity);
+                        if (block)
+                        {
+                            Instantiate(fx, block.transform.position, Quaternion.identity);
+                        }
                     };
                     anim.Add((block, action));
                 }
+            }
+
+            protected override void OnAnimate()
+            {
+                base.OnAnimate();
+                feel.Do();
             }
         }
     }

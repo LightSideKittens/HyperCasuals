@@ -10,6 +10,7 @@ public class TimeGoal : MonoBehaviour
 {
     [TimeSpan(options = TimeAttribute.Options.Minute | TimeAttribute.Options.Second)] 
     public long time;
+    private long cachedTime;
     
     public LSText timeText;
     private Tween timer;
@@ -17,6 +18,7 @@ public class TimeGoal : MonoBehaviour
     
     protected void Awake()
     {
+        cachedTime = time;
         SetTimerText(time.ToTimeSpan());
         IUIView.Showing += PauseOnShowingOtherWindow;
         FieldManager.DragStarted += StartTimer;
@@ -54,7 +56,18 @@ public class TimeGoal : MonoBehaviour
     private void SetTimerText(TimeSpan remaining)
     {
         timeText.text = remaining.ToString(@"mm\:ss");
-        if(remaining <= TimeSpan.Zero) LoseWindow.Show();
+        if (remaining <= TimeSpan.Zero) LoseWindow.Show(OnRevive);
+    }
+
+    private void OnRevive()
+    {
+        SetTimerText(cachedTime.ToTimeSpan());
+        var lastPauseCount = pauseCount;
+        pauseCount = 0;
+        timer.Kill();
+        timer = null;
+        StartTimer();
+        pauseCount = lastPauseCount;
     }
 
 #if UNITY_EDITOR

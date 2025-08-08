@@ -24,6 +24,8 @@ public partial class FieldManager : SingleService<FieldManager>
     
     private int MaxBlocksInLine => Math.Min(gridSize.x, gridSize.y);
     
+    
+    public Feel.SoundAndHaptic feel;
     public ParticleSystem shapeAppearFx;
     
     public float defaultShapeSize = 1.4f;
@@ -188,6 +190,7 @@ public partial class FieldManager : SingleService<FieldManager>
                 
                 if (GetFullLines())
                 {
+                    feel.Do();
                     BlocksDestroying?.Invoke(shape.BlockPrefab);
                     placeData.lines = new List<List<Vector2Int>>(_linesIndices);
                     _linesIndices.Clear();
@@ -218,7 +221,6 @@ public partial class FieldManager : SingleService<FieldManager>
     protected override void Init()
     {
         base.Init();
-        LoseWindow.onReviveClicked += Revive;
     }
 
     private void Update()
@@ -229,7 +231,6 @@ public partial class FieldManager : SingleService<FieldManager>
     protected override void DeInit()
     {
         base.DeInit();
-        LoseWindow.onReviveClicked -= Revive;
         selectionAreas?.Clear();
 #if UNITY_EDITOR
         EditorApplication.update -= EditorUpdate;
@@ -319,7 +320,7 @@ public partial class FieldManager : SingleService<FieldManager>
                     shapeListIndex++;
                     if (shapeListIndex >= allTempShapes.Count)
                     {
-                        break;   
+                        break;
                     }
                     tempShapes = new List<Shape>(allTempShapes[shapeListIndex]);
                 }
@@ -514,7 +515,7 @@ public partial class FieldManager : SingleService<FieldManager>
         }
 
         Debug.Log("[CheckLoseCondition] All shapes blocked -> Game Over");
-        LoseWindow.Show();
+        LoseWindow.Show(Revive);
     }
     
     private void Revive()

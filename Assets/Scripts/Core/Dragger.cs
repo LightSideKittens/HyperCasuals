@@ -38,7 +38,7 @@ public class Dragger : MonoBehaviour
                     CheckTouch(touchPosition);
                     if (isDragging)
                     {
-                        //pickFeel.Do();
+                        pickFeel.Do();
                         shapeStartPos = currentShape.transform.position;
                         Started?.Invoke(currentShape);
                         foreach (var block in currentShape.blocks)
@@ -56,7 +56,7 @@ public class Dragger : MonoBehaviour
                 case TouchPhase.Canceled:
                     if (isDragging)
                     {
-                        //releaseFeel.Do();
+                        releaseFeel.Do();
                         tween?.Complete();
                         tween = null;
                         

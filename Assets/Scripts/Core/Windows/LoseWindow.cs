@@ -3,7 +3,6 @@ using DG.Tweening;
 using LSCore;
 using LSCore.AnimationsModule;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoseWindow : BaseWindow<LoseWindow>
 {
@@ -31,5 +30,23 @@ public class LoseWindow : BaseWindow<LoseWindow>
         base.OnHiding();
         watchButton.Submitted -= Reload;
         sequence?.Kill();
+    }
+
+    protected override void DeInit()
+    {
+        base.DeInit();
+        onReviveClicked = null;
+    }
+
+    public static void Show(Action onRevive)
+    {
+        onReviveClicked += OnRevive;
+        Show();
+
+        void OnRevive()
+        {
+            onReviveClicked -= OnRevive;
+            onRevive();
+        }
     }
 }

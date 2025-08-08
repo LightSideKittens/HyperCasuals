@@ -6,14 +6,13 @@ using UnityEngine;
 public class BlockPlaceholder : MonoBehaviour
 {
     public FieldAppearance.BlockData data;
-    [HideInInspector] public Block block;
+    protected Block block;
     public BlockPlaceholder next;
     private static bool isEdited;
     private SpriteRenderer dummySpriteRenderer;
     
     protected virtual void Awake()
     {
-        block = null;
         InitBlock();
     }
 

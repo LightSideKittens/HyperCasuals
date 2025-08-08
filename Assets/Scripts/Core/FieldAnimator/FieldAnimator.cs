@@ -75,6 +75,8 @@ namespace Core
             [NonSerialized] public FieldAnimator animator;
             
             public Block[,] Grid => FieldManager.Grid;
+            public virtual void StartSimulate(){}
+            public virtual void StopSimulate(){}
             public abstract void Handle();
         }
         
@@ -90,9 +92,11 @@ namespace Core
                 {
                     data.action?.Invoke();
                 }
-
+                OnAnimate();
                 anim.Clear();
             }
+            
+            protected virtual void OnAnimate(){}
         }
 
         [Serializable]
@@ -102,7 +106,7 @@ namespace Core
         }
         
         public HandlerDict _handlers = new();
-
+        
         protected override void Init()
         {
             base.Init();
@@ -137,7 +141,9 @@ namespace Core
             {
                 var h = _handlers[prefab].handler as SpecialHandler;
                 h!.blocks = specialBlocks;
+                h.StartSimulate();
                 h.Handle();
+                h.StopSimulate();
                 h.anim.Clear();
             }
             currentSpecialBlocks.Clear();
