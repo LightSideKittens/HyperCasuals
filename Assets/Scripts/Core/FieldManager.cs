@@ -212,7 +212,7 @@ public partial class FieldManager : SingleService<FieldManager>
             }
             else
             {
-                shape.transform.DOMove(dragger.shapeStartPos, 0.2f).SetEase(Ease.InOutExpo);
+                shape.transform.DOMove(dragger.currentSpawner.transform.position, 0.2f).SetEase(Ease.InOutExpo);
                 shape.transform.DOScale(shapeSpawnerScale, 0.2f).SetEase(Ease.InOutExpo);
             }
         };
