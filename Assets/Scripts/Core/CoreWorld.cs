@@ -92,7 +92,10 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     private void _StopIdleMusic()
     {
         var source = idleMusic.obj;
-        source?.DOFade(0, 0.5f).OnComplete(source.Stop).KillOnDestroy();
+        if (source != null)
+        { 
+            source.DOFade(0, 0.5f).OnComplete(source.Stop).KillOnDestroy();
+        }
     }
 
     protected override void Awake()
