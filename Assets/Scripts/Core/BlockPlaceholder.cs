@@ -13,6 +13,7 @@ public class BlockPlaceholder : MonoBehaviour
     
     protected virtual void Awake()
     {
+        if (World.IsEditMode) return;
         InitBlock();
     }
 
