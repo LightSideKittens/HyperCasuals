@@ -14,8 +14,7 @@ public class Dragger : MonoBehaviour
     private Vector2 touchOffset = new (0f, 3f);
     public event Action<Shape> Started;
     public event Action<Shape> Ended;
-
-    [NonSerialized] public Vector3 shapeStartPos;
+    
     [NonSerialized] public Spawner currentSpawner;
     
     private Vector3 startTouchPos;
@@ -39,7 +38,6 @@ public class Dragger : MonoBehaviour
                     if (isDragging)
                     {
                         pickFeel.Do();
-                        shapeStartPos = currentShape.transform.position;
                         Started?.Invoke(currentShape);
                         foreach (var block in currentShape.blocks)
                         {
