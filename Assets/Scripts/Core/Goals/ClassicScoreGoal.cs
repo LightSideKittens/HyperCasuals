@@ -1,4 +1,5 @@
-﻿using LSCore;
+﻿using Firebase.Analytics;
+using LSCore;
 
 namespace Core
 {
@@ -9,16 +10,16 @@ namespace Core
         protected override void Awake()
         {
             base.Awake();
-            bestScore.Number = CoreWorld.BestScore;
+            bestScore.Number = GameSave.BestScore;
         }
 
         protected override void ChangeScoreText()
         {
             var currentScore = ScoreManager.CurrentScore;
             target.Number = currentScore;
-            if (currentScore > CoreWorld.BestScore)
+            if (currentScore > GameSave.BestScore)
             {
-                CoreWorld.BestScore = currentScore;
+                GameSave.BestScore = currentScore;
                 bestScore.Number = currentScore;
             }
         }

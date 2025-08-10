@@ -17,12 +17,14 @@ public class LoseWindow : BaseWindow<LoseWindow>
         base.OnShowing();
         watchButton.Submitted += Reload;
         sequence = timerAnim.Animate();
+        Analytic.LogEvent("lost_level", "level", GameSave.currentLevel);
     }
 
     private void Reload()
     {
         UIViewBoss.GoBack();
         onReviveClicked?.Invoke();
+        Analytic.LogEvent("revive", "level", GameSave.currentLevel);
     }
 
     protected override void OnHiding()

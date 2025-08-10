@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Firebase.Analytics;
 using LSCore;
 using LSCore.AnimationsModule;
 using LSCore.Async;
@@ -50,6 +51,7 @@ namespace Core
             pointerAnim.Kill();
             pointer.SetActive(false);
             Wait.Delay(1, onCompleted.Do);
+            Analytic.LogEvent("tutorial_completed", "level", GameSave.TutorialLevel.ToString());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Firebase.Analytics;
 using LSCore;
 using LSCore.AnimationsModule;
 using Sirenix.OdinInspector;
@@ -25,9 +26,9 @@ namespace Common
         }
         public override void Do()
         {
-            if (CoreWorld.BuyTheme(theme))
+            if (GameSave.BuyTheme(theme))
             { 
-                CoreWorld.Theme = theme;
+                GameSave.Theme = theme;
             }
         }
     }
@@ -53,20 +54,20 @@ namespace Common
         protected override void Init()
         {
             base.Init();
-            if (CoreWorld.HasTheme(buyTheme.theme))
+            if (GameSave.HasTheme(buyTheme.theme))
             {
                 buyAnim.Animate().Complete();
             }
         }
 
-        protected override bool Get => CoreWorld.Theme == buyTheme.theme;
+        protected override bool Get => GameSave.Theme == buyTheme.theme;
 
         protected override bool Set
         {
             set
             {
                 if(!value) return;
-                if (!CoreWorld.HasTheme(buyTheme.theme))
+                if (!GameSave.HasTheme(buyTheme.theme))
                 {
                     if (price.Spend(out spend))
                     {
@@ -77,12 +78,14 @@ namespace Common
                             buyTheme.Do();
                             spend = null;
                             IsOn = true;
+                            Analytic.LogEvent("buy_theme", "theme", buyTheme.theme.ToString());
                         };
                     }
                 }
                 else
                 {
-                    CoreWorld.Theme = buyTheme.theme;
+                    GameSave.Theme = buyTheme.theme;
+                    Analytic.LogEvent("select_theme", "theme", buyTheme.theme.ToString());
                 }
             }
         }
