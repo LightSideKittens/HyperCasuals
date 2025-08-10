@@ -136,16 +136,34 @@ namespace Core
             currentSpecialBlocks = FieldManager.GetSpecialBlocks(
                 FieldManager.GetBlocks(false, false)
                     .Select(x => x.index));
-
+            
+            var handlers = new List<SpecialHandler>();
+            
             foreach (var (prefab, specialBlocks) in currentSpecialBlocks)
             {
                 var h = _handlers[prefab].handler as SpecialHandler;
                 h!.blocks = specialBlocks;
-                h.StartSimulate();
-                h.Handle();
-                h.StopSimulate();
-                h.anim.Clear();
+                handlers.Add(h);
             }
+
+            foreach (var handler in handlers)
+            {
+                handler.StartSimulate();
+            }
+
+            for (var i = 0; i < handlers.Count; i++)
+            {
+                var handler = handlers[i];
+                handler.Handle();
+                handler.anim.Clear();
+            }
+
+            for (var i = 0; i < handlers.Count; i++)
+            {
+                var handler = handlers[i];
+                handler.StopSimulate();
+            }
+
             currentSpecialBlocks.Clear();
         }
 

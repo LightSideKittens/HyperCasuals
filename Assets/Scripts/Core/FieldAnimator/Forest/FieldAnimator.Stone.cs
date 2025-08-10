@@ -21,7 +21,6 @@ namespace Core
             {
                 base.StartSimulate();
                 simulateCache = new Dictionary<Vector2Int, Sprite>(cache);
-                cache = simulateCache;
             }
 
             public override void StopSimulate()
@@ -32,6 +31,7 @@ namespace Core
 
             public override void Handle()
             {
+                Debug.Log($"Stone Handle {blocks.Count}");
                 for (var i = 0; i < blocks.Count; i++)
                 {
                     var index = blocks[i].index;
