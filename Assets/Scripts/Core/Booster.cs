@@ -13,12 +13,20 @@ using Object = UnityEngine.Object;
 public abstract class Booster : DoIt
 {
     public static Action<Block[,], Block[,]> Used;
+    [Id(typeof(CurrencyIdGroup))] public Id id;
+
+    protected virtual void OnUsed()
+    {
+        Funds.ForceSpend(id, 1);
+        Analytic.LogEvent("booster_used", "id", id.ToString());
+    }
 }
 
 [Serializable]
 public abstract class BaseFieldClickBooster : Booster
 {
     public LSButton button;
+    protected Vector2Int index;
     
     public override void Do()
     {
@@ -29,14 +37,14 @@ public abstract class BaseFieldClickBooster : Booster
     {
         LSTouch touch = LSInput.GetTouch(0);
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-        var index = FieldManager.ToIndex(touchPosition);
+        index = FieldManager.ToIndex(touchPosition);
         if (FieldManager.Grid.HasIndex(index))
         { 
-            OnClicked(index);
+            OnClicked();
         }
     }
 
-    protected abstract void OnClicked(Vector2Int index);
+    protected abstract void OnClicked();
 }
 
 [Serializable]
@@ -44,9 +52,14 @@ public abstract class BaseSpecialBlockBooster : BaseFieldClickBooster
 {
     public abstract Block Prefab { get; }
 
-    protected override void OnClicked(Vector2Int index)
+    protected override void OnClicked()
     {
         if(!Prefab) return;
+        OnUsed();
+    }
+
+    protected override void OnUsed()
+    {
         FieldManager.PlaceBlock(index, Prefab, out var block);
         var h = FieldAnimator.Handlers[Prefab].handler as FieldAnimator.SpecialHandler;
         h!.blocks = new List<(Vector2Int index, Block block)> { (index, block)};
@@ -54,6 +67,7 @@ public abstract class BaseSpecialBlockBooster : BaseFieldClickBooster
         h.Handle();
         h.Animate();
         Used?.Invoke(lastGrid, FieldManager.Grid);
+        base.OnUsed();
     }
 }
 
@@ -79,17 +93,24 @@ public class Rocket : BaseSpecialBlockBooster
 public class Hummer : BaseFieldClickBooster
 {
     public ParticleSystem fx;
+    private Block block;
     
-    protected override void OnClicked(Vector2Int index)
+    protected override void OnClicked()
     {
-        var block = FieldManager.Grid.Get(index);
+        block = FieldManager.Grid.Get(index);
         if (block == null) return;
+        OnUsed();
+    }
+
+    protected override void OnUsed()
+    {
         var fxPos = FieldManager.ToPos(index);
         Object.Instantiate(fx, fxPos, Quaternion.identity);
         var lastGrid = FieldManager.CopyGrid();
         FieldManager.Grid.Set(index, null);
         Object.Destroy(block.gameObject);
         Used?.Invoke(lastGrid, FieldManager.Grid);
+        base.OnUsed();
     }
 }
 
@@ -122,7 +143,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
     {
         button.Submitted += OnSubmit;
         lockLeveText.LocalizeArguments(unlockLevel);
-        states = CoreWorld.Config.AsJ<JObject>("states");
+        states = GameSave.Config.AsJ<JObject>("states");
         states.As(id.ToString(), false);
         if (states[id.ToString()].ToBool())
         {
@@ -138,7 +159,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
         countLabel.SetActive(false);
         plusLabel.SetActive(false);
         
-        if (CoreWorld.Level >= unlockLevel)
+        if (GameSave.Level >= unlockLevel)
         {
             if (states.CheckDiffAndSync<bool>(id.ToString(), true))
             {

@@ -7,5 +7,6 @@ public class Initializer : BaseInitializer
     protected override void _Initialize()
     {
         defaultTheme.Do();
+        Analytic.Init();
     }
 }

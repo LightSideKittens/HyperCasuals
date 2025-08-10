@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.65
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
   localizationData:
     tableData: {fileID: 11400000, guid: e0d621d1ef7248d4c85dfa1657580628, type: 2}
-    key: lvlArg
+    id: 0
     arguments: []
   references:
     version: 2
@@ -278,9 +278,6 @@ MonoBehaviour:
   ignoreSLAAAAYout: 0
   submittable:
     rid: 1249993174685319173
-  clickActions:
-    actions: []
-    isClickSoundOverride: 0
   references:
     version: 2
     RefIds:
@@ -295,7 +292,10 @@ MonoBehaviour:
           rid: 1249993174685319176
     - rid: 1249993174685319174
       type: {class: DefaultSubmittableAnim, ns: LSCore, asm: LSCore.UIModule}
-      data: 
+      data:
+        sound:
+          prefab: {fileID: 1214800232964751706, guid: fd3dba92e0d5baf4fa3897caa4e691ef, type: 3}
+          clip: {fileID: 8300000, guid: d2dc2b00d006a4844989e8946ae0fcd6, type: 3}
     - rid: 1249993174685319175
       type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
@@ -369,7 +369,6 @@ MonoBehaviour:
         transformActions: []
         option: 0
         id: 
-        showOnlyWhenCreated: 0
     - rid: 5237655153313054954
       type: {class: ShakeRotation, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
@@ -506,7 +505,6 @@ MonoBehaviour:
         - rid: 5237655153313054995
         option: 0
         id: 
-        showOnlyWhenCreated: 0
     - rid: 5237655153313054985
       type: {class: SetParentAction, ns: , asm: LSCore.DoIt}
       data:
