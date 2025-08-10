@@ -21,6 +21,7 @@ namespace Core
             {
                 base.StartSimulate();
                 simulateCache = new Dictionary<Vector2Int, Sprite>(cache);
+                cache = simulateCache;
             }
 
             public override void StopSimulate()
