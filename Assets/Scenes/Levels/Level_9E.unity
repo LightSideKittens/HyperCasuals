@@ -169,9 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    index: 0
+    id: {fileID: 0}
     isSpecial: 0
-  block: {fileID: 0}
   next: {fileID: 0}
 --- !u!1001 &58544647
 PrefabInstance:
@@ -243,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6764201873561425272, guid: 7631eb10599bc0346a70a4ce0fdcd8c9, type: 3}
       propertyPath: time
-      value: 1500000000
+      value: 750000000
       objectReference: {fileID: 0}
     - target: {fileID: 7987956011323365985, guid: 7631eb10599bc0346a70a4ce0fdcd8c9, type: 3}
       propertyPath: m_Pivot.x
@@ -494,9 +493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    index: 0
+    id: {fileID: 0}
     isSpecial: 0
-  block: {fileID: 0}
   next: {fileID: 0}
 --- !u!1001 &312975051
 PrefabInstance:
@@ -828,9 +826,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    index: 0
+    id: {fileID: 0}
     isSpecial: 1
-  block: {fileID: 0}
   next: {fileID: 45197207}
 --- !u!1001 &809992552
 PrefabInstance:
@@ -1119,9 +1116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    index: 0
+    id: {fileID: 0}
     isSpecial: 1
-  block: {fileID: 0}
   next: {fileID: 284019144}
 --- !u!1 &1080290656
 GameObject:
@@ -1202,9 +1198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    index: 0
+    id: {fileID: 0}
     isSpecial: 0
-  block: {fileID: 0}
   next: {fileID: 0}
 --- !u!1001 &1235220376
 PrefabInstance:
@@ -1628,11 +1623,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6066358192971789573, guid: bf2765764487d5443b45edc69fcc67d9, type: 3}
       propertyPath: m_text
-      value: 1500
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 6066358192971789573, guid: bf2765764487d5443b45edc69fcc67d9, type: 3}
       propertyPath: number
-      value: 1500
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 7714327082613856229, guid: bf2765764487d5443b45edc69fcc67d9, type: 3}
       propertyPath: m_Name
@@ -1911,9 +1906,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    index: 0
+    id: {fileID: 0}
     isSpecial: 1
-  block: {fileID: 0}
   next: {fileID: 1808115272}
 --- !u!1 &1754135820
 GameObject:
@@ -2010,9 +2004,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    index: 0
+    id: {fileID: 0}
     isSpecial: 0
-  block: {fileID: 0}
   next: {fileID: 0}
 --- !u!1 &1818000023
 GameObject:
@@ -2060,9 +2053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    index: 0
+    id: {fileID: 0}
     isSpecial: 1
-  block: {fileID: 0}
   next: {fileID: 1177709100}
 --- !u!1001 &1879112006
 PrefabInstance:
@@ -2291,7 +2283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76ff9e98b5a4b9c88c5f752a863507d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initShowHideAnim: 0
   showHideAnim:
     rid: 1249993581379191259
   onShowing: []
