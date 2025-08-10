@@ -64,6 +64,12 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
         set => Config["theme"] = value;
     }
     
+    public static int BestScore
+    {
+        get => Config.As("bestScore", 0);
+        set => Config["bestScore"] = value;
+    }
+    
     private static JHashSet<int> themesSet;
     private static int id;
 

@@ -14,7 +14,7 @@ namespace Core
         private int lastScore;
         private bool needAnimate;
         
-        private void Awake()
+        protected virtual void Awake()
         {
             ScoreManager.ScoreChanged += OnScoreChanged;
             ScoreManager.ComboChanged += OnComboChanged;

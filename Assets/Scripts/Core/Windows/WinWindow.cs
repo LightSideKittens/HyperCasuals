@@ -17,6 +17,12 @@ public class WinWindow : BaseWindow<WinWindow>
     }
     
     [Serializable]
+    public class BestScore : ILocalizationArgument
+    {
+        public override string ToString() => (CoreWorld.BestScore).ToString();
+    }
+    
+    [Serializable]
     public class TutorialLevelUp : DoIt
     {
         public override void Do() => CoreWorld.TutorialLevel++;
