@@ -22,6 +22,7 @@ namespace Core
             {
                 base.StartSimulate();
                 simulateHandled = new HashSet<Block>(handled);
+                handled = simulateHandled;
             }
 
             public override void StopSimulate()
