@@ -26,7 +26,6 @@ public partial class FieldManager : SingleService<FieldManager>
     
     
     public Feel.SoundAndHaptic feel;
-    public ParticleSystem shapeAppearFx;
     
     public float defaultShapeSize = 1.4f;
     public SpriteRenderer back => FieldAppearance.Back;
@@ -338,16 +337,8 @@ public partial class FieldManager : SingleService<FieldManager>
         for (int i = 0; i < activeShapes.Count; i++)
         {
             var shape = activeShapes[i];
-            
             shape.transform.SetScale(0);
-            shapeAppearFx.transform.SetScale(0);
-            
-            shape.transform.DOScale(shapeSpawnerScale, 0.2f).OnComplete(() =>
-            {
-                var appearFxInstance = Instantiate(shapeAppearFx, shape.transform.position, Quaternion.identity);
-                appearFxInstance.transform.SetScale(0);
-                appearFxInstance.transform.DOScale(4, 3f).KillOnDestroy(); 
-            });
+            shape.transform.DOScale(shapeSpawnerScale, 0.2f);
         }
         
         grid = lastGrid;
