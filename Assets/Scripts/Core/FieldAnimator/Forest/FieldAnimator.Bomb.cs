@@ -22,7 +22,6 @@ namespace Core
             {
                 base.StartSimulate();
                 simulateHandled = new HashSet<Block>(handled);
-                handled = simulateHandled;
             }
 
             public override void StopSimulate()
@@ -33,6 +32,7 @@ namespace Core
 
             public override void Handle()
             {
+                Debug.Log($"Bomb Handle {blocks.Count}");
                 var offsets = Offsets;
                 for (var i = 0; i < blocks.Count; i++)
                 {

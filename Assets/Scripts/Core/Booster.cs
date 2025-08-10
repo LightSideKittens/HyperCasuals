@@ -35,6 +35,7 @@ public abstract class BaseFieldClickBooster : Booster
     
     private void OnSubmitted()
     {
+        button.submittable.Submitted -= OnSubmitted;
         LSTouch touch = LSInput.GetTouch(0);
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
         index = FieldManager.ToIndex(touchPosition);
