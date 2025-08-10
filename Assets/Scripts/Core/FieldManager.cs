@@ -154,15 +154,18 @@ public partial class FieldManager : SingleService<FieldManager>
 
             var gridIndices = new List<Vector2Int>();
 
+            var tween = DOTween.TweensByTarget(shape.transform, true);
+            if (tween is { Count: > 0 })
+            {
+                for (int i = 0; i < tween.Count; i++)
+                { 
+                    tween[i].Complete();
+                }
+            }
             var canPlace = CanPlaceShape(shape, ref gridIndices);
 
             if (canPlace)
             {
-                var tween = DOTween.TweensByTarget(shape.transform, true);
-                if (tween is { Count: > 0 })
-                {
-                    tween[0].Complete();
-                }
                 float delayConst = 0.1f / shape.blocks.Count;
                 for (int j = 0; j < shape.blocks.Count; j++)
                 {

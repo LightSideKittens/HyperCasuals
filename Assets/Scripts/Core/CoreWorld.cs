@@ -123,6 +123,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     protected override void OnDestroy()
     {
         base.OnDestroy();
+        LoseWindow.onReviveClicked -= OnReviveClicked;
         _StopIdleMusic();
 #if DEBUG
         DebugData.DeInit();
