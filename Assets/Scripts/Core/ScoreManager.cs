@@ -181,7 +181,6 @@ namespace Core
         private void Bonusize()
         {
             if(bonuses.Count > 0) return;
-            
             var set = new HashSet<Vector2Int>();
             var size = FieldManager.Grid.GetSize();
             for (int i = 0; i < maxBonusBlock; i++)
@@ -189,13 +188,13 @@ namespace Core
                 var index = FieldManager.Grid.RandomIndex();
                 while (!set.Add(index))
                 {
+                    index.x++;
                     if (index.x >= size.x)
                     {
                         index.x = 0;
                         index.y++;
                         index.y %= size.y;
                     }
-                    index.x++;
                 }
                 var block = FieldManager.Grid.Get(index);
                 if(block == null) continue;

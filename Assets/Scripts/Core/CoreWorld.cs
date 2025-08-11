@@ -38,6 +38,14 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
         {
             LoseWindow.Show();
         }
+        
+        [Category("Core")]
+        [Preserve]
+        public int Level
+        {
+            get => GameSave.Level;
+            set => GameSave.Level = value;
+        }
     }
 #endif
     
