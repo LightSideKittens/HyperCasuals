@@ -24,10 +24,8 @@ public partial class FieldManager : SingleService<FieldManager>
     
     private int MaxBlocksInLine => Math.Min(gridSize.x, gridSize.y);
     
-    
     public Feel.SoundAndHaptic feel;
     
-    public float defaultShapeSize = 1.4f;
     public SpriteRenderer back => FieldAppearance.Back;
     public SpriteRenderer selector => FieldAppearance.Selector;
 
@@ -281,19 +279,44 @@ public partial class FieldManager : SingleService<FieldManager>
 
         _spawners.Clear();
     }
+
+    private int GridFullness
+    {
+        get
+        {
+            var count = 0;
+            foreach (var block in grid)
+            {
+                if(block != null) count++;
+            }
+            return count;
+        }
+    }
     
     private async void CreateAndInitShape()
     {
+        var fullness = GridFullness / grid.Length;
+        var easyShapeFactor = fullness / 5;
         var lastGrid = grid;
         grid = Internal_CopyGrid();
         activeShapes.Clear();
         for (int i = 0; i < _spawners.Count; i++)
         {
             int shapeListIndex = 0;
-            if (Random.value > 0.5f)
+            var easyWasSwapped = false;
+            
+            var random = Random.value;
+            if (random > 0.5f)
             {
                 (allTempShapes[0], allTempShapes[1]) = (allTempShapes[1], allTempShapes[0]);
             }
+
+            if (random > 0.95f - easyShapeFactor)
+            {
+                easyWasSwapped = true;
+                (allTempShapes[0], allTempShapes[2]) = (allTempShapes[2], allTempShapes[0]);
+            }
+            
             var tempShapes = new List<Shape>(allTempShapes[shapeListIndex]);
             
             Shape tempShape;
@@ -322,6 +345,11 @@ public partial class FieldManager : SingleService<FieldManager>
                     tempShapes = new List<Shape>(allTempShapes[shapeListIndex]);
                 }
             } while (true);
+
+            if (easyWasSwapped)
+            {
+                (allTempShapes[0], allTempShapes[2]) = (allTempShapes[2], allTempShapes[0]);
+            }
             
             void SpawnShape()
             {
@@ -499,6 +527,8 @@ public partial class FieldManager : SingleService<FieldManager>
                 return;
             }
         }
+        
+        Lose?.Invoke();
         
         FieldAppearance.RedBack.DOFade(0.3f, 0.5f).SetLoops(4, LoopType.Yoyo).OnComplete(() => LoseWindow.Show(Revive));
     }
@@ -733,6 +763,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public static event Action<PlaceData> Placed;
     public static event Action<Shape> InitialShapePlaced;
     public static event Action DragStarted;
+    public static event Action Lose;
     
     public struct PlaceData
     {

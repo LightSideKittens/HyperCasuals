@@ -93,6 +93,7 @@ public class Rocket : BaseSpecialBlockBooster
 [Serializable]
 public class Hummer : BaseFieldClickBooster
 {
+    public LaLa.PlayOneShot sound;
     public ParticleSystem fx;
     private Block block;
     
@@ -105,6 +106,7 @@ public class Hummer : BaseFieldClickBooster
 
     protected override void OnUsed()
     {
+        sound.Do();
         var fxPos = FieldManager.ToPos(index);
         Object.Instantiate(fx, fxPos, Quaternion.identity);
         var lastGrid = FieldManager.CopyGrid();

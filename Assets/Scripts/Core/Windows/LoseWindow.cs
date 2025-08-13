@@ -10,15 +10,14 @@ public class LoseWindow : BaseWindow<LoseWindow>
     [SerializeField] private LSButton watchButton;
     [SerializeReference] private AnimSequencer timerAnim;
     public static Action onReviveClicked;
-
-    private Sequence sequence;
+    
     protected override void OnShowing()
     {
         sound.Do();
         CoreWorld.StopIdleMusic();
         base.OnShowing();
-        watchButton.Submitted += Reload;
-        sequence = timerAnim.Animate();
+        watchButton.Submitted += Reload; 
+        timerAnim.Animate();
         Analytic.LogEvent("lost_level", "level", GameSave.currentLevel);
     }
 
@@ -33,7 +32,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
     {
         base.OnHiding();
         watchButton.Submitted -= Reload;
-        sequence?.Kill();
+        timerAnim.Kill();
     }
 
     protected override void DeInit()
@@ -44,6 +43,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
 
     public static void Show(Action onRevive)
     {
+        if(WinWindow.IsVisible) return;
         onReviveClicked += OnRevive;
         Show();
 
@@ -53,4 +53,6 @@ public class LoseWindow : BaseWindow<LoseWindow>
             onRevive();
         }
     }
+
+    public static void Hide() => Instance.Manager.OnlyHide();
 }

@@ -49,6 +49,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     }
 #endif
     
+    public static bool IsLoseOrWinVisible => LoseWindow.IsVisible || WinWindow.IsVisible;
     public LaLa.PlayClip idleMusic;
     
     private void _StopIdleMusic()
