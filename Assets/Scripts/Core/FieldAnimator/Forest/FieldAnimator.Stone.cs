@@ -31,7 +31,6 @@ namespace Core
 
             public override void Handle()
             {
-                Debug.Log($"Stone Handle {blocks.Count}");
                 for (var i = 0; i < blocks.Count; i++)
                 {
                     var index = blocks[i].index;
