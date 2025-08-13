@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class LoseWindow : BaseWindow<LoseWindow>
 {
+    public LaLa.PlayClip sound;
     [SerializeField] private LSButton watchButton;
     [SerializeReference] private AnimSequencer timerAnim;
     public static Action onReviveClicked;
@@ -13,6 +14,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
     private Sequence sequence;
     protected override void OnShowing()
     {
+        sound.Do();
         CoreWorld.StopIdleMusic();
         base.OnShowing();
         watchButton.Submitted += Reload;
