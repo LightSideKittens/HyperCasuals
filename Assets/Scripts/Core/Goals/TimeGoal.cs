@@ -29,12 +29,19 @@ public class TimeGoal : MonoBehaviour
         UpdateTimer(time.ToTimeSpan());
         IUIView.Showing += PauseOnShowingOtherWindow;
         FieldManager.DragStarted += StartTimer;
+        FieldManager.Lose += OnLose;
     }
 
     private void OnDestroy()
     {
         IUIView.Showing -= PauseOnShowingOtherWindow;
         FieldManager.DragStarted -= StartTimer;
+        FieldManager.Lose -= OnLose;
+    }
+
+    private void OnLose()
+    {
+        timer.Pause();
     }
 
     private void PauseOnShowingOtherWindow(IUIView view)
@@ -42,6 +49,7 @@ public class TimeGoal : MonoBehaviour
         if (view.GetType() != typeof(CoreWindow))
         {
             timer.Pause();
+            StopTimingOut();
             pauseCount++;
             view.Manager.Hiding += OnHide;
 
@@ -63,6 +71,17 @@ public class TimeGoal : MonoBehaviour
     private void UpdateTimer(TimeSpan remaining)
     {
         timeText.text = remaining.ToString(@"mm\:ss");
+        UpdateTimeOuting(remaining);
+
+        if (remaining <= TimeSpan.Zero)
+        {
+            StopTimingOut();
+            LoseWindow.Show(OnRevive);
+        }
+    }
+
+    private void UpdateTimeOuting(TimeSpan remaining)
+    {
         if (remaining <= timeOutingSpan)
         {
             var seq = timeOutingAnim.sequence;
@@ -76,24 +95,18 @@ public class TimeGoal : MonoBehaviour
         {
             StopTimingOut();
         }
-
-        if (remaining <= TimeSpan.Zero)
+    }
+    
+    private void StopTimingOut()
+    {
+        timerSound.Stop();
+        var seq = timeOutingAnim.sequence;
+        if (seq.IsActive())
         {
-            StopTimingOut();
-            LoseWindow.Show(OnRevive);
-        }
-
-        void StopTimingOut()
-        {
-            timerSound.Stop();
-            var seq = timeOutingAnim.sequence;
-            if (seq.IsActive())
-            {
-                seq.KillOnEverySecondLoop();
-            }
+            seq.KillOnEverySecondLoop();
         }
     }
-
+    
     private void OnRevive()
     {
         UpdateTimer(cachedTime.ToTimeSpan());

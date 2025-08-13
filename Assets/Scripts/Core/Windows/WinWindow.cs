@@ -6,6 +6,10 @@ public class WinWindow : BaseWindow<WinWindow>
     
     protected override void OnShowing()
     {
+        if (LoseWindow.IsVisible)
+        {
+            LoseWindow.Hide();
+        }
         sound.Do(); 
         CoreWorld.StopIdleMusic();
         base.OnShowing();
