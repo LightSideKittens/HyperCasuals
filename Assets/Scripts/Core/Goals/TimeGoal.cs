@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using LSCore;
+using LSCore.AnimationsModule;
 using LSCore.Async;
 using LSCore.Attributes;
 using LSCore.Extensions.Time;
@@ -10,16 +11,22 @@ public class TimeGoal : MonoBehaviour
 {
     [TimeSpan(options = TimeAttribute.Options.Minute | TimeAttribute.Options.Second)] 
     public long time;
+
+    public int timeOuting = 15;
+    public AnimSequencer timeOutingAnim;
+    public LaLa.PlayClip timerSound;
     private long cachedTime;
     
     public LSText timeText;
     private Tween timer;
     private int pauseCount;
+    private TimeSpan timeOutingSpan;
     
     protected void Awake()
     {
         cachedTime = time;
-        SetTimerText(time.ToTimeSpan());
+        timeOutingSpan = TimeSpan.FromSeconds(timeOuting);
+        UpdateTimer(time.ToTimeSpan());
         IUIView.Showing += PauseOnShowingOtherWindow;
         FieldManager.DragStarted += StartTimer;
     }
@@ -50,18 +57,46 @@ public class TimeGoal : MonoBehaviour
     private void StartTimer()
     {
         if(pauseCount > 0) return;
-        timer ??= time.ToTimeSpan().Seconder(SetTimerText, false);
+        timer ??= time.ToTimeSpan().Seconder(UpdateTimer, false);
     }
 
-    private void SetTimerText(TimeSpan remaining)
+    private void UpdateTimer(TimeSpan remaining)
     {
         timeText.text = remaining.ToString(@"mm\:ss");
-        if (remaining <= TimeSpan.Zero) LoseWindow.Show(OnRevive);
+        if (remaining <= timeOutingSpan)
+        {
+            var seq = timeOutingAnim.sequence;
+            if (!seq.IsActive())
+            {
+                timerSound.Do();
+                timeOutingAnim.Animate();
+            }
+        }
+        else
+        {
+            StopTimingOut();
+        }
+
+        if (remaining <= TimeSpan.Zero)
+        {
+            StopTimingOut();
+            LoseWindow.Show(OnRevive);
+        }
+
+        void StopTimingOut()
+        {
+            timerSound.Stop();
+            var seq = timeOutingAnim.sequence;
+            if (seq.IsActive())
+            {
+                seq.KillOnEverySecondLoop();
+            }
+        }
     }
 
     private void OnRevive()
     {
-        SetTimerText(cachedTime.ToTimeSpan());
+        UpdateTimer(cachedTime.ToTimeSpan());
         var lastPauseCount = pauseCount;
         pauseCount = 0;
         timer.Kill();

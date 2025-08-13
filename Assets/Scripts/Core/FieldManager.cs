@@ -489,7 +489,6 @@ public partial class FieldManager : SingleService<FieldManager>
 
     private async void CheckLoseCondition()
     {
-        Debug.Log($"[CheckLoseCondition] Checking lose condition: {activeShapes.Count}");
         if (activeShapes.Count == 0) return;
 
         foreach (var shape in activeShapes)
@@ -497,19 +496,15 @@ public partial class FieldManager : SingleService<FieldManager>
             if (shape == null) continue;
             if (await HasPlaceForShape(shape))
             {
-                Debug.Log("[CheckLoseCondition] At least one shape can be placed");
                 return;
             }
-            Debug.Log("[CheckLoseCondition] Can't place shape, checking next");
         }
-
-        Debug.Log("[CheckLoseCondition] All shapes blocked -> Game Over");
-        LoseWindow.Show(Revive);
+        
+        FieldAppearance.RedBack.DOFade(0.3f, 0.5f).SetLoops(4, LoopType.Yoyo).OnComplete(() => LoseWindow.Show(Revive));
     }
     
     private void Revive()
     {
-        Debug.Log("[Revive] called!");
         for (int i = activeShapes.Count - 1; i >= 0; i--)
         {
             var shape = activeShapes[i];

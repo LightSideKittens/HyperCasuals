@@ -36,6 +36,7 @@ public partial class FieldAppearance : SingleService<FieldAppearance>
     }
     
     public SpriteRenderer _back;
+    public SpriteRenderer _redBack;
     public ParticleSystem _shapeAppearFx;
     public SpriteRenderer _selector;
     public List<Block> _blockPrefabs;
