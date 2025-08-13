@@ -58,7 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5864f4664a654b45b331a4a96aa2528a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initShowHideAnim: 0
   showHideAnim:
     rid: 1724297501560799844
   onShowing: []
@@ -67,6 +66,9 @@ MonoBehaviour:
   - rid: 5237655153313055434
   onHiding: []
   onHidden: []
+  sound:
+    prefab: {fileID: 124978471103678096, guid: 92b1036c0ce958645970f8e2151cc86f, type: 3}
+    clip: {fileID: 8300000, guid: 0f6b1291a5fb32e428c34cce554a64e6, type: 3}
   references:
     version: 2
     RefIds:
@@ -310,11 +312,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseFundText
       objectReference: {fileID: 0}
-    - target: {fileID: 4619624241055375339, guid: 25f9c5eae7d0bf941978795631bded3f, type: 3}
+    - target: {fileID: 4619624241055375339, guid: 71148fe5894a275448faacf4902eeeb0, type: 3}
       propertyPath: m_fontSize
       value: 35.35
       objectReference: {fileID: 0}
-    - target: {fileID: 4619624241055375339, guid: 71148fe5894a275448faacf4902eeeb0, type: 3}
+    - target: {fileID: 7370679368218626573, guid: 32211a55c5f9cb74393647ff8f7b9d45, type: 3}
       propertyPath: m_fontSize
       value: 35.35
       objectReference: {fileID: 0}
@@ -370,7 +372,7 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7370679368218626573, guid: 32211a55c5f9cb74393647ff8f7b9d45, type: 3}
+    - target: {fileID: 4619624241055375339, guid: 25f9c5eae7d0bf941978795631bded3f, type: 3}
       propertyPath: m_fontSize
       value: 35.35
       objectReference: {fileID: 0}
@@ -758,6 +760,7 @@ MonoBehaviour:
   ease: 10
   onParticleAttracted:
   - rid: 5237655153313055454
+  - rid: 2877981880615174249
   onComplete:
   - rid: 2877981638842908784
   references:
@@ -766,6 +769,11 @@ MonoBehaviour:
     - rid: 2877981638842908784
       type: {class: Levels/LoadCurrent, ns: , asm: Core}
       data: 
+    - rid: 2877981880615174249
+      type: {class: LaLa/PlayOneShot, ns: , asm: LSCore.AudioModule}
+      data:
+        prefab: {fileID: 1214800232964751706, guid: fd3dba92e0d5baf4fa3897caa4e691ef, type: 3}
+        clip: {fileID: 8300000, guid: 79e269cbc49671e4da95db28c3b6d449, type: 3}
     - rid: 5237655153313055454
       type: {class: CurrenciesView/Anim, ns: LSCore, asm: LSCore.CurrencyModule}
       data:
@@ -1152,6 +1160,14 @@ PrefabInstance:
       value: LSCore.UIModule LSCore.UIModule.ResetButton
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: 'managedReferences[2877981880615174248]'
+      value: LSCore.AudioModule LaLa/PlayClip
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: 'managedReferences[2877981880615174264]'
+      value: LSCore.AudioModule LaLa/PlayOneShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: 'managedReferences[5237655153313055384]'
       value: LSCore.UIModule PlayUIParticleAttractor
       objectReference: {fileID: 0}
@@ -1177,7 +1193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: submittable.doIter.onSubmit.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
@@ -1189,8 +1205,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: 'submittable.doIter.onSubmit.Array.data[2]'
-      value: 1249993154680324096
+      value: 2877981880615174264
       objectReference: {fileID: 0}
+    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: managedReferences[2877981880615174248].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 870a8a11d1d9cce4eaa0c1b8fcdff962, type: 3}
+    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: managedReferences[2877981880615174264].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 870a8a11d1d9cce4eaa0c1b8fcdff962, type: 3}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: managedReferences[5237655153313055385].data
       value: 
@@ -1212,6 +1236,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3972999207480508154}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: managedReferences[2877981880615174248].prefab
+      value: 
+      objectReference: {fileID: 1214800232964751706, guid: fd3dba92e0d5baf4fa3897caa4e691ef, type: 3}
+    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: managedReferences[2877981880615174264].prefab
+      value: 
+      objectReference: {fileID: 1214800232964751706, guid: fd3dba92e0d5baf4fa3897caa4e691ef, type: 3}
+    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: managedReferences[5237655153313055384].attractor
       value: 5237655153313055385
       objectReference: {fileID: 0}
@@ -1225,7 +1257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
@@ -1234,6 +1266,10 @@ PrefabInstance:
     - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[1]'
       value: 1249993154680324096
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[2]'
+      value: 2877981880615174264
       objectReference: {fileID: 0}
     - target: {fileID: 1881147931105723731, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: m_Sprite

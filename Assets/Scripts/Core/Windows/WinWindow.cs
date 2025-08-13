@@ -2,8 +2,11 @@
 using LSCore;
 public class WinWindow : BaseWindow<WinWindow>
 {
+    public LaLa.PlayClip sound;
+    
     protected override void OnShowing()
     {
+        sound.Do(); 
         CoreWorld.StopIdleMusic();
         base.OnShowing();
         Manager.canvas.sortingOrder = 120;
