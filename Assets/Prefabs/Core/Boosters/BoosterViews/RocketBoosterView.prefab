@@ -107,9 +107,9 @@ MonoBehaviour:
       type: {class: DefaultSubmittable, ns: LSCore, asm: LSCore.UIModule}
       data:
         anim:
-          rid: -2
+          rid: 2877981903112110188
         doIter:
-          rid: 2877981696179568724
+          rid: 2877981903112110199
         selectBehaviour:
           rid: -2
     - rid: 1249993464767316247
@@ -146,7 +146,13 @@ MonoBehaviour:
       type: {class: 'SerializeField`1[[UnityEngine.UI.Graphic, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
       data:
         data: {fileID: 8064796061521427323}
-    - rid: 2877981696179568724
+    - rid: 2877981903112110188
+      type: {class: DefaultSubmittableAnim, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        sound:
+          prefab: {fileID: 1214800232964751706, guid: fd3dba92e0d5baf4fa3897caa4e691ef, type: 3}
+          clip: {fileID: 8300000, guid: d2dc2b00d006a4844989e8946ae0fcd6, type: 3}
+    - rid: 2877981903112110199
       type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
         onSubmit: []
@@ -357,7 +363,7 @@ MonoBehaviour:
       type: {class: DefaultSubmittable, ns: LSCore, asm: LSCore.UIModule}
       data:
         anim:
-          rid: -2
+          rid: 2877981903112110189
         doIter:
           rid: 2877981696179568725
         selectBehaviour:
@@ -400,6 +406,12 @@ MonoBehaviour:
       type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
         onSubmit: []
+    - rid: 2877981903112110189
+      type: {class: DefaultSubmittableAnim, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        sound:
+          prefab: {fileID: 1214800232964751706, guid: fd3dba92e0d5baf4fa3897caa4e691ef, type: 3}
+          clip: {fileID: 8300000, guid: d2dc2b00d006a4844989e8946ae0fcd6, type: 3}
 --- !u!1001 &2209406844335578396
 PrefabInstance:
   m_ObjectHideFlags: 0
