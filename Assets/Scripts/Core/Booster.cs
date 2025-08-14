@@ -144,6 +144,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
 
     public override void Do()
     {
+        lastCanvas = null;
         button.Submitted += OnSubmit;
         lockLeveText.LocalizeArguments(unlockLevel);
         states = GameSave.Config.AsJ<JObject>("states");
