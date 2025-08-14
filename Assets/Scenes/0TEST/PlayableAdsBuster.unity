@@ -6866,7 +6866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2923292237326370468
 Transform:
   m_ObjectHideFlags: 0
@@ -6876,7 +6876,7 @@ Transform:
   m_GameObject: {fileID: 2588522771374763849}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.36, z: 0}
+  m_LocalPosition: {x: 3.1, y: -1.47, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -6962,16 +6962,9 @@ MonoBehaviour:
   easyShapes: []
   mediumShapes: []
   hardShapes:
-  - {fileID: 1064330546610032413, guid: 0d0fa7be5267cdd47941aeb3762806ec, type: 3}
-  - {fileID: 1064330546610032413, guid: 032448288d1f4004fb223d6117e3b193, type: 3}
-  - {fileID: 2765401025963637978, guid: 1f508333492321d4ca24928d7ced91ed, type: 3}
-  - {fileID: 2765401025963637978, guid: db19375786d7c594bb4ac9fab3ff5b4c, type: 3}
-  - {fileID: 2765401025963637978, guid: 9045d046058b902489fca98b451fb390, type: 3}
-  - {fileID: 2765401025963637978, guid: 9716d2b810f08ee4999c386d948aff2e, type: 3}
-  - {fileID: 6245424791155680371, guid: c6295d2d2302e64429b71ccaa8c9f22e, type: 3}
-  - {fileID: 7123522423473158640, guid: 8ab6175cd2e998f4c916ee091065bc05, type: 3}
-  - {fileID: -4154785575370713005, guid: 18f585561c76c4f40bd268ce0070fcab, type: 3}
-  - {fileID: -4154785575370713005, guid: f1de74099e885924f8b08c157c2dc56a, type: 3}
+  - {fileID: -3835919730639907320, guid: 4030d7a1bf8493e4f8b5618699f0ad3a, type: 3}
+  - {fileID: -3835919730639907320, guid: 4030d7a1bf8493e4f8b5618699f0ad3a, type: 3}
+  - {fileID: -3835919730639907320, guid: 4030d7a1bf8493e4f8b5618699f0ad3a, type: 3}
 --- !u!114 &4383754822755270769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6999,6 +6992,57 @@ MonoBehaviour:
     - timeOffset: 0
       anim:
         rid: 2877981903112110183
+    - timeOffset: 0.5
+      anim:
+        rid: 2877981903112110172
+    - timeOffset: 0.3
+      anim:
+        rid: 2877981903112110177
+    - timeOffset: 0
+      anim:
+        rid: 2877981903112110216
+    - timeOffset: 0.5
+      anim:
+        rid: 2877981903112110172
+    - timeOffset: 0.3
+      anim:
+        rid: 2877981903112110177
+    - timeOffset: 0.5
+      anim:
+        rid: 2877981903112110227
+    - timeOffset: 0.5
+      anim:
+        rid: 2877981903112110172
+    - timeOffset: 0.1
+      anim:
+        rid: 2877981903112110238
+    - timeOffset: 0.7
+      anim:
+        rid: 2877981903112110177
+    - timeOffset: 1.2
+      anim:
+        rid: 2877981903112110241
+    - timeOffset: 0.5
+      anim:
+        rid: 2877981903112110172
+    - timeOffset: 0.1
+      anim:
+        rid: 2877981903112110244
+    - timeOffset: 0.7
+      anim:
+        rid: 2877981903112110177
+    - timeOffset: 0
+      anim:
+        rid: 2877981903112110251
+    - timeOffset: 0.5
+      anim:
+        rid: 2877981903112110172
+    - timeOffset: 0.1
+      anim:
+        rid: 2877981903112110257
+    - timeOffset: 0.7
+      anim:
+        rid: 2877981903112110177
     editor_options: []
   touchPoint: {fileID: 2923292237326370468}
   references:
@@ -7147,10 +7191,10 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        needInit: 1
+        needInit: 0
         duration: 0.5
         startValue: {x: 0, y: 0, z: 0}
-        endValue: {x: 0, y: -7.36, z: 0}
+        endValue: {x: -2.77, y: -6.53, z: 0}
     - rid: 2877981903112110184
       type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
       data:
@@ -7163,6 +7207,300 @@ MonoBehaviour:
           m_RotationOrder: 4
         ease: 10
     - rid: 2877981903112110185
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2923292237326370468}
+    - rid: 2877981903112110216
+      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 2877981903112110217
+        targets:
+        - rid: 2877981903112110218
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: -3.49, y: -3.49, z: 0}
+    - rid: 2877981903112110217
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 10
+    - rid: 2877981903112110218
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2923292237326370468}
+    - rid: 2877981903112110227
+      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 2877981903112110228
+        targets:
+        - rid: 2877981903112110229
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: 0, y: -10.55, z: 0}
+    - rid: 2877981903112110228
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 10
+    - rid: 2877981903112110229
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2923292237326370468}
+    - rid: 2877981903112110238
+      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 2877981903112110239
+        targets:
+        - rid: 2877981903112110240
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: -2.98, y: -2.43, z: 0}
+    - rid: 2877981903112110239
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 10
+    - rid: 2877981903112110240
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2923292237326370468}
+    - rid: 2877981903112110241
+      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 2877981903112110242
+        targets:
+        - rid: 2877981903112110243
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: -3.01, y: -10.97, z: 0}
+    - rid: 2877981903112110242
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 10
+    - rid: 2877981903112110243
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2923292237326370468}
+    - rid: 2877981903112110244
+      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 2877981903112110245
+        targets:
+        - rid: 2877981903112110246
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: -1.89, y: 1.55, z: 0}
+    - rid: 2877981903112110245
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 10
+    - rid: 2877981903112110246
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2923292237326370468}
+    - rid: 2877981903112110251
+      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 2877981903112110252
+        targets:
+        - rid: 2877981903112110253
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: 3.01, y: -10.97, z: 0}
+    - rid: 2877981903112110252
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 10
+    - rid: 2877981903112110253
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2923292237326370468}
+    - rid: 2877981903112110257
+      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 2877981903112110258
+        targets:
+        - rid: 2877981903112110259
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: 3.1, y: -1.47, z: 0}
+    - rid: 2877981903112110258
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 10
+    - rid: 2877981903112110259
       type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
       data:
         data: {fileID: 2923292237326370468}
