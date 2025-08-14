@@ -17,7 +17,7 @@ using Random = UnityEngine.Random;
 public partial class FieldManager : SingleService<FieldManager>
 {
     [NonSerialized] public List<Spawner> _spawners = new();
-    private List<Shape> activeShapes = new();
+    protected List<Shape> activeShapes = new();
     
     [MinValue(4)] [MaxValue("$MaxBlocksInLine")] public int blocksInLine = 8;
     [MinValue(4)] public Vector2Int gridSize;
@@ -33,7 +33,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public Shape initialShape;
     
     private Vector3 gridOffset;
-    private float shapeSpawnerScale = 0.7f;
+    protected float shapeSpawnerScale = 0.7f;
     private Vector3 defaultScale;
     public Block[,] grid;
     public bool debug;
@@ -233,7 +233,7 @@ public partial class FieldManager : SingleService<FieldManager>
     }
 
     public static Block[,] CopyGrid() => Instance.Internal_CopyGrid();
-    private Block[,] Internal_CopyGrid()
+    protected Block[,] Internal_CopyGrid()
     {
         var size = grid.GetSize();
         var copiedGrid = new Block[size.x, size.y];
@@ -247,7 +247,7 @@ public partial class FieldManager : SingleService<FieldManager>
         return copiedGrid;
     }
     
-    private List<List<Shape>> allTempShapes = new();
+    protected List<List<Shape>> allTempShapes = new();
     
     private void InitTempShapes()
     {
@@ -293,7 +293,7 @@ public partial class FieldManager : SingleService<FieldManager>
         }
     }
     
-    private async void CreateAndInitShape()
+    protected virtual async void CreateAndInitShape()
     {
         var fullness = GridFullness / grid.Length;
         var easyShapeFactor = fullness / 5;
