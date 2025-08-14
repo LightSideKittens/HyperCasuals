@@ -1,14 +1,17 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using LSCore.Extensions.Unity;
 
 namespace Core
 {
     public class CreoFieldManager : FieldManager
     {
+        public List<Spawner> spawners;
         private int spawnedBlockPrefabIndex = 0;
         
         protected override void CreateAndInitShape()
         {
+            _spawners = spawners;
             activeShapes.Clear();
             var shapes = allTempShapes[0];
             if(shapes.Count == 0) return;
