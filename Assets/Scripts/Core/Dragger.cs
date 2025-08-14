@@ -11,13 +11,11 @@ public class Dragger : MonoBehaviour
     
     private bool isDragging = false;
     private Vector3 offset;
-    private Vector2 touchOffset = new (0f, 3f);
     public event Action<Shape> Started;
     public event Action<Shape> Ended;
     
     [NonSerialized] public Spawner currentSpawner;
     
-    private Vector3 startTouchPos;
     private Tween tween;
     public Shape currentShape => currentSpawner.currentShape;
 
@@ -33,7 +31,6 @@ public class Dragger : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    startTouchPos = touchPosition;
                     CheckTouch(touchPosition);
                     if (isDragging)
                     {
@@ -43,11 +40,6 @@ public class Dragger : MonoBehaviour
                         {
                             block.sortingOrder = 200;
                         }
-                        var lastTouchOffset = touchOffset;
-                        tween = Wait.FromTo(0, 1, 0.2f, value =>
-                        {
-                            touchOffset = value * lastTouchOffset;
-                        }).SetEase(Ease.InOutCubic);
                     }
                     break;
                 case TouchPhase.Ended:
@@ -70,7 +62,7 @@ public class Dragger : MonoBehaviour
             
             if (needMove)
             {
-                currentShape.transform.position = touchPosition + (Vector3) touchOffset + offset + (touchPosition - startTouchPos);
+                currentShape.transform.position = touchPosition + offset;
             }
         }
     }
