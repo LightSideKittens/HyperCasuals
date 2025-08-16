@@ -7,18 +7,49 @@ using UnityEngine;
 
 namespace Core
 {
-    public static class FieldSave
+    public class FieldConfigManager : JTokenGameConfigManager
     {
-        public static JTokenGameConfigManager Manager =>
-            JTokenGameConfig.GetManager(Path.Combine("FieldSaves", GameSave.currentLevel ?? "unknown"));
+#if UNITY_EDITOR
+        public override void Load()
+        {
+            base.Load();
+            if (!FieldSave.IsEnabled)
+            { 
+                cached.data = new JObject();
+            }
+        }
+
+        public override void Save()
+        {
+            if (FieldSave.IsEnabled)
+            { 
+                base.Save();
+            }
+        }
+#endif
+    }
+    
+    public static partial class FieldSave
+    {
+        public static FieldConfigManager Manager => ConfigMaster<FieldConfigManager>.Get(Path.Combine("FieldSaves", GameSave.currentLevel ?? "unknown"));
         
         public static JToken Config => Manager.Config.data;
         
-        public static bool Exists => Manager.Exists;
+        public static bool Exists
+        {
+            get
+            {
+#if UNITY_EDITOR
+                if (!IsEnabled) return false;
+#endif
+                return Manager.Exists;
+            }
+        }
+
         public static void Save() => Manager.Save();
         public static void Delete() => Manager.Delete();
-
-            public static JArray GradeBlocks => Config.AsJ<JArray>("gradeBlocks");
+        
+        public static JArray GradeBlocks => Config.AsJ<JArray>("gradeBlocks");
         public static void SaveGradeBlocks(Dictionary<Vector2Int, int> stages)
         {
             var jGradeBlocks = GradeBlocks;
