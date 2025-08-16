@@ -1,5 +1,4 @@
-﻿using Firebase.Analytics;
-using LSCore;
+﻿using LSCore;
 using LSCore.ConfigModule;
 using LSCore.Extensions;
 using Newtonsoft.Json.Linq;
@@ -25,10 +24,7 @@ public class GameSave
     public static int Theme
     {
         get => Config.As("theme", 0);
-        set
-        {
-            Config["theme"] = value;
-        }
+        set => Config["theme"] = value;
     }
 
     public static int BestScore

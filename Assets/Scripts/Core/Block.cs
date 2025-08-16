@@ -10,7 +10,7 @@ public class Block : MonoBehaviour
     [Id(typeof(BlockIdGroup))] public Id id;
     [ReadOnly] public Block prefab;
     public SpriteRenderer render;
-    [NonSerialized] public int defaultSortingOrder;
+    public const int DefaultSortingOrder = -10;
     
     public Sprite sprite
     {

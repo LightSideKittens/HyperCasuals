@@ -5,7 +5,6 @@ using LSCore;
 using LSCore.Extensions;
 using Sirenix.OdinInspector;
 using SourceGenerators;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -41,7 +40,26 @@ namespace Core
             base.Init();
             FieldManager.Placed += OnPlaced;
             FieldManager.InitialShapePlaced += OnInitialShapePlaced;
+            FieldManager.Saving += OnSaving;
+            FieldManager.Loading += OnLoading;
             Booster.Used += OnBoosterUsed;
+        }
+
+        private void OnLoading()
+        {
+            var jBonuses = FieldSave.Bonuses;
+            for (int i = 0; i < jBonuses.Count; i++)
+            {
+                var jBonus = jBonuses[i];
+                var index = jBonus["index"].ToVector2Int();
+                var block = FieldManager.Grid.Get(index).GetRegular();
+                bonuses[block] = Instantiate(bonusPrefab, block.transform.position, Quaternion.identity);
+            }
+        }
+
+        private void OnSaving()
+        {
+            FieldSave.SaveBonusBlocks(bonuses);
         }
 
         protected override void DeInit()
@@ -49,6 +67,8 @@ namespace Core
             base.DeInit();
             FieldManager.Placed -= OnPlaced;
             FieldManager.InitialShapePlaced -= OnInitialShapePlaced;
+            FieldManager.Saving -= OnSaving;
+            FieldManager.Loading -= OnLoading;
             Booster.Used -= OnBoosterUsed;
         }
 

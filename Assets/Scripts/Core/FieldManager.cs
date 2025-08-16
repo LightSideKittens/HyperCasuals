@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core;
 using DG.Tweening;
@@ -37,7 +38,6 @@ public partial class FieldManager : SingleService<FieldManager>
     private Vector3 defaultScale;
     public Block[,] grid;
     public bool debug;
-    private int spawnShapeLock = 0;
     private bool allShapesPlaced;
     private Shape currentGhostShape;
     private Vector2Int lastGhostBlockIndex = new(-1, -1);
@@ -103,27 +103,103 @@ public partial class FieldManager : SingleService<FieldManager>
         gridOffset = new Vector3(back.size.x / 2, back.size.y / 2) - LSVector3.half;
     }
 
-    private void ApplyInitialShape()
+    private void InitField()
     {
-        if (initialShape)
+        if (FieldSave.Exists)
         {
-            if (initialShape.blocks.Count > 0)
+            if (initialShape)
             {
-                for (int j = 0; j < initialShape.blocks.Count; j++)
+                if (initialShape.blocks.Count > 0)
                 {
-                    var block = initialShape.blocks[j];
-                    var gridIndex = _ToIndex(block.transform.position);
-                    grid.Set(gridIndex, block);
-                    block.transform.SetParent(null, true);
+                    for (int j = 0; j < initialShape.blocks.Count; j++)
+                    {
+                        Destroy(initialShape.blocks[j].gameObject);
+                    }
                 }
                 
-                InitialShapePlaced?.Invoke(initialShape);
-                initialShape.transform.DetachChildren();
                 Destroy(initialShape.gameObject);
+            }
+
+            LoadFromSave();
+        }
+        else
+        {
+            if (initialShape)
+            {
+                if (initialShape.blocks.Count > 0)
+                {
+                    for (int j = 0; j < initialShape.blocks.Count; j++)
+                    {
+                        var block = initialShape.blocks[j];
+                        var gridIndex = _ToIndex(block.transform.position);
+                        grid.Set(gridIndex, block);
+                        block.transform.SetParent(null, true);
+                    }
+                
+                    InitialShapePlaced?.Invoke(initialShape);
+                    initialShape.transform.DetachChildren();
+                    Destroy(initialShape.gameObject);
+                }
             }
         }
     }
 
+    public static event Action Loading;
+
+    private void LoadFromSave()
+    {
+        var map = new Dictionary<string, Block>();
+        FieldAppearance.BlockPrefabs.ForEach(prefab => map.Add(prefab.id, prefab));
+        FieldAppearance.SpecialBlockPrefabs.ForEach(prefab => map.Add(prefab.id, prefab));
+
+        var jBlocks = FieldSave.Blocks;
+        
+        for (int i = 0; i < jBlocks.Count; i++)
+        {
+            var jBlock = jBlocks[i];
+            var prefab = map[jBlock["block"]!.ToString()];
+            var index = jBlock["index"].ToVector2Int();
+            Internal_PlaceBlock(index, prefab, out _);
+            var next = jBlock["next"];
+            while (next != null)
+            {
+                prefab = map[next["block"]!.ToString()];
+                Internal_PlaceBlock(index, prefab,out _, true);
+                next = next["next"];
+            }
+        }
+        
+        var jShapes = FieldSave.Shapes;
+        activeShapes.Clear();
+        for (int i = 0; i < jShapes.Count; i++)
+        {
+            var jShape = jShapes[i];
+            var listIndex = jShape["listIndex"].ToInt();
+            var shapeIndex = jShape["shapeIndex"].ToInt();
+            var tempShape = allTempShapes[listIndex][shapeIndex];
+            var blockPrefabId = jShape["blockPrefab"]!.ToString();
+            var blockPrefab = map[blockPrefabId];
+            
+            var shape = Instantiate(tempShape);
+            activeShapes.Add(shape);
+            shape.BlockPrefab = blockPrefab;
+            shape.transform.position = _spawners[i].transform.position;
+            shape.transform.SetScale(shapeSpawnerScale);
+            _spawners[i].currentShape = shape;
+            shapesSaveData.Add(shape, (listIndex, shapeIndex, blockPrefabId));
+        }
+        
+        for (int i = 0; i < activeShapes.Count; i++)
+        {
+            var shape = activeShapes[i];
+            shape.transform.SetScale(0);
+            shape.transform.DOScale(shapeSpawnerScale, 0.2f);
+        }
+        
+        Loading?.Invoke();
+        FieldSave.gridDirtied = false;
+    }
+    
     public List<Shape> easyShapes;
     public List<Shape> mediumShapes;
     public List<Shape> hardShapes;
@@ -133,8 +209,11 @@ public partial class FieldManager : SingleService<FieldManager>
         grid = new Block[gridSize.x, gridSize.y]; 
         InitBack();
         InitTempShapes();
-        ApplyInitialShape();
-        CreateAndInitShape();
+        InitField();
+        if (FieldSave.Shapes.Count == 0)
+        {
+            CreateAndInitShape();
+        }
 
         dragger.Started += shape =>
         {
@@ -184,6 +263,8 @@ public partial class FieldManager : SingleService<FieldManager>
                 }
 
                 activeShapes.Remove(shape);
+                shapesSaveData.Remove(shape);
+                FieldSave.SaveShapes(shapesSaveData.Values.ToList());
                 var placeData = new PlaceData();
                 placeData.shape = shape;
                 placeData.lastGrid = Internal_CopyGrid();
@@ -200,11 +281,9 @@ public partial class FieldManager : SingleService<FieldManager>
                 Placed?.Invoke(placeData);
                 
                 CheckLoseCondition();
-
-                spawnShapeLock++;
-                if (spawnShapeLock >= _spawners.Count)
+                
+                if (activeShapes.Count == 0)
                 {
-                    spawnShapeLock = 0;
                     CreateAndInitShape();
                 }
                 
@@ -217,9 +296,18 @@ public partial class FieldManager : SingleService<FieldManager>
             }
         };
     }
-    
+
+    public static event Action Saving;
     private void Update()
     {
+        if (FieldSave.gridDirtied)
+        {
+            FieldSave.SaveField(grid);
+            Saving?.Invoke();
+            FieldSave.Save();
+            FieldSave.gridDirtied = false;
+        }
+        
         UpdateGhost();
     }
     
@@ -247,7 +335,8 @@ public partial class FieldManager : SingleService<FieldManager>
         return copiedGrid;
     }
     
-    private List<List<Shape>> allTempShapes = new();
+    protected List<List<Shape>> allTempShapes = new();
+    protected List<List<Shape>> copiedAllTempShapes = new();
     
     private void InitTempShapes()
     {
@@ -256,6 +345,7 @@ public partial class FieldManager : SingleService<FieldManager>
         AddShapes(hardShapes);
         AddShapes(mediumShapes);
         AddShapes(easyShapes);
+        copiedAllTempShapes.AddRange(allTempShapes);
 
         void AddShapes(List<Shape> shapes)
         {
@@ -293,11 +383,16 @@ public partial class FieldManager : SingleService<FieldManager>
         }
     }
     
-    private async void CreateAndInitShape()
+    private Dictionary<Shape, (int listIndex, int shapeIndex, string blockPrefab)> shapesSaveData = new();
+    
+    protected virtual async void CreateAndInitShape()
     {
+        var lastGridDirtied = FieldSave.gridDirtied;
         var fullness = GridFullness / grid.Length;
         var easyShapeFactor = fullness / 5;
         var lastGrid = grid;
+        var shapeIndex = 0;
+        
         grid = Internal_CopyGrid();
         activeShapes.Clear();
         for (int i = 0; i < _spawners.Count; i++)
@@ -316,13 +411,14 @@ public partial class FieldManager : SingleService<FieldManager>
                 easyWasSwapped = true;
                 (allTempShapes[0], allTempShapes[2]) = (allTempShapes[2], allTempShapes[0]);
             }
-            
-            var tempShapes = new List<Shape>(allTempShapes[shapeListIndex]);
+
+            var shapes = allTempShapes[shapeListIndex];
+            var tempShapes = new List<Shape>(shapes);
             
             Shape tempShape;
             do
             {
-                tempShape = tempShapes.Random(out var index);
+                tempShape = tempShapes.Random(out shapeIndex);
                 if (await HasPlaceForShape(tempShape, true))
                 {
                     SpawnShape();
@@ -334,7 +430,7 @@ public partial class FieldManager : SingleService<FieldManager>
                     
                     break;
                 }
-                tempShapes.RemoveAt(index);
+                tempShapes.RemoveAt(shapeIndex);
                 if (tempShapes.Count == 0)
                 {
                     shapeListIndex++;
@@ -355,13 +451,15 @@ public partial class FieldManager : SingleService<FieldManager>
             {
                 var shape = Instantiate(tempShape);
                 activeShapes.Add(shape);
-                shape.BlockPrefab = FieldAppearance.BlockPrefabs.Random();
+                var blockPrefab = FieldAppearance.BlockPrefabs.Random();
+                shape.BlockPrefab = blockPrefab;
                 shape.transform.position = _spawners[i].transform.position;
                 shape.transform.SetScale(shapeSpawnerScale);
                 _spawners[i].currentShape = shape;
+                shapesSaveData.Add(shape, (copiedAllTempShapes.IndexOf(shapes), shapeIndex, blockPrefab.id));
             }
         }
-
+        
         for (int i = 0; i < activeShapes.Count; i++)
         {
             var shape = activeShapes[i];
@@ -370,6 +468,8 @@ public partial class FieldManager : SingleService<FieldManager>
         }
         
         grid = lastGrid;
+        FieldSave.SaveShapes(shapesSaveData.Values.ToList());
+        FieldSave.gridDirtied = lastGridDirtied;;
     }
 
     public Vector2Int _ToIndex(Vector2 pos)
@@ -388,25 +488,34 @@ public partial class FieldManager : SingleService<FieldManager>
         return localPos;
     }
 
-    public static void PlaceBlock(Vector2Int index, Block prefab, out Block block) => Instance.Internal_PlaceBlock(index, prefab, out block);
+    public static void PlaceBlock(Vector2Int index, Block prefab, out Block block, bool toNext = false) => Instance.Internal_PlaceBlock(index, prefab, out block, toNext);
 
-    public void Internal_PlaceBlock(Vector2Int index, Block prefab, out Block block)
+    public void Internal_PlaceBlock(Vector2Int index, Block prefab, out Block block, bool toNext = false)
     {
-        block = null;
         block = Block.Create(prefab);
-        _PlaceBlock(index, block);
+        _PlaceBlock(index, block, toNext);
     }
 
-    public void _PlaceBlock(Vector2Int index, Block block)
+    public void _PlaceBlock(Vector2Int index, Block block, bool toNext = false)
     {
         var existingBlock = grid.Get(index);
         block.transform.position = _ToPos(index);
         block.transform.SetScale(defaultScale);
-        if (existingBlock != null)
+        if (existingBlock == null)
         {
-            Shape.OverlayBlock(existingBlock, block);
+            grid.Set(index, block);
         }
-        grid.Set(index, block);
+        else
+        {
+            if (toNext)
+            {
+                Shape.AddNext(existingBlock, block);
+            }
+            else
+            {
+                Shape.OverlayBlock(existingBlock, block);
+            }
+        }
     }
     
     private bool CanPlaceShape(Shape shape, ref List<Vector2Int> gridIndices)
@@ -540,8 +649,8 @@ public partial class FieldManager : SingleService<FieldManager>
             var shape = activeShapes[i];
             if (shape != null) Destroy(shape.gameObject);
         }
+        
         activeShapes.Clear();
-        spawnShapeLock = 0;
         CreateAndInitShape();
     }
     
