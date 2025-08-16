@@ -75,6 +75,8 @@ namespace Core
             [NonSerialized] public FieldAnimator animator;
             
             public Block[,] Grid => FieldManager.Grid;
+            public virtual void Init(){}
+            public virtual void DeInit(){}
             public virtual void StartSimulate(){}
             public virtual void StopSimulate(){}
             public abstract void Handle();
@@ -115,6 +117,7 @@ namespace Core
             foreach (var handler in _handlers.Values)
             {
                 handler.handler.animator = this;
+                handler.handler.Init();
             }
         }
 
@@ -122,10 +125,15 @@ namespace Core
         {
             base.DeInit();
             FieldManager.BlocksDestroying -= OnDestroyBlocks;
+            foreach (var handler in _handlers.Values)
+            {
+                handler.handler.DeInit();
+            }
         }
 
         private void _Simulate()
         {
+            var lastGridDirtied = FieldSave.gridDirtied;
             var blocks = FieldManager.GetBlocks(true, true);
             for (int j = 0; j < blocks.Count; j++)
             {
@@ -165,6 +173,7 @@ namespace Core
             }
 
             currentSpecialBlocks.Clear();
+            FieldSave.gridDirtied = lastGridDirtied;
         }
 
         public Dictionary<Block, List<(Vector2Int index, Block block)>> currentSpecialBlocks = new();

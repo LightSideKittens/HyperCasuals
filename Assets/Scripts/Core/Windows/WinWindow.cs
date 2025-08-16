@@ -1,4 +1,5 @@
 ﻿using System;
+using Core;
 using LSCore;
 public class WinWindow : BaseWindow<WinWindow>
 {
@@ -6,6 +7,7 @@ public class WinWindow : BaseWindow<WinWindow>
     
     protected override void OnShowing()
     {
+        FieldSave.Delete();
         if (LoseWindow.IsVisible)
         {
             LoseWindow.Hide();

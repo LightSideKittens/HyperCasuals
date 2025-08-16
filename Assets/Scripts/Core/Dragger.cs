@@ -62,7 +62,7 @@ public class Dragger : MonoBehaviour
                         isDragging = false;
                         foreach (var block in currentShape.blocks)
                         {
-                            block.sortingOrder = block.defaultSortingOrder;
+                            block.sortingOrder = Block.DefaultSortingOrder;
                         }
                     }
                     break;

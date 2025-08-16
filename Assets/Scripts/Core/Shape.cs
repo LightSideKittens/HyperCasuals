@@ -35,7 +35,6 @@ public class Shape : MonoBehaviour
                 var currBlockTr = currBlock.transform;
                 var siblingIndex = currBlockTr.GetSiblingIndex();
                 var newBlock = Block.Create(value, currBlockTr.position, Quaternion.identity, transform);
-                newBlock.defaultSortingOrder = -10;
                 blocks[i] = newBlock;
                 newBlock.transform.SetSiblingIndex(siblingIndex);
                 currBlockTr.SetParent(null, true);
@@ -61,10 +60,16 @@ public class Shape : MonoBehaviour
 
     public static void OverlayBlock(Block existingBlock, Block newBlock)
     {
-        newBlock.defaultSortingOrder = existingBlock.sortingOrder+1;
-        newBlock.sortingOrder = newBlock.defaultSortingOrder;
         existingBlock.transform.SetParent(newBlock.transform, true);
         newBlock.next = existingBlock;
+        newBlock.sortingOrder = Block.DefaultSortingOrder;
+    }
+    
+    public static void AddNext(Block existingBlock, Block nextBlock)
+    {
+        existingBlock.next = nextBlock;
+        nextBlock.transform.SetParent(existingBlock.transform, true);
+        existingBlock.sortingOrder = Block.DefaultSortingOrder;
     }
 
     public Shape CreateGhost(Shape shape)
