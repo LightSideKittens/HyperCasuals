@@ -1,5 +1,6 @@
 ﻿using LSCore;
 using LSCore.AnimationsModule;
+using LSCore.Extensions;
 
 namespace Core
 {
@@ -13,21 +14,44 @@ namespace Core
         {
             if (block.prefab == target.Block)
             {
-                if (count > 1)
+                count -= 1;
+                
+                if (Check())
                 {
-                    count -= 1;
-                }
-                else
-                {
-                    IsReached = true;
                     reachedAnim.Animate();
                 }
+                
+                FieldSave.SaveBlockGoal(target.id, count);
             }
+        }
+
+        private bool Check()
+        {
+            if (count <= 0)
+            {
+                count.Number = 0;
+                IsReached = true;
+            }
+            
+            return IsReached;
         }
 
         private void Awake()
         {
             UpdateSprite();
+        }
+
+        private void Start()
+        {
+            if (FieldSave.Exists)
+            {
+                var jBlockGoals = FieldSave.BlockGoals;
+                if (jBlockGoals.TryGetValue(target.id, out var jCount))
+                { 
+                    count.Number = jCount.ToInt();
+                }
+                Check();
+            }
         }
 
 #if UNITY_EDITOR

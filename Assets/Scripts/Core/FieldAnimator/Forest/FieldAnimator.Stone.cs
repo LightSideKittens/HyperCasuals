@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using LSCore.Extensions;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Core
@@ -20,14 +21,12 @@ namespace Core
             public override void Init()
             {
                 base.Init();
-                FieldManager.Saving += OnSaving;
                 FieldManager.Loading += OnLoading;
             }
 
             public override void DeInit()
             {
                 base.DeInit();
-                FieldManager.Saving -= OnSaving;
                 FieldManager.Loading -= OnLoading;
             }
 
@@ -35,12 +34,17 @@ namespace Core
             {
                 var jGradeBlocks = FieldSave.GradeBlocks;
 
-                for (int i = 0; i < jGradeBlocks.Count; i++)
+                if (jGradeBlocks.TryGetValue(prefab.id.ToString(), out JArray arr))
                 {
-                    var gradeBlock = jGradeBlocks[i];
-                    var index = gradeBlock["index"].ToVector2Int();
-                    var stage = gradeBlock["stage"].ToInt();
-                    cache[index] = stages[stage];
+                    for (int i = 0; i < arr.Count; i++)
+                    {
+                        var gradeBlock = arr[i];
+                        var index = gradeBlock["index"].ToVector2Int();
+                        var stage = gradeBlock["stage"].ToInt();
+                        var block = Grid.Get(index);
+                        block.sprite = stages[stage];
+                        cache[index] = stages[stage];
+                    }
                 }
             }
 
@@ -51,7 +55,7 @@ namespace Core
                 {
                     dict.Add(index, stages.IndexOf(sprite));
                 }
-                FieldSave.SaveGradeBlocks(dict);
+                FieldSave.SaveGradeBlocks(prefab, dict);
             }
 
             public override void StartSimulate()
@@ -117,6 +121,11 @@ namespace Core
                         }
                     };
                     anim.Add((block, action));
+                }
+
+                if (!IsSimulating)
+                {
+                    OnSaving();
                 }
             }
 

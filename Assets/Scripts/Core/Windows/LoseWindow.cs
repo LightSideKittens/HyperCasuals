@@ -1,7 +1,9 @@
 ﻿using System;
+using Core;
 using DG.Tweening;
 using LSCore;
 using LSCore.AnimationsModule;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class LoseWindow : BaseWindow<LoseWindow>

@@ -55,10 +55,13 @@ namespace Core
                 var block = FieldManager.Grid.Get(index).GetRegular();
                 bonuses[block] = Instantiate(bonusPrefab, block.transform.position, Quaternion.identity);
             }
+            
+            FieldSave.LoadScoreManager(out _lastScore, out _currentScore, out _currentCombo, out currentTurn, out turnsForBonus);
         }
 
         private void OnSaving()
         {
+            FieldSave.SaveScoreManager(_lastScore, _currentScore, _currentCombo, currentTurn, turnsForBonus);
             FieldSave.SaveBonusBlocks(bonuses);
         }
 

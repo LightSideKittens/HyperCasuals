@@ -12,6 +12,7 @@ namespace Core
 #if UNITY_EDITOR
         public override void Load()
         {
+            isLogEnabled = true;
             base.Load();
             if (!FieldSave.IsEnabled)
             { 
@@ -32,8 +33,13 @@ namespace Core
     public static partial class FieldSave
     {
         public static FieldConfigManager Manager => ConfigMaster<FieldConfigManager>.Get(Path.Combine("FieldSaves", GameSave.currentLevel ?? "unknown"));
-        
-        public static JToken Config => Manager.Config.data;
+
+        private static JObject cached;
+        public static JObject Config
+        {
+            get => Manager.Config.data;
+            set => Manager.Config.data = value;
+        }
         
         public static bool Exists
         {
@@ -47,16 +53,34 @@ namespace Core
         }
 
         public static void Save() => Manager.Save();
-        public static void Delete() => Manager.Delete();
+        public static void Delete()
+        {
+            cached = Config;
+            Manager.Delete();
+        }
         
-        public static JArray GradeBlocks => Config.AsJ<JArray>("gradeBlocks");
-        public static void SaveGradeBlocks(Dictionary<Vector2Int, int> stages)
+        public static void Restore() => Config = cached;
+
+        public static void Unload() => Manager.Unload();
+        
+        public static JObject GradeBlocks => Config.AsJ<JObject>("gradeBlocks");
+        
+        public static void SaveGradeBlocks(Block prefab, Dictionary<Vector2Int, int> stages)
         {
             var jGradeBlocks = GradeBlocks;
-            jGradeBlocks.Clear();
+            var id = prefab.id.ToString();
+            
+            if (stages.Count == 0)
+            {
+                jGradeBlocks.Remove(id);
+                return;
+            }
+            
+            var arr = jGradeBlocks.AsJ<JArray>(prefab.id.ToString());
+            arr.Clear();
             foreach (var (index, stage) in stages)
             {
-                jGradeBlocks.Add(new JObject
+                arr.Add(new JObject
                 {
                     {"index", index.ToJObject()},
                     {"stage", stage}

@@ -7,6 +7,7 @@ using DG.Tweening;
 using LSCore;
 using LSCore.Extensions;
 using LSCore.Extensions.Unity;
+using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using SourceGenerators;
@@ -203,9 +204,11 @@ public partial class FieldManager : SingleService<FieldManager>
     public List<Shape> easyShapes;
     public List<Shape> mediumShapes;
     public List<Shape> hardShapes;
+    private string level;
     
     private void Start()
     {
+        level = GameSave.currentLevel;
         grid = new Block[gridSize.x, gridSize.y]; 
         InitBack();
         InitTempShapes();
@@ -300,6 +303,12 @@ public partial class FieldManager : SingleService<FieldManager>
     public static event Action Saving;
     private void Update()
     {
+        TryToSave();
+        UpdateGhost();
+    }
+
+    private void TryToSave()
+    {
         if (FieldSave.gridDirtied)
         {
             FieldSave.SaveField(grid);
@@ -307,14 +316,20 @@ public partial class FieldManager : SingleService<FieldManager>
             FieldSave.Save();
             FieldSave.gridDirtied = false;
         }
-        
-        UpdateGhost();
     }
     
     protected override void DeInit()
     {
         base.DeInit();
         selectionAreas?.Clear();
+        var lastLevel = GameSave.currentLevel;
+        GameSave.currentLevel = level;
+        if (FieldSave.Exists)
+        {
+            FieldSave.Save();
+            FieldSave.Unload();
+        }
+        GameSave.currentLevel = lastLevel;
 #if UNITY_EDITOR
         EditorApplication.update -= EditorUpdate;
 #endif
@@ -391,10 +406,10 @@ public partial class FieldManager : SingleService<FieldManager>
         var fullness = GridFullness / grid.Length;
         var easyShapeFactor = fullness / 5;
         var lastGrid = grid;
-        var shapeIndex = 0;
         
         grid = Internal_CopyGrid();
         activeShapes.Clear();
+        shapesSaveData.Clear();
         for (int i = 0; i < _spawners.Count; i++)
         {
             int shapeListIndex = 0;
@@ -418,7 +433,7 @@ public partial class FieldManager : SingleService<FieldManager>
             Shape tempShape;
             do
             {
-                tempShape = tempShapes.Random(out shapeIndex);
+                tempShape = tempShapes.Random(out var shapeIndex);
                 if (await HasPlaceForShape(tempShape, true))
                 {
                     SpawnShape();
@@ -438,7 +453,8 @@ public partial class FieldManager : SingleService<FieldManager>
                     {
                         break;
                     }
-                    tempShapes = new List<Shape>(allTempShapes[shapeListIndex]);
+                    shapes = allTempShapes[shapeListIndex];
+                    tempShapes = new List<Shape>(shapes);
                 }
             } while (true);
 
@@ -456,7 +472,7 @@ public partial class FieldManager : SingleService<FieldManager>
                 shape.transform.position = _spawners[i].transform.position;
                 shape.transform.SetScale(shapeSpawnerScale);
                 _spawners[i].currentShape = shape;
-                shapesSaveData.Add(shape, (copiedAllTempShapes.IndexOf(shapes), shapeIndex, blockPrefab.id));
+                shapesSaveData.Add(shape, (copiedAllTempShapes.IndexOf(shapes), shapes.IndexOf(tempShape), blockPrefab.id));
             }
         }
         
@@ -623,7 +639,8 @@ public partial class FieldManager : SingleService<FieldManager>
         currentGhostShape = currentShape.CreateGhost(currentShape);
         currentGhostShape.transform.SetScale(defaultScale);
     }
-
+    
+    
     private async void CheckLoseCondition()
     {
         if (activeShapes.Count == 0) return;
@@ -636,14 +653,17 @@ public partial class FieldManager : SingleService<FieldManager>
                 return;
             }
         }
-        
+
         Lose?.Invoke();
-        
+        TryToSave();
+        FieldSave.Delete();
+        FieldSave.gridDirtied = false;
         FieldAppearance.RedBack.DOFade(0.3f, 0.5f).SetLoops(4, LoopType.Yoyo).OnComplete(() => LoseWindow.Show(Revive));
     }
     
     private void Revive()
     {
+        FieldSave.Restore();
         for (int i = activeShapes.Count - 1; i >= 0; i--)
         {
             var shape = activeShapes[i];
@@ -692,6 +712,7 @@ public partial class FieldManager : SingleService<FieldManager>
     
     private void HighlightDestroyableLines(List<Vector2Int> gridIndices)
     {
+        var lastGridDirtied = FieldSave.gridDirtied;
         for (int i = 0; i < gridIndices.Count; i++)
         {
             var index = gridIndices[i];
@@ -703,7 +724,7 @@ public partial class FieldManager : SingleService<FieldManager>
             var index = gridIndices[i];
             grid.Set(index, null);
         }
-        
+        FieldSave.gridDirtied = lastGridDirtied;
         if (lines.Count == 0)
         {
             return;
