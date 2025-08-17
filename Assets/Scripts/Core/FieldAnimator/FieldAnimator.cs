@@ -72,6 +72,7 @@ namespace Core
         [Serializable]
         public abstract class Handler
         {
+            [NonSerialized] public Block prefab;
             [NonSerialized] public FieldAnimator animator;
             
             public Block[,] Grid => FieldManager.Grid;
@@ -114,8 +115,9 @@ namespace Core
             base.Init();
             FieldManager.BlocksDestroying += OnDestroyBlocks;
 
-            foreach (var handler in _handlers.Values)
+            foreach (var (blockPrefab, handler) in _handlers)
             {
+                handler.handler.prefab = blockPrefab;
                 handler.handler.animator = this;
                 handler.handler.Init();
             }
@@ -131,8 +133,10 @@ namespace Core
             }
         }
 
+        private bool _isSimulating;
         private void _Simulate()
         {
+            _isSimulating = true;
             var lastGridDirtied = FieldSave.gridDirtied;
             var blocks = FieldManager.GetBlocks(true, true);
             for (int j = 0; j < blocks.Count; j++)
@@ -174,6 +178,7 @@ namespace Core
 
             currentSpecialBlocks.Clear();
             FieldSave.gridDirtied = lastGridDirtied;
+            _isSimulating = false;
         }
 
         public Dictionary<Block, List<(Vector2Int index, Block block)>> currentSpecialBlocks = new();

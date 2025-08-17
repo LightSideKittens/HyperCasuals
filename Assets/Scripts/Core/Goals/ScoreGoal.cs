@@ -1,4 +1,5 @@
-﻿using LSCore;
+﻿using System;
+using LSCore;
 using LSCore.AnimationsModule;
 using LSCore.AnimationsModule.Animations.Text;
 
@@ -19,6 +20,12 @@ namespace Core
             ScoreManager.ScoreChanged += OnScoreChanged;
             ScoreManager.ComboChanged += OnComboChanged;
             anim = scoreAnim.GetAnim<TextNumberAnim>();
+        }
+
+        private void Start()
+        {
+            ChangeScoreText((int)target.Number - ScoreManager.CurrentScore);
+            lastScore = ScoreManager.LastScore;
         }
 
         private void OnDestroy()
@@ -50,7 +57,12 @@ namespace Core
 
         protected virtual void ChangeScoreText()
         {
-            target.Number -= ScoreManager.CurrentScore - ScoreManager.LastScore;
+            ChangeScoreText((int)target.Number - (ScoreManager.CurrentScore - ScoreManager.LastScore));
+        }
+
+        private void ChangeScoreText(int score)
+        {
+            target.Number = score;
             if (target.Number <= 0)
             { 
                 IsReached = true;

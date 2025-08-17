@@ -1,4 +1,5 @@
 ﻿using System;
+using Core;
 using DG.Tweening;
 using LSCore;
 using LSCore.AnimationsModule;
@@ -24,6 +25,11 @@ public class TimeGoal : MonoBehaviour
     
     protected void Awake()
     {
+        if (FieldSave.Exists)
+        {
+            time = FieldSave.Time;
+        }
+        
         cachedTime = time;
         timeOutingSpan = TimeSpan.FromSeconds(timeOuting);
         UpdateTimer(time.ToTimeSpan());
@@ -71,11 +77,13 @@ public class TimeGoal : MonoBehaviour
     private void UpdateTimer(TimeSpan remaining)
     {
         timeText.text = remaining.ToString(@"mm\:ss");
+        FieldSave.Time = remaining.Ticks;
         UpdateTimeOuting(remaining);
 
         if (remaining <= TimeSpan.Zero)
         {
             StopTimingOut();
+            FieldSave.Delete();
             LoseWindow.Show(OnRevive);
         }
     }
@@ -109,6 +117,7 @@ public class TimeGoal : MonoBehaviour
     
     private void OnRevive()
     {
+        FieldSave.Restore();
         UpdateTimer(cachedTime.ToTimeSpan());
         var lastPauseCount = pauseCount;
         pauseCount = 0;
