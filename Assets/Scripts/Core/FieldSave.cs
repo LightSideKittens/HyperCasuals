@@ -57,6 +57,7 @@ namespace Core
         {
             cached = Config;
             Manager.Delete();
+            gridDirtied = false;
         }
         
         public static void Restore() => Config = cached;
