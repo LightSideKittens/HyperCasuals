@@ -657,7 +657,6 @@ public partial class FieldManager : SingleService<FieldManager>
         Lose?.Invoke();
         TryToSave();
         FieldSave.Delete();
-        FieldSave.gridDirtied = false;
         FieldAppearance.RedBack.DOFade(0.3f, 0.5f).SetLoops(4, LoopType.Yoyo).OnComplete(() => LoseWindow.Show(Revive));
     }
     
