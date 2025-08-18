@@ -114,12 +114,16 @@ namespace Core
         {
             base.Init();
             FieldManager.BlocksDestroying += OnDestroyBlocks;
-
             foreach (var (blockPrefab, handler) in _handlers)
             {
-                handler.handler.prefab = blockPrefab;
-                handler.handler.animator = this;
-                handler.handler.Init();
+                var h = handler.handler;
+                h.prefab = blockPrefab;
+                h.animator = this;
+                h.Init();
+                if (h is SpecialHandler sh)
+                {
+                    allHandlers.Add(sh);
+                }
             }
         }
 
@@ -149,30 +153,31 @@ namespace Core
                 FieldManager.GetBlocks(false, false)
                     .Select(x => x.index));
             
-            var handlers = new List<SpecialHandler>();
             
+            var activeHandlers = new List<SpecialHandler>();
             foreach (var (prefab, specialBlocks) in currentSpecialBlocks)
             {
                 var h = _handlers[prefab].handler as SpecialHandler;
                 h!.blocks = specialBlocks;
-                handlers.Add(h);
+                activeHandlers.Add(h);
             }
 
-            foreach (var handler in handlers)
+            for (var i = 0; i < allHandlers.Count; i++)
             {
+                var handler = allHandlers[i];
                 handler.StartSimulate();
             }
 
-            for (var i = 0; i < handlers.Count; i++)
+            for (var i = 0; i < activeHandlers.Count; i++)
             {
-                var handler = handlers[i];
+                var handler = activeHandlers[i];
                 handler.Handle();
                 handler.anim.Clear();
             }
 
-            for (var i = 0; i < handlers.Count; i++)
+            for (var i = 0; i < allHandlers.Count; i++)
             {
-                var handler = handlers[i];
+                var handler = allHandlers[i];
                 handler.StopSimulate();
             }
 
@@ -182,6 +187,7 @@ namespace Core
         }
 
         public Dictionary<Block, List<(Vector2Int index, Block block)>> currentSpecialBlocks = new();
+        private List<SpecialHandler> allHandlers = new();
 
         public bool ContainsInSpecialBlocks(Block block)
         {
