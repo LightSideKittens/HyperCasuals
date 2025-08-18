@@ -1,5 +1,4 @@
-﻿using System;
-using LSCore;
+﻿using LSCore;
 using LSCore.AnimationsModule;
 using LSCore.AnimationsModule.Animations.Text;
 
@@ -60,7 +59,7 @@ namespace Core
             ChangeScoreText((int)target.Number - (ScoreManager.CurrentScore - ScoreManager.LastScore));
         }
 
-        private void ChangeScoreText(int score)
+        protected virtual void ChangeScoreText(int score)
         {
             target.Number = score;
             if (target.Number <= 0)

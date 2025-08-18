@@ -1,5 +1,4 @@
-﻿using Firebase.Analytics;
-using LSCore;
+﻿using LSCore;
 
 namespace Core
 {
@@ -22,6 +21,11 @@ namespace Core
                 GameSave.BestScore = currentScore;
                 bestScore.Number = currentScore;
             }
+        }
+
+        protected override void ChangeScoreText(int score)
+        {
+            target.Number = ScoreManager.CurrentScore;
         }
     }
 }
