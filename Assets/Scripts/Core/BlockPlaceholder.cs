@@ -13,16 +13,19 @@ public class BlockPlaceholder : MonoBehaviour
     
     protected virtual void Awake()
     {
+#if UNITY_EDITOR
         if (World.IsEditMode) return;
+#endif
         InitBlock();
     }
 
     private void Start()
     {
-        if (World.IsPlaying)
-        {
-            Destroy(gameObject);
-        }
+#if UNITY_EDITOR
+        if (World.IsEditMode) return;
+#endif
+        
+        Destroy(gameObject);
     }
 
     private void InitBlock()
@@ -45,24 +48,26 @@ public class BlockPlaceholder : MonoBehaviour
             block.next = next.block;
         }
         block.sortingOrder = block.sortingOrder;
-        if (World.IsPlaying)
+        
+#if UNITY_EDITOR
+        if (World.IsEditMode) return;
+#endif
+        
+        block.transform.SetParent(null, true);
+        var bonus = GetComponentInChildren<BonusBlock>();
+        if (bonus)
         {
-            block.transform.SetParent(null, true);
-            var bonus = GetComponentInChildren<BonusBlock>();
-            if (bonus)
-            {
-                bonus.transform.SetParent(block.transform, true);
-            }
+            bonus.transform.SetParent(block.transform, true);
+        }
             
-            var shape = transform.parent.GetComponent<Shape>();
-            if (block.next)
-            {
-                block.next.transform.SetParent(block.transform, true);
-            }
-            if (shape)
-            { 
-                shape.blocks.Add(block);
-            }
+        var shape = transform.parent.GetComponent<Shape>();
+        if (block.next)
+        {
+            block.next.transform.SetParent(block.transform, true);
+        }
+        if (shape)
+        { 
+            shape.blocks.Add(block);
         }
     }
     
@@ -70,6 +75,7 @@ public class BlockPlaceholder : MonoBehaviour
     private void OnValidate()
     {
         if(World.IsPlaying) return;
+        if(World.IsBuilding) return;
         EditorApplication.update += OnUpdate;
         isEdited = true;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using LSCore.ConfigModule;
 using LSCore.Extensions;
@@ -9,10 +10,8 @@ namespace Core
 {
     public class FieldConfigManager : JTokenGameConfigManager
     {
-#if UNITY_EDITOR
         public override void Load()
         {
-            isLogEnabled = true;
             base.Load();
             if (!FieldSave.IsEnabled)
             { 
@@ -27,11 +26,23 @@ namespace Core
                 base.Save();
             }
         }
-#endif
     }
     
     public static partial class FieldSave
     {
+        [Serializable]
+        public class DoDelete : DoIt
+        {
+            public override void Do()
+            {
+                Delete();
+            }
+        }
+        
+#if !UNITY_EDITOR
+        public static bool IsEnabled { get; set; }
+#endif
+        
         public static FieldConfigManager Manager => ConfigMaster<FieldConfigManager>.Get(Path.Combine("FieldSaves", GameSave.currentLevel ?? "unknown"));
 
         private static JObject cached;
@@ -68,6 +79,8 @@ namespace Core
         
         public static void SaveGradeBlocks(Block prefab, Dictionary<Vector2Int, int> stages)
         {
+            if(!IsEnabled) return;
+            
             var jGradeBlocks = GradeBlocks;
             var id = prefab.id.ToString();
             
@@ -93,6 +106,7 @@ namespace Core
 
         public static void SaveShapes(List<(int listIndex, int shapeIndex, string blockPrefab)> shapes)
         {
+            if(!IsEnabled) return;
             var jShapes = Shapes;
             jShapes.Clear();
             foreach (var (listIndex, shapeIndex, blockPrefab) in shapes)
@@ -110,6 +124,7 @@ namespace Core
 
         public static void SaveBonusBlocks(Dictionary<Block, BonusBlock> bonuses)
         {
+            if(!IsEnabled) return;
             var jBonuses = Bonuses;
             jBonuses.Clear();
             foreach (var (block, bonus) in bonuses)
@@ -127,6 +142,7 @@ namespace Core
         
         public static void SaveField(Block[,] blocks)
         {
+            if(!IsEnabled) return;
             var jBlocks = Blocks;
             jBlocks.Clear();
             var size = blocks.GetSize();

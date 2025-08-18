@@ -38,10 +38,14 @@ public class GameSave
 
     private static void InitThemesSet(JArray themes)
     {
+#if UNITY_EDITOR
         if (World.IsDiff(ref id))
         {
             themesSet = new JHashSet<int>(themes);
         }
+#else
+        themesSet ??= new JHashSet<int>(themes);
+#endif
     }
     
     public static bool BuyTheme(int theme)
