@@ -56,7 +56,7 @@ namespace Core
                 bonuses[block] = Instantiate(bonusPrefab, block.transform.position, Quaternion.identity);
             }
             
-            FieldSave.LoadScoreManager(out _lastScore, out _currentScore, out _currentCombo, out currentTurn, out turnsForBonus);
+            FieldSave.LoadScoreManager(ref _lastScore, ref _currentScore, ref _currentCombo, ref currentTurn, ref turnsForBonus);
         }
 
         private void OnSaving()

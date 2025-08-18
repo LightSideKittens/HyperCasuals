@@ -20,6 +20,8 @@ namespace Core
             int currentTurn,
             int turnsForBonus)
         {
+            if(!IsEnabled) return;
+            
             var jScoreManager = Goals.AsJ<JObject>("scoreManager");
             jScoreManager["lastScore"] = lastScore;
             jScoreManager["currentScore"] = currentScore;
@@ -29,23 +31,30 @@ namespace Core
         }
         
         public static void LoadScoreManager(
-            out int lastScore,
-            out int currentScore,
-            out int currentCombo,
-            out int currentTurn,
-            out int turnsForBonus)
+            ref int lastScore,
+            ref int currentScore,
+            ref int currentCombo,
+            ref int currentTurn,
+            ref int turnsForBonus)
         {
+            if(!IsEnabled) return;
+            
             var jScoreManager = Goals.AsJ<JObject>("scoreManager");
-            lastScore = jScoreManager["lastScore"].ToInt();
-            currentScore = jScoreManager["currentScore"].ToInt();
-            currentCombo = jScoreManager["currentCombo"].ToInt();
-            currentTurn = jScoreManager["currentTurn"].ToInt();
-            turnsForBonus = jScoreManager["turnsForBonus"].ToInt();
+            if (jScoreManager.ContainsKey("lastScore"))
+            {
+                lastScore = jScoreManager["lastScore"].ToInt();
+                currentScore = jScoreManager["currentScore"].ToInt();
+                currentCombo = jScoreManager["currentCombo"].ToInt();
+                currentTurn = jScoreManager["currentTurn"].ToInt();
+                turnsForBonus = jScoreManager["turnsForBonus"].ToInt();
+            }
         }
 
         public static JObject BlockGoals => Goals.AsJ<JObject>("blockGoals");
         public static void SaveBlockGoal(string blockPrefab, int count)
         {
+            if(!IsEnabled) return;
+            
             var jBlockGoals = BlockGoals;
             jBlockGoals[blockPrefab] = count;
         }
