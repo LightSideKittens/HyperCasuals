@@ -40,7 +40,7 @@ namespace Core
         }
         
 #if !UNITY_EDITOR
-        public static bool IsEnabled { get; set; }
+        public static bool IsEnabled { get; set; } = true;
 #endif
         
         public static FieldConfigManager Manager => ConfigMaster<FieldConfigManager>.Get(Path.Combine("FieldSaves", GameSave.currentLevel ?? "unknown"));
