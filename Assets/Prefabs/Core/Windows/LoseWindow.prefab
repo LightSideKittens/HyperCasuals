@@ -57,6 +57,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHideAnim:
     rid: 1724297501560799844
+  blockSystemGoBack: 0
+  systemGoBackOverride:
+    rid: 2877982023557841911
   onShowing: []
   onShowed: []
   onHiding: []
@@ -70,6 +73,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1724297501560799844
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:
@@ -181,6 +186,14 @@ MonoBehaviour:
       data:
         loopsCount: 20
         loopType: 1
+    - rid: 2877982023557841911
+      type: {class: LoadScene, ns: , asm: LSCore.UIModule}
+      data:
+        sceneToLoad: Launcher
+        mode: 0
+        useAddressables: 0
+        loader:
+          rid: -2
     - rid: 5237655027965231568
       type: {class: 'SerializeField`1[[UnityEngine.UI.Image, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
       data:

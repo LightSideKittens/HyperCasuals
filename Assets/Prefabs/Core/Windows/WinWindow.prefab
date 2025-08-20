@@ -60,6 +60,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHideAnim:
     rid: 1724297501560799844
+  blockSystemGoBack: 0
+  systemGoBackOverride:
+    rid: 2877982023557841918
   onShowing: []
   onShowed:
   - rid: 5237655153313055433
@@ -72,11 +75,21 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1724297501560799844
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:
         canvasGroup: {fileID: 1011038207463600823}
         duration: 0.2
+    - rid: 2877982023557841918
+      type: {class: LoadScene, ns: , asm: LSCore.UIModule}
+      data:
+        sceneToLoad: Launcher
+        mode: 0
+        useAddressables: 0
+        loader:
+          rid: -2
     - rid: 5237655153313055433
       type: {class: WinWindow/LevelUp, ns: , asm: Core}
       data: 
