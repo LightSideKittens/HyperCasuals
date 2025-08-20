@@ -95,6 +95,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
 
     private void Init()
     {
+        CoreWindow.AsHome();
         CoreWindow.Show();
         idleMusic.Do();
     }

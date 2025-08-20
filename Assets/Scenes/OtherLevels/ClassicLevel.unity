@@ -410,7 +410,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4745898678485896363, guid: d71f6af05ff306a45a06fa0a979c7643, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5481979846487352920, guid: d71f6af05ff306a45a06fa0a979c7643, type: 3}
       insertIndex: -1
@@ -757,6 +758,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHideAnim:
     rid: 1249993581379191259
+  blockSystemGoBack: 0
+  systemGoBackOverride:
+    rid: -2
   onShowing: []
   onShowed: []
   onHiding: []
@@ -764,6 +768,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1249993581379191259
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:

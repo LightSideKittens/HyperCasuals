@@ -144,7 +144,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.9.5
+  bundleVersion: 0.9.6
   preloadedAssets:
   - {fileID: 11400000, guid: e9b1965281f5be840889a83946bd954f, type: 2}
   metroInputSource: 0
@@ -179,7 +179,7 @@ PlayerSettings:
     iPhone: 3
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 6
+  AndroidBundleVersionCode: 8
   AndroidMinSdkVersion: 26
   AndroidTargetSdkVersion: 35
   AndroidPreferredInstallLocation: 1
@@ -294,7 +294,7 @@ PlayerSettings:
   androidGamepadSupportLevel: 0
   AndroidMinifyRelease: 1
   AndroidMinifyDebug: 0
-  AndroidValidateAppBundleSize: 1
+  AndroidValidateAppBundleSize: 0
   AndroidAppBundleSizeToValidate: 150
   AndroidReportGooglePlayAppDependencies: 1
   androidSymbolsSizeThreshold: 800
@@ -529,7 +529,7 @@ PlayerSettings:
   m_BuildTargetGraphicsAPIs:
   - m_BuildTarget: AndroidPlayer
     m_APIs: 0b000000
-    m_Automatic: 1
+    m_Automatic: 0
   - m_BuildTarget: iOSSupport
     m_APIs: 10000000
     m_Automatic: 1
@@ -555,7 +555,7 @@ PlayerSettings:
   m_BuildTargetDefaultTextureCompressionFormat:
   - serializedVersion: 3
     m_BuildTarget: Android
-    m_Formats: 03000000
+    m_Formats: 0300000002000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -822,7 +822,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3_2;ODIN_INSPECTOR_3_3;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;SW_STAGE_STAGE10;SW_STAGE_STAGE10_OR_ABOVE;DEBUG
+    Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3_2;ODIN_INSPECTOR_3_3;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;SW_STAGE_STAGE10;SW_STAGE_STAGE10_OR_ABOVE
     EmbeddedLinux: 
     LinuxHeadlessSimulation: 
     Nintendo Switch: 
@@ -843,7 +843,7 @@ PlayerSettings:
     Android: 1
   il2cppCodeGeneration: {}
   il2cppStacktraceInformation:
-    Android: 1
+    Android: 0
   managedStrippingLevel:
     Android: 3
     EmbeddedLinux: 1
