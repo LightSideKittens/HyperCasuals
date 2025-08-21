@@ -1,6 +1,4 @@
-﻿using Firebase;
-using Firebase.Analytics;
-using LSCore;
+﻿using LSCore;
 
 namespace Launcher
 {
@@ -9,28 +7,7 @@ namespace Launcher
         protected override void Awake()
         {
             base.Awake();
-            InitFirebase();
-        }
-
-        private async void InitFirebase()
-        {
-            var status = await FirebaseApp.CheckAndFixDependenciesAsync();
-            if (status == DependencyStatus.Available)
-            {
-                FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-            }
-            else
-            {
-                UnityEngine.Debug.LogError($"[Firebase] Dependencies not available: {status}");
-            }
-            
-            BaseInitializer.Initialize();
-            if (!Levels.IsTutorialCompleted.Is)
-            {
-                new Levels.LoadCurrentTutorial().Do();
-                return;
-            }
-            Init();
+            BaseInitializer.Initialize(Init);
         }
 
         private void Init()

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using LSCore.Extensions.Unity;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -82,5 +84,41 @@ public class Shape : MonoBehaviour
         }
 
         return ghost;
+    }
+
+    private Shape shadowShape;
+    private List<Block> shadowBlocks;
+
+    private void OnDestroy()
+    {
+        if (shadowShape)
+        { 
+            Destroy(shadowShape.gameObject);
+        }
+    }
+
+    public bool ShadowEnabled
+    {
+        set 
+        {
+            if (shadowShape == null)
+            {
+                shadowBlocks = new List<Block>();
+                shadowShape = Instantiate(this, transform.position - new Vector3(0, 0.025f), Quaternion.identity);
+                for (int i = 0; i < shadowShape.blocks.Count; i++)
+                {
+                    var block = shadowShape.blocks[i].GetRegular();
+                    if (block)
+                    {
+                        block.render.sortingOrder = -30;
+                        block.color = Color.black;
+                        block.transform.localScale = new Vector3(1.15f, 1.25f, 1);
+                        shadowBlocks.Add(block);
+                    }
+                }
+            }
+            
+            shadowShape.gameObject.SetActive(value);
+        }
     }
 }
