@@ -58,6 +58,7 @@ namespace Core
         private void OnValidate()
         {
             if(World.IsPlaying) return;
+            if(World.IsBuilding) return;
             UpdateSprite();
         }
 #endif

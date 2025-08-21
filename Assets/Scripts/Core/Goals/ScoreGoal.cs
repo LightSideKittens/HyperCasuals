@@ -8,6 +8,7 @@ namespace Core
     {
         public LSNumber target;
         public LocalizationText comboText;
+        public AnimSequencer reachedAnim;
         public AnimSequencer scoreAnim;
         public AnimSequencer comboAnim;
         private TextNumberAnim anim;
@@ -63,7 +64,11 @@ namespace Core
         {
             target.Number = score;
             if (target.Number <= 0)
-            { 
+            {
+                if (!IsReached)
+                {
+                    reachedAnim.Animate();
+                }
                 IsReached = true;
                 target.Number = 0;
             }

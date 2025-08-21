@@ -64,7 +64,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     protected override void Awake()
     {
         base.Awake();
-        BaseInitializer.Initialize();
+        BaseInitializer.Initialize(null);
         LoseWindow.onReviveClicked += OnReviveClicked;
 #if DEBUG
         DebugData.Init();  

@@ -186,6 +186,7 @@ public partial class FieldManager : SingleService<FieldManager>
             shape.BlockPrefab = blockPrefab;
             shape.transform.position = _spawners[i].transform.position;
             shape.transform.SetScale(shapeSpawnerScale);
+            shape.ShadowEnabled = true;
             _spawners[i].currentShape = shape;
             shapesSaveData.Add(shape, (listIndex, shapeIndex, blockPrefabId));
         }
@@ -220,6 +221,7 @@ public partial class FieldManager : SingleService<FieldManager>
 
         dragger.Started += shape =>
         {
+            shape.ShadowEnabled = false;
             DragStarted?.Invoke();
             ClearCurrentGhostShape();
             shape.transform.DOScale(defaultScale, 0.2f);
@@ -294,7 +296,10 @@ public partial class FieldManager : SingleService<FieldManager>
             }
             else
             {
-                shape.transform.DOMove(dragger.currentSpawner.transform.position, 0.2f).SetEase(Ease.InOutExpo);
+                shape.transform.DOMove(dragger.currentSpawner.transform.position, 0.2f).SetEase(Ease.InOutExpo).OnComplete(() =>
+                {
+                    shape.ShadowEnabled = true;
+                });
                 shape.transform.DOScale(shapeSpawnerScale, 0.2f).SetEase(Ease.InOutExpo);
             }
         };
@@ -471,6 +476,7 @@ public partial class FieldManager : SingleService<FieldManager>
                 shape.BlockPrefab = blockPrefab;
                 shape.transform.position = _spawners[i].transform.position;
                 shape.transform.SetScale(shapeSpawnerScale);
+                shape.ShadowEnabled = true;
                 _spawners[i].currentShape = shape;
                 shapesSaveData.Add(shape, (copiedAllTempShapes.IndexOf(shapes), shapes.IndexOf(tempShape), blockPrefab.id));
             }
