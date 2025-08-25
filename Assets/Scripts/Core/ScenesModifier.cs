@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LSCore;
 using LSCore.Editor;
+using LSCore.Extensions.Unity;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -45,9 +46,15 @@ namespace Core
         protected override bool Modify(GameObject go, out bool needBreak)
         {
             needBreak = false;
-            if (go.TryGetComponent<BlockPlaceholder>(out var blockPlaceholder))
+            if (go.TryGetComponent<GoalWindow>(out var blockPlaceholder))
             {
-                blockPlaceholder.enabled = true;
+                var back = blockPlaceholder.transform.GetChild(0) as RectTransform;
+                var pos = back.anchoredPosition;
+                pos.y = 853.7f;
+                back.anchorMin = 0.5f.ToVector2();
+                back.anchorMax = 0.5f.ToVector2();
+                back.anchoredPosition = pos;
+                needBreak = true;
                 return true;
             }
             

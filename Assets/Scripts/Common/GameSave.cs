@@ -8,6 +8,7 @@ public class GameSave
     public static RJObject Config => config ?? JTokenGameConfig.Get("GameCoreData");
     private static RJObject config;
     public static string currentLevel;
+    public static string loseReason;
 
     public static int Level
     {

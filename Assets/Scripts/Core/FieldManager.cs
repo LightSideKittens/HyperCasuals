@@ -66,7 +66,7 @@ public partial class FieldManager : SingleService<FieldManager>
         if (initialShape)
         {
             InitBack();
-            initialShape.transform.position = back.transform.position - (Vector3)4f.ToVector2();
+            initialShape.transform.position = back.transform.position - ((Vector3)4f.ToVector2() * FieldAppearance.Field.transform.localScale.x);
             initialShape.transform.SetScale(defaultScale);
         }
     }
@@ -102,6 +102,7 @@ public partial class FieldManager : SingleService<FieldManager>
         defaultScale = new Vector3(8f / gridSize.x, 8f / gridSize.y, 1);
         back.transform.localScale = defaultScale;
         gridOffset = new Vector3(back.size.x / 2, back.size.y / 2) - LSVector3.half;
+        defaultScale *= FieldAppearance.Field.transform.localScale.x;
     }
 
     private void InitField()
@@ -127,6 +128,10 @@ public partial class FieldManager : SingleService<FieldManager>
         {
             if (initialShape)
             {
+                initialShape.transform.position = back.transform.position - ((Vector3)4f.ToVector2() * FieldAppearance.Field.transform.localScale.x);
+                initialShape.transform.SetScale(defaultScale);
+                InitialShapePlacing?.Invoke();
+                
                 if (initialShape.blocks.Count > 0)
                 {
                     for (int j = 0; j < initialShape.blocks.Count; j++)
@@ -206,9 +211,11 @@ public partial class FieldManager : SingleService<FieldManager>
     public List<Shape> mediumShapes;
     public List<Shape> hardShapes;
     private string level;
+    public static event Action Starting;
     
     private void Start()
     {
+        Starting?.Invoke();
         level = GameSave.currentLevel;
         grid = new Block[gridSize.x, gridSize.y]; 
         InitBack();
@@ -896,6 +903,7 @@ public partial class FieldManager : SingleService<FieldManager>
 
     public static event Action<Block> BlocksDestroying;
     public static event Action<PlaceData> Placed;
+    public static event Action InitialShapePlacing;
     public static event Action<Shape> InitialShapePlaced;
     public static event Action DragStarted;
     public static event Action Lose;

@@ -1,4 +1,6 @@
 ﻿using LSCore;
+using LSCore.AnimationsModule.Animations.Options;
+using LSCore.Async;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,20 +13,18 @@ public class BlockPlaceholder : MonoBehaviour
     private static bool isEdited;
     private SpriteRenderer dummySpriteRenderer;
     
-    protected virtual void Awake()
+    private void Awake()
     {
 #if UNITY_EDITOR
         if (World.IsEditMode) return;
 #endif
-        InitBlock();
+        FieldManager.InitialShapePlacing += OnPlacing;
     }
 
-    private void Start()
+    protected virtual void OnPlacing()
     {
-#if UNITY_EDITOR
-        if (World.IsEditMode) return;
-#endif
-        
+        FieldManager.InitialShapePlacing -= OnPlacing;
+        InitBlock();
         Destroy(gameObject);
     }
 

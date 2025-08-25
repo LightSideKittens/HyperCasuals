@@ -1,5 +1,4 @@
 ﻿using System;
-using Firebase.Analytics;
 using LSCore;
 using LSCore.Attributes;
 using LSCore.ConditionModule;
@@ -41,7 +40,7 @@ public class Levels : SingleScriptableObject<Levels>
         public override void Do()
         {
             base.Do();
-            Analytic.LogEvent("start_tutorial", "level", GameSave.TutorialLevel.ToString());
+            Analytic.LogEvent("start_tutorial", ("level", GameSave.TutorialLevel));
         }
     }
     
@@ -64,7 +63,7 @@ public class Levels : SingleScriptableObject<Levels>
         public override void Do()
         {
             GameSave.currentLevel = $"level_{GameSave.Level}";
-            Analytic.LogEvent("start_level", "level", GameSave.currentLevel);
+            Analytic.LogEvent("start_level", ("level", GameSave.Level));
             base.Do();
         }
     }

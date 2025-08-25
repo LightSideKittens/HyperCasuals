@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using LSCore.Extensions;
+using LSCore.Extensions.Unity;
 using UnityEngine;
 
 namespace Core
@@ -20,8 +21,12 @@ namespace Core
                     foreach (var (index, block) in data)
                     {
                         var pos = (index.x + index.y) / 4f * 0.05f;
-                        seq.Insert(pos, block.render.DOFade(0, 0.3f)
-                            .SetEase(Ease.InCubic).OnComplete(() => { Destroy(block.gameObject); }));
+                        var fadeAnim = block.render.DOFade(0, 0.3f)
+                            .SetEase(Ease.InCubic)
+                            .OnComplete(() => { Destroy(block.gameObject); });
+                        var scaleAnim = block.transform.DOScale(1.5f.ToVector3(), 0.1f).SetLoops(2, LoopType.Yoyo);
+                        seq.Insert(pos, fadeAnim);
+                        seq.Insert(pos, scaleAnim);
                     }
                 }
             }

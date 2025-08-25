@@ -4,9 +4,22 @@ using LSCore;
 public class WinWindow : BaseWindow<WinWindow>
 {
     public LaLa.PlayClip sound;
+    public LSButton claimButton;
     
     protected override void OnShowing()
     {
+        if (Ads.IsRewardedReady)
+        {
+            claimButton.gameObject.SetActive(true);
+            claimButton.submittable.doIter.Unsubscribe();
+            ISubmittable submittable = claimButton.submittable;
+            submittable.Submitted += OnClaim;
+        }
+        else
+        {
+            claimButton.gameObject.SetActive(false);
+        }
+        
         FieldSave.Delete();
         if (LoseWindow.IsVisible)
         {
@@ -16,7 +29,26 @@ public class WinWindow : BaseWindow<WinWindow>
         CoreWorld.StopIdleMusic();
         base.OnShowing();
         Manager.canvas.sortingOrder = 120;
-        Analytic.LogEvent("win_level", "level", GameSave.currentLevel);
+        Analytic.LogEvent("win_level", ("level", GameSave.currentLevel));
+    }
+
+    private void OnClaim()
+    {
+        Ads.ShowRewarded(OnRewarded, OnClosed);
+
+        void OnRewarded()
+        {
+            claimButton.submittable.doIter.Do();
+            claimButton.gameObject.SetActive(false);
+        }
+
+        void OnClosed()
+        {
+            if (!Ads.IsRewardedReady)
+            {
+                claimButton.gameObject.SetActive(false);
+            }
+        }
     }
 
     [Serializable]

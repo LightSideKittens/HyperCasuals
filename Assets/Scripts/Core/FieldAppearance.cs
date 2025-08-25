@@ -35,6 +35,8 @@ public partial class FieldAppearance : SingleService<FieldAppearance>
         private IEnumerable<ValueDropdownItem<Id>> Blocks => GetBlocks(isSpecial);
     }
     
+    public RectTransform _area;
+    public Transform _field;
     public SpriteRenderer _back;
     public SpriteRenderer _redBack;
     public ParticleSystem _shapeAppearFx;
