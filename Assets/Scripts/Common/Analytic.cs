@@ -62,13 +62,64 @@ public static class Analytic
 
     public static void LogEvent(string name)
     {
-        Burger.Log($"{log} LogEvent {name}");
+        Burger.Log($"{log} LogEvent: {name}");
         FirebaseAnalytics.LogEvent(name);
     }
     
-    public static void LogEvent(string name, string param, string value)
+    public static void LogEvent(string name, Param param)
     {
-        Burger.Log($"{log} LogEvent {name} {param} = {value}");
-        FirebaseAnalytics.LogEvent(name, param, value);
+        Burger.Log($"{log} LogEvent {name}: {param}");
+        FirebaseAnalytics.LogEvent(name, param.parameter);
+    }
+
+    public static void LogEvent(string name, params Param[] parameters)
+    {
+        Burger.Log($"{log} LogEvent {name}: {string.Join(" ",  parameters)}");
+        FirebaseAnalytics.LogEvent(name, parameters.ToParameters());
+    }
+
+    public static Parameter[] ToParameters(this Param[] param)
+    {
+        var parameters = new Parameter[param.Length];
+
+        for (int i = 0; i < param.Length; i++)
+        {
+            parameters[i] = param[i].parameter;
+        }
+
+        return parameters;
+    }
+
+    public struct Param
+    {
+        public static implicit operator Param((string, string) param) => new(param.Item1, param.Item2);
+        public static implicit operator Param((string, long) param) => new(param.Item1, param.Item2);
+        public static implicit operator Param((string, double) param) => new(param.Item1, param.Item2);
+
+        private string log;
+        public Parameter parameter;
+
+        public override string ToString()
+        {
+            return log;
+        }
+
+        public Param(string key, string val) : this()
+        {
+            log = $"\n\r{key}: {val}";
+            parameter = new Parameter(key, val);
+        }
+        
+        public Param(string key, long val) : this()
+        {
+            log = $"\n\r{key}: {val}";
+            parameter = new Parameter(key, val);
+        }
+        
+        public Param(string key, double val) : this()
+        {
+            log = $"\n\r{key}: {val}";
+            parameter = new Parameter(key, val);
+        }
     }
 }

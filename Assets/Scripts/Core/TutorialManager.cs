@@ -12,12 +12,14 @@ namespace Core
         public Dragger dragger;
         public AnimSequencer pointerAnim;
         public AnimSequencer shapeBlinkAnim;
+        public Transform blinkShape;
         public GameObject pointer;
         [SerializeReference] public List<DoIt> onCompleted;
         private static bool lastFieldSaveEnabled;
         protected override void Init()
         {
             base.Init();
+            blinkShape.SetParent(FieldAppearance.Field, false);
             lastFieldSaveEnabled = FieldSave.IsEnabled;
             FieldSave.IsEnabled = false;
             pointerAnim.Animate();
@@ -54,7 +56,7 @@ namespace Core
             pointerAnim.Kill();
             pointer.SetActive(false);
             Wait.Delay(1, onCompleted.Do);
-            Analytic.LogEvent("tutorial_completed", "level", GameSave.TutorialLevel.ToString());
+            Analytic.LogEvent("tutorial_completed", ("level", GameSave.TutorialLevel));
         }
     }
 }

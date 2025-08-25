@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using LSCore;
 using LSCore.AnimationsModule;
 using UnityEngine;
@@ -6,25 +7,70 @@ using UnityEngine;
 public class LoseWindow : BaseWindow<LoseWindow>
 {
     public LaLa.PlayClip sound;
+    [SerializeField] private GameObject counter;
     [SerializeField] private LSButton watchButton;
+    [SerializeField] private LSButton replayButton;
     [SerializeReference] private AnimSequencer timerAnim;
     public static Action onReviveClicked;
+    private bool watched;
     
     protected override void OnShowing()
     {
         sound.Do();
         CoreWorld.StopIdleMusic();
         base.OnShowing();
-        watchButton.Submitted += Reload; 
-        timerAnim.Animate();
-        Analytic.LogEvent("lost_level", "level", GameSave.currentLevel);
-    }
+        watchButton.Submitted += Reload;
 
+        if (Ads.IsRewardedReady && !watched)
+        { 
+            SetActiveWatchButton(true);
+            timerAnim.Animate().OnComplete(() => SetActiveWatchButton(false));
+        }
+        else
+        {
+            SetActiveWatchButton(false);
+        }
+        
+        if (GameSave.currentLevel == "classic")
+        {
+            Analytic.LogEvent("lost_classic");
+        }
+        else
+        { 
+            Analytic.LogEvent("lost_level", ("level", GameSave.currentLevel));
+        }
+    }
+    
     private void Reload()
     {
-        UIViewBoss.GoBack();
-        onReviveClicked?.Invoke();
-        Analytic.LogEvent("revive", "level", GameSave.currentLevel);
+        Ads.ShowRewarded(OnRewarded, OnClosed);
+        
+        void OnClosed()
+        {
+            SetActiveWatchButton(false);
+        }
+        
+        void OnRewarded()
+        {
+            watched = true; 
+            UIViewBoss.GoBack();
+            onReviveClicked?.Invoke();
+            if (GameSave.currentLevel == "classic")
+            {
+                Analytic.LogEvent("revive_classic");
+            }
+            else
+            { 
+                Analytic.LogEvent("revive", ("level", GameSave.currentLevel));
+            }
+        }
+    }
+
+    private void SetActiveWatchButton(bool active)
+    {
+        watchButton.gameObject.SetActive(active);
+        counter.SetActive(active);
+        replayButton.gameObject.SetActive(!active);
     }
 
     protected override void OnHiding()

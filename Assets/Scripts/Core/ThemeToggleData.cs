@@ -78,14 +78,14 @@ namespace Common
                             buyTheme.Do();
                             spend = null;
                             IsOn = true;
-                            Analytic.LogEvent("buy_theme", "theme", buyTheme.theme.ToString());
+                            Analytic.LogEvent("buy_theme", ("theme", buyTheme.theme.ToString()));
                         };
                     }
                 }
                 else
                 {
                     GameSave.Theme = buyTheme.theme;
-                    Analytic.LogEvent("select_theme", "theme", buyTheme.theme.ToString());
+                    Analytic.LogEvent("select_theme", ("theme", buyTheme.theme.ToString()));
                 }
             }
         }

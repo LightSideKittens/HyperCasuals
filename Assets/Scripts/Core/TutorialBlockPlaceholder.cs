@@ -1,15 +1,10 @@
-﻿using LSCore;
-
-namespace Core
+﻿namespace Core
 {
     public class TutorialBlockPlaceholder : BlockPlaceholder
     {
-        protected override void Awake()
+        protected override void OnPlacing()
         {
-            base.Awake();
-#if UNITY_EDITOR
-            if(World.IsEditMode) return;
-#endif
+            base.OnPlacing();
             block.render.enabled = false;
         }
     }

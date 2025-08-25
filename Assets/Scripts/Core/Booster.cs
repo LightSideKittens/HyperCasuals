@@ -18,7 +18,7 @@ public abstract class Booster : DoIt
     protected virtual void OnUsed()
     {
         Funds.ForceSpend(id, 1);
-        Analytic.LogEvent("booster_used", "id", id.ToString());
+        Analytic.LogEvent("booster_used", ("id", id.ToString()));
     }
 }
 
