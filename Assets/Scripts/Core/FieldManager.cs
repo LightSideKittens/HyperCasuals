@@ -414,7 +414,6 @@ public partial class FieldManager : SingleService<FieldManager>
     
     protected virtual async void CreateAndInitShape()
     {
-        var lastGridDirtied = FieldSave.gridDirtied;
         var fullness = GridFullness / grid.Length;
         var easyShapeFactor = fullness / 5;
         var lastGrid = grid;
@@ -498,7 +497,7 @@ public partial class FieldManager : SingleService<FieldManager>
         
         grid = lastGrid;
         FieldSave.SaveShapes(shapesSaveData.Values.ToList());
-        FieldSave.gridDirtied = lastGridDirtied;;
+        FieldSave.gridDirtied = true;
     }
 
     public Vector2Int _ToIndex(Vector2 pos)
