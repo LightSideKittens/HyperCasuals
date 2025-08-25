@@ -19,7 +19,8 @@ public class WinWindow : BaseWindow<WinWindow>
         {
             claimButton.gameObject.SetActive(false);
         }
-        
+
+        FieldSave.gridDirtied = false;
         FieldSave.Delete();
         if (LoseWindow.IsVisible)
         {

@@ -15,21 +15,35 @@ public static class Ads
 
     private static string rvUnitId;
     private static string isUnitId;
-    
-    private static bool isShowing;
 
-    public static bool IsInitialized => initialized;
-    public static bool IsRewardedReady => rewarded != null && rewarded.IsAdReady();
-    public static bool IsInterstitialReady => interstitial != null && interstitial.IsAdReady();
+    private static bool isShowing;
+    private static bool rvLoading;
+    private static bool isLoading;
+
+    public static bool IsInitialized      => initialized;
+    public static bool IsRewardedReady    => rewarded != null && rewarded.IsAdReady();
+    public static bool IsInterstitialReady=> interstitial != null && interstitial.IsAdReady();
+
     private static readonly string logTag = "[Ads]".ToTag(new Color(0.48f, 0.79f, 0f));
+
+    private static float rvRetry = 2f, isRetry = 2f;
+    private const float MaxRetry = 30f;
 
 #if UNITY_EDITOR
     static Ads()
     {
-        World.Destroyed += Dispose;
+        World.Destroyed += () =>
+        {
+            rewarded = null;
+            interstitial = null;
+            initialized = false;
+            isShowing = false;
+            rvLoading = isLoading = false;
+            rvRetry = isRetry = 2f;
+        };
     }
 #endif
-
+    
     public static void Init(
         string appKey,
         string rewardedUnitId,
@@ -52,11 +66,34 @@ public static class Ads
         {
             initialized = true;
 
-            rewarded = new LevelPlayRewardedAd(rvUnitId);
-            interstitial = new LevelPlayInterstitialAd(isUnitId);
+            rewarded    = new LevelPlayRewardedAd(rvUnitId);
+            interstitial= new LevelPlayInterstitialAd(isUnitId);
 
-            rewarded.OnAdLoadFailed += e => Burger.Warning($"{logTag} RV load failed: {e}");
-            interstitial.OnAdLoadFailed += e => Burger.Warning($"{logTag} IS load failed: {e}");
+            rewarded.OnAdLoaded += _ =>
+            {
+                rvLoading = false;
+                rvRetry = 2f;
+                Burger.Log($"{logTag} RV loaded");
+            };
+            rewarded.OnAdLoadFailed += e =>
+            {
+                rvLoading = false;
+                Burger.Warning($"{logTag} RV load failed: {e}");
+                RetryRewarded();
+            };
+
+            interstitial.OnAdLoaded += _ =>
+            {
+                isLoading = false;
+                isRetry = 2f;
+                Burger.Log($"{logTag} IS loaded");
+            };
+            interstitial.OnAdLoadFailed += e =>
+            {
+                isLoading = false;
+                Burger.Warning($"{logTag} IS load failed: {e}");
+                RetryInterstitial();
+            };
 
             LoadRewarded();
             LoadInterstitial();
@@ -64,11 +101,14 @@ public static class Ads
             Burger.Log($"{logTag} LevelPlay initialized");
         };
 
-        LevelPlay.OnInitFailed += e => { Burger.Error($"{logTag} LevelPlay init failed: {e}"); };
-
+        LevelPlay.OnInitFailed += e =>
+        {
+            Burger.Error($"{logTag} LevelPlay init failed: {e}");
+        };
+        
         LevelPlay.Init(appKey, userId, new[] { REWARDED, INTERSTITIAL });
     }
-
+    
     public static void LoadRewarded()
     {
         if (rewarded == null)
@@ -76,10 +116,12 @@ public static class Ads
             Burger.Warning($"{logTag} Rewarded not set");
             return;
         }
+        if (rvLoading || rewarded.IsAdReady()) return;
 
+        rvLoading = true;
         rewarded.LoadAd();
     }
-
+    
     public static void LoadInterstitial()
     {
         if (interstitial == null)
@@ -87,25 +129,26 @@ public static class Ads
             Burger.Warning($"{logTag} Interstitial not set");
             return;
         }
+        if (isLoading || interstitial.IsAdReady()) return;
 
+        isLoading = true;
         interstitial.LoadAd();
     }
-
-
+    
     public static bool ShowRewarded(Action onReward, Action onClosed = null, string placement = null)
     {
         if (rewarded == null || !rewarded.IsAdReady() || isShowing) return false;
-        
-        var isRewarded = false;
+
+        var isRewardedFlag = false;
 #if UNITY_EDITOR
-        var timer = Wait.Delay(4.9f);
+        var editorWatchTimer = Wait.Delay(4.9f);
 #endif
         Tween delay = null;
         isShowing = true;
 
-        rewarded.OnAdRewarded += OnRewarded;
-        rewarded.OnAdClosed += OnClosed;
-        rewarded.OnAdDisplayFailed += OnShowFailed;
+        rewarded.OnAdRewarded       += OnRewarded;
+        rewarded.OnAdClosed         += OnClosed;
+        rewarded.OnAdDisplayFailed  += OnShowFailed;
 
         rewarded.ShowAd(placement);
         return true;
@@ -113,87 +156,99 @@ public static class Ads
         void OnRewarded(LevelPlayAdInfo info, LevelPlayReward reward)
         {
 #if UNITY_EDITOR
-            if (timer.IsActive())
-            {
-                return;
-            }
+            if (editorWatchTimer.IsActive()) return;
 #endif
-            isRewarded = true;
-            delay ??= Wait.Frames(1, OnDelay);
+            isRewardedFlag = true;
+            delay ??= Wait.Frames(1, Finish);
         }
 
         void OnClosed(LevelPlayAdInfo info)
         {
-            delay ??= Wait.Frames(1, OnDelay);
+            delay ??= Wait.Frames(1, Finish);
         }
 
         void OnShowFailed(LevelPlayAdDisplayInfoError error)
         {
             Burger.Warning($"{logTag} Rewarded show failed: {error}");
-            delay ??= Wait.Frames(1, OnDelay);
+            delay ??= Wait.Frames(1, Finish);
         }
 
-        void OnDelay()
+        void Finish()
         {
+            rvRetry = 2f;
             LoadRewarded();
+
             isShowing = false;
-            rewarded.OnAdRewarded -= OnRewarded;
-            rewarded.OnAdClosed -= OnClosed;
+            rewarded.OnAdRewarded      -= OnRewarded;
+            rewarded.OnAdClosed        -= OnClosed;
             rewarded.OnAdDisplayFailed -= OnShowFailed;
 
-            if (isRewarded)
-            {
-                onReward.SafeInvoke();
-            }
-            else
-            {
-                onClosed.SafeInvoke();
-            }
+            if (isRewardedFlag) onReward.SafeInvoke();
+            else                onClosed.SafeInvoke();
         }
     }
-
+    
     public static bool ShowInterstitial(Action onClosed = null, string placement = null)
     {
-        if (interstitial == null || !interstitial.IsAdReady() || isShowing)
-            return false;
+        if (interstitial == null || !interstitial.IsAdReady() || isShowing) return false;
 
         isShowing = true;
 
+        interstitial.OnAdClosed        += OnClosed;
+        interstitial.OnAdDisplayFailed += OnShowFailed;
+
+        interstitial.ShowAd(placement);
+        return true;
+
         void OnClosed(LevelPlayAdInfo info)
         {
-            interstitial.OnAdClosed -= OnClosed;
+            interstitial.OnAdClosed        -= OnClosed;
             interstitial.OnAdDisplayFailed -= OnShowFailed;
 
             isShowing = false;
-            onClosed.SafeInvoke();
 
+            isRetry = 2f;
             LoadInterstitial();
+
+            onClosed.SafeInvoke();
         }
 
         void OnShowFailed(LevelPlayAdDisplayInfoError error)
         {
             Burger.Warning($"{logTag} Interstitial show failed: {error}");
 
-            interstitial.OnAdClosed -= OnClosed;
+            interstitial.OnAdClosed        -= OnClosed;
             interstitial.OnAdDisplayFailed -= OnShowFailed;
 
             isShowing = false;
+
+            RetryInterstitial();
+
             onClosed.SafeInvoke();
-
-            LoadInterstitial();
         }
-
-        interstitial.OnAdClosed += OnClosed;
-        interstitial.OnAdDisplayFailed += OnShowFailed;
-
-        interstitial.ShowAd(placement);
-        return true;
     }
 
-    public static void Dispose()
+    private static void RetryRewarded()
     {
-        rewarded = null;
-        interstitial = null;
-        initialized = isShowing = false;
+        if (rewarded == null || rewarded.IsAdReady() || rvLoading) return;
+
+        DOVirtual.DelayedCall(rvRetry, () =>
+        {
+            if (rewarded == null || rewarded.IsAdReady()) return;
+            LoadRewarded();
+        });
+        rvRetry = Mathf.Min(rvRetry * 1.8f, MaxRetry);
+    }
+
+    private static void RetryInterstitial()
+    {
+        if (interstitial == null || interstitial.IsAdReady() || isLoading) return;
+
+        DOVirtual.DelayedCall(isRetry, () =>
+        {
+            if (interstitial == null || interstitial.IsAdReady()) return;
+            LoadInterstitial();
+        });
+        isRetry = Mathf.Min(isRetry * 1.8f, MaxRetry);
     }
 }
