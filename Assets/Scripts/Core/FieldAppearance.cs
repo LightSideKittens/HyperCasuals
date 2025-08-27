@@ -43,7 +43,7 @@ public partial class FieldAppearance : SingleService<FieldAppearance>
     public SpriteRenderer _selector;
     public List<Block> _blockPrefabs;
     public List<Block> _specialBlockPrefabs;
-
+    public static float FieldScale => Instance._field.localScale.x;
     public IEnumerable<ValueDropdownItem<Id>> _GetBlocks(bool isSpecial)
     {
         var list = isSpecial ? _specialBlockPrefabs : _blockPrefabs;
