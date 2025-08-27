@@ -7,7 +7,6 @@ using DG.Tweening;
 using LSCore;
 using LSCore.Extensions;
 using LSCore.Extensions.Unity;
-using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using SourceGenerators;
@@ -42,15 +41,14 @@ public partial class FieldManager : SingleService<FieldManager>
     private bool allShapesPlaced;
     private Shape currentGhostShape;
     private Vector2Int lastGhostBlockIndex = new(-1, -1);
-    private Shape currentShape => dragger.currentShape;
+    private Shape CurrentShape => dragger.currentShape;
     
-    private int? lastUsedSpriteIndex = null;
     [NonSerialized] public List<List<Vector2Int>> _linesIndices = new();
     
-    public List<Block> blockPrefabs => FieldAppearance.BlockPrefabs;
-    public List<Block> specialBlockPrefabs => FieldAppearance.SpecialBlockPrefabs;
+    public List<Block> BlockPrefabs => FieldAppearance.BlockPrefabs;
+    public List<Block> SpecialBlockPrefabs => FieldAppearance.SpecialBlockPrefabs;
     
-    public static Bounds FieldRect => new(Instance.back.transform.position, 8f.ToVector2());
+    public static Bounds FieldRect => new(Instance.back.transform.position, 8f.ToVector2() * FieldAppearance.FieldScale);
     public static Block[,] Grid => Instance.grid;
 
 #if UNITY_EDITOR
@@ -66,7 +64,7 @@ public partial class FieldManager : SingleService<FieldManager>
         if (initialShape)
         {
             InitBack();
-            initialShape.transform.position = back.transform.position - ((Vector3)4f.ToVector2() * FieldAppearance.Field.transform.localScale.x);
+            initialShape.transform.position = back.transform.position - ((Vector3)4f.ToVector2() * FieldAppearance.FieldScale);
             initialShape.transform.SetScale(defaultScale);
         }
     }
@@ -82,7 +80,7 @@ public partial class FieldManager : SingleService<FieldManager>
             var block = grid.Get(index);
             if(!block) continue;
             var prefab = block.prefab;
-            if (this.specialBlockPrefabs.Contains(prefab))
+            if (this.SpecialBlockPrefabs.Contains(prefab))
             {
                 if (!specialBlockPrefabs.TryGetValue(prefab, out var list))
                 {
@@ -648,7 +646,7 @@ public partial class FieldManager : SingleService<FieldManager>
 
     private void CreateGhostShape()
     {
-        currentGhostShape = currentShape.CreateGhost(currentShape);
+        currentGhostShape = CurrentShape.CreateGhost(CurrentShape);
         currentGhostShape.transform.SetScale(defaultScale);
     }
     
@@ -690,7 +688,7 @@ public partial class FieldManager : SingleService<FieldManager>
         if(currentGhostShape == null) return;
         
         var gridIndices = new List<Vector2Int>();
-        var canPlace = CanPlaceShape(currentShape, ref gridIndices);
+        var canPlace = CanPlaceShape(CurrentShape, ref gridIndices);
 
         if (!canPlace)
         {
@@ -800,7 +798,7 @@ public partial class FieldManager : SingleService<FieldManager>
                 var index = line[j];
                 var block = grid.Get(index);
                 if (excludeNull && block == null) continue;
-                if (excludeSpecial && specialBlockPrefabs.Contains(block.prefab)) continue;
+                if (excludeSpecial && SpecialBlockPrefabs.Contains(block.prefab)) continue;
                 if(unique && !set.Add(index)) continue;
                 buffer.Add((index, block));
             }

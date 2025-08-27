@@ -21,6 +21,11 @@ public class BlockPlaceholder : MonoBehaviour
         FieldManager.InitialShapePlacing += OnPlacing;
     }
 
+    private void OnDestroy()
+    {
+        FieldManager.InitialShapePlacing -= OnPlacing;
+    }
+    
     protected virtual void OnPlacing()
     {
         FieldManager.InitialShapePlacing -= OnPlacing;
