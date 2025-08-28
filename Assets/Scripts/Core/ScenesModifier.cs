@@ -40,19 +40,33 @@ namespace Core
             return false;
         }
 
-        public RectTransform levelLabel;
+        public GoalWindow goalWindow;
 
         protected override bool Modify(GameObject go, out bool needBreak)
         {
             needBreak = false;
-            if (go.TryGetComponent<GoalWindow>(out var blockPlaceholder))
+            if (go.TryGetComponent<GoalWindow>(out var oldWindow))
             {
-                if (!PrefabUtility.IsPartOfPrefabInstance(blockPlaceholder))
+                var newWindow = (GoalWindow)PrefabUtility.InstantiatePrefab(goalWindow, oldWindow.transform.parent.transform);
+                RevertPrefabChanges.RevertAll((RectTransform)newWindow.transform, InteractionMode.AutomatedAction);
+
+                var oldBack = oldWindow.transform.GetChild(0) as RectTransform;
+                var newBack = newWindow.transform.GetChild(0) as RectTransform;
+                newBack.anchoredPosition = oldBack.anchoredPosition;
+                newBack.sizeDelta = oldBack.sizeDelta;
+                
+                var oldContent = oldBack.GetChild(0) as RectTransform;
+                var newContent = newBack.GetChild(0) as RectTransform;
+
+                var count = oldContent.childCount;
+                for (var i = 0; i < count; i++)
                 {
-                    Object.DestroyImmediate(blockPlaceholder.gameObject);
-                    needBreak = true; 
-                    return true;
+                    var child = oldContent.GetChild(0);
+                    child.SetParent(newContent);
                 }
+                Object.DestroyImmediate(oldWindow.gameObject);
+                needBreak = true;
+                return true;
             }
             
             /*if (go.TryGetComponent<Shape>(out var shape))
