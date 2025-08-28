@@ -21,7 +21,12 @@ namespace Core
             FieldManager.Starting -= OnStarting;
             Fit();
         }
-        
+
+        private void OnDestroy()
+        {
+            FieldManager.Starting -= OnStarting;
+        }
+
 #if UNITY_EDITOR
         public void Update()
         {
