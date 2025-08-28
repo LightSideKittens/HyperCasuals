@@ -47,11 +47,9 @@ namespace Core
             needBreak = false;
             if (go.TryGetComponent<GoalWindow>(out var blockPlaceholder))
             {
-                var back = blockPlaceholder.transform.GetChild(0) as RectTransform;
-                var obj = Object.Instantiate(levelLabel, back);
-                obj.anchorMin = new Vector2(0.5f, 0);
-                obj.anchorMax = new Vector2(0.5f, 0);
-                obj.anchoredPosition = new Vector2(0, -41.60065f);
+                var back = blockPlaceholder.transform.GetChild(0).GetChild(1) as RectTransform;
+                RevertPrefabChanges.RevertAll(back, InteractionMode.AutomatedAction);
+                needBreak = true;
                 return true;
             }
             
