@@ -40,8 +40,7 @@ namespace Core
             return false;
         }
 
-        public GameObject horizontalPrefab;
-        public GameObject verticalPrefab;
+        public RectTransform levelLabel;
 
         protected override bool Modify(GameObject go, out bool needBreak)
         {
@@ -49,12 +48,10 @@ namespace Core
             if (go.TryGetComponent<GoalWindow>(out var blockPlaceholder))
             {
                 var back = blockPlaceholder.transform.GetChild(0) as RectTransform;
-                var pos = back.anchoredPosition;
-                pos.y = 853.7f;
-                back.anchorMin = 0.5f.ToVector2();
-                back.anchorMax = 0.5f.ToVector2();
-                back.anchoredPosition = pos;
-                needBreak = true;
+                var obj = Object.Instantiate(levelLabel, back);
+                obj.anchorMin = new Vector2(0.5f, 0);
+                obj.anchorMax = new Vector2(0.5f, 0);
+                obj.anchoredPosition = new Vector2(0, -41.60065f);
                 return true;
             }
             

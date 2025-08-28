@@ -4,9 +4,12 @@ using Core;
 using DG.Tweening;
 using LSCore;
 using LSCore.AnimationsModule;
+using LSCore.Async;
+using LSCore.ConfigModule;
 using LSCore.Extensions;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 [Serializable]
@@ -14,11 +17,28 @@ public abstract class Booster : DoIt
 {
     public static Action<Block[,], Block[,]> Used;
     [Id(typeof(CurrencyIdGroup))] public Id id;
+    public GameObject tutorialPointer;
+    public AnimSequencer tutorialAnim;
+    public static bool isTutorial;
+
+    public override void Do()
+    {
+        tutorialPointer.SetActive(isTutorial);
+        if (isTutorial)
+        {
+            tutorialAnim.Animate();
+        }
+    }
 
     protected virtual void OnUsed()
     {
         Funds.ForceSpend(id, 1);
         Analytic.LogEvent("booster_used", ("id", id.ToString()));
+        if (isTutorial)
+        {
+            tutorialAnim.Kill();
+            tutorialPointer.SetActive(false);
+        }
     }
 }
 
@@ -27,20 +47,26 @@ public abstract class BaseFieldClickBooster : Booster
 {
     public LSButton button;
     protected Vector2Int index;
+    public Vector2Int tutorialGridIndex;
     
     public override void Do()
     {
-        button.submittable.Submitted += OnSubmitted;
+        base.Do();
+        if (isTutorial)
+        {
+            tutorialPointer.transform.position = FieldManager.ToPos(tutorialGridIndex);
+        }
+        button.Submitted -= OnSubmitted;
+        button.Submitted += OnSubmitted;
     }
     
     private void OnSubmitted()
     {
-        button.submittable.Submitted -= OnSubmitted;
         LSTouch touch = LSInput.GetTouch(0);
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
         index = FieldManager.ToIndex(touchPosition);
         if (FieldManager.Grid.HasIndex(index))
-        { 
+        {
             OnClicked();
         }
     }
@@ -88,6 +114,30 @@ public class Rocket : BaseSpecialBlockBooster
     public LSToggle yRocketToggle;
     
     public override Block Prefab => xRocketToggle.IsOn ? xRocket : (yRocketToggle.IsOn ? yRocket : null);
+
+    public override void Do()
+    {
+        base.Do();
+        if (isTutorial)
+        {
+            CanvasUpdateRegistry.Updated += TryStartTutorial;
+        }
+    }
+
+    private void TryStartTutorial()
+    {
+        CanvasUpdateRegistry.Updated -= TryStartTutorial;
+        tutorialPointer.transform.position = xRocketToggle.transform.position;
+        xRocketToggle.Submitted += OnSelected;
+        yRocketToggle.Submitted += OnSelected;
+    }
+
+    private void OnSelected()
+    {
+        tutorialPointer.transform.position = FieldManager.ToPos(tutorialGridIndex);
+        xRocketToggle.Submitted -= OnSelected;
+        yRocketToggle.Submitted -= OnSelected;
+    }
 }
 
 [Serializable]
@@ -173,6 +223,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
             
             if(amount > 0)
             {
+                Wait.Frames(1, TryStartTutorial);
                 submitAction = OnAvailableClicked;
                 countLabel.SetActive(true);
             }
@@ -188,13 +239,53 @@ public class BoosterButton : DoIt, ILocalizationArgument
         }
     }
 
+    private void TryStartTutorial()
+    {
+        if (FirstTime.IsNot($"Booster used {id}", out var pass))
+        {
+            Booster.isTutorial = true;
+            button.Submit();
+            UIViewBoss.IsGoBackBlocked = true;
+            Booster.Used += OnUsed;
+                    
+            void OnUsed(Block[,] _, Block[,] __)
+            {
+                Booster.isTutorial = false;
+                UIViewBoss.IsGoBackBlocked = false;
+                UIViewBoss.GoBack();
+                Booster.Used -= OnUsed;
+                Analytic.LogEvent("booster_tutorial_completed");
+                pass();
+            }
+        }
+    }
+
     private void OnSubmit() => submitAction?.Invoke();
 
+    private bool clicked;
     private void OnAvailableClicked()
     {
+        if (clicked)
+        {
+            if (!UIViewBoss.IsGoBackBlocked)
+            {
+                UIViewBoss.GoBack();
+            }
+            
+            return;
+        }
+        
+        IUIView.Hiding += OnHiding;
+        clicked = true;
         availableDoIts.Do();
         if(lastCanvas != null) lastCanvas.sortingOrder--;
         lastCanvas = canvas;
         canvas.sortingOrder++;
+        
+        void OnHiding(IUIView obj)
+        {
+            IUIView.Hiding -= OnHiding;
+            clicked = false;
+        }
     }
 }

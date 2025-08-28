@@ -5,6 +5,8 @@ public class WinWindow : BaseWindow<WinWindow>
 {
     public LaLa.PlayClip sound;
     public LSButton claimButton;
+    public FundText reward;
+    public FundText rewardX2;
     
     protected override void OnShowing()
     {
@@ -20,6 +22,7 @@ public class WinWindow : BaseWindow<WinWindow>
             claimButton.gameObject.SetActive(false);
         }
 
+        FieldSave.IsEnabled = false;
         FieldSave.gridDirtied = false;
         FieldSave.Delete();
         if (LoseWindow.IsVisible)
@@ -35,12 +38,14 @@ public class WinWindow : BaseWindow<WinWindow>
 
     private void OnClaim()
     {
+        Analytic.LogEvent("double_reward");
         Ads.ShowRewarded(OnRewarded, OnClosed);
 
         void OnRewarded()
         {
             claimButton.submittable.doIter.Do();
             claimButton.gameObject.SetActive(false);
+            reward.Number = rewardX2.Number;
         }
 
         void OnClosed()

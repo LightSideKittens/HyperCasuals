@@ -10,7 +10,11 @@ namespace Core
         public static long Time
         {
             get => Goals["time"].ToLong();
-            set => Goals["time"] = value;
+            set
+            {
+                if(!IsEnabled) return;
+                Goals["time"] = value;
+            }
         }
 
         public static void SaveScoreManager(

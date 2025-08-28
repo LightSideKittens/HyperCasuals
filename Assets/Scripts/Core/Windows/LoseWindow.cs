@@ -9,18 +9,28 @@ public class LoseWindow : BaseWindow<LoseWindow>
 {
     public LaLa.PlayClip sound;
     [SerializeField] private GameObject counter;
+    [SerializeField] private LocalizationText reasonText;
     [SerializeField] private LSButton watchButton;
     [SerializeField] private LSButton replayButton;
+    [SerializeField] private LSButton homeButton;
+    [SerializeField] private SubmittableRect noThanksButton;
     [SerializeReference] private AnimSequencer timerAnim;
     public static Action onReviveClicked;
     private bool watched;
-    
+
+    protected override void Init()
+    {
+        base.Init();
+        watchButton.Submitted += Reload;
+        noThanksButton.Submitted += () => SetActiveWatchButton(false);
+    }
+
     protected override void OnShowing()
     {
+        reasonText.Localize(GameSave.loseReason);
         sound.Do();
         CoreWorld.StopIdleMusic();
         base.OnShowing();
-        watchButton.Submitted += Reload;
 
         if (Ads.IsRewardedReady && !watched)
         { 
@@ -34,7 +44,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
         
         if (GameSave.currentLevel == "classic")
         {
-            Analytic.LogEvent("lost_classic");
+            Analytic.LogEvent("lost_classic", ("reason", GameSave.loseReason));
         }
         else
         { 
@@ -70,14 +80,15 @@ public class LoseWindow : BaseWindow<LoseWindow>
     private void SetActiveWatchButton(bool active)
     {
         watchButton.gameObject.SetActive(active);
+        noThanksButton.gameObject.SetActive(active);
         counter.SetActive(active);
         replayButton.gameObject.SetActive(!active);
+        homeButton.gameObject.SetActive(!active);
     }
 
     protected override void OnHiding()
     {
         base.OnHiding();
-        watchButton.Submitted -= Reload;
         timerAnim.Kill();
     }
 

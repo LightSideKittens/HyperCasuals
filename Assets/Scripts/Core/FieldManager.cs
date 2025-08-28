@@ -213,6 +213,7 @@ public partial class FieldManager : SingleService<FieldManager>
     
     private void Start()
     {
+        FieldSave.IsEnabled = true;
         Starting?.Invoke();
         level = GameSave.currentLevel;
         grid = new Block[gridSize.x, gridSize.y]; 
@@ -248,7 +249,7 @@ public partial class FieldManager : SingleService<FieldManager>
                     tween[i].Complete();
                 }
             }
-            var canPlace = CanPlaceShape(shape, ref gridIndices);
+            var canPlace = CanPlaceShape(shape, ref gridIndices) && !CoreWorld.IsGameStopped;
 
             if (canPlace)
             {
@@ -666,12 +667,15 @@ public partial class FieldManager : SingleService<FieldManager>
 
         Lose?.Invoke();
         TryToSave();
+        FieldSave.IsEnabled = false;
         FieldSave.Delete();
+        GameSave.loseReason = "no_place";
         FieldAppearance.RedBack.DOFade(0.3f, 0.5f).SetLoops(4, LoopType.Yoyo).OnComplete(() => LoseWindow.Show(Revive));
     }
     
     private void Revive()
     {
+        FieldSave.IsEnabled = true;
         FieldSave.Restore();
         for (int i = activeShapes.Count - 1; i >= 0; i--)
         {
