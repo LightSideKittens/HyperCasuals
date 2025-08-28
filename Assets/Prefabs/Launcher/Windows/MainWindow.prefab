@@ -131,6 +131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHideAnim:
     rid: 1724297501560799844
+  blockSystemGoBack: 0
+  systemGoBackOverride:
+    rid: -2
   onShowing: []
   onShowed: []
   onHiding: []
@@ -138,6 +141,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1724297501560799844
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:
@@ -3748,7 +3753,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 851411494679360578, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: m_Name
-      value: BaseButton
+      value: ThemesButton
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: m_Type

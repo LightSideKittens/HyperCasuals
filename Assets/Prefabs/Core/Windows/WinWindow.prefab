@@ -72,7 +72,6 @@ MonoBehaviour:
   sound:
     prefab: {fileID: 124978471103678096, guid: 92b1036c0ce958645970f8e2151cc86f, type: 3}
     clip: {fileID: 8300000, guid: 0f6b1291a5fb32e428c34cce554a64e6, type: 3}
-  nextButton: {fileID: 0}
   claimButton: {fileID: 2527172157387592948}
   reward: {fileID: 5868659293778942594}
   rewardX2: {fileID: 7829014874884488258}
@@ -1001,17 +1000,11 @@ MonoBehaviour:
       type: {class: DoIf, ns: , asm: LSCore.ConditionModule}
       data:
         conditions:
-          rid: 2877982226664390657
+          rid: 2877982226664391098
         ifActions:
         - rid: 2877982226664390659
         elseActions:
         - rid: 2877982226664390658
-    - rid: 2877982226664390657
-      type: {class: Levels/IsLevel, ns: , asm: Core}
-      data:
-        not: 0
-        type: 0
-        level: 4
     - rid: 2877982226664390658
       type: {class: Levels/LoadCurrent, ns: , asm: Core}
       data: 
@@ -1023,6 +1016,11 @@ MonoBehaviour:
         useAddressables: 0
         loader:
           rid: -2
+    - rid: 2877982226664391098
+      type: {class: IsTimeForThemeTutorial, ns: , asm: Core}
+      data:
+        not: 0
+        type: 0
     - rid: 5237655153313055454
       type: {class: CurrenciesView/Anim, ns: LSCore, asm: LSCore.CurrencyModule}
       data:
