@@ -322,6 +322,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 5237655153313054951
       type: {class: BoosterButton, ns: , asm: Core}
       data:
@@ -531,9 +533,9 @@ MonoBehaviour:
         target:
           rid: 5237655153313054996
         index:
-          useTransform: 1
+          useTransform: 0
           target:
-            rid: 5237655153313054997
+            rid: -2
           index: 0
           offset: 0
     - rid: 5237655153313054996
@@ -541,10 +543,6 @@ MonoBehaviour:
       data:
         provider:
           rid: 5237655153313054998
-    - rid: 5237655153313054997
-      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 1065524551258596721}
     - rid: 5237655153313054998
       type: {class: 'FromBuffer`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
       data: 

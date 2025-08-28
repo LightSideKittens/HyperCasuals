@@ -83,7 +83,9 @@ public class TimeGoal : MonoBehaviour
         if (remaining <= TimeSpan.Zero)
         {
             StopTimingOut();
+            FieldSave.IsEnabled = false;
             FieldSave.Delete();
+            GameSave.loseReason = "time_out";
             LoseWindow.Show(OnRevive);
         }
     }

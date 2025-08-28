@@ -150,6 +150,7 @@ public static class Ads
         rewarded.OnAdClosed         += OnClosed;
         rewarded.OnAdDisplayFailed  += OnShowFailed;
 
+        Analytic.LogEvent("show_reward_ad");
         rewarded.ShowAd(placement);
         return true;
 
