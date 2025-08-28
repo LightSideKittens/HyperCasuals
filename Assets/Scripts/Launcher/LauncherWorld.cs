@@ -1,9 +1,12 @@
 ﻿using LSCore;
+using UnityEngine;
 
 namespace Launcher
 {
     public class LauncherWorld : ServiceManager<LauncherWorld>
     {
+        [SerializeReference] public DoIt[] onInit;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -14,6 +17,8 @@ namespace Launcher
         {
             MainWindow.AsHome();
             MainWindow.Show();
+            
+            onInit.Do();
         }
     } 
 }

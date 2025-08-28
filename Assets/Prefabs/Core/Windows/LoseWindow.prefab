@@ -36,7 +36,6 @@ RectTransform:
   - {fileID: 4554041171710844630}
   - {fileID: 585529670583790292}
   - {fileID: 2465814099414885056}
-  - {fileID: 5275550167686809583}
   - {fileID: 3175038757690772709}
   - {fileID: 1803139591526567665}
   m_Father: {fileID: 0}
@@ -74,7 +73,7 @@ MonoBehaviour:
   reasonText: {fileID: 232255965537517742}
   watchButton: {fileID: 6983757328725076511}
   replayButton: {fileID: 5400702915661750795}
-  homeButton: {fileID: 2449384831085233956}
+  homeButton: {fileID: 0}
   noThanksButton: {fileID: 2737261969832323620}
   timerAnim:
     rid: 1724297709363134601
@@ -619,127 +618,6 @@ MonoBehaviour:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1793690443273877311, guid: 56eebe4fe52b8314094e7f45ff2ff40d, type: 3}
   m_PrefabInstance: {fileID: 2572560553380059115}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &4049791898853043630
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1011038207463600818}
-    m_Modifications:
-    - target: {fileID: 400417130813264742, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: localizationData.id
-      value: 53433520424538114
-      objectReference: {fileID: 0}
-    - target: {fileID: 400417130813264742, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: localizationData.key
-      value: replay
-      objectReference: {fileID: 0}
-    - target: {fileID: 400417130813264742, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400417130813264742, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: localizationData.tableData
-      value: 
-      objectReference: {fileID: 11400000, guid: e0d621d1ef7248d4c85dfa1657580628, type: 2}
-    - target: {fileID: 405438111595204419, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_Name
-      value: HomeButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 405438111595204419, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 6123119735394691670, guid: 2de8c4438c2993541a86b143c0cd7328, type: 3}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: 'managedReferences[-2]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: 'managedReferences[2877981638842908770]'
-      value: Core Levels/LoadCurrent
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: 'managedReferences[2877982121308717861]'
-      value: Core Levels/LoadCurrent
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: 'managedReferences[2877982204866068714]'
-      value: LSCore.UIModule LoadScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: managedReferences[2877982204866068714].mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: managedReferences[2877982204866068714].loader
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: managedReferences[2877982204866068714].sceneToLoad
-      value: Launcher
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: managedReferences[2877982204866068714].useAddressables
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: managedReferences[1249993174685319192].onSubmit.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: 'managedReferences[1249993174685319192].onSubmit.Array.data[0]'
-      value: 2877982204866068714
-      objectReference: {fileID: 0}
-    - target: {fileID: 1881147931105723731, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6a08882d89c75fa4f956669883386aba, type: 3}
-    - target: {fileID: 8143991003789552193, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8143991003789552193, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -270
-      objectReference: {fileID: 0}
-    - target: {fileID: 8143991003789552193, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8143991003789552193, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8143991003789552193, guid: 623be12bd4367314b9e8311433882948, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 623be12bd4367314b9e8311433882948, type: 3}
---- !u!114 &2449384831085233956 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1859483897607432842, guid: 623be12bd4367314b9e8311433882948, type: 3}
-  m_PrefabInstance: {fileID: 4049791898853043630}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a6708c6231b4c7fbe083ad45b3a9862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &5275550167686809583 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8143991003789552193, guid: 623be12bd4367314b9e8311433882948, type: 3}
-  m_PrefabInstance: {fileID: 4049791898853043630}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5655248518443486242
 PrefabInstance:
