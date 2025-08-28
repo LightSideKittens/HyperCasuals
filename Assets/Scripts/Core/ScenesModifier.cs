@@ -47,10 +47,12 @@ namespace Core
             needBreak = false;
             if (go.TryGetComponent<GoalWindow>(out var blockPlaceholder))
             {
-                var back = blockPlaceholder.transform.GetChild(0).GetChild(1) as RectTransform;
-                RevertPrefabChanges.RevertAll(back, InteractionMode.AutomatedAction);
-                needBreak = true;
-                return true;
+                if (!PrefabUtility.IsPartOfPrefabInstance(blockPlaceholder))
+                {
+                    Object.DestroyImmediate(blockPlaceholder.gameObject);
+                    needBreak = true; 
+                    return true;
+                }
             }
             
             /*if (go.TryGetComponent<Shape>(out var shape))

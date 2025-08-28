@@ -2,6 +2,7 @@
 using LSCore;
 using LSCore.Attributes;
 using LSCore.ConditionModule;
+using LSCore.ConfigModule;
 using UnityEngine.SceneManagement;
 
 [Serializable]
@@ -24,6 +25,23 @@ public abstract class BaseLevelLoader : DoIt
         SceneManager.LoadScene(Level, LoadSceneMode.Additive);
     }
 }
+
+[Serializable]
+public class IsTimeForThemeTutorial : If
+{
+    public class Pass : DoIt
+    {
+        public override void Do()
+        {
+            FirstTime.Pass(key);
+        }
+    }
+    
+    private static string key = "Theme tutorial";
+    public static bool Is => GameSave.Level > 3 && FirstTime.IsNot(key);
+    protected override bool Check() => Is;
+}
+
 public class Levels : SingleScriptableObject<Levels>
 {
     [Serializable]

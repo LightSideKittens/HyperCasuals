@@ -12,7 +12,6 @@ public class LoseWindow : BaseWindow<LoseWindow>
     [SerializeField] private LocalizationText reasonText;
     [SerializeField] private LSButton watchButton;
     [SerializeField] private LSButton replayButton;
-    [SerializeField] private LSButton homeButton;
     [SerializeField] private SubmittableRect noThanksButton;
     [SerializeReference] private AnimSequencer timerAnim;
     public static Action onReviveClicked;
@@ -83,7 +82,6 @@ public class LoseWindow : BaseWindow<LoseWindow>
         noThanksButton.gameObject.SetActive(active);
         counter.SetActive(active);
         replayButton.gameObject.SetActive(!active);
-        homeButton.gameObject.SetActive(!active);
     }
 
     protected override void OnHiding()
