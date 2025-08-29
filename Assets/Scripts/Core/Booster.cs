@@ -138,6 +138,13 @@ public class Rocket : BaseSpecialBlockBooster
         xRocketToggle.Submitted -= OnSelected;
         yRocketToggle.Submitted -= OnSelected;
     }
+
+    protected override void OnUsed()
+    {
+        base.OnUsed();
+        xRocketToggle.IsOn = false;
+        yRocketToggle.IsOn = false;
+    }
 }
 
 [Serializable]

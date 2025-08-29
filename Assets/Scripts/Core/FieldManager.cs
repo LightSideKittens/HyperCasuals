@@ -213,7 +213,7 @@ public partial class FieldManager : SingleService<FieldManager>
     
     private void Start()
     {
-        FieldSave.IsEnabled = true;
+        FieldSave.IsEnabled = TutorialManager.IsNull;
         Starting?.Invoke();
         level = GameSave.currentLevel;
         grid = new Block[gridSize.x, gridSize.y]; 

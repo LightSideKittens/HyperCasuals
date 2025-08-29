@@ -36,6 +36,13 @@ public class TimeGoal : MonoBehaviour
         IUIView.Showing += PauseOnShowingOtherWindow;
         FieldManager.DragStarted += StartTimer;
         FieldManager.Lose += OnLose;
+        FieldManager.Saving += OnSaving;
+        
+        void OnSaving()
+        {
+            FieldManager.Saving -= OnSaving;
+            FieldSave.Time = time;
+        }
     }
 
     private void OnDestroy()
