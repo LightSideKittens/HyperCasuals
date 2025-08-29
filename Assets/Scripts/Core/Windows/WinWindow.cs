@@ -36,7 +36,6 @@ public class WinWindow : BaseWindow<WinWindow>
         sound.Do(); 
         CoreWorld.StopIdleMusic();
         base.OnShowing();
-        Manager.canvas.sortingOrder = 120;
         Analytic.LogEvent("win_level", ("level", GameSave.currentLevel));
     }
 

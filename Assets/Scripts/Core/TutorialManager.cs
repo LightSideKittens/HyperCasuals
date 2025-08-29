@@ -15,12 +15,11 @@ namespace Core
         public Transform blinkShape;
         public GameObject pointer;
         [SerializeReference] public List<DoIt> onCompleted;
-        private static bool lastFieldSaveEnabled;
+        
         protected override void Init()
         {
             base.Init();
             blinkShape.SetParent(FieldAppearance.Field, false);
-            lastFieldSaveEnabled = FieldSave.IsEnabled;
             FieldSave.IsEnabled = false;
             pointerAnim.Animate();
             shapeBlinkAnim.Animate();
@@ -44,7 +43,6 @@ namespace Core
         protected override void DeInit()
         {
             base.DeInit();
-            FieldSave.IsEnabled = lastFieldSaveEnabled;
             FieldManager.Placed -= OnPlaced;
         }
 

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1685252650808547322, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
       propertyPath: m_Name
-      value: BaseImage
+      value: Hole
       objectReference: {fileID: 0}
     - target: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
       propertyPath: m_Pivot.x
@@ -121,6 +121,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
+--- !u!114 &4754314295248062637 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
+  m_PrefabInstance: {fileID: 3510623190849613514}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8591062300475195205 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
@@ -418,8 +429,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThemeTutorialView
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1214986863025348083, guid: 953d989b3c3b2f8478be4669114019eb, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2704468266148934692, guid: 953d989b3c3b2f8478be4669114019eb, type: 3}
@@ -530,6 +540,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 86eb66184dca67f46bb6f2d3857edb2b, type: 2}
+    - target: {fileID: 2940948219319206694, guid: 910f320e31ca40e40947ee98ca2d1a6e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5688585167030465211, guid: 910f320e31ca40e40947ee98ca2d1a6e, type: 3}
       propertyPath: m_Name
       value: Back
@@ -537,8 +551,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5688585167030465211, guid: 910f320e31ca40e40947ee98ca2d1a6e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8366275482334040108}
   m_SourcePrefab: {fileID: 100100000, guid: 910f320e31ca40e40947ee98ca2d1a6e, type: 3}
+--- !u!1 &675820684980490924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5688585167030465211, guid: 910f320e31ca40e40947ee98ca2d1a6e, type: 3}
+  m_PrefabInstance: {fileID: 5156926434403917847}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8366275482334040108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675820684980490924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbd7fca909f44ebbdc9521584fcbd14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LSCore.UIModule::LSCore.RaycastHole
+  hole: {fileID: 4754314295248062637}
 --- !u!224 &6449840324870214873 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2167210942592890062, guid: 910f320e31ca40e40947ee98ca2d1a6e, type: 3}
