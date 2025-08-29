@@ -1,8 +1,11 @@
 ﻿using System;
 using Core;
 using LSCore;
+using UnityEngine;
+
 public class WinWindow : BaseWindow<WinWindow>
 {
+    public ParticleSystem confetti;
     public LaLa.PlayClip sound;
     public LSButton claimButton;
     public FundText reward;
@@ -10,6 +13,7 @@ public class WinWindow : BaseWindow<WinWindow>
     
     protected override void OnShowing()
     {
+        Instantiate(confetti);
         if (Ads.IsRewardedReady)
         {
             claimButton.gameObject.SetActive(true);
