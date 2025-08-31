@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 15106e52d54e02a47a357014c5e88655
+guid: c6dc7eeb4cf114044b7cd83bacb01505
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8811535566131983925
-    second: Corall256_0
-  - first:
-      213: -8333510670512675991
-    second: Corall256_1
+      213: 2854755135288014583
+    second: wood-specialblock-atlas_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 255
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -129,45 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Corall256_0
+      name: wood-specialblock-atlas_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 9
-        width: 256
-        height: 247
+        y: 512
+        width: 512
+        height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc98bfe861327b580800000000000000
-      internalID: -8811535566131983925
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Corall256_1
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 250
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9632a20b23c695c80800000000000000
-      internalID: -8333510670512675991
+      spriteID: 7f6709f9ba02e9720800000000000000
+      internalID: 2854755135288014583
       vertices: []
       indices: 
       edges: []
@@ -184,10 +159,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Corall256_0: -8811535566131983925
-      Corall256_1: -8333510670512675991
+      wood-specialblock-atlas_0: 2854755135288014583
+      wood-specialblock-atlas_1: 1332602072
+      wood-specialblock-atlas_2: 129819582
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
