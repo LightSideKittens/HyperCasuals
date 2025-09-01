@@ -43,11 +43,11 @@ public class LoseWindow : BaseWindow<LoseWindow>
         
         if (GameSave.currentLevel == "classic")
         {
-            Analytic.LogEvent("lost_classic", ("reason", GameSave.loseReason));
+            Analytic.LogEvent("lost_classic");
         }
         else
         { 
-            Analytic.LogEvent("lost_level", ("level", GameSave.currentLevel));
+            Analytic.LogEvent("lost_level", ("level", GameSave.Level), ("reason", GameSave.loseReason));
         }
     }
     
@@ -71,7 +71,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
             }
             else
             { 
-                Analytic.LogEvent("revive", ("level", GameSave.currentLevel));
+                Analytic.LogEvent("revive", ("level", GameSave.Level));
             }
         }
     }

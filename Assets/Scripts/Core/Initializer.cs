@@ -31,7 +31,9 @@ public class Initializer : BaseInitializer
         }
         
         Ads.Init(appKey, rewardAdUnit, interAdUnit, true);
+        Analytic.Init();
         
+        defaultTheme.Do();
         NotificationHandlers.AddHandler("test", token =>
         {
             Debug.Log($"Test notification: {token}");
@@ -45,8 +47,6 @@ public class Initializer : BaseInitializer
             return;
         }
         
-        defaultTheme.Do();
-        Analytic.Init();
         onInitialized?.Invoke();
     }
 }
