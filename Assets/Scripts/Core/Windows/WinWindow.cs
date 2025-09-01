@@ -35,8 +35,8 @@ public class WinWindow : BaseWindow<WinWindow>
         }
         sound.Do(); 
         CoreWorld.StopIdleMusic();
+        Analytic.LogEvent("win_level", ("level", GameSave.Level));
         base.OnShowing();
-        Analytic.LogEvent("win_level", ("level", GameSave.currentLevel));
     }
 
     private void OnClaim()

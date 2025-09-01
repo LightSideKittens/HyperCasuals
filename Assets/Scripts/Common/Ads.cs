@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Firebase.Analytics;
 using LSCore;
 using LSCore.Async;
 using LSCore.Extensions;
@@ -100,7 +101,8 @@ public static class Ads
 
             Burger.Log($"{logTag} LevelPlay initialized");
         };
-
+        
+        LevelPlay.OnImpressionDataReady += OnImpressionDataReady;
         LevelPlay.OnInitFailed += e =>
         {
             Burger.Error($"{logTag} LevelPlay init failed: {e}");
@@ -108,7 +110,29 @@ public static class Ads
         
         LevelPlay.Init(appKey, userId, new[] { REWARDED, INTERSTITIAL });
     }
-    
+
+    private static void OnImpressionDataReady(LevelPlayImpressionData data)
+    {
+        if (data == null) return;
+
+        var adNetwork = data.AdNetwork ?? "unknown";
+        var adUnit = data.MediationAdUnitName ?? "unknown";
+        var instance = data.InstanceName ?? "unknown";
+        var revenue = data.Revenue ?? 0.0;
+
+        var parameters = new Parameter[]
+        {
+            new("ad_platform", "ironSource"),
+            new("ad_source", adNetwork),
+            new("ad_unit_name", instance),
+            new("ad_format", adUnit),
+            new("value", revenue),
+            new("currency", "USD")
+        };
+
+        FirebaseAnalytics.LogEvent("ad_impression", parameters);
+    }
+
     public static void LoadRewarded()
     {
         if (rewarded == null)
