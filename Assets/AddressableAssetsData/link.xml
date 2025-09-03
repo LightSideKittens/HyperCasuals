@@ -1,28 +1,9 @@
 <linker>
-  <assembly fullname="Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Core.BlockIdGroup" preserve="all" />
-  </assembly>
-  <assembly fullname="LSCore.BattleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="LSCore.BattleModule.Location" preserve="all" />
-  </assembly>
-  <assembly fullname="LSCore.CurrencyModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="LSCore.CurrencyIdGroup" preserve="all" />
-  </assembly>
-  <assembly fullname="LSCore.IdGroupSystem, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="LSCore.Id" preserve="all" />
-    <type fullname="LSCore.IdGroup" preserve="all" />
-  </assembly>
-  <assembly fullname="LSCore.Palette, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="LSCore.PaletteIdGroup" preserve="all" />
-  </assembly>
   <assembly fullname="LSCore.SceneGitModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="Branch" preserve="all" />
     <type fullname="Commit" preserve="nothing" serialized="true" />
     <type fullname="SetColor" preserve="nothing" serialized="true" />
     <type fullname="SetText" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="LSCore.UIModule.MarkSystem, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="LSCore.MarkIdGroup" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
@@ -51,8 +32,5 @@
   </assembly>
   <assembly fullname="LSCore.DoIt">
     <type fullname="FromKeyBuffer`1" preserve="nothing" serialized="true" />
-  </assembly>
-  <assembly fullname="Sirenix.Serialization">
-    <type fullname="Sirenix.Serialization.SerializationData" preserve="nothing" serialized="true" />
   </assembly>
 </linker>

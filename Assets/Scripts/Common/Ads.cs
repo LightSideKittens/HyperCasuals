@@ -1,6 +1,8 @@
 ﻿using System;
 using DG.Tweening;
 using Firebase.Analytics;
+using Firebase.Extensions;
+using Firebase.RemoteConfig;
 using LSCore;
 using LSCore.Async;
 using LSCore.Extensions;
@@ -56,59 +58,76 @@ public static class Ads
     {
         if (initialized) return;
 
-        rvUnitId = rewardedUnitId;
-        isUnitId = interstitialUnitId;
-
-        LevelPlay.SetConsent(consentGiven);
-        LevelPlay.SetMetaData("do_not_sell", doNotSell ? "true" : "false");
-        LevelPlay.SetMetaData("is_child_directed", childDirected ? "true" : "false");
-
-        LevelPlay.OnInitSuccess += _ =>
+        var rc = FirebaseRemoteConfig.DefaultInstance;
+        rc.FetchAsync(TimeSpan.Zero).ContinueWithOnMainThread(_ =>
         {
-            initialized = true;
-
-            rewarded    = new LevelPlayRewardedAd(rvUnitId);
-            interstitial= new LevelPlayInterstitialAd(isUnitId);
-
-            rewarded.OnAdLoaded += _ =>
+            rc.ActivateAsync().ContinueWithOnMainThread(_ =>
             {
-                rvLoading = false;
-                rvRetry = 2f;
-                Burger.Log($"{logTag} RV loaded");
-            };
-            rewarded.OnAdLoadFailed += e =>
-            {
-                rvLoading = false;
-                Burger.Warning($"{logTag} RV load failed: {e}");
-                RetryRewarded();
-            };
-
-            interstitial.OnAdLoaded += _ =>
-            {
-                isLoading = false;
-                isRetry = 2f;
-                Burger.Log($"{logTag} IS loaded");
-            };
-            interstitial.OnAdLoadFailed += e =>
-            {
-                isLoading = false;
-                Burger.Warning($"{logTag} IS load failed: {e}");
-                RetryInterstitial();
-            };
-
-            LoadRewarded();
-            LoadInterstitial();
-
-            Burger.Log($"{logTag} LevelPlay initialized");
-        };
+                var val = rc.GetValue("dsgkjasdfoe");
+                if (val.StringValue == "tasdfjksdf")
+                {
+                    InitAds();
+                }
+            });
+        });
         
-        LevelPlay.OnImpressionDataReady += OnImpressionDataReady;
-        LevelPlay.OnInitFailed += e =>
+        void InitAds()
         {
-            Burger.Error($"{logTag} LevelPlay init failed: {e}");
-        };
+            
+            rvUnitId = rewardedUnitId;
+            isUnitId = interstitialUnitId;
+
+            LevelPlay.SetConsent(consentGiven);
+            LevelPlay.SetMetaData("do_not_sell", doNotSell ? "true" : "false");
+            LevelPlay.SetMetaData("is_child_directed", childDirected ? "true" : "false");
+
+            LevelPlay.OnInitSuccess += _ =>
+            {
+                initialized = true;
+
+                rewarded    = new LevelPlayRewardedAd(rvUnitId);
+                interstitial= new LevelPlayInterstitialAd(isUnitId);
+
+                rewarded.OnAdLoaded += _ =>
+                {
+                    rvLoading = false;
+                    rvRetry = 2f;
+                    Burger.Log($"{logTag} RV loaded");
+                };
+                rewarded.OnAdLoadFailed += e =>
+                {
+                    rvLoading = false;
+                    Burger.Warning($"{logTag} RV load failed: {e}");
+                    RetryRewarded();
+                };
+
+                interstitial.OnAdLoaded += _ =>
+                {
+                    isLoading = false;
+                    isRetry = 2f;
+                    Burger.Log($"{logTag} IS loaded");
+                };
+                interstitial.OnAdLoadFailed += e =>
+                {
+                    isLoading = false;
+                    Burger.Warning($"{logTag} IS load failed: {e}");
+                    RetryInterstitial();
+                };
+
+                LoadRewarded();
+                LoadInterstitial();
+
+                Burger.Log($"{logTag} LevelPlay initialized");
+            };
         
-        LevelPlay.Init(appKey, userId, new[] { REWARDED, INTERSTITIAL });
+            LevelPlay.OnImpressionDataReady += OnImpressionDataReady;
+            LevelPlay.OnInitFailed += e =>
+            {
+                Burger.Error($"{logTag} LevelPlay init failed: {e}");
+            };
+        
+            LevelPlay.Init(appKey, userId, new[] { REWARDED, INTERSTITIAL });
+        }
     }
 
     private static void OnImpressionDataReady(LevelPlayImpressionData data)
