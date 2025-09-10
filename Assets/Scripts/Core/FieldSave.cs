@@ -51,6 +51,8 @@ namespace Core
             get => Manager.Config.data;
             set => Manager.Config.data = value;
         }
+
+        public static bool isChestGot;
         
         public static bool Exists
         {

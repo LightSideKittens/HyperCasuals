@@ -58,7 +58,7 @@ public class Levels : SingleScriptableObject<Levels>
         public override void Do()
         {
             base.Do();
-            Analytic.LogEvent("start_tutorial", ("level", GameSave.TutorialLevel));
+            Analytic.LogEvent("start_tutorial", ("level", GameSave.TutorialLevel.ToString()));
         }
     }
     
@@ -81,7 +81,7 @@ public class Levels : SingleScriptableObject<Levels>
         public override void Do()
         {
             GameSave.currentLevel = $"level_{GameSave.Level}";
-            Analytic.LogEvent("start_level", ("level", GameSave.Level));
+            Analytic.LogEvent("start_level", GameSave.CurrentLevelParam);
             base.Do();
         }
     }

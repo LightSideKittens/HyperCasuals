@@ -1,4 +1,5 @@
-﻿using LSCore;
+﻿using System;
+using LSCore;
 using LSCore.ConfigModule;
 using LSCore.Extensions;
 using Newtonsoft.Json.Linq;
@@ -9,7 +10,20 @@ public class GameSave
     private static RJObject config;
     public static string currentLevel;
     public static string loseReason;
+    public static Analytic.Param CurrentLevelParam => ("level", currentLevel);
 
+    public static long RenewalTime
+    {
+        get => Config.As("renewalTime", DateTime.UtcNow.Ticks);
+        set => Config["renewalTime"] = value;
+    }
+
+    public static int CollectedChests
+    {
+        get => Config.As("collectedChests", 0);
+        set => Config["collectedChests"] = value;
+    }
+    
     public static int Level
     {
         get => Config.As("level", 1);

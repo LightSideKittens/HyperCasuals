@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
+    "com.onesignal.unity.android": "5.1.14",
+    "com.onesignal.unity.core": "5.1.14",
+    "com.onesignal.unity.ios": "5.1.14",
     "com.sendbird.chat": "https://github.com/sendbird/sendbird-chat-sdk-unity.git",
     "com.unity.2d.animation": "12.0.2",
     "com.unity.2d.sprite": "1.0.0",
@@ -36,5 +39,13 @@
     "com.unity.modules.unitywebrequesttexture": "1.0.0",
     "com.unity.modules.unitywebrequestwww": "1.0.0"
   },
-  "scopedRegistries": []
+  "scopedRegistries": [
+    {
+      "name": "npmjs",
+      "url": "https://registry.npmjs.org",
+      "scopes": [
+        "com.onesignal"
+      ]
+    }
+  ]
 }

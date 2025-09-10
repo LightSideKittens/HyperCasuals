@@ -1,4 +1,5 @@
 ﻿using LSCore;
+using LSCore.Extensions;
 using UnityEngine;
 
 namespace Launcher
@@ -11,6 +12,10 @@ namespace Launcher
         {
             base.Awake();
             BaseInitializer.Initialize(Init);
+            if (!GameSave.currentLevel.IsNullOrEmpty())
+            {
+                Analytic.LogEvent("level_quit", GameSave.CurrentLevelParam);
+            }
         }
 
         private void Init()

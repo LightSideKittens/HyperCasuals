@@ -12,6 +12,26 @@ using static com.unity3d.mediation.LevelPlayAdFormat;
 
 public static class Ads
 {
+    [Serializable]
+    public class ShowRewardedAd : DoIt
+    {
+        public DoItt onRewarded;
+        public DoItt onClosed;
+        public DoItt onFailed;
+
+        public override void Do()
+        {
+            if (IsRewardedReady)
+            {
+                ShowRewarded(onRewarded, onClosed);
+            }
+            else
+            {
+                onFailed.Do();
+            }
+        }
+    }
+
     private static bool initialized;
     private static LevelPlayRewardedAd rewarded;
     private static LevelPlayInterstitialAd interstitial;
@@ -23,9 +43,9 @@ public static class Ads
     private static bool rvLoading;
     private static bool isLoading;
 
-    public static bool IsInitialized      => initialized;
-    public static bool IsRewardedReady    => rewarded != null && rewarded.IsAdReady();
-    public static bool IsInterstitialReady=> interstitial != null && interstitial.IsAdReady();
+    public static bool IsInitialized => initialized;
+    public static bool IsRewardedReady => rewarded != null && rewarded.IsAdReady();
+    public static bool IsInterstitialReady => interstitial != null && interstitial.IsAdReady();
 
     private static readonly string logTag = "[Ads]".ToTag(new Color(0.48f, 0.79f, 0f));
 
@@ -46,7 +66,7 @@ public static class Ads
         };
     }
 #endif
-    
+
     public static void Init(
         string appKey,
         string rewardedUnitId,
@@ -70,10 +90,9 @@ public static class Ads
                 }
             });
         });
-        
+
         void InitAds()
         {
-            
             rvUnitId = rewardedUnitId;
             isUnitId = interstitialUnitId;
 
@@ -85,8 +104,8 @@ public static class Ads
             {
                 initialized = true;
 
-                rewarded    = new LevelPlayRewardedAd(rvUnitId);
-                interstitial= new LevelPlayInterstitialAd(isUnitId);
+                rewarded = new LevelPlayRewardedAd(rvUnitId);
+                interstitial = new LevelPlayInterstitialAd(isUnitId);
 
                 rewarded.OnAdLoaded += _ =>
                 {
@@ -119,13 +138,10 @@ public static class Ads
 
                 Burger.Log($"{logTag} LevelPlay initialized");
             };
-        
+
             LevelPlay.OnImpressionDataReady += OnImpressionDataReady;
-            LevelPlay.OnInitFailed += e =>
-            {
-                Burger.Error($"{logTag} LevelPlay init failed: {e}");
-            };
-        
+            LevelPlay.OnInitFailed += e => { Burger.Error($"{logTag} LevelPlay init failed: {e}"); };
+
             LevelPlay.Init(appKey, userId, new[] { REWARDED, INTERSTITIAL });
         }
     }
@@ -159,12 +175,13 @@ public static class Ads
             Burger.Warning($"{logTag} Rewarded not set");
             return;
         }
+
         if (rvLoading || rewarded.IsAdReady()) return;
 
         rvLoading = true;
         rewarded.LoadAd();
     }
-    
+
     public static void LoadInterstitial()
     {
         if (interstitial == null)
@@ -172,12 +189,13 @@ public static class Ads
             Burger.Warning($"{logTag} Interstitial not set");
             return;
         }
+
         if (isLoading || interstitial.IsAdReady()) return;
 
         isLoading = true;
         interstitial.LoadAd();
     }
-    
+
     public static bool ShowRewarded(Action onReward, Action onClosed = null, string placement = null)
     {
         if (rewarded == null || !rewarded.IsAdReady() || isShowing) return false;
@@ -189,9 +207,9 @@ public static class Ads
         Tween delay = null;
         isShowing = true;
 
-        rewarded.OnAdRewarded       += OnRewarded;
-        rewarded.OnAdClosed         += OnClosed;
-        rewarded.OnAdDisplayFailed  += OnShowFailed;
+        rewarded.OnAdRewarded += OnRewarded;
+        rewarded.OnAdClosed += OnClosed;
+        rewarded.OnAdDisplayFailed += OnShowFailed;
 
         Analytic.LogEvent("show_reward_ad");
         rewarded.ShowAd(placement);
@@ -223,22 +241,22 @@ public static class Ads
             LoadRewarded();
 
             isShowing = false;
-            rewarded.OnAdRewarded      -= OnRewarded;
-            rewarded.OnAdClosed        -= OnClosed;
+            rewarded.OnAdRewarded -= OnRewarded;
+            rewarded.OnAdClosed -= OnClosed;
             rewarded.OnAdDisplayFailed -= OnShowFailed;
 
             if (isRewardedFlag) onReward.SafeInvoke();
-            else                onClosed.SafeInvoke();
+            else onClosed.SafeInvoke();
         }
     }
-    
+
     public static bool ShowInterstitial(Action onClosed = null, string placement = null)
     {
         if (interstitial == null || !interstitial.IsAdReady() || isShowing) return false;
 
         isShowing = true;
 
-        interstitial.OnAdClosed        += OnClosed;
+        interstitial.OnAdClosed += OnClosed;
         interstitial.OnAdDisplayFailed += OnShowFailed;
 
         interstitial.ShowAd(placement);
@@ -246,7 +264,7 @@ public static class Ads
 
         void OnClosed(LevelPlayAdInfo info)
         {
-            interstitial.OnAdClosed        -= OnClosed;
+            interstitial.OnAdClosed -= OnClosed;
             interstitial.OnAdDisplayFailed -= OnShowFailed;
 
             isShowing = false;
@@ -261,7 +279,7 @@ public static class Ads
         {
             Burger.Warning($"{logTag} Interstitial show failed: {error}");
 
-            interstitial.OnAdClosed        -= OnClosed;
+            interstitial.OnAdClosed -= OnClosed;
             interstitial.OnAdDisplayFailed -= OnShowFailed;
 
             isShowing = false;
@@ -276,7 +294,7 @@ public static class Ads
     {
         if (rewarded == null || rewarded.IsAdReady() || rvLoading) return;
 
-        DOVirtual.DelayedCall(rvRetry, () =>
+        Wait.Delay(rvRetry, () =>
         {
             if (rewarded == null || rewarded.IsAdReady()) return;
             LoadRewarded();
@@ -288,7 +306,7 @@ public static class Ads
     {
         if (interstitial == null || interstitial.IsAdReady() || isLoading) return;
 
-        DOVirtual.DelayedCall(isRetry, () =>
+        Wait.Delay(isRetry, () =>
         {
             if (interstitial == null || interstitial.IsAdReady()) return;
             LoadInterstitial();

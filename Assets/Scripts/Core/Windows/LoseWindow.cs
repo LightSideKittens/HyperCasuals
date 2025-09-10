@@ -32,7 +32,8 @@ public class LoseWindow : BaseWindow<LoseWindow>
         base.OnShowing();
 
         if (Ads.IsRewardedReady && !watched)
-        { 
+        {
+            Analytic.LogEvent("ads_button_seen");
             SetActiveWatchButton(true);
             timerAnim.Animate().OnComplete(() => SetActiveWatchButton(false));
         }
@@ -47,7 +48,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
         }
         else
         { 
-            Analytic.LogEvent("lost_level", ("level", GameSave.Level), ("reason", GameSave.loseReason));
+            Analytic.LogEvent("lost_level", GameSave.CurrentLevelParam, ("reason", GameSave.loseReason), GoalWindow.LevelTimeParam);
         }
     }
     
@@ -71,7 +72,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
             }
             else
             { 
-                Analytic.LogEvent("revive", ("level", GameSave.Level));
+                Analytic.LogEvent("revive", GameSave.CurrentLevelParam);
             }
         }
     }
