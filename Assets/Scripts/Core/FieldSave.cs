@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using LSCore;
 using LSCore.ConfigModule;
 using LSCore.Extensions;
 using Newtonsoft.Json.Linq;
@@ -51,8 +52,6 @@ namespace Core
             get => Manager.Config.data;
             set => Manager.Config.data = value;
         }
-
-        public static bool isChestGot;
         
         public static bool Exists
         {

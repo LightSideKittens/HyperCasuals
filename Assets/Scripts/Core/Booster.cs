@@ -56,8 +56,8 @@ public abstract class BaseFieldClickBooster : Booster
         {
             tutorialPointer.transform.position = FieldManager.ToPos(tutorialGridIndex);
         }
-        button.Submitted -= OnSubmitted;
-        button.Submitted += OnSubmitted;
+        button.Did -= OnSubmitted;
+        button.Did += OnSubmitted;
     }
     
     private void OnSubmitted()
@@ -201,7 +201,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
 
     public override void Do()
     {
-        button.Submitted += OnSubmit;
+        button.Did += OnSubmit;
         lockLeveText.LocalizeArguments(unlockLevel);
         states = GameSave.Config.AsJ<JObject>("states");
         states.As(id.ToString(), false);
@@ -213,8 +213,9 @@ public class BoosterButton : DoIt, ILocalizationArgument
         DestroyEvent.AddOnDestroy(root, () => Funds.RemoveOnChanged(id, UpdateState));
     }
 
-    private void UpdateState(int amount)
+    private void UpdateState((int last, int current) data)
     {
+        var amount = data.current;
         amountText.text = amount.ToString();
         countLabel.SetActive(false);
         plusLabel.SetActive(false);
@@ -251,7 +252,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
         if (FirstTime.IsNot($"Booster used {id}", out var pass))
         {
             Booster.isTutorial = true;
-            button.Submit();
+            button.Do();
             UIViewBoss.IsGoBackBlocked = true;
             Booster.Used += OnUsed;
                     

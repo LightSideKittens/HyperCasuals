@@ -20,9 +20,9 @@ public class WinWindow : BaseWindow<WinWindow>
         {
             Analytic.LogEvent("ads_button_seen");
             claimButton.gameObject.SetActive(true);
-            claimButton.submittable.doIter.Unsubscribe();
-            ISubmittable submittable = claimButton.submittable;
-            submittable.Submitted += OnClaim;
+            claimButton.uiControl.doIter.Unsubscribe();
+            IUIControl uiControl = claimButton.uiControl;
+            uiControl.Activated += OnClaim;
         }
         else
         {
@@ -40,7 +40,7 @@ public class WinWindow : BaseWindow<WinWindow>
         CoreWorld.StopIdleMusic();
         Analytic.LogEvent("win_level", GameSave.CurrentLevelParam, GoalWindow.LevelTimeParam);
         base.OnShowing();
-        if (FieldSave.isChestGot)
+        if (GameSave.IsChestGot)
         {
             chest.Show();
         }
@@ -48,6 +48,8 @@ public class WinWindow : BaseWindow<WinWindow>
         {
             main.Show();
         }
+        
+        GameSave.IsChestGot = false;
     }
 
     private void OnClaim()
@@ -57,7 +59,7 @@ public class WinWindow : BaseWindow<WinWindow>
 
         void OnRewarded()
         {
-            claimButton.submittable.doIter.Do();
+            claimButton.uiControl.doIter.Do();
             claimButton.gameObject.SetActive(false);
             reward.Number = rewardX2.Number;
         }

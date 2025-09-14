@@ -15,9 +15,9 @@ public static class Ads
     [Serializable]
     public class ShowRewardedAd : DoIt
     {
-        public DoItt onRewarded;
-        public DoItt onClosed;
-        public DoItt onFailed;
+        [SerializeReference] public DoIt onRewarded;
+        [SerializeReference] public DoIt onClosed;
+        [SerializeReference] public DoIt onFailed;
 
         public override void Do()
         {

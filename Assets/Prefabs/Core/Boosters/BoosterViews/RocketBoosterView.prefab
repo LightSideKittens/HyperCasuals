@@ -86,7 +86,7 @@ MonoBehaviour:
     rid: 1249993464767316241
   isOn:
     rid: 1249993464767316247
-  submittable:
+  uiControl:
     rid: 1249993464767316242
   references:
     version: 2
@@ -104,7 +104,7 @@ MonoBehaviour:
               rid: 1249993467469496393
           editor_options: []
     - rid: 1249993464767316242
-      type: {class: DefaultSubmittable, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControl, ns: LSCore, asm: LSCore.UIModule}
       data:
         anim:
           rid: -2
@@ -147,9 +147,9 @@ MonoBehaviour:
       data:
         data: {fileID: 8064796061521427323}
     - rid: 2877981696179568724
-      type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControlDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
-        onSubmit: []
+        onActivate: []
 --- !u!1 &1901485822636821581
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ MonoBehaviour:
     rid: 1249993464767316241
   isOn:
     rid: 1249993464767316247
-  submittable:
+  uiControl:
     rid: 1249993464767316242
   references:
     version: 2
@@ -354,7 +354,7 @@ MonoBehaviour:
               rid: 1249993467469496393
           editor_options: []
     - rid: 1249993464767316242
-      type: {class: DefaultSubmittable, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControl, ns: LSCore, asm: LSCore.UIModule}
       data:
         anim:
           rid: -2
@@ -397,9 +397,9 @@ MonoBehaviour:
       data:
         data: {fileID: 4692897426662267828}
     - rid: 2877981696179568725
-      type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControlDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
-        onSubmit: []
+        onActivate: []
 --- !u!1001 &30319582959531967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1372,11 +1372,11 @@ PrefabInstance:
       value: Core FreezeTimer
       objectReference: {fileID: 0}
     - target: {fileID: 6413825744915403851, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: submittable.doIter.onSubmit.Array.size
+      propertyPath: uiControl.doIter.onActivate.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6413825744915403851, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: 'submittable.doIter.onSubmit.Array.data[0]'
+      propertyPath: 'uiControl.doIter.onActivate.Array.data[0]'
       value: 5237655153313055015
       objectReference: {fileID: 0}
     - target: {fileID: 6413825744915403851, guid: a58e57144fc50304a9040ee3209339b6, type: 3}

@@ -87,7 +87,7 @@ MonoBehaviour:
     rid: 3302317731496591862
   isOn:
     rid: -2
-  submittable:
+  uiControl:
     rid: 1000
   references:
     version: 2
@@ -95,7 +95,7 @@ MonoBehaviour:
     - rid: -2
       type: {class: , ns: , asm: }
     - rid: 1000
-      type: {class: DefaultSubmittable, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControl, ns: LSCore, asm: LSCore.UIModule}
       data:
         anim:
           rid: -2
@@ -104,9 +104,9 @@ MonoBehaviour:
         selectBehaviour:
           rid: -2
     - rid: 2877981690709147994
-      type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControlDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
-        onSubmit: []
+        onActivate: []
     - rid: 3302317731496591862
       type: {class: InOutShowHideAnim, ns: LSCore, asm: LSCore.UIModule}
       data:

@@ -15,6 +15,7 @@ namespace Launcher
             if (!GameSave.currentLevel.IsNullOrEmpty())
             {
                 Analytic.LogEvent("level_quit", GameSave.CurrentLevelParam);
+                GameSave.currentLevel = null;
             }
         }
 

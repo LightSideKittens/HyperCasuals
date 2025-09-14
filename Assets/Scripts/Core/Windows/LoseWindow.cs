@@ -12,7 +12,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
     [SerializeField] private LocalizationText reasonText;
     [SerializeField] private LSButton watchButton;
     [SerializeField] private LSButton replayButton;
-    [SerializeField] private SubmittableRect noThanksButton;
+    [SerializeField] private UIControlRect noThanksButton;
     [SerializeReference] private AnimSequencer timerAnim;
     public static Action onReviveClicked;
     private bool watched;
@@ -20,8 +20,8 @@ public class LoseWindow : BaseWindow<LoseWindow>
     protected override void Init()
     {
         base.Init();
-        watchButton.Submitted += Reload;
-        noThanksButton.Submitted += () => SetActiveWatchButton(false);
+        watchButton.Did += Reload;
+        noThanksButton.Did += () => SetActiveWatchButton(false);
     }
 
     protected override void OnShowing()
