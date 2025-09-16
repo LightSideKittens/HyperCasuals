@@ -86,8 +86,9 @@ namespace Core
             var block = FieldManager.ActiveBlocks.RandomElement();
             if (block != null)
             {
-                chestIndex = FieldManager.ToIndex(block.transform.position);
-                chestGo = Instantiate(Chests.Current.block, block.transform.position, Quaternion.identity);
+                var index = FieldManager.ToIndex(block.transform.position);
+                chestIndex = index;
+                chestGo = Instantiate(Chests.Current.block, FieldManager.ToPos(index), Quaternion.identity);
             }
         }
 
@@ -113,16 +114,18 @@ namespace Core
         {
             chest.sprite = Chests.Current.ChestSprite;
 
+            var nowTicks = DateTime.UtcNow.Ticks;
+            
             if (CanPlaceChest)
             {
                 chestInfo.text = $"{GameSave.CollectedChests}/{Chests.ChestCountForIssue}";
             }
-            else if(GameSave.RenewalDateTime <= DateTime.UtcNow.Ticks)
+            else if(GameSave.RenewalDateTime <= nowTicks)
             {
-                GameSave.RenewalDateTime += Chests.RenewalTime;
+                GameSave.RenewalDateTime = nowTicks + Chests.RenewalTime;
             }
 
-            var diff = GameSave.RenewalDateTime - DateTime.UtcNow.Ticks;
+            var diff = GameSave.RenewalDateTime - nowTicks;
             if (diff > 0)
             {
                 TimeSpan.FromTicks(diff).Seconder(time =>
