@@ -54,7 +54,7 @@ namespace Core
             pointerAnim.Kill();
             pointer.SetActive(false);
             Wait.Delay(1, onCompleted.Do);
-            Analytic.LogEvent("tutorial_completed", ("level", GameSave.TutorialLevel));
+            Analytic.LogEvent("tutorial_completed", ("level", GameSave.TutorialLevel.ToString()));
         }
     }
 }

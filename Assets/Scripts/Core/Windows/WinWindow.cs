@@ -16,6 +16,7 @@ public class WinWindow : BaseWindow<WinWindow>
         Instantiate(confetti);
         if (Ads.IsRewardedReady)
         {
+            Analytic.LogEvent("ads_button_seen");
             claimButton.gameObject.SetActive(true);
             claimButton.submittable.doIter.Unsubscribe();
             ISubmittable submittable = claimButton.submittable;
@@ -35,7 +36,7 @@ public class WinWindow : BaseWindow<WinWindow>
         }
         sound.Do(); 
         CoreWorld.StopIdleMusic();
-        Analytic.LogEvent("win_level", ("level", GameSave.Level));
+        Analytic.LogEvent("win_level", GameSave.CurrentLevelParam, GoalWindow.LevelTimeParam);
         base.OnShowing();
     }
 

@@ -1,4 +1,5 @@
-﻿using Firebase.Analytics;
+﻿using AppodealStack.Monetization.Api;
+using Firebase.Analytics;
 using LSCore;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -63,18 +64,21 @@ public static class Analytic
     public static void LogEvent(string name)
     {
         Burger.Log($"{log} LogEvent: {name}");
+        Appodeal.LogEvent(name);
         FirebaseAnalytics.LogEvent(name);
     }
     
     public static void LogEvent(string name, Param param)
     {
         Burger.Log($"{log} LogEvent {name}: {param}");
+        Appodeal.LogEvent(name);
         FirebaseAnalytics.LogEvent(name, param.parameter);
     }
 
     public static void LogEvent(string name, params Param[] parameters)
     {
         Burger.Log($"{log} LogEvent {name}: {string.Join(" ",  parameters)}");
+        Appodeal.LogEvent(name);
         FirebaseAnalytics.LogEvent(name, parameters.ToParameters());
     }
 

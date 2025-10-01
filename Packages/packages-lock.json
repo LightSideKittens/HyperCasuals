@@ -1,11 +1,26 @@
 {
   "dependencies": {
+    "com.appodeal.mediation": {
+      "version": "https://github.com/appodeal/appodeal-unity-plugin-upm.git#v3.10.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.google.external-dependency-manager": "1.2.175"
+      },
+      "hash": "200d157fc9b45d694ebf4d8fae14ecde769a58c4"
+    },
     "com.github-glitchenzo.nugetforunity": {
       "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
       "depth": 0,
       "source": "git",
       "dependencies": {},
       "hash": "a22299e7e94eaa13ac17b326e0de8f2d3afa9e46"
+    },
+    "com.google.external-dependency-manager": {
+      "version": "file:../Assets/Plugins/com.google.external-dependency-manager-1.2.186.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
     },
     "com.sendbird.chat": {
       "version": "https://github.com/sendbird/sendbird-chat-sdk-unity.git",
@@ -204,26 +219,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.services.core": {
-      "version": "1.14.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.nuget.newtonsoft-json": "3.2.1",
-        "com.unity.modules.androidjni": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.services.levelplay": {
-      "version": "8.10.1",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.services.core": "1.8.1"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.test-framework": {
       "version": "1.5.1",
       "depth": 0,
@@ -257,7 +252,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ugui": {
-      "version": "https://github.com/LightSideKittens/UnityUI.git",
+      "version": "https://github.com/LightSideKittens/UnityUI.git#2.0.0",
       "depth": 0,
       "source": "git",
       "dependencies": {

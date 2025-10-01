@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dependencies>
+	<iosPods>
+		<iosPod id="appodeal" name="Appodeal" version="3.10.0" minTargetSdk="12.0" />
+		<iosPod id="appodeal_appsflyer" name="APDAppsFlyerAdapter" version="3.10.0.0" minTargetSdk="12.0" />
+		<iosPod id="appodeal_bidmachine" name="APDBidMachineAdapter" version="3.10.0.0" minTargetSdk="12.0" />
+		<iosPod id="appodeal_bidon" name="APDBidonAdapter" version="3.10.0.0" minTargetSdk="12.0" />
+		<iosPod id="appodeal_facebook_analytics" name="APDFacebookAdapter" version="3.10.0.0" minTargetSdk="12.0" />
+		<iosPod id="appodeal_iab" name="APDIABAdapter" version="3.10.0.0" minTargetSdk="12.0" />
+		<iosPod id="appodeal_sentry" name="APDSentryAdapter" version="3.10.0.0" minTargetSdk="12.0" />
+		<iosPod id="bidon_bidmachine" name="BidonAdapterBidMachine" version="0.11.0.0" minTargetSdk="12.0" />
+		<sources>
+			<source>https://github.com/appodeal/CocoaPods.git</source>
+			<source>https://github.com/bidon-io/CocoaPods_Specs.git</source>
+		</sources>
+	</iosPods>
+	<androidPackages>
+		<androidPackage id="appodeal" spec="com.appodeal.ads.sdk:core:3.10.0" />
+		<androidPackage id="appodeal_appsflyer" spec="com.appodeal.ads.sdk.services:appsflyer:3.10.0.0" />
+		<androidPackage id="appodeal_bidmachine" spec="com.appodeal.ads.sdk.networks:bidmachine:3.10.0.0" />
+		<androidPackage id="appodeal_bidon" spec="com.appodeal.ads.sdk.networks:bidon:3.10.0.0" />
+		<androidPackage id="appodeal_facebook_analytics" spec="com.appodeal.ads.sdk.services:facebook_analytics:3.10.0.0" />
+		<androidPackage id="appodeal_iab" spec="com.appodeal.ads.sdk.networks:iab:3.10.0.0" />
+		<androidPackage id="appodeal_sentry" spec="com.appodeal.ads.sdk.services:sentry_analytics:3.10.0.0" />
+		<androidPackage id="bidon_bidmachine" spec="org.bidon:bidmachine-adapter:0.11.0.0" />
+		<repositories>
+			<repository>https://artifactory.appodeal.com/appodeal</repository>
+			<repository>https://artifactory.bidon.org/bidon</repository>
+		</repositories>
+	</androidPackages>
+</dependencies>
