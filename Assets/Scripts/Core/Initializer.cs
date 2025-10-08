@@ -22,20 +22,12 @@ public class Initializer : BaseInitializer
     private string interAdUnit = "nm1m0f54txlyc37x";
 #endif
     
-    protected override async void OnInitialize(Action onInitialized)
+    protected override void OnInitialize(Action onInitialized)
     {
-        await Task.WhenAll(InitAppodeal(), InitFirebase());
-        
         Ads.Init(appKey, rewardAdUnit, interAdUnit, true);
-        Analytic.Init();
+        Analytic.Init(InitFirebase(), InitAppodeal());
         
         defaultTheme.Do();
-        NotificationHandlers.AddHandler("test", token =>
-        {
-            Debug.Log($"Test notification: {token}");
-        });
-        
-        NotificationHandlers.Init();
         
         if (!Levels.IsTutorialCompleted.Is)
         {
@@ -46,37 +38,52 @@ public class Initializer : BaseInitializer
         onInitialized?.Invoke();
     }
 
-    private static async Task InitFirebase()
+    private static Task<bool> InitFirebase()
     {
-        var status = await FirebaseApp.CheckAndFixDependenciesAsync();
-        if (status == DependencyStatus.Available)
+        var task = new TaskCompletionSource<bool>();
+        Init();
+        return task.Task;
+
+        async void Init()
         {
-            FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-        }
-        else
-        {
-            Debug.LogError($"[Firebase] Dependencies not available: {status}");
+            var status = await FirebaseApp.CheckAndFixDependenciesAsync();
+            var success = status == DependencyStatus.Available;
+            task.SetResult(success);
+        
+            if (success)
+            {
+                FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+            }
+            else
+            {
+                Debug.LogError($"[Firebase] Dependencies not available: {status}");
+            }
+        
+            NotificationHandlers.AddHandler("test", token =>
+            {
+                Debug.Log($"Test notification: {token}");
+            });
+        
+            NotificationHandlers.Init();
         }
     }
 
-    private static Task InitAppodeal()
+    private static Task<bool> InitAppodeal()
     {
         int adTypes = AppodealAdType.Interstitial | AppodealAdType.Banner | AppodealAdType.RewardedVideo | AppodealAdType.Mrec;
         string appodealAppKey = "4386af860de7e62f60365b784a790d76212a25013f4e8f20";
         var task = new TaskCompletionSource<bool>();
         AppodealCallbacks.Sdk.OnInitialized += OnInitializationFinished;
+#if DEBUG
         Appodeal.SetLogLevel(AppodealLogLevel.Verbose);
         Appodeal.SetTesting(true);  
+#endif
         Appodeal.Initialize(appodealAppKey, adTypes);
 
         return task.Task;
-        void OnInitializationFinished(object sender, SdkInitializedEventArgs sdkInitializedEventArgs)
+        void OnInitializationFinished(object sender, SdkInitializedEventArgs args)
         {
-            task.SetResult(true);
-            if (sdkInitializedEventArgs?.Errors is { Count: > 0 })
-            { 
-                Debug.Log(string.Join("\n", sdkInitializedEventArgs.Errors));
-            }
+            task.SetResult(args?.Errors == null || args.Errors.Count == 0);
         }
     }
 }
