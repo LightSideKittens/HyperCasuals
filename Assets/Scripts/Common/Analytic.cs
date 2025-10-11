@@ -1,10 +1,13 @@
-﻿using Firebase.Analytics;
+﻿using System;
+using System.Threading.Tasks;
+using Firebase.Analytics;
 using LSCore;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public static class Analytic
 {
+    private static Task<bool> firebaseInitTask;
     private static bool isInited;
 
 #if UNITY_EDITOR
@@ -14,12 +17,17 @@ public static class Analytic
     }
 #endif
     
-    public static void Init()
+    public static void Init(Task<bool> firebaseInitTask)
     {
         if(isInited) return;
         isInited = true;
-        InitMixerMuters();
-        InitGameSave();
+        Analytic.firebaseInitTask = firebaseInitTask;
+        Check(firebaseInitTask, InitUserProps);
+        void InitUserProps()
+        {
+            InitMixerMuters();
+            InitGameSave();
+        }
     }
 
     private static void InitMixerMuters()
@@ -63,21 +71,43 @@ public static class Analytic
     public static void LogEvent(string name)
     {
         Burger.Log($"{log} LogEvent: {name}");
-        FirebaseAnalytics.LogEvent(name);
+        Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name));
     }
     
     public static void LogEvent(string name, Param param)
     {
         Burger.Log($"{log} LogEvent {name}: {param}");
-        FirebaseAnalytics.LogEvent(name, param.parameter);
+        Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name, param.parameter));
     }
 
     public static void LogEvent(string name, params Param[] parameters)
     {
         Burger.Log($"{log} LogEvent {name}: {string.Join(" ",  parameters)}");
-        FirebaseAnalytics.LogEvent(name, parameters.ToParameters());
+        Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name, parameters.ToParameters()));
     }
 
+    private static async void Check(Task<bool> task, Action onSuccess)
+    {
+        if (task.IsCompleted)
+        {
+            if (task.Result)
+            {
+                onSuccess();
+            }
+            else
+            {
+                return;
+            }
+        }
+        
+        await task;
+        
+        if (task.Result)
+        {
+            onSuccess();
+        }
+    }
+    
     public static Parameter[] ToParameters(this Param[] param)
     {
         var parameters = new Parameter[param.Length];
