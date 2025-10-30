@@ -6,6 +6,7 @@ namespace Launcher
 {
     public class LauncherWorld : ServiceManager<LauncherWorld>
     {
+        public MoveItCurve curve;
         [SerializeReference] public DoIt[] onInit;
         
         protected override void Awake()
