@@ -22,6 +22,31 @@
       "source": "local-tarball",
       "dependencies": {}
     },
+    "com.onesignal.unity.android": {
+      "version": "5.2.0-beta-01",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.onesignal.unity.core": "5.2.0-beta-01"
+      },
+      "url": "https://registry.npmjs.org"
+    },
+    "com.onesignal.unity.core": {
+      "version": "5.2.0-beta-01",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "com.onesignal.unity.ios": {
+      "version": "5.2.0-beta-01",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.onesignal.unity.core": "5.2.0-beta-01"
+      },
+      "url": "https://registry.npmjs.org"
+    },
     "com.sendbird.chat": {
       "version": "https://github.com/sendbird/sendbird-chat-sdk-unity.git",
       "depth": 0,
@@ -219,6 +244,26 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.services.core": {
+      "version": "1.15.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.services.levelplay": {
+      "version": "9.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.services.core": "1.15.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.test-framework": {
       "version": "1.6.0",
       "depth": 0,
@@ -252,14 +297,14 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ugui": {
-      "version": "https://github.com/LightSideKittens/UnityUI.git#2.0.0",
+      "version": "https://github.com/LightSideKittens/UnityUI.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       },
-      "hash": "21729f3b53964d55717aeaedfa95cd5d35e45db2"
+      "hash": "fb1418be5fb566262d87e70b2f4ca82e9827f7eb"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

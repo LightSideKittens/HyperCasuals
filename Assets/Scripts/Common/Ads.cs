@@ -8,7 +8,6 @@ using LSCore.Async;
 using LSCore.Extensions;
 using UnityEngine;
 using Unity.Services.LevelPlay;
-using static com.unity3d.mediation.LevelPlayAdFormat;
 
 public static class Ads
 {
@@ -142,7 +141,7 @@ public static class Ads
             LevelPlay.OnImpressionDataReady += OnImpressionDataReady;
             LevelPlay.OnInitFailed += e => { Burger.Error($"{logTag} LevelPlay init failed: {e}"); };
 
-            LevelPlay.Init(appKey, userId, new[] { REWARDED, INTERSTITIAL });
+            LevelPlay.Init(appKey, userId);
         }
     }
 
@@ -229,7 +228,7 @@ public static class Ads
             delay ??= Wait.Frames(1, Finish);
         }
 
-        void OnShowFailed(LevelPlayAdDisplayInfoError error)
+        void OnShowFailed(LevelPlayAdInfo info, LevelPlayAdError error)
         {
             Burger.Warning($"{logTag} Rewarded show failed: {error}");
             delay ??= Wait.Frames(1, Finish);
@@ -275,7 +274,7 @@ public static class Ads
             onClosed.SafeInvoke();
         }
 
-        void OnShowFailed(LevelPlayAdDisplayInfoError error)
+        void OnShowFailed(LevelPlayAdInfo info, LevelPlayAdError error)
         {
             Burger.Warning($"{logTag} Interstitial show failed: {error}");
 
