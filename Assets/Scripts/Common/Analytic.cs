@@ -100,10 +100,8 @@ public static class Analytic
             {
                 onSuccess();
             }
-            else
-            {
-                return;
-            }
+            
+            return;
         }
         
         await task;

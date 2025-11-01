@@ -223,7 +223,6 @@ public class BoosterButton : DoIt, ILocalizationArgument
         {
             if (states.CheckDiffAndSync<bool>(id.ToString(), true))
             {
-                Funds.Earn(id, 3);
                 amount = Funds.GetAmount(id);
                 unlockAnimation.Animate();
             }

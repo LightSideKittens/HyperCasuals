@@ -12,7 +12,7 @@ namespace Core
         private int reachedCount;
         private static float startTime;
         public static float LevelTime => Time.realtimeSinceStartup - startTime;
-        public static Analytic.Param LevelTimeParam => ("time", ((int)LevelTime).ToString());
+        public static Analytic.Param LevelTimeParam => ("time", (int)LevelTime);
         
         protected override void Init()
         {
