@@ -90,7 +90,7 @@ MonoBehaviour:
     rid: 2877981669296702075
   isOn:
     rid: 2877981669296702089
-  submittable:
+  uiControl:
     rid: 2877981669296702076
   references:
     version: 2
@@ -108,7 +108,7 @@ MonoBehaviour:
               rid: 2877981669296702079
           editor_options: []
     - rid: 2877981669296702076
-      type: {class: DefaultSubmittable, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControl, ns: LSCore, asm: LSCore.UIModule}
       data:
         anim:
           rid: 2877981669296702088
@@ -159,7 +159,7 @@ MonoBehaviour:
           m_RotationOrder: 4
         ease: 30
     - rid: 2877981669296702088
-      type: {class: DefaultSubmittableAnim, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControlAnim, ns: LSCore, asm: LSCore.UIModule}
       data:
         sound:
           prefab: {fileID: 1214800232964751706, guid: fd3dba92e0d5baf4fa3897caa4e691ef, type: 3}
@@ -247,9 +247,9 @@ MonoBehaviour:
       data:
         data: {fileID: 7595935630973294386}
     - rid: 2877981690709147869
-      type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControlDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
-        onSubmit: []
+        onActivate: []
 --- !u!1001 &1740823423877198165
 PrefabInstance:
   m_ObjectHideFlags: 0

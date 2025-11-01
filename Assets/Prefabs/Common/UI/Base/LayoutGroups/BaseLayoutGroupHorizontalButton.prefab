@@ -83,7 +83,7 @@ MonoBehaviour:
   mirror: {x: 1, y: 0}
   combineFilledWithSliced: 0
   ignoreSLAAAAYout: 0
-  submittable:
+  uiControl:
     rid: 1000
   clickActions:
     actions: []
@@ -92,7 +92,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 1000
-      type: {class: DefaultSubmittable, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControl, ns: LSCore, asm: LSCore.UIModule}
       data:
         anim:
           rid: 1249993174685319865
@@ -101,12 +101,12 @@ MonoBehaviour:
         selectBehaviour:
           rid: 1249993174685319935
     - rid: 1249993174685319865
-      type: {class: DefaultSubmittableAnim, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControlAnim, ns: LSCore, asm: LSCore.UIModule}
       data: 
     - rid: 1249993174685319866
-      type: {class: DefaultSubmittableDoIter, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControlDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
-        onSubmit: []
+        onActivate: []
     - rid: 1249993174685319935
-      type: {class: DefaultSubmittableSelectBehaviour, ns: LSCore, asm: LSCore.UIModule}
+      type: {class: DefaultUIControlSelectBehaviour, ns: LSCore, asm: LSCore.UIModule}
       data: 

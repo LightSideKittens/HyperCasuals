@@ -7,14 +7,34 @@ using LSCore;
 using LSCore.Async;
 using LSCore.Extensions;
 using UnityEngine;
-/*using Unity.Services.LevelPlay;
-using static com.unity3d.mediation.LevelPlayAdFormat;*/
+using Unity.Services.LevelPlay;
+using static com.unity3d.mediation.LevelPlayAdFormat;
 
 public static class Ads
 {
+    [Serializable]
+    public class ShowRewardedAd : DoIt
+    {
+        [SerializeReference] public DoIt onRewarded;
+        [SerializeReference] public DoIt onClosed;
+        [SerializeReference] public DoIt onFailed;
+
+        public override void Do()
+        {
+            if (IsRewardedReady)
+            {
+                ShowRewarded(onRewarded, onClosed);
+            }
+            else
+            {
+                onFailed.Do();
+            }
+        }
+    }
+
     private static bool initialized;
-    /*private static LevelPlayRewardedAd rewarded;
-    private static LevelPlayInterstitialAd interstitial;*/
+    private static LevelPlayRewardedAd rewarded;
+    private static LevelPlayInterstitialAd interstitial;
 
     private static string rvUnitId;
     private static string isUnitId;
@@ -24,8 +44,8 @@ public static class Ads
     private static bool isLoading;
 
     public static bool IsInitialized => initialized;
-    public static bool IsRewardedReady => /*rewarded != null && rewarded.IsAdReady()*/ false;
-    public static bool IsInterstitialReady => /*interstitial != null && interstitial.IsAdReady()*/ false;
+    public static bool IsRewardedReady => rewarded != null && rewarded.IsAdReady();
+    public static bool IsInterstitialReady => interstitial != null && interstitial.IsAdReady();
 
     private static readonly string logTag = "[Ads]".ToTag(new Color(0.48f, 0.79f, 0f));
 
@@ -37,8 +57,8 @@ public static class Ads
     {
         World.Destroyed += () =>
         {
-            /*rewarded = null;
-            interstitial = null;*/
+            rewarded = null;
+            interstitial = null;
             initialized = false;
             isShowing = false;
             rvLoading = isLoading = false;
@@ -76,7 +96,6 @@ public static class Ads
             rvUnitId = rewardedUnitId;
             isUnitId = interstitialUnitId;
 
-            /*
             LevelPlay.SetConsent(consentGiven);
             LevelPlay.SetMetaData("do_not_sell", doNotSell ? "true" : "false");
             LevelPlay.SetMetaData("is_child_directed", childDirected ? "true" : "false");
@@ -123,11 +142,11 @@ public static class Ads
             LevelPlay.OnImpressionDataReady += OnImpressionDataReady;
             LevelPlay.OnInitFailed += e => { Burger.Error($"{logTag} LevelPlay init failed: {e}"); };
 
-            LevelPlay.Init(appKey, userId, new[] { REWARDED, INTERSTITIAL });*/
+            LevelPlay.Init(appKey, userId, new[] { REWARDED, INTERSTITIAL });
         }
     }
 
-    /*private static void OnImpressionDataReady(LevelPlayImpressionData data)
+    private static void OnImpressionDataReady(LevelPlayImpressionData data)
     {
         if (data == null) return;
 
@@ -147,9 +166,9 @@ public static class Ads
         };
 
         FirebaseAnalytics.LogEvent("ad_impression", parameters);
-    }*/
+    }
 
-    /*public static void LoadRewarded()
+    public static void LoadRewarded()
     {
         if (rewarded == null)
         {
@@ -161,9 +180,9 @@ public static class Ads
 
         rvLoading = true;
         rewarded.LoadAd();
-    }*/
+    }
 
-    /*public static void LoadInterstitial()
+    public static void LoadInterstitial()
     {
         if (interstitial == null)
         {
@@ -175,12 +194,10 @@ public static class Ads
 
         isLoading = true;
         interstitial.LoadAd();
-    }*/
+    }
 
     public static bool ShowRewarded(Action onReward, Action onClosed = null, string placement = null)
     {
-        return false;
-        /*
         if (rewarded == null || !rewarded.IsAdReady() || isShowing) return false;
 
         var isRewardedFlag = false;
@@ -230,13 +247,11 @@ public static class Ads
 
             if (isRewardedFlag) onReward.SafeInvoke();
             else onClosed.SafeInvoke();
-        }*/
+        }
     }
 
     public static bool ShowInterstitial(Action onClosed = null, string placement = null)
     {
-        return false;
-        /*
         if (interstitial == null || !interstitial.IsAdReady() || isShowing) return false;
 
         isShowing = true;
@@ -272,10 +287,10 @@ public static class Ads
             RetryInterstitial();
 
             onClosed.SafeInvoke();
-        }*/
+        }
     }
 
-    /*private static void RetryRewarded()
+    private static void RetryRewarded()
     {
         if (rewarded == null || rewarded.IsAdReady() || rvLoading) return;
 
@@ -297,5 +312,5 @@ public static class Ads
             LoadInterstitial();
         });
         isRetry = Mathf.Min(isRetry * 1.8f, MaxRetry);
-    }*/
+    }
 }

@@ -34,7 +34,7 @@ namespace Common
     }
     
     [Serializable]
-    public class ThemeToggleData : BaseToggleData
+    public class ThemeToggleData : ToggleData
     {
         [Serializable]
         public class ConfirmBuy : DoIt

@@ -693,7 +693,7 @@ MonoBehaviour:
         id: 
         options: []
         targets:
-        - rid: 1249993581379191339
+        - rid: 7466096554891542640
         timeOffsetPerTarget:
           serializedVersion: 2
           m_Curve:
@@ -715,14 +715,6 @@ MonoBehaviour:
         randomness: 90
         fadeOut: 1
         randomnessMode: 0
-    - rid: 1249993581379191339
-      type: {class: 'Cast`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
-      data:
-        provider:
-          rid: 1249993581379191340
-    - rid: 1249993581379191340
-      type: {class: CameraMainGet, ns: , asm: LSCore.DoIt}
-      data: 
     - rid: 1249993581379191347
       type: {class: GraphicAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
@@ -853,6 +845,14 @@ MonoBehaviour:
       type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
       data:
         data: {fileID: 4589098608845406472}
+    - rid: 7466096554891542640
+      type: {class: 'Cast`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data:
+          rid: 7466096554891542641
+    - rid: 7466096554891542641
+      type: {class: CameraMainGet, ns: , asm: LSCore.DoIt}
+      data: 
 --- !u!1001 &38314700429117858
 PrefabInstance:
   m_ObjectHideFlags: 0

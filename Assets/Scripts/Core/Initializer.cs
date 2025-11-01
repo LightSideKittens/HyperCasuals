@@ -24,7 +24,6 @@ public class Initializer : BaseInitializer
     
     protected override void OnInitialize(Action onInitialized)
     {
-        Ads.Init(appKey, rewardAdUnit, interAdUnit, true);
         Analytic.Init(InitFirebase(), InitAppodeal());
         
         defaultTheme.Do();
@@ -67,7 +66,6 @@ public class Initializer : BaseInitializer
             NotificationHandlers.Init();
         }
     }
-
     private static Task<bool> InitAppodeal()
     {
         int adTypes = AppodealAdType.Interstitial | AppodealAdType.Banner | AppodealAdType.RewardedVideo | AppodealAdType.Mrec;

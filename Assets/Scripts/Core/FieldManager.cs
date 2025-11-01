@@ -50,7 +50,8 @@ public partial class FieldManager : SingleService<FieldManager>
     
     public static Bounds FieldRect => new(Instance.back.transform.position, 8f.ToVector2() * FieldAppearance.FieldScale);
     public static Block[,] Grid => Instance.grid;
-
+    public static IEnumerable<Block> ActiveBlocks => Grid.Enumerate().Where(b => b);
+    
 #if UNITY_EDITOR
     private void OnValidate()
     {
@@ -210,6 +211,7 @@ public partial class FieldManager : SingleService<FieldManager>
     public List<Shape> hardShapes;
     private string level;
     public static event Action Starting;
+    public static event Action Started;
     
     private void Start()
     {
@@ -309,6 +311,8 @@ public partial class FieldManager : SingleService<FieldManager>
                 shape.transform.DOScale(shapeSpawnerScale, 0.2f).SetEase(Ease.InOutExpo);
             }
         };
+        
+        Started?.Invoke();
     }
 
     public static event Action Saving;
@@ -341,6 +345,7 @@ public partial class FieldManager : SingleService<FieldManager>
             FieldSave.Unload();
         }
         GameSave.currentLevel = lastLevel;
+        
 #if UNITY_EDITOR
         EditorApplication.update -= EditorUpdate;
 #endif

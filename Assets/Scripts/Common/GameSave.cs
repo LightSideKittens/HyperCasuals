@@ -11,8 +11,8 @@ public class GameSave
     public static string currentLevel;
     public static string loseReason;
     public static Analytic.Param CurrentLevelParam => ("level", currentLevel);
-
-    public static long RenewalTime
+    
+    public static long RenewalDateTime
     {
         get => Config.As("renewalTime", DateTime.UtcNow.Ticks);
         set => Config["renewalTime"] = value;
@@ -22,6 +22,12 @@ public class GameSave
     {
         get => Config.As("collectedChests", 0);
         set => Config["collectedChests"] = value;
+    }
+
+    public static bool IsChestGot
+    {
+        get => Config.As("isChestGot", false);
+        set => Config["isChestGot"] = value;
     }
     
     public static int Level

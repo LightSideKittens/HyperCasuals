@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class TimeGoal : MonoBehaviour
 {
-    [TimeSpan(options = TimeAttribute.Options.Minute | TimeAttribute.Options.Second)] 
+    [TimeSpan(options = TimeAttribute.Options.Seconder)] 
     public long time;
 
     public int timeOuting = 15;

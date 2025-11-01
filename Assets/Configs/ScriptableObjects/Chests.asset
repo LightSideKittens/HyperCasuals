@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b3fcfb974e4b09ab3777f1ff71c35a, type: 3}
+  m_Name: Chests
+  m_EditorClassIdentifier: 
+  chestCountForIssue: 5
+  renewalTime: 432000000000
+  chests:
+  - block: {fileID: 1324913133926198659, guid: 1d35afb67b3944d45aa84a023274898f, type: 3}
+    chestView: {fileID: 5493581514138454097, guid: 6d705a355dd9b3043b0bce9ef15be9a6, type: 3}
+    rewardView: {fileID: 7259423537706965707, guid: 999f5b0b0d097b841879096391ec0b6f, type: 3}
