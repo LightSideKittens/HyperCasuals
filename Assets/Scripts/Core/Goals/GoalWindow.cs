@@ -85,13 +85,13 @@ namespace Core
         
         private void PlaceChest()
         {
-            var block = FieldManager.ActiveBlocks.RandomElement();
+            /*var block = FieldManager.ActiveBlocks.RandomElement();
             if (block != null)
             {
                 var index = FieldManager.ToIndex(block.transform.position);
                 chestIndex = index;
                 chestGo = Instantiate(Chests.Current.block, FieldManager.ToPos(index), Quaternion.identity);
-            }
+            }*/
         }
 
         private void OnChestGot()
