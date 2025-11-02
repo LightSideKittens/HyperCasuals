@@ -65,6 +65,9 @@ namespace Core
 
         private void UpdateSprite()
         {
+#if UNITY_EDITOR
+            if(FieldAppearance.IsNull) return;
+#endif
             if (image.sprite != target.Block.sprite)
             { 
                 image.sprite = target.Block.sprite;

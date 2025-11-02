@@ -31,6 +31,7 @@ namespace Core
         public void Update()
         {
             if(World.IsPlaying) return;
+            if(FieldAppearance.IsNull) return;
             Fit();
         }
 #endif

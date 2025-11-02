@@ -250,6 +250,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
     {
         if (FirstTime.IsNot($"Booster used {id}", out var pass))
         {
+            countLabel.SetActive(false);
             Booster.isTutorial = true;
             button.Do();
             UIViewBoss.IsGoBackBlocked = true;
@@ -257,6 +258,8 @@ public class BoosterButton : DoIt, ILocalizationArgument
                     
             void OnUsed(Block[,] _, Block[,] __)
             {
+                countLabel.SetActive(true);
+                Funds.Earn(id, 1);
                 Booster.isTutorial = false;
                 UIViewBoss.IsGoBackBlocked = false;
                 UIViewBoss.GoBack();
