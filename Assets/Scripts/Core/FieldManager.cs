@@ -62,6 +62,8 @@ public partial class FieldManager : SingleService<FieldManager>
 
     private void EditorUpdate()
     {
+        if (FieldAppearance.IsNull) return;
+        
         if (initialShape)
         {
             InitBack();

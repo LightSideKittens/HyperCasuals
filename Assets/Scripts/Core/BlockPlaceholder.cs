@@ -1,6 +1,7 @@
 ﻿using LSCore;
 using LSCore.AnimationsModule.Animations.Options;
 using LSCore.Async;
+using LSCore.Extensions.Unity;
 using UnityEditor;
 using UnityEngine;
 
@@ -81,6 +82,7 @@ public class BlockPlaceholder : MonoBehaviour
     {
         if(World.IsPlaying) return;
         if(World.IsBuilding) return;
+        if(FieldAppearance.IsNull) return;
         EditorApplication.update += OnUpdate;
         isEdited = true;
 
@@ -89,7 +91,7 @@ public class BlockPlaceholder : MonoBehaviour
             EditorApplication.update -= OnUpdate;
             if (dummySpriteRenderer == null)
             {
-                dummySpriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+                dummySpriteRenderer = gameObject.GetOrAddComponent<SpriteRenderer>();
                 dummySpriteRenderer.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
                 dummySpriteRenderer.sprite = data.Block.sprite;
                 dummySpriteRenderer.color = Color.clear;
@@ -100,6 +102,8 @@ public class BlockPlaceholder : MonoBehaviour
     private void Update()
     {
         if (World.IsPlaying) return;
+        if(FieldAppearance.IsNull) return;
+        
         InitBlock();
         
         if (block != null && isEdited)
