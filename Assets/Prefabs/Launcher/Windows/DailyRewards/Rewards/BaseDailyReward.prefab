@@ -17,6 +17,18 @@ PrefabInstance:
       value: 146
       objectReference: {fileID: 0}
     - target: {fileID: 1384729284734720206, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384729284734720206, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384729284734720206, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384729284734720206, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -74.999985
       objectReference: {fileID: 0}
@@ -33,6 +45,14 @@ PrefabInstance:
       value: 146
       objectReference: {fileID: 0}
     - target: {fileID: 1852328852787165794, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.9914448
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852328852787165794, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.13052656
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852328852787165794, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -75
       objectReference: {fileID: 0}
@@ -40,9 +60,37 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 2198971277681682562, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219516726238852473, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3844784829352713827, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
       propertyPath: m_Name
       value: States
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387430890842130750, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953565386393195915, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7044585173887165869, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7044585173887165869, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7044585173887165869, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8186271067054053206, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -105,6 +153,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+--- !u!224 &1326565411192739201 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1384729284734720206, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+  m_PrefabInstance: {fileID: 98907411091754319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1795714157607319341 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1852328852787165794, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+  m_PrefabInstance: {fileID: 98907411091754319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &2295485050701473229 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 2198971277681682562, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+  m_PrefabInstance: {fileID: 98907411091754319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3326060672865960133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3420458952026328458, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+  m_PrefabInstance: {fileID: 98907411091754319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &6961446959643109602 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7044585173887165869, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
+  m_PrefabInstance: {fileID: 98907411091754319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8125648135614077465 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8186271067054053206, guid: a3d0be1830b409c4b81ed5210951c6c3, type: 3}
@@ -132,6 +211,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6280245574326959093, guid: e4013f85dbf242041b12d662b9c4558d, type: 3}
       propertyPath: mirror.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280245574326959093, guid: e4013f85dbf242041b12d662b9c4558d, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7053982952748370973, guid: e4013f85dbf242041b12d662b9c4558d, type: 3}
@@ -197,6 +280,10 @@ PrefabInstance:
     - target: {fileID: 7786008374286252160, guid: e4013f85dbf242041b12d662b9c4558d, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027953331094281421, guid: e4013f85dbf242041b12d662b9c4558d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8345078807461658389, guid: e4013f85dbf242041b12d662b9c4558d, type: 3}
       propertyPath: m_text
@@ -284,13 +371,407 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7178513301085661881}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1685252650808547322, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3382260347717549086}
   m_SourcePrefab: {fileID: 100100000, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
+--- !u!1 &685780159525327176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1685252650808547322, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
+  m_PrefabInstance: {fileID: 2226846606047446706}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3382260347717549086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685780159525327176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bafdab51bd34d389746ef7fb2860aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LSCore.UIModule::ViewState
+  viewSavePath: DailyRewards
+  init:
+    rid: 1454450694129713633
+  canChange:
+    rid: 1454450694129713413
+  changers:
+  - rid: 1454450694129713414
+  listenKeysForChange:
+  - image_showed_
+  - config_changed
+  references:
+    version: 2
+    RefIds:
+    - rid: 1454450694129713413
+      type: {class: If_LSImage_Is_Visible, ns: , asm: LSCore.UIModule}
+      data:
+        not: 0
+        type: 0
+        image: {fileID: 8045069031142219989}
+    - rid: 1454450694129713414
+      type: {class: DailyReward, ns: , asm: LSCore.DailyRewardsModule}
+      data:
+        stateSetters:
+          data: []
+        initializationTransitionPaths:
+          data:
+          - key: readyToClaim
+            value: locked/readyToClaim
+          - key: claimed
+            value: locked/readyToClaim/claimed
+        transitionAnims:
+          data:
+          - key:
+              from: locked
+              to: readyToClaim
+            value:
+              options: []
+              animsData:
+              - timeOffset: 0
+                anim:
+                  rid: 1454450694129713430
+              - timeOffset: 0.4
+                anim:
+                  rid: 1454450694129713439
+              - timeOffset: 0
+                anim:
+                  rid: 1454450694129713433
+              editor_options: []
+          - key:
+              from: readyToClaim
+              to: claimed
+            value:
+              options: []
+              animsData:
+              - timeOffset: 0
+                anim:
+                  rid: 1454450694129713579
+              - timeOffset: 0.1
+                anim:
+                  rid: 1454450694129713597
+              editor_options: []
+          - key:
+              from: claimed
+              to: locked
+            value:
+              options: []
+              animsData:
+              - timeOffset: 0
+                anim:
+                  rid: 1454450714694385812
+              - timeOffset: 0
+                anim:
+                  rid: 1454450714694385817
+              - timeOffset: 0.1
+                anim:
+                  rid: 1454450714694385813
+              editor_options: []
+        listener:
+          owner: {fileID: 3382260347717549086}
+          data: []
+        day: 0
+    - rid: 1454450694129713430
+      type: {class: ShakeRotation, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options: []
+        targets:
+        - rid: 1454450694129713434
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        duration: 0.4
+        strength: {x: 0, y: 0, z: 10}
+        vibrato: 20
+        randomness: 90
+        fadeOut: 0
+        randomnessMode: 1
+    - rid: 1454450694129713433
+      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options: []
+        targets:
+        - rid: 1454450694129713437
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.3
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: 0, y: 100, z: 0}
+    - rid: 1454450694129713434
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 1795714157607319341}
+    - rid: 1454450694129713437
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 6961446959643109602}
+    - rid: 1454450694129713439
+      type: {class: GraphicAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options: []
+        targets:
+        - rid: 1454450694129713440
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.3
+        startValue: 0
+        endValue: 0
+    - rid: 1454450694129713440
+      type: {class: 'SerializeField`1[[UnityEngine.UI.Graphic, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 3326060672865960133}
+    - rid: 1454450694129713579
+      type: {class: CanvasGroupAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options: []
+        targets:
+        - rid: 1454450694129713580
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.1
+        startValue: 0
+        endValue: 1
+    - rid: 1454450694129713580
+      type: {class: 'SerializeField`1[[UnityEngine.CanvasGroup, UnityEngine.UIModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2295485050701473229}
+    - rid: 1454450694129713597
+      type: {class: ScaleAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 1454450694129713598
+        targets:
+        - rid: 1454450694129713599
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 1
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: 1, y: 1, z: 1}
+    - rid: 1454450694129713598
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 30
+    - rid: 1454450694129713599
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 1326565411192739201}
+    - rid: 1454450694129713633
+      type: {class: DoIts, ns: , asm: LSCore.DoIt}
+      data:
+        doIts:
+        - rid: 1454450694129713634
+    - rid: 1454450694129713634
+      type: {class: OnLSImageShowed, ns: , asm: LSCore.UIModule}
+      data:
+        owner: {fileID: 3382260347717549086}
+        image: {fileID: 8045069031142219989}
+        doIt:
+          rid: 1454450694129713635
+    - rid: 1454450694129713635
+      type: {class: InvokeEvent, ns: , asm: LSCore.DoIt}
+      data:
+        key: image_showed_
+    - rid: 1454450714694385812
+      type: {class: CanvasGroupAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options: []
+        targets:
+        - rid: 1454450714694385814
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.1
+        startValue: 0
+        endValue: 0
+    - rid: 1454450714694385813
+      type: {class: ScaleAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options:
+        - rid: 1454450714694385815
+        targets:
+        - rid: 1454450714694385816
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 1
+        duration: 0.5
+        startValue: {x: 0, y: 0, z: 0}
+        endValue: {x: 1, y: 1, z: 1}
+    - rid: 1454450714694385814
+      type: {class: 'SerializeField`1[[UnityEngine.CanvasGroup, UnityEngine.UIModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 2295485050701473229}
+    - rid: 1454450714694385815
+      type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
+      data:
+        useCustom: 0
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        ease: 30
+    - rid: 1454450714694385816
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 1795714157607319341}
+    - rid: 1454450714694385817
+      type: {class: GraphicAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
+      data:
+        id: 
+        options: []
+        targets:
+        - rid: 1454450714694385818
+        timeOffsetPerTarget:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        needInit: 0
+        duration: 0.001
+        startValue: 1
+        endValue: 1
+    - rid: 1454450714694385818
+      type: {class: 'SerializeField`1[[UnityEngine.UI.Graphic, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 3326060672865960133}
 --- !u!224 &6442102006553909053 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
   m_PrefabInstance: {fileID: 2226846606047446706}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8045069031142219989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
+  m_PrefabInstance: {fileID: 2226846606047446706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685780159525327176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4164172515845933288
 PrefabInstance:
   m_ObjectHideFlags: 0

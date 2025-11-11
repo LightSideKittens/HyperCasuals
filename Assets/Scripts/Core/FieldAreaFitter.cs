@@ -1,5 +1,4 @@
-﻿using System;
-using LSCore;
+﻿using LSCore;
 using LSCore.Extensions.Unity;
 using UnityEngine;
 

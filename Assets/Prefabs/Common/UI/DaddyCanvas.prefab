@@ -49,7 +49,7 @@ Canvas:
   m_GameObject: {fileID: 2242856626139118712}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -104,16 +104,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6f38a82f2e436e8f2d84f81b34af2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initShowHideAnim: 0
   showHideAnim:
     rid: 1000
+  blockSystemGoBack: 0
+  systemGoBackOverride:
+    rid: -2
   onShowing: []
-  onHiding: []
   onShowed: []
+  onHiding: []
   onHidden: []
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1000
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:

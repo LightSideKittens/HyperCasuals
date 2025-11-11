@@ -82,6 +82,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2969258089252399854}
+  - component: {fileID: 2198971277681682562}
   m_Layer: 0
   m_Name: Colleted
   m_TagString: Untagged
@@ -110,6 +111,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &2198971277681682562
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4387430890842130750}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4953565386393195915
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7044585173887165869}
-  - component: {fileID: 9205929887651480907}
   m_Layer: 0
   m_Name: Locked
   m_TagString: Untagged
@@ -147,140 +159,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9205929887651480907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4953565386393195915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aba69fb451a409ca437ea8d56a0fde7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: LSCore.AnimationsModule::LSCore.AnimationsModule.AnimComp
-  anim:
-    options: []
-    animsData:
-    - timeOffset: 0
-      anim:
-        rid: 1930898667321426121
-    - timeOffset: 0
-      anim:
-        rid: 1930898667321426122
-    - timeOffset: 0
-      anim:
-        rid: 1930898667321426123
-    editor_options: []
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 1930898667321426121
-      type: {class: ShakeRotation, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
-      data:
-        id: 
-        options: []
-        targets:
-        - rid: 1930898667321426124
-        timeOffsetPerTarget:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0.1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        duration: 0.4
-        strength: {x: 0, y: 0, z: 10}
-        vibrato: 20
-        randomness: 90
-        fadeOut: 0
-        randomnessMode: 1
-    - rid: 1930898667321426122
-      type: {class: AlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
-      data:
-        id: 
-        canvasGroupAnim:
-          rid: -2
-        graphicAnim:
-          rid: 1930898667321426125
-    - rid: 1930898667321426123
-      type: {class: LocalPosAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
-      data:
-        id: 
-        options:
-        - rid: 1930898667321426128
-        targets:
-        - rid: 1930898667321426126
-        timeOffsetPerTarget:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0.1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        needInit: 0
-        duration: 0.3
-        startValue: {x: -67, y: 82, z: 0}
-        endValue: {x: 0, y: 30, z: 0}
-    - rid: 1930898667321426124
-      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 1852328852787165794}
-    - rid: 1930898667321426125
-      type: {class: GraphicAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
-      data:
-        id: 
-        options: []
-        targets:
-        - rid: 1930898667321426127
-        timeOffsetPerTarget:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0.1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        needInit: 0
-        duration: 0.3
-        startValue: 0
-        endValue: 0
-    - rid: 1930898667321426126
-      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 1852328852787165794}
-    - rid: 1930898667321426127
-      type: {class: 'SerializeField`1[[UnityEngine.UI.Graphic, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 3420458952026328458}
-    - rid: 1930898667321426128
-      type: {class: SetRelative, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
-      data: 
 --- !u!1001 &6104105268481984833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -437,17 +315,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
   m_PrefabInstance: {fileID: 6788441772232141805}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3420458952026328458 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
-  m_PrefabInstance: {fileID: 6788441772232141805}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7073830684277004972
 PrefabInstance:
   m_ObjectHideFlags: 0
