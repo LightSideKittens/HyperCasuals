@@ -54,6 +54,7 @@ public class GameSave
         set => Config["bestScore"] = value;
     }
     
+    public static JArray BoughtThemes => Config.AsJ<JArray>("themes");
     private static JHashSet<int> themesSet;
     private static int id;
 
@@ -71,14 +72,14 @@ public class GameSave
     
     public static bool BuyTheme(int theme)
     {
-        var themes = Config.AsJ<JArray>("themes");
+        var themes = BoughtThemes;
         InitThemesSet(themes);
         return themesSet.Add(theme);
     }
 
     public static bool HasTheme(int theme)
     {
-        var themes = Config.AsJ<JArray>("themes");
+        var themes = BoughtThemes;
         InitThemesSet(themes);
         return themesSet.Contains(theme) || Theme == theme;
     }

@@ -467,31 +467,10 @@ MonoBehaviour:
       alignType: 1
       e: {x: 4.0193834, y: -0.45959628}
     stepMode: 0
-  onInit:
-  - rid: 2877982226664390918
+  onInit: []
   references:
     version: 2
-    RefIds:
-    - rid: 2877982226664390918
-      type: {class: DoIf, ns: , asm: LSCore.ConditionModule}
-      data:
-        conditions:
-          rid: 2877982226664390919
-        ifActions:
-        - rid: 2877982226664390920
-        elseActions: []
-    - rid: 2877982226664390919
-      type: {class: IsTimeForThemeTutorial, ns: , asm: Core}
-      data:
-        not: 0
-        type: 0
-    - rid: 2877982226664390920
-      type: {class: CreateOrShowCanvasView, ns: LSCore, asm: LSCore.WindowModule}
-      data:
-        prefab: {fileID: 2433387780352228769, guid: ff8a6f6a487a39f488d71d79fb5cbf86, type: 3}
-        transformActions: []
-        option: 0
-        id: 
+    RefIds: []
 --- !u!4 &1185218025
 Transform:
   m_ObjectHideFlags: 0

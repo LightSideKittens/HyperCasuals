@@ -5,6 +5,7 @@ using Firebase.Analytics;
 using LSCore;
 using LSCore.AnimationsModule;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Common
 {

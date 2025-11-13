@@ -83,7 +83,7 @@ public class WinWindow : BaseWindow<WinWindow>
     [Serializable]
     public class BestScore : ILocalizationArgument
     {
-        public override string ToString() => (GameSave.BestScore).ToString();
+        public override string ToString() => (GameSave.BestScore).ToString("N0");
     }
     
     [Serializable]

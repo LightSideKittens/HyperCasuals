@@ -1554,7 +1554,7 @@ PrefabInstance:
       objectReference: {fileID: 4978113182224011111}
     - target: {fileID: 3064011435709360163, guid: 94a0f8ef3e9c8f9478a9984d4e37d0f1, type: 3}
       propertyPath: total
-      value: 0
+      value: 4.75
       objectReference: {fileID: 0}
     - target: {fileID: 3064011435709360163, guid: 94a0f8ef3e9c8f9478a9984d4e37d0f1, type: 3}
       propertyPath: m_Value
@@ -1937,7 +1937,34 @@ MonoBehaviour:
     - rid: 1454450714694385985
       type: {class: DailyReward/ChestSlider, ns: , asm: LSCore.DailyRewardsModule}
       data:
-        slider: {fileID: 1914196676417018449}
+        sliderAnim:
+          id: 
+          options: []
+          targets:
+          - rid: 1454450766337802781
+          timeOffsetPerTarget:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0.1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          needInit: 0
+          duration: 1
+          startValue: 0
+          endValue: 0
+    - rid: 1454450766337802781
+      type: {class: 'SerializeField`1[[LSCore.LSSlider, LSCore.UIModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 1914196676417018449}
 --- !u!114 &1914196676417018449 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3064011435709360163, guid: 94a0f8ef3e9c8f9478a9984d4e37d0f1, type: 3}

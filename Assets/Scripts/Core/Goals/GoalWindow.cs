@@ -42,10 +42,12 @@ namespace Core
             Booster.Used -= OnBoosterUsed;
             FieldManager.Placed -= PlaceChest;
             FieldManager.Started -= OnStarted;
+            Quests.DeInit();
         }
         
         private void OnStarted()
         {
+            Quests.Init();
             SetupChestView();
             
             if (CanPlaceChest && !GameSave.IsChestGot)

@@ -38,7 +38,7 @@ public class IsTimeForThemeTutorial : If
     }
     
     private static string key = "Theme tutorial";
-    public static bool Is => GameSave.Level > 3 && FirstTime.IsNot(key);
+    public static bool Is => FirstTime.IsNot(key);
     protected override bool Check() => Is;
 }
 
