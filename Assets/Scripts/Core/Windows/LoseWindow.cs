@@ -3,6 +3,7 @@ using Core;
 using DG.Tweening;
 using LSCore;
 using LSCore.AnimationsModule;
+using LSCore.Extensions;
 using UnityEngine;
 
 public class LoseWindow : BaseWindow<LoseWindow>
@@ -34,7 +35,8 @@ public class LoseWindow : BaseWindow<LoseWindow>
     [SerializeField] private LSButton replayButton;
     [SerializeField] private UIControlRect noThanksButton;
     [SerializeReference] private AnimSequencer timerAnim;
-    
+    public RectTransform questPlaceholder;
+    private LostQuestView lostQuestView;
     [SerializeField] private LSButton reviveButton;
     public FundText keysFundText;
     
@@ -47,10 +49,21 @@ public class LoseWindow : BaseWindow<LoseWindow>
         watchButton.Did += Reload;
         noThanksButton.Did += () => SetActiveWatchButton(false);
         reviveButton.Did += () => keysFundText.Number *= 2;
+        
+        var questViewPrefab = Quests.CurrentQuestHandler.ViewState;
+        questViewPrefab.gameObject.SetActive(false);
+        var questView = Instantiate(questViewPrefab, questPlaceholder);
+        questViewPrefab.gameObject.SetActive(true);
+        ((QuestView)questView).SetupIcon();
+        Destroy(questView);
+        lostQuestView = questView.GetComponent<LostQuestView>();
     }
 
     protected override void OnShowing()
     {
+        lostQuestView.gameObject.SetActive(true);
+        lostQuestView.slider.value = Quests.CurrentQuest["collectedCount"].ToInt() + Quests.CollectBlocksQuest.collectedCount;
+        
         var canSpend = keysFundText.CanSpend;
         replayButton.gameObject.SetActive(!canSpend);
         reviveButton.gameObject.SetActive(canSpend);

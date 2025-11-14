@@ -21,7 +21,7 @@ namespace Core
         }
 #endif
 
-        private void SetupIcon()
+        public void SetupIcon()
         {
             icon.sprite = data.GetBlock(Levels.FieldAppearance[GameSave.Theme]).sprite;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Animatable;
 using LSCore;
 using LSCore.ConfigModule;
 using LSCore.Extensions;
@@ -22,6 +23,7 @@ namespace Core
         [SerializeReference] public Quest[] quests;
         
         public static Quest[] QuestsHandlers => Instance.quests;
+        public static Quest CurrentQuestHandler => QuestsHandlers.GetCyclic(CompletedQuests);
         
         public static JObject CurrentQuest => Config.AsJ<JObject>("quest");
         
@@ -35,13 +37,13 @@ namespace Core
             }
         }
         
-        public static void Init() => QuestsHandlers.GetCyclic(CompletedQuests).Init();
-        public static void DeInit() => QuestsHandlers.GetCyclic(CompletedQuests).DeInit();
+        public static void Init() => CurrentQuestHandler.Init();
+        public static void DeInit() => CurrentQuestHandler.DeInit();
         
         [Serializable]
         public class GetCurrentQuestView : Get<ViewState>
         {
-            public override ViewState Data => QuestsHandlers.GetCyclic(CompletedQuests).ViewState;
+            public override ViewState Data => CurrentQuestHandler.ViewState;
         }
         
         [Serializable]
@@ -110,15 +112,24 @@ namespace Core
         public class CollectBlocksQuest : Quest
         {
             public QuestView view;
-        
+            public static int collectedCount;
+            
             public override void Init()
             {
                 FieldManager.Placed += OnPlaced;
                 Booster.Used += OnGridChanged;
+                WinWindow.Showing += OnWin;
+                collectedCount = CurrentQuest["collectedCount"].ToInt();
+            }
+
+            private void OnWin()
+            {
+                CurrentQuest.Increase("collectedCount", collectedCount);
             }
 
             public override void DeInit()
             {
+                WinWindow.Showing -= OnWin;
                 FieldManager.Placed -= OnPlaced;
                 Booster.Used -= OnGridChanged;
             }
@@ -134,16 +145,22 @@ namespace Core
             {
                 var destroyedBlocksSet = FieldManager.GetDestroyedBlocks(lastGrid, currentGrid);
                 int destroyedCount = 0;
-            
+                Block firstBlock = null;
+                
                 foreach (var block in destroyedBlocksSet)
                 {
                     if (block.id == view.data.id)
                     {
+                        firstBlock = block;
                         destroyedCount++;
                     }
                 }
 
-                CurrentQuest.Increase("collectedCount", destroyedCount);
+                collectedCount += destroyedCount;
+                if (destroyedCount > 0)
+                { 
+                    BlockCount.Create(destroyedCount, firstBlock.sprite, firstBlock.transform);
+                }
             }
         }
     }
