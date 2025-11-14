@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1110774243459455592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4961000291594044338}
+  - component: {fileID: 5962731863435952044}
+  m_Layer: 0
+  m_Name: FieldAppearance_DarkForest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4961000291594044338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110774243459455592}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5962731863435952044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110774243459455592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65549b84415c4d3d937faa6a3dad34bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _area: {fileID: 0}
+  _field: {fileID: 0}
+  _back: {fileID: 0}
+  _redBack: {fileID: 0}
+  _shapeAppearFx: {fileID: 2924675626361782533, guid: 1d7628660bc647e47846b55b3c4b7bd5, type: 3}
+  _selector: {fileID: 8210076731274164301, guid: f4a34e33ea3f06b4a9af8cc1971f0d2e, type: 3}
+  _blockPrefabs:
+  - {fileID: 8512770957231261250, guid: a4f4528a405237c478ff1e12bd5b95b3, type: 3}
+  - {fileID: 4591270519534980581, guid: 5043e7aefa3409642afcc93bcb798588, type: 3}
+  - {fileID: 4591270519534980581, guid: e962e13680141b7459984d696cf4d485, type: 3}
+  - {fileID: 4591270519534980581, guid: 834f86ccf381f5f4a88a829d79a1ead5, type: 3}
+  _specialBlockPrefabs:
+  - {fileID: 4591270519534980581, guid: a23cdf9b5d5f8704581ce4b712052904, type: 3}
+  - {fileID: 2791755575516428673, guid: 02f0bb752399d8e4191bd9cf19b1a790, type: 3}
+  - {fileID: 6035388817502845878, guid: 7d047efc315aac84cb39c3d6ec31c2b0, type: 3}
+  - {fileID: 4591270519534980581, guid: 4c8d74ed6e5ed5041b911553782b37e1, type: 3}
+  - {fileID: 4591270519534980581, guid: 892c80028e4d84f42bff14fa98badf67, type: 3}
+  - {fileID: 4591270519534980581, guid: c11c3807819e2594a882b6064fd0437b, type: 3}

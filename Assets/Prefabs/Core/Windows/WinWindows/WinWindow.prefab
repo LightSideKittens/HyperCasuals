@@ -136,6 +136,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 719118007886208429}
+  - {fileID: 8381445623662228020}
   - {fileID: 1037757663146938138}
   - {fileID: 70953096977158351}
   - {fileID: 5792787444595534700}
@@ -167,6 +168,7 @@ MonoBehaviour:
   onShowing:
   - rid: 2877982245476630804
   - rid: 7466096581195858020
+  - rid: 1454450791076593900
   onShowed:
   - rid: 1454450500098327130
   - rid: 5237655153313055433
@@ -191,6 +193,54 @@ MonoBehaviour:
       data:
         names:
         - earn
+    - rid: 1454450791076593900
+      type: {class: Delay, ns: , asm: LSCore.DoIt}
+      data:
+        delay: 1
+        doIt:
+          rid: 1454450791076593901
+    - rid: 1454450791076593901
+      type: {class: DoIts, ns: , asm: LSCore.DoIt}
+      data:
+        doIts:
+        - rid: 1454450791076593902
+        - rid: 1454450791076593903
+    - rid: 1454450791076593902
+      type: {class: SetKeyBuffer, ns: , asm: LSCore.DoIt}
+      data:
+        key: questPlaceholder
+        data:
+          rid: 1454450791076593904
+    - rid: 1454450791076593903
+      type: {class: 'CreateSinglePrefabDynamic`1[[ViewState, LSCore.UIModule]]', ns: LSCore, asm: LSCore.WindowModule}
+      data:
+        prefab: {fileID: 0}
+        transformActions:
+        - rid: 1454450791076593905
+        getPrefab:
+          rid: 1454450791076593906
+    - rid: 1454450791076593904
+      type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        data: {fileID: 8381445623662228020}
+    - rid: 1454450791076593905
+      type: {class: SetParentAction, ns: , asm: LSCore.DoIt}
+      data:
+        parent:
+          rid: 1454450791076593907
+        child:
+          rid: 1454450791076593908
+        worldPositionStays: 0
+    - rid: 1454450791076593906
+      type: {class: Quests/GetCurrentQuestView, ns: Core, asm: Core}
+      data: 
+    - rid: 1454450791076593907
+      type: {class: 'FromKeyBuffer`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data:
+        key: questPlaceholder
+    - rid: 1454450791076593908
+      type: {class: 'FromBuffer`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
+      data: 
     - rid: 2877982245476630804
       type: {class: BaseAnimAction, ns: LSCore.AnimationsModule, asm: LSCore.AnimationsModule}
       data:
@@ -259,7 +309,7 @@ MonoBehaviour:
         animation:
           options: []
           animsData:
-          - timeOffset: 1
+          - timeOffset: 0
             anim:
               rid: 7466096554891542867
           editor_options: []
@@ -697,6 +747,41 @@ MonoBehaviour:
     - rid: 7466096495369388276
       type: {class: 'FromBuffer`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
       data: 
+--- !u!1 &2616474497662308012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8381445623662228020}
+  m_Layer: 0
+  m_Name: QuestPlaceholder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8381445623662228020
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2616474497662308012}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1011038207463600818}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -317}
+  m_SizeDelta: {x: 1080, y: 231.40002}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3777875861054178622
 GameObject:
   m_ObjectHideFlags: 0

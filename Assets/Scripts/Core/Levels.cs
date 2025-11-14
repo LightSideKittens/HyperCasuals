@@ -88,6 +88,9 @@ public class Levels : SingleScriptableObject<Levels>
 
     [SceneSelector] public string[] tutorialLevels;
     [SceneSelector] public string[] levels;
+    
+    public FieldAppearance[] fieldAppearance;
+    public static FieldAppearance[] FieldAppearance => Instance.fieldAppearance;
     public static string[] List => Instance.levels;
     public static string[] TutorialList => Instance.tutorialLevels;
 }

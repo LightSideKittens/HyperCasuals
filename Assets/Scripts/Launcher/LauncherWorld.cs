@@ -1,12 +1,13 @@
 ﻿using LSCore;
 using LSCore.Extensions;
+using SourceGenerators;
 using UnityEngine;
 
 namespace Launcher
 {
-    public class LauncherWorld : ServiceManager<LauncherWorld>
+    [InstanceProxy]
+    public partial class LauncherWorld : ServiceManager<LauncherWorld>
     {
-        public MoveItCurve curve;
         [SerializeReference] public DoIt[] onInit;
         
         protected override void Awake()

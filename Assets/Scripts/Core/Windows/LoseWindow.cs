@@ -7,6 +7,26 @@ using UnityEngine;
 
 public class LoseWindow : BaseWindow<LoseWindow>
 {
+    [Serializable]
+    public class Revive : DoIt
+    {
+        public override void Do() => DoIt();
+
+        public static void DoIt()
+        {
+            UIViewBoss.GoBack();
+            onReviveClicked?.Invoke();
+            if (GameSave.currentLevel == "classic")
+            {
+                Analytic.LogEvent("revive_classic");
+            }
+            else
+            { 
+                Analytic.LogEvent("revive", GameSave.CurrentLevelParam);
+            }
+        }
+    }
+
     public LaLa.PlayClip sound;
     [SerializeField] private GameObject counter;
     [SerializeField] private LocalizationText reasonText;
@@ -14,6 +34,10 @@ public class LoseWindow : BaseWindow<LoseWindow>
     [SerializeField] private LSButton replayButton;
     [SerializeField] private UIControlRect noThanksButton;
     [SerializeReference] private AnimSequencer timerAnim;
+    
+    [SerializeField] private LSButton reviveButton;
+    public FundText keysFundText;
+    
     public static Action onReviveClicked;
     private bool watched;
 
@@ -22,10 +46,14 @@ public class LoseWindow : BaseWindow<LoseWindow>
         base.Init();
         watchButton.Did += Reload;
         noThanksButton.Did += () => SetActiveWatchButton(false);
+        reviveButton.Did += () => keysFundText.Number *= 2;
     }
 
     protected override void OnShowing()
     {
+        var canSpend = keysFundText.CanSpend;
+        replayButton.gameObject.SetActive(!canSpend);
+        reviveButton.gameObject.SetActive(canSpend);
         reasonText.Localize(GameSave.loseReason);
         sound.Do();
         CoreWorld.StopIdleMusic();
@@ -64,16 +92,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
         void OnRewarded()
         {
             watched = true; 
-            UIViewBoss.GoBack();
-            onReviveClicked?.Invoke();
-            if (GameSave.currentLevel == "classic")
-            {
-                Analytic.LogEvent("revive_classic");
-            }
-            else
-            { 
-                Analytic.LogEvent("revive", GameSave.CurrentLevelParam);
-            }
+            Revive.DoIt();
         }
     }
 

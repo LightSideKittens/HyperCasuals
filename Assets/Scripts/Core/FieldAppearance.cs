@@ -17,22 +17,28 @@ public partial class FieldAppearance : SingleService<FieldAppearance>
     { 
         [ValueDropdown("Blocks")] public Id id;
         public bool isSpecial;
-        public Block Block
+        
+        public Block Block => GetBlock(Instance);
+        public Block GetBlock(FieldAppearance fieldAppearance)
+        {
+            if (id == null)
+            {
+                return isSpecial ? fieldAppearance._specialBlockPrefabs[0] : fieldAppearance._blockPrefabs[0];
+            }
+                
+            return isSpecial
+                ? fieldAppearance._specialBlockPrefabs.FirstOrDefault(x => x.id == id)
+                : fieldAppearance._blockPrefabs.FirstOrDefault(x => x.id == id);
+        }
+
+        private IEnumerable<ValueDropdownItem<Id>> Blocks
         {
             get
             {
-                if (id == null)
-                {
-                    return isSpecial ? SpecialBlockPrefabs[0] : BlockPrefabs[0];
-                }
-                
-                return isSpecial
-                    ? SpecialBlockPrefabs.FirstOrDefault(x => x.id == id)
-                    : BlockPrefabs.FirstOrDefault(x => x.id == id);
+                if(IsNull) return Levels.FieldAppearance[GameSave.Theme]._GetBlocks(isSpecial);
+                return GetBlocks(isSpecial);
             }
         }
-
-        private IEnumerable<ValueDropdownItem<Id>> Blocks => GetBlocks(isSpecial);
     }
     
     public RectTransform _area;

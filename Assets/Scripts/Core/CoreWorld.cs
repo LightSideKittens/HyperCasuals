@@ -36,6 +36,7 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
         [Preserve]
         public void Lose()
         {
+            GameSave.loseReason = "no_place";
             LoseWindow.Show();
         }
         

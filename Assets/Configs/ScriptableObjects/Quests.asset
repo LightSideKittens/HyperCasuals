@@ -13,13 +13,11 @@ MonoBehaviour:
   m_Name: Quests
   m_EditorClassIdentifier: 
   quests:
-  - rid: 1454450766337802685
-  questViews:
-  - {fileID: 6964155651474281236, guid: 59f03882a11d66244ba0bec2e65f7e42, type: 3}
+  - rid: 1454450791076593707
   references:
     version: 2
     RefIds:
-    - rid: 1454450766337802685
-      type: {class: CollectBlocksQuest, ns: Core, asm: Core}
+    - rid: 1454450791076593707
+      type: {class: Quests/CollectBlocksQuest, ns: Core, asm: Core}
       data:
-        blockId: {fileID: -6750239444755058063, guid: 65a497d9effb91e4bb20478637342ab5, type: 3}
+        view: {fileID: 2913859691985772144, guid: 7895be6b505fb0145b1ae8d8ce899618, type: 3}
