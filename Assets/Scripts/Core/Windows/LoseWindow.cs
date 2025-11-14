@@ -65,7 +65,6 @@ public class LoseWindow : BaseWindow<LoseWindow>
         lostQuestView.slider.value = Quests.CurrentQuest["collectedCount"].ToInt() + Quests.CollectBlocksQuest.collectedCount;
         
         var canSpend = keysFundText.CanSpend;
-        replayButton.gameObject.SetActive(!canSpend);
         reviveButton.gameObject.SetActive(canSpend);
         reasonText.Localize(GameSave.loseReason);
         sound.Do();
