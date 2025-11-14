@@ -40,13 +40,17 @@ public class WinWindow : BaseWindow<WinWindow>
         CoreWorld.StopIdleMusic();
         Analytic.LogEvent("win_level", GameSave.CurrentLevelParam, GoalWindow.LevelTimeParam);
         base.OnShowing();
-        if (GameSave.IsChestGot)
+
+        using (UIViewBoss.UseId("WinWindowViews"))
         {
-            chest.Show();
-        }
-        else
-        {
-            main.Show();
+            if (GameSave.IsChestGot)
+            {
+                chest.Show();
+            }
+            else
+            {
+                main.Show();
+            }
         }
         
         GameSave.IsChestGot = false;

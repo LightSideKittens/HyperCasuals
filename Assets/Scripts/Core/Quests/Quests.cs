@@ -37,8 +37,14 @@ namespace Core
             }
         }
         
-        public static void Init() => CurrentQuestHandler.Init();
-        public static void DeInit() => CurrentQuestHandler.DeInit();
+        private static Quest currentQuest;
+        public static void Init()
+        {
+            currentQuest = CurrentQuestHandler;
+            currentQuest.Init();
+        }
+
+        public static void DeInit() => currentQuest.DeInit();
         
         [Serializable]
         public class GetCurrentQuestView : Get<ViewState>
@@ -119,7 +125,7 @@ namespace Core
                 FieldManager.Placed += OnPlaced;
                 Booster.Used += OnGridChanged;
                 WinWindow.Showing += OnWin;
-                collectedCount = CurrentQuest["collectedCount"].ToInt();
+                collectedCount = CurrentQuest.As("collectedCount", 0);
             }
 
             private void OnWin()
@@ -145,22 +151,17 @@ namespace Core
             {
                 var destroyedBlocksSet = FieldManager.GetDestroyedBlocks(lastGrid, currentGrid);
                 int destroyedCount = 0;
-                Block firstBlock = null;
                 
                 foreach (var block in destroyedBlocksSet)
                 {
                     if (block.id == view.data.id)
                     {
-                        firstBlock = block;
                         destroyedCount++;
+                        BlockCount.Create(1, block.sprite, block.transform);
                     }
                 }
 
                 collectedCount += destroyedCount;
-                if (destroyedCount > 0)
-                { 
-                    BlockCount.Create(destroyedCount, firstBlock.sprite, firstBlock.transform);
-                }
             }
         }
     }
