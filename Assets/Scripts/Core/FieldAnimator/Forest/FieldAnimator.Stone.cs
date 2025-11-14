@@ -82,8 +82,8 @@ namespace Core
                         sprite = block.sprite;
                         cache[index] = sprite;
                     }
-                    
-                    var stageIndex = stages.IndexOf(sprite);
+
+                    var stageIndex = stages.Count-1;
                     if (stageIndex == -1)
                     {
                         continue;

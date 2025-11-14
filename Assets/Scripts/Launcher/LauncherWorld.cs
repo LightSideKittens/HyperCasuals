@@ -1,12 +1,10 @@
 ﻿using LSCore;
 using LSCore.Extensions;
-using SourceGenerators;
 using UnityEngine;
 
 namespace Launcher
 {
-    [InstanceProxy]
-    public partial class LauncherWorld : ServiceManager<LauncherWorld>
+    public class LauncherWorld : ServiceManager<LauncherWorld>
     {
         [SerializeReference] public DoIt[] onInit;
         
