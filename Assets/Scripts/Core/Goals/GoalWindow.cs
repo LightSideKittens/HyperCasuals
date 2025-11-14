@@ -39,8 +39,8 @@ namespace Core
         protected override void DeInit()
         {
             base.DeInit();
-            Booster.Used -= OnBoosterUsed;
-            FieldManager.Placed -= PlaceChest;
+            //Booster.Used -= OnBoosterUsed;
+            //FieldManager.Placed -= PlaceChest;
             FieldManager.Started -= OnStarted;
             Quests.DeInit();
         }
@@ -48,14 +48,14 @@ namespace Core
         private void OnStarted()
         {
             Quests.Init();
-            SetupChestView();
+            //SetupChestView();
             
-            if (CanPlaceChest && !GameSave.IsChestGot)
+            /*if (CanPlaceChest && !GameSave.IsChestGot)
             {
                 FieldManager.Placed += PlaceChest;
                 Booster.Used += OnBoosterUsed;
                 PlaceChest();
-            }
+            }*/
         }
 
         private void OnBoosterUsed(Block[,] lastGrid, Block[,] newGrid)
