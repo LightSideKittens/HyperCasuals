@@ -27,6 +27,7 @@ public class Initializer : BaseInitializer
         Analytic.Init(InitFirebase(), InitAppodeal());
         
         defaultTheme.Do();
+        Themes.PlayMusic();
         
         if (!Levels.IsTutorialCompleted.Is)
         {

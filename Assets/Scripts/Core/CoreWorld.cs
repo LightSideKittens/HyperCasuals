@@ -51,34 +51,16 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
 #endif
     
     public static bool IsGameStopped => LoseWindow.IsVisible || WinWindow.IsVisible;
-    public LaLa.PlayClip idleMusic;
-    
-    private void _StopIdleMusic()
-    {
-        var source = idleMusic.obj;
-        if (source != null)
-        { 
-            source.DOFade(0, 0.5f).OnComplete(source.Stop).KillOnDestroy();
-        }
-    }
 
     protected override void Awake()
     {
         base.Awake();
         BaseInitializer.Initialize(null);
-        LoseWindow.onReviveClicked += OnReviveClicked;
 #if DEBUG
         DebugData.Init();  
 #endif
     }
-
-    private void OnReviveClicked()
-    {
-        DOTween.Kill(idleMusic.obj);
-        idleMusic.obj.volume = 1;
-        idleMusic.Do();
-    }
-
+    
     private void Start()
     {
         Init();
@@ -87,8 +69,6 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        LoseWindow.onReviveClicked -= OnReviveClicked;
-        _StopIdleMusic();
 #if DEBUG
         DebugData.DeInit();
 #endif
@@ -98,6 +78,5 @@ public partial class CoreWorld : ServiceManager<CoreWorld>
     {
         CoreWindow.AsHome();
         CoreWindow.Show();
-        idleMusic.Do();
     }
 }

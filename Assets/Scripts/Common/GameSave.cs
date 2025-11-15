@@ -6,8 +6,8 @@ using Newtonsoft.Json.Linq;
 
 public class GameSave
 {
-    public static RJObject Config => config ?? JTokenGameConfig.Get("GameCoreData");
-    private static RJObject config;
+    public static RJObject Config => config ??= JTokenGameConfig.Get("GameCoreData");
+    [ResetStatic] private static RJObject config;
     public static string currentLevel;
     public static string loseReason;
     public static Analytic.Param CurrentLevelParam => ("level", currentLevel);
@@ -55,8 +55,8 @@ public class GameSave
     }
     
     public static JArray BoughtThemes => Config.AsJ<JArray>("themes");
-    private static JHashSet<int> themesSet;
-    protected static JHashSet<int> ThemesSet => themesSet = W.RS(ref themesSet) ?? new JHashSet<int>(BoughtThemes);
+    [ResetStatic] private static JHashSet<int> themesSet;
+    protected static JHashSet<int> ThemesSet => themesSet ??= new JHashSet<int>(BoughtThemes);
     private static int id;
 
     public static bool BuyTheme(int theme) => ThemesSet.Add(theme);

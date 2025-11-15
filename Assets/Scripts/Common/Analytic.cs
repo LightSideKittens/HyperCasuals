@@ -39,10 +39,11 @@ public static class Analytic
         {
             SetUserProperty(property.Name, property.Value.ToString());
         }
+
+        LaLa.MixerMuter.Changed += (parameter, value) => SetUserProperty(parameter, value.ToString());
         
         SetUserProperty("haptic_enabled", BzBz.Unmuted.ToString());
         BzBz.Muter.Changed += value => SetUserProperty("haptic_enabled", value.ToString());
-        LaLa.MixerMuter.Changed += (parameter, value) => SetUserProperty(parameter, value.ToString());
     }
 
     private static void InitGameSave()

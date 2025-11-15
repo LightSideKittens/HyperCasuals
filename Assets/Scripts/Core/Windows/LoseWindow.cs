@@ -27,8 +27,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
             }
         }
     }
-
-    public LaLa.PlayClip sound;
+    
     [SerializeField] private GameObject counter;
     [SerializeField] private LocalizationText reasonText;
     [SerializeField] private LSButton watchButton;
@@ -67,8 +66,6 @@ public class LoseWindow : BaseWindow<LoseWindow>
         var canSpend = keysFundText.CanSpend;
         reviveButton.gameObject.SetActive(canSpend);
         reasonText.Localize(GameSave.loseReason);
-        sound.Do();
-        CoreWorld.StopIdleMusic();
         base.OnShowing();
 
         if (Ads.IsRewardedReady && !watched)

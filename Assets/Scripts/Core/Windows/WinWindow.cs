@@ -6,7 +6,6 @@ using UnityEngine;
 public class WinWindow : BaseWindow<WinWindow>
 {
     public ParticleSystem confetti;
-    public LaLa.PlayClip sound;
     public LSButton claimButton;
     public FundText reward;
     public FundText rewardX2;
@@ -36,8 +35,7 @@ public class WinWindow : BaseWindow<WinWindow>
         {
             LoseWindow.Hide();
         }
-        sound.Do(); 
-        CoreWorld.StopIdleMusic();
+        
         Analytic.LogEvent("win_level", GameSave.CurrentLevelParam, GoalWindow.LevelTimeParam);
         base.OnShowing();
 
