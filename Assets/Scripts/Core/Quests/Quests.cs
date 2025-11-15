@@ -79,6 +79,7 @@ namespace Core
                     {
                         CompletedQuests++;
                         onCompleted.Do();
+                        Analytic.LogEvent("quest_completed", ("quest", CompletedQuests));
                     }
                     onComplete?.Invoke();
                 }
