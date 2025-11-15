@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.028770553
+      value: -0.0063821333
       objectReference: {fileID: 0}
     - target: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -182,7 +182,7 @@ MonoBehaviour:
       data:
         id: 
         options:
-        - rid: 1454450809127830064
+        - rid: 1454450819601269311
         targets:
         - rid: 1454450809127830054
         timeOffsetPerTarget:
@@ -205,48 +205,76 @@ MonoBehaviour:
         startValue: {x: 0, y: 0, z: 0}
         endValue: {x: 0, y: 500, z: 0}
         xCurve:
-          points:
-          - x: -0.00052560825
-            y: -0.20343332
-            alignType: 1
-            e: {x: -0.00052560825, y: -0.20343332}
-          - x: -0.00016236305
-            y: -0.0034338795
-            alignType: 1
-            e: {x: -0.00016236305, y: -0.0034338795}
-          - x: 0.06026171
-            y: 33.265503
-            alignType: 1
-            e: {x: 0.06026171, y: 33.265503}
-          - x: 0.2181649
-            y: 197.96658
-            alignType: 1
-            e: {x: 0.2181649, y: 197.96658}
-          - x: 0.5043334
-            y: 198.70248
-            alignType: 1
-            e: {x: 0.5043334, y: 198.70248}
-          - x: 1.2619528
-            y: 200.65076
-            alignType: 1
-            e: {x: 1.2619528, y: 200.65076}
-          stepMode: 0
+          curve:
+            points:
+            - x: -0.00037662778
+              y: -0.20523077
+              alignType: 1
+              e: {x: -0.00037662778, y: -0.20523077}
+            - x: -0.000021395448
+              y: -0.0052314326
+              alignType: 1
+              e: {x: -0.000021395448, y: -0.0052314326}
+            - x: 0.09211918
+              y: 51.870834
+              alignType: 1
+              e: {x: 0.09211918, y: 51.870834}
+            - x: 0.2989753
+              y: 199.8308
+              alignType: 1
+              e: {x: 0.2989753, y: 199.8308}
+            - x: 0.4989753
+              y: 199.8308
+              alignType: 1
+              e: {x: 0.4989753, y: 199.8308}
+            - x: 0.6989753
+              y: 199.8308
+              alignType: 1
+              e: {x: 0.6989753, y: 199.8308}
+            stepMode: 0
+          randomRange: {x: -1, y: 1}
+          mode: 2
+        yCurve:
+          curve:
+            points: []
+            stepMode: 0
+          randomRange: {x: 1, y: 1}
+          mode: 0
         zCurve:
-          points: []
-          stepMode: 0
-        mode: 2
-        randomRange: {x: -1, y: 1}
+          curve:
+            points: []
+            stepMode: 0
+          randomRange: {x: 1, y: 1}
+          mode: 0
     - rid: 1454450809127830054
       type: {class: 'SerializeField`1[[UnityEngine.Transform, UnityEngine.CoreModule]]', ns: , asm: LSCore.DoIt}
       data:
         data: {fileID: 3713120434031947720}
-    - rid: 1454450809127830064
+    - rid: 1454450819601269311
       type: {class: SetEase, ns: LSCore.AnimationsModule.Animations.Options, asm: LSCore.AnimationsModule}
       data:
         useCustom: 0
         curve:
           serializedVersion: 2
-          m_Curve: []
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.0012550354
+            value: 0
+            inSlope: 0.682697
+            outSlope: 0.682697
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.16475488
+          - serializedVersion: 3
+            time: 0.98291016
+            value: -0.05886841
+            inSlope: -2.1891992
+            outSlope: -2.1891992
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.11257481
+            outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4

@@ -56,32 +56,9 @@ public class GameSave
     
     public static JArray BoughtThemes => Config.AsJ<JArray>("themes");
     private static JHashSet<int> themesSet;
+    protected static JHashSet<int> ThemesSet => themesSet = W.RS(ref themesSet) ?? new JHashSet<int>(BoughtThemes);
     private static int id;
 
-    private static void InitThemesSet(JArray themes)
-    {
-#if UNITY_EDITOR
-        if (World.IsDiff(ref id))
-        {
-            themesSet = new JHashSet<int>(themes);
-        }
-#else
-        themesSet ??= new JHashSet<int>(themes);
-#endif
-    }
-    
-    public static bool BuyTheme(int theme)
-    {
-        var themes = BoughtThemes;
-        InitThemesSet(themes);
-        return themesSet.Add(theme);
-    }
-
-    public static bool HasTheme(int theme)
-    {
-        var themes = BoughtThemes;
-        InitThemesSet(themes);
-        return themesSet.Contains(theme) || Theme == theme;
-    }
-
+    public static bool BuyTheme(int theme) => ThemesSet.Add(theme);
+    public static bool HasTheme(int theme) => ThemesSet.Contains(theme) || Theme == theme;
 }
