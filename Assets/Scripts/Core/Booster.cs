@@ -258,12 +258,13 @@ public class BoosterButton : DoIt, ILocalizationArgument
                     
             void OnUsed(Block[,] _, Block[,] __)
             {
+                Booster.Used -= OnUsed;
+                if(countLabel == null) return;
                 countLabel.SetActive(true);
                 Funds.Earn(id, 1);
                 Booster.isTutorial = false;
                 UIViewBoss.IsGoBackBlocked = false;
                 UIViewBoss.GoBack();
-                Booster.Used -= OnUsed;
                 Analytic.LogEvent("booster_tutorial_completed");
                 pass();
             }

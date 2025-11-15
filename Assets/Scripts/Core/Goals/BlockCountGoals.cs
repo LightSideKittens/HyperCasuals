@@ -31,7 +31,10 @@ namespace Core
             {
                 for (var i = 0; i < goals.Length; i++)
                 {
-                    goals[i].Check(block);
+                    if (!goals[i].IsReached)
+                    { 
+                        goals[i].Check(block);
+                    }
                 }
             }
         }

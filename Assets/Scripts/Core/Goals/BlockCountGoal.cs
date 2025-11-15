@@ -1,5 +1,8 @@
-﻿using LSCore;
+﻿using Animatable;
+using DG.Tweening;
+using LSCore;
 using LSCore.AnimationsModule;
+using LSCore.AnimationsModule.Animations;
 using LSCore.Extensions;
 
 namespace Core
@@ -10,6 +13,7 @@ namespace Core
         public AnimSequencer reachedAnim;
         public FieldAppearance.BlockData target;
         public LSImage image;
+        
         public void Check(Block block)
         {
             if (block.prefab == target.Block)
@@ -20,6 +24,19 @@ namespace Core
                 {
                     reachedAnim.Animate();
                 }
+                
+                var imageAnim = ImageAnim.Create(block.sprite);
+                var animImage = imageAnim.image;
+                var animTransform = animImage.transform;
+                var animComp = animTransform.GetComponent<AnimComp>();
+                var localPosAnim = animComp.anim.GetAnim<LocalCurveAnim>();
+                localPosAnim.startValue =  AnimatableCanvas.GetLocalPosition(block.transform.position);
+                localPosAnim.endValue =  AnimatableCanvas.GetLocalPosition(image.transform.position);
+                animComp.Animate().OnComplete(() =>
+                {
+                    image.transform.DOScale(1.4f, 0.5f).SetLoops(2, LoopType.Yoyo).KillOnDestroy();
+                    imageAnim.Release(animImage);
+                });
                 
                 FieldSave.SaveBlockGoal(target.id, count);
             }
