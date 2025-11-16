@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AppodealStack.Monetization.Api;
-using AppodealStack.Monetization.Common;
 using Common;
 using Firebase;
 using Firebase.Analytics;
@@ -24,7 +22,7 @@ public class Initializer : BaseInitializer
     
     protected override void OnInitialize(Action onInitialized)
     {
-        Analytic.Init(InitFirebase(), InitAppodeal());
+        Analytic.Init(InitFirebase());
         
         defaultTheme.Do();
         Themes.PlayMusic();
@@ -65,24 +63,6 @@ public class Initializer : BaseInitializer
             });
         
             NotificationHandlers.Init();
-        }
-    }
-    private static Task<bool> InitAppodeal()
-    {
-        int adTypes = AppodealAdType.Interstitial | AppodealAdType.Banner | AppodealAdType.RewardedVideo | AppodealAdType.Mrec;
-        string appodealAppKey = "4386af860de7e62f60365b784a790d76212a25013f4e8f20";
-        var task = new TaskCompletionSource<bool>();
-        AppodealCallbacks.Sdk.OnInitialized += OnInitializationFinished;
-#if DEBUG
-        Appodeal.SetLogLevel(AppodealLogLevel.Verbose);
-        Appodeal.SetTesting(true);  
-#endif
-        Appodeal.Initialize(appodealAppKey, adTypes);
-
-        return task.Task;
-        void OnInitializationFinished(object sender, SdkInitializedEventArgs args)
-        {
-            task.SetResult(args?.Errors == null || args.Errors.Count == 0);
         }
     }
 }
