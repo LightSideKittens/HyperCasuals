@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AppodealStack.Monetization.Api;
 using Firebase.Analytics;
 using LSCore;
 using LSCore.Extensions;
@@ -8,6 +9,7 @@ using UnityEngine;
 
 public static class Analytic
 {
+    private static Task<bool> appodealInitTask;
     private static Task<bool> firebaseInitTask;
     private static bool isInited;
 
@@ -18,11 +20,12 @@ public static class Analytic
     }
 #endif
     
-    public static void Init(Task<bool> firebaseInitTask)
+    public static void Init(Task<bool> firebaseInitTask, Task<bool> appodealInitTask)
     {
         if(isInited) return;
         isInited = true;
         Analytic.firebaseInitTask = firebaseInitTask;
+        Analytic.appodealInitTask = appodealInitTask;
         Check(firebaseInitTask, InitUserProps);
         void InitUserProps()
         {
@@ -56,10 +59,11 @@ public static class Analytic
 
     private static void ListenProperty(string name)
     {
-        var property = GameSave.Config.Property(name);
-        property?.ListenAndCall(() =>
+        GameSave.Config.ListenAndCall(name, () =>
         {
-            SetUserProperty(property.Name, property.Value.ToString());
+            var value = GameSave.Config[name];
+            if(value == null) return;
+            SetUserProperty(name, value.ToString());
         });
     }
     
@@ -72,18 +76,21 @@ public static class Analytic
     public static void LogEvent(string name)
     {
         Burger.Log($"{log} LogEvent: {name}");
+        Check(appodealInitTask, () => Appodeal.LogEvent(name));
         Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name));
     }
     
     public static void LogEvent(string name, Param param)
     {
         Burger.Log($"{log} LogEvent {name}: {param}");
+        Check(appodealInitTask, () => Appodeal.LogEvent(name));
         Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name, param.parameter));
     }
 
     public static void LogEvent(string name, params Param[] parameters)
     {
         Burger.Log($"{log} LogEvent {name}: {string.Join(" ",  parameters)}");
+        Check(appodealInitTask, () => Appodeal.LogEvent(name));
         Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name, parameters.ToParameters()));
     }
 
