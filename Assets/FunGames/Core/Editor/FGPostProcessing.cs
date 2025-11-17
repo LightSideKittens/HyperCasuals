@@ -13,7 +13,7 @@ namespace FunGames.Core.Editor
         {
             ExportSdkConfig(report);
         }
-        
+
         private void ExportSdkConfig(BuildReport report)
         {
             FGConfigFile.ExportToRoot();

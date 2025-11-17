@@ -69,9 +69,9 @@ namespace FunGames.Core.Utils
             return bitString;
         }
         
-        internal static string CreateAuthorizationHeader(string url, string apikey)
+        internal static string CreateAuthorizationHeader(string content)
         {
-            return $"hmac {apikey} {CreateToken(url)}";
+            return $"hmac {GetBitString()} {CreateToken(content)}";
         }
 
         public static void GET(string url, Action<ResponseHelper, Exception> callback = null)

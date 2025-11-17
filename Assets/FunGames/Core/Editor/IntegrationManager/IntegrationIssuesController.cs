@@ -7,7 +7,7 @@ namespace FunGames.Core.Editor.IntegrationManager
 {
     public class IntegrationIssuesController
     {
-        public List<FGAnalyzer> TopLevelAnalyzers { get; private set; } = new();
+        public static List<FGAnalyzer> TopLevelAnalyzers { get; private set; } = new();
 
         public void Initialize()
         {
@@ -16,31 +16,40 @@ namespace FunGames.Core.Editor.IntegrationManager
         
         public void RefreshIssues()
         {
+            DisposeAnalyzers();
             TopLevelAnalyzers = new List<FGAnalyzer>();
-            Dictionary<string, FGAnalyzer> checkersMap = GetFGCheckersMap();
+            Dictionary<string, FGAnalyzer> analyzersMap = GetFGAnalyzersMap();
 
-            foreach (var checker in checkersMap.Values)
+            foreach (var analyzer in analyzersMap.Values)
             {
-                if (checker.ParentId == "" || !checkersMap.ContainsKey(checker.ParentId))
+                if (analyzer.ParentId == "" || !analyzersMap.ContainsKey(analyzer.ParentId))
                 {
-                    TopLevelAnalyzers.Add(checker);
+                    TopLevelAnalyzers.Add(analyzer);
                     continue;
                 }
 
-                FGAnalyzer parent = checkersMap[checker.ParentId];
-                parent.Add(checker);
+                FGAnalyzer parent = analyzersMap[analyzer.ParentId];
+                parent.Add(analyzer);
             }
 
-            foreach (var checker in TopLevelAnalyzers)
+            foreach (var analyzer in TopLevelAnalyzers)
             {
-                checker.RunAnalysis();
+                analyzer.RunAnalysis();
             }
         }
 
-        private Dictionary<string, FGAnalyzer> GetFGCheckersMap()
+        private Dictionary<string, FGAnalyzer> GetFGAnalyzersMap()
         {
             List<FGAnalyzer> checkers = ProjectUtils.GetEnumerableOfType<FGAnalyzer>();
             return checkers.ToDictionary(checker => checker.Id);
+        }
+
+        private void DisposeAnalyzers()
+        {
+            foreach (var analyzer in TopLevelAnalyzers)
+            {
+                analyzer.Dispose();
+            }
         }
     }
 }

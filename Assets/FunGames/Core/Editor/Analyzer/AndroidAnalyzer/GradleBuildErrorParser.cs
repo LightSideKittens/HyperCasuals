@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace FunGames.Core.Editor.Analyzer
         private const string BuildReportDir = "Assets/BuildReports";
         private const string UnityBuildReportPath = "Library/LastBuild.buildreport";
 
-        public int callbackOrder => -100;
+        public int callbackOrder => (int)PreprocessCallbackOrder.Minus100;
         private static readonly List<SuspiciousMessage> LastSuspiciousMessages = new();
 
         public static bool HasMessages => LastSuspiciousMessages.Count > 0;
@@ -22,10 +23,13 @@ namespace FunGames.Core.Editor.Analyzer
         private static bool BuildReportFound => File.Exists(UnityBuildReportPath);
         private static AnalyzerSettings Settings => AnalyzerSettings.GetOrCreateSettings();
 
-            public void OnPreprocessBuild(BuildReport report)
+        public static Action BuildAnalysisAndMessagesCleared;
+        
+        public void OnPreprocessBuild(BuildReport report)
         {
             Settings.LastBuildAnalysis = null;
             LastSuspiciousMessages.Clear();
+            BuildAnalysisAndMessagesCleared?.Invoke();
 
             // We have to do it this way because IPostprocessBuildWithReport is not fired if the build fails:
             // see: https://forum.unity.com/threads/ipostprocessbuildwithreport-and-qa-embarrasing-answer-about-a-serious-bug.891055/
@@ -258,5 +262,4 @@ namespace FunGames.Core.Editor.Analyzer
             return false;
         }
     }
-    
 }

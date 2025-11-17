@@ -112,7 +112,7 @@ namespace FunGames.Core.Editor.IntegrationManager
             }
 
             IsDownloadingConfig = true;
-            WebUtils.DownloadFile(SdkConfigUrl, SdkConfigFilePath, ApiKey, (result, responseCode)=>
+            WebUtils.DownloadFileWAuthorization(SdkConfigUrl, SdkConfigFilePath, (result, responseCode)=>
             {
                 IsDownloadingConfig = false;
                 RequestError = GetRequestError(responseCode);

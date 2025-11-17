@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FunGames.Core.Editor.Analyzer;
-using FunGames.Tools.Editor;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
@@ -22,8 +21,8 @@ namespace FunGames.Core.Editor.IntegrationManager
         private Rect _windowPosition;
         private GUIStyle _rightAlignedLabelStyle;
         private GUIStyle _descriptionLabelStyle;
-        private List<FGAnalyzer> TopLevelAnalyzers => _controller.TopLevelAnalyzers;
-        public int callbackOrder => 1000;
+        private List<FGAnalyzer> TopLevelAnalyzers => IntegrationIssuesController.TopLevelAnalyzers;
+        public int callbackOrder => (int)PreprocessCallbackOrder.Plus100;
         
         public IntegrationIssuesDrawer()
         {
@@ -40,7 +39,7 @@ namespace FunGames.Core.Editor.IntegrationManager
         
         public void OnPreprocessBuild(BuildReport report)
         {
-            CheckCriticalErrors();
+            CheckCriticalErrorsPrebuild();
         }
 
         private void RefreshIssues()
@@ -226,7 +225,7 @@ namespace FunGames.Core.Editor.IntegrationManager
             return AssetDatabase.LoadAssetAtPath(iconPath, typeof(Texture)) as Texture;
         }
 
-        private void CheckCriticalErrors()
+        private void CheckCriticalErrorsPrebuild()
         {
             if(!AnalyzerSettings.GetOrCreateSettings().ShowPrebuildWarning) return;
 

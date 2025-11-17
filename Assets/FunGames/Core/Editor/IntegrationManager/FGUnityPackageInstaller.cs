@@ -203,7 +203,7 @@ namespace FunGames.Core.Editor.IntegrationManager
         {
             DirectoryInfo folder = new DirectoryInfo(Path.Combine(Application.dataPath, "FunGames_Externals"));
             if(!folder.Exists) return;
-
+            
             var packageFiles = folder.GetFiles("*", SearchOption.AllDirectories)
                 .Where(a => IsFileBasedPackage(a.FullName))
                 .ToList();

@@ -39,7 +39,7 @@ namespace FunGames.Core.Editor.IntegrationManager
         private float MaxHeight => _rmc.IsVirginProject && _integrationViewToDraw == IntegrationView.SettingsAndModules 
             ? shortHeight : tallHeight;
 
-        [MenuItem("FunGames/Integration Manager")]
+        [MenuItem("FunGames/Integration Manager", priority = 0)]
         public static void Init()
         {
             GetWindow<IntegrationManagerWindow>();
@@ -55,9 +55,9 @@ namespace FunGames.Core.Editor.IntegrationManager
         void OnEnable()
         {
             titleContent.text = "FunGames SDK ";
-            position = new Rect(200, 200, 540, shortHeight); //w820
+            position = new Rect(200, 200, 540, tallHeight); //w820
             minSize = new Vector2(position.width, shortHeight);
-            maxSize = new Vector2(position.width, shortHeight);
+            maxSize = new Vector2(position.width, tallHeight);
             previousWindowWidth = maxSize.x;
             isInit = false;
 

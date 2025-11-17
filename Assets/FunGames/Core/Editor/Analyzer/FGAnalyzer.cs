@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace FunGames.Core.Editor.Analyzer
 {
-    public abstract class FGAnalyzer
+    public abstract class FGAnalyzer: IDisposable
     {
         public virtual string Id => GetType().Name;
         public virtual string ParentId => "";
@@ -11,6 +12,7 @@ namespace FunGames.Core.Editor.Analyzer
         public readonly List<FGIssue> Issues = new();
         private readonly List<FGAnalyzer> children = new ();
         public List<FGIssue> FilteredIssues = new();
+        protected abstract List<FGIssue> OwnIssues();
 
         public void Add(FGAnalyzer analyzer)
         {
@@ -29,6 +31,19 @@ namespace FunGames.Core.Editor.Analyzer
             }
         }
 
-        protected abstract List<FGIssue> OwnIssues();
+        public void Dispose()
+        {
+            DisposeSelf();
+            DisposeChildren();
+        }
+
+        protected virtual void DisposeSelf()
+        {
+        }
+
+        private void DisposeChildren()
+        {
+            children.ForEach(a=>a.Dispose());
+        }
     }
 }

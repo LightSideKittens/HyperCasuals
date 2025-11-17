@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FunGames.Core.Editor.IntegrationManager;
 using UnityEditor;
 using UnityEngine;
@@ -10,8 +11,14 @@ namespace FunGames.Core.Editor.Analyzer
 
     public class FGGradleAnalyzer : FGAnalyzer
     {
+        private const string DUPLICATE_CLASS_ISSUE_TITLE = "Duplicate classes";
         private static AnalyzerSettings Settings => AnalyzerSettings.GetOrCreateSettings();
         private readonly DuplicateClassErrorsDrawer _duplicateClassErrorsDrawer = new();
+
+        public FGGradleAnalyzer()
+        {
+            GradleBuildErrorParser.BuildAnalysisAndMessagesCleared += RemoveDuplicateClassIssue;
+        }
 
         protected override List<FGIssue> OwnIssues()
         {
@@ -78,7 +85,7 @@ namespace FunGames.Core.Editor.Analyzer
 
             return new FGIssue
             {
-                title = "Duplicate classes",
+                title = DUPLICATE_CLASS_ISSUE_TITLE,
                 severity = FGSDKIssueSeverity.Error,
                 platform = FGSDKIssuePlatform.Android,
                 customDescriptionDrawer = DrawDuplicateClassErrorResults
@@ -127,6 +134,15 @@ namespace FunGames.Core.Editor.Analyzer
                 severity = FGSDKIssueSeverity.Info,
                 platform = FGSDKIssuePlatform.Android
             };
+        }
+
+        private void RemoveDuplicateClassIssue()
+        {
+            List<FGIssue> issuesCopy = Issues.ToList();
+            Issues.Clear();
+            Issues.AddRange(issuesCopy.Where(a => !a.title.Equals(DUPLICATE_CLASS_ISSUE_TITLE)));
+
+            FilteredIssues = FilteredIssues.Where(a => !a.title.Equals(DUPLICATE_CLASS_ISSUE_TITLE)).ToList();
         }
 
         private void DrawDuplicateClassErrorResults()
@@ -183,5 +199,10 @@ namespace FunGames.Core.Editor.Analyzer
             }
         }
 
+        protected override void DisposeSelf()
+        {
+            base.DisposeSelf();
+            GradleBuildErrorParser.BuildAnalysisAndMessagesCleared -= RemoveDuplicateClassIssue;
+        }
     }
 }

@@ -26,29 +26,29 @@ namespace FunGames.Tools.Utils
             SendRequest(downloadRequest, (s) => FileDownloaded(s, path, action));
         }
 
-        public static void DownloadFile(string url, string path, string apiKey, Action<bool, long> action = null)
+        public static void DownloadFileWAuthorization(string url, string path, Action<bool, long> action = null)
         {
             UnityWebRequest downloadRequest = DownloadRequest(url);
             downloadRequest.SetRequestHeader(
-                "authorization", FGAPIHelpers.CreateAuthorizationHeader(url, apiKey));
-            SendRequest(downloadRequest, (r) =>
+                "authorization", FGAPIHelpers.CreateAuthorizationHeader(url));
+            SendRequest(downloadRequest, (request) =>
             {
-                if (r.result != UnityWebRequest.Result.Success)
+                if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError($"File download error: {r.error}");
-                    action?.Invoke(false, r.responseCode);
+                    Debug.LogError($"File download error: {request.error}");
+                    action?.Invoke(false, request.responseCode);
                     return;
                 }
                 
-                if (r.downloadHandler.data == null)
+                if (request.downloadHandler.data == null)
                 {
-                    Debug.LogError($"Response code {r.responseCode}. The response data is empty.");
-                    action?.Invoke(false, r.responseCode);
+                    Debug.LogError($"Response code {request.responseCode}. The response data is empty.");
+                    action?.Invoke(false, request.responseCode);
                     return;
                 }
                 
-                FileDownloaded(r, path, null);
-                action?.Invoke(true, r.responseCode);
+                FileDownloaded(request, path, null);
+                action?.Invoke(true, request.responseCode);
             });
         }
 

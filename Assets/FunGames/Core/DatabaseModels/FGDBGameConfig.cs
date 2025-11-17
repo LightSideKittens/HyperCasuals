@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace FunGames.Core.DatabaseModels
@@ -28,6 +29,27 @@ namespace FunGames.Core.DatabaseModels
             if (b.id == LastModuleId) return -1;
             return b.is_mandatory.CompareTo(a.is_mandatory);
             
+        }
+
+        public void RemoveParameterValues()
+        {
+            foreach (FGDBModuleSettings module in modules)
+            {
+                RemoveParameterValues(module);
+            }
+        }
+
+        private void RemoveParameterValues(FGDBModuleSettings module)
+        {
+            foreach (var parameter in module.parameters)
+            {
+                parameter.value = String.Empty;
+            }
+            
+            foreach (var submodule in module.submodules)
+            {
+                RemoveParameterValues(submodule);
+            }
         }
     }
 }

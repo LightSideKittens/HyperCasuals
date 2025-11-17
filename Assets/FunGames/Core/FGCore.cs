@@ -20,7 +20,7 @@ namespace FunGames.Core
         public FGDebugConsoleBuilder DebugConsoleBuilder;
         public FGNoInternetPopup NoInternetPopup;
         public FGUpdatePopup UpdateVersionPopup;
-
+        
         public const string RC_LOG_LEVEL = "FGLogLevel";
         public const string RC_NO_ADS = "FGNoAds";
 
