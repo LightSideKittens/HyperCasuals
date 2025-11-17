@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using LSCore;
 using LSCore.Attributes;
-using Newtonsoft.Json.Linq;
+using LSCore.Extensions;
 using SourceGenerators;
 using UnityEngine;
 
@@ -19,10 +19,10 @@ public partial class Themes : SingleScriptableObject<Themes>
     
     public static void PlayMusic()
     {
-        GameSave.Config.ListenAndCall("theme", Instance.Internal_PlayMusic);
+        GameSave.Config["theme"].ListenAndCall(Instance.Internal_PlayMusic);
     }
 
-    private void Internal_PlayMusic(JToken token)
+    private void Internal_PlayMusic()
     {
         lastIdleMusic?.FadeOut();
         lastIdleMusic = idleMusics[GameSave.Theme];

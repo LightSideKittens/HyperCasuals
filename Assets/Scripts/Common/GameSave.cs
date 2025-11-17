@@ -6,8 +6,7 @@ using Newtonsoft.Json.Linq;
 
 public class GameSave
 {
-    public static RJObject Config => config ??= JTokenGameConfig.Get("GameCoreData");
-    [ResetStatic] private static RJObject config;
+    public static JObject Config => JTokenGameConfig.Get("GameCoreData");
     public static string currentLevel;
     public static string loseReason;
     public static Analytic.Param CurrentLevelParam => ("level", currentLevel);

@@ -24,7 +24,7 @@ namespace Launcher
 
         private void Init()
         {
-            GameSave.Config.ListenAndCall("theme", UpdateBackground);
+            GameSave.Config["theme"].ListenAndCall(UpdateBackground);
             MainWindow.AsHome();
             MainWindow.Show();
             
@@ -34,10 +34,10 @@ namespace Launcher
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            GameSave.Config.UnListen("theme", UpdateBackground);
+            GameSave.Config["theme"].UnListen(UpdateBackground);
         }
 
-        private void UpdateBackground(JToken json)
+        private void UpdateBackground()
         {
             background.sprite = Themes.CurrentBackground;
         }

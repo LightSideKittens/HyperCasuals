@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Firebase.Analytics;
 using LSCore;
+using LSCore.Extensions;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -55,11 +56,10 @@ public static class Analytic
 
     private static void ListenProperty(string name)
     {
-        GameSave.Config.ListenAndCall(name, value =>
+        var property = GameSave.Config.Property(name);
+        property?.ListenAndCall(() =>
         {
-            if(value == null) return;
-            var v = value.Parent as JProperty;
-            SetUserProperty(v.Name, v.Value.ToString());
+            SetUserProperty(property.Name, property.Value.ToString());
         });
     }
     

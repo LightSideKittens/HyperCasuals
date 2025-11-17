@@ -29,7 +29,7 @@ public class Dragger : MonoBehaviour
             if(touch.IsPointerOverUI && !isDragging) return;
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
             touchPosition.z = 0;
-            var needMove = (touch.phase == TouchPhase.Moved && isDragging) || (tween?.active ?? false);
+            var needMove = (touch.IsPositionChanged && isDragging) || (tween?.active ?? false);
             
             if (CoreWorld.IsGameStopped)
             {
