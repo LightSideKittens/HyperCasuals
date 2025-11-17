@@ -297,6 +297,7 @@ public class BoosterButton : DoIt, ILocalizationArgument
         {
             IUIView.Hiding -= OnHiding;
             clicked = false;
+            canvas.sortingOrder = UIViewBoss.CurrentSortingOrder - 1;
         }
     }
 }

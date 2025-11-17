@@ -234,6 +234,7 @@ public partial class FieldManager : SingleService<FieldManager>
             shape.ShadowEnabled = false;
             DragStarted?.Invoke();
             ClearCurrentGhostShape();
+            DOTween.Kill(shape.transform);
             shape.transform.DOScale(defaultScale, 0.2f);
             CreateGhostShape();
             currentGhostShape.gameObject.SetActive(false);
