@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AppodealStack.Monetization.Api;
 using Firebase.Analytics;
 using LSCore;
 using Newtonsoft.Json.Linq;
@@ -8,7 +7,6 @@ using UnityEngine;
 
 public static class Analytic
 {
-    private static Task<bool> appodealInitTask;
     private static Task<bool> firebaseInitTask;
     private static bool isInited;
 
@@ -19,12 +17,11 @@ public static class Analytic
     }
 #endif
     
-    public static void Init(Task<bool> firebaseInitTask, Task<bool> appodealInitTask)
+    public static void Init(Task<bool> firebaseInitTask)
     {
         if(isInited) return;
         isInited = true;
         Analytic.firebaseInitTask = firebaseInitTask;
-        Analytic.appodealInitTask = appodealInitTask;
         Check(firebaseInitTask, InitUserProps);
         void InitUserProps()
         {
@@ -75,21 +72,18 @@ public static class Analytic
     public static void LogEvent(string name)
     {
         Burger.Log($"{log} LogEvent: {name}");
-        Check(appodealInitTask, () => Appodeal.LogEvent(name));
         Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name));
     }
     
     public static void LogEvent(string name, Param param)
     {
         Burger.Log($"{log} LogEvent {name}: {param}");
-        Check(appodealInitTask, () => Appodeal.LogEvent(name));
         Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name, param.parameter));
     }
 
     public static void LogEvent(string name, params Param[] parameters)
     {
         Burger.Log($"{log} LogEvent {name}: {string.Join(" ",  parameters)}");
-        Check(appodealInitTask, () => Appodeal.LogEvent(name));
         Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name, parameters.ToParameters()));
     }
 
