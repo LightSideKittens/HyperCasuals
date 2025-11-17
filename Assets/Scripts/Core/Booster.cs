@@ -289,9 +289,9 @@ public class BoosterButton : DoIt, ILocalizationArgument
         IUIView.Hiding += OnHiding;
         clicked = true;
         availableDoIts.Do();
-        if(lastCanvas != null) lastCanvas.sortingOrder--;
+        if(lastCanvas != null) lastCanvas.sortingOrder = UIViewBoss.CurrentSortingOrder - 1;
         lastCanvas = canvas;
-        canvas.sortingOrder++;
+        canvas.sortingOrder = UIViewBoss.CurrentSortingOrder + 1;
         
         void OnHiding(IUIView obj)
         {
