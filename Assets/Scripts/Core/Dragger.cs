@@ -58,6 +58,7 @@ public class Dragger : MonoBehaviour
                     break;
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:
+                    needMove = false;
                     if (isDragging)
                     {
                         releaseFeel.Do();

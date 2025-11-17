@@ -56,10 +56,11 @@ public static class Analytic
 
     private static void ListenProperty(string name)
     {
-        var property = GameSave.Config.Property(name);
-        property?.ListenAndCall(() =>
+        GameSave.Config.ListenAndCall(name, () =>
         {
-            SetUserProperty(property.Name, property.Value.ToString());
+            var value = GameSave.Config[name];
+            if(value == null) return;
+            SetUserProperty(name, value.ToString());
         });
     }
     
