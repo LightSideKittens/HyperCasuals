@@ -434,6 +434,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: 'managedReferences[1724297593403211858]'
       value: LSCore.WindowModule LSCore.GoBack
       objectReference: {fileID: 0}
@@ -448,6 +452,10 @@ PrefabInstance:
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: 'uiControl.doIter.onActivate.Array.data[0]'
       value: 1724297593403211858
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: managedReferences[1249993174685319190].anim
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[1249993174685319192].onActivate.Array.size
@@ -827,6 +835,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4434366257213022481}
     m_Modifications:
+    - target: {fileID: 2869820108354595784, guid: c80adccb8f93dfd439f6382c09134e73, type: 3}
+      propertyPath: m_fontSize
+      value: 35.9
+      objectReference: {fileID: 0}
     - target: {fileID: 1685252650808547322, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
       propertyPath: m_Name
       value: CountLabel
@@ -911,10 +923,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2d5964a390facc8448780c115702e79d, type: 3}
-    - target: {fileID: 2869820108354595784, guid: c80adccb8f93dfd439f6382c09134e73, type: 3}
-      propertyPath: m_fontSize
-      value: 35.9
-      objectReference: {fileID: 0}
     - target: {fileID: 6137745548946964248, guid: 1b851484955cb584e8cb6397b06b91d2, type: 3}
       propertyPath: m_fontSize
       value: 72
@@ -1012,6 +1020,10 @@ PrefabInstance:
       propertyPath: managedReferences[5237655153313054727].fundText
       value: 
       objectReference: {fileID: 3928303967217071886}
+    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
+      propertyPath: managedReferences[5237655153313054721].onCannotSpent
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: managedReferences[5237655153313054721].transactionId
       value: 

@@ -45,9 +45,10 @@ public class LoseWindow : BaseWindow<LoseWindow>
     protected override void Init()
     {
         base.Init();
+        DoEventListener.Listen("exchange_showed", OnExchangeShowed);
         watchButton.Did += Reload;
         noThanksButton.Did += () => SetActiveWatchButton(false);
-        reviveButton.Did += () => keysFundText.Number *= 2;
+        onReviveClicked += () => keysFundText.Number *= 2;
         
         var questViewPrefab = Quests.CurrentQuestHandler.ViewState;
         questViewPrefab.gameObject.SetActive(false);
@@ -63,8 +64,6 @@ public class LoseWindow : BaseWindow<LoseWindow>
         lostQuestView.gameObject.SetActive(true);
         lostQuestView.slider.value = Quests.CurrentQuest["collectedCount"].ToInt() + Quests.CollectBlocksQuest.collectedCount;
         
-        var canSpend = keysFundText.CanSpend;
-        reviveButton.gameObject.SetActive(canSpend);
         reasonText.Localize(GameSave.loseReason);
         base.OnShowing();
 
@@ -87,6 +86,12 @@ public class LoseWindow : BaseWindow<LoseWindow>
         { 
             Analytic.LogEvent("lost_level", GameSave.CurrentLevelParam, ("reason", GameSave.loseReason), GoalWindow.LevelTimeParam);
         }
+    }
+
+    private void OnExchangeShowed()
+    {
+        var exchanger = DataBuffer.Get<FundsExchanger>();
+        exchanger.SetAmountForTo((int)keysFundText.Number);
     }
     
     private void Reload()
@@ -122,6 +127,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
     protected override void DeInit()
     {
         base.DeInit();
+        DoEventListener.UnListen("exchange_showed", OnExchangeShowed);
         onReviveClicked = null;
     }
 
