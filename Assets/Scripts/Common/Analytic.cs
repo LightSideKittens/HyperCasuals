@@ -72,20 +72,29 @@ public static class Analytic
 
     public static void LogEvent(string name)
     {
-        Burger.Log($"{log} LogEvent: {name}");
-        Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name));
+        Check(firebaseInitTask, () =>
+        {
+            Burger.Log($"{log} LogEvent: {name}");
+            FirebaseAnalytics.LogEvent(name);
+        });
     }
     
     public static void LogEvent(string name, Param param)
     {
-        Burger.Log($"{log} LogEvent {name}: {param}");
-        Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name, param.parameter));
+        Check(firebaseInitTask, () =>
+        {
+            Burger.Log($"{log} LogEvent {name}: {param}");
+            FirebaseAnalytics.LogEvent(name, param.parameter);
+        });
     }
 
     public static void LogEvent(string name, params Param[] parameters)
     {
-        Burger.Log($"{log} LogEvent {name}: {string.Join(" ",  parameters)}");
-        Check(firebaseInitTask, () => FirebaseAnalytics.LogEvent(name, parameters.ToParameters()));
+        Check(firebaseInitTask, () =>
+        {
+            Burger.Log($"{log} LogEvent {name}: {string.Join(" ",  parameters)}");
+            FirebaseAnalytics.LogEvent(name, parameters.ToParameters());
+        });
     }
 
     private static async void Check(Task<bool> task, Action onSuccess)
