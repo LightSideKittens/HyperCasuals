@@ -45,7 +45,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
     protected override void Init()
     {
         base.Init();
-        DoEventListener.Listen("exchange_showed", OnExchangeShowed);
+        DoEvent.Listen("exchange_showed", OnExchangeShowed);
         watchButton.Did += Reload;
         noThanksButton.Did += () => SetActiveWatchButton(false);
         onReviveClicked += () => keysFundText.Number *= 2;
@@ -127,7 +127,7 @@ public class LoseWindow : BaseWindow<LoseWindow>
     protected override void DeInit()
     {
         base.DeInit();
-        DoEventListener.UnListen("exchange_showed", OnExchangeShowed);
+        DoEvent.UnListen("exchange_showed", OnExchangeShowed);
         onReviveClicked = null;
     }
 
