@@ -112,12 +112,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf27d99893cb484db4b964e9e11a6cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initShowHideAnim: 0
   showHideAnim:
     rid: 4229861110881977009
+  blockSystemGoBack: 0
+  systemGoBackOverride:
+    rid: -2
   onShowing: []
-  onHiding: []
   onShowed: []
+  onHiding: []
   onHidden: []
   references:
     version: 2
@@ -169,11 +171,11 @@ MonoBehaviour:
           - timeOffset: 0
             anim:
               rid: 4229861110881977156
+          editor_options: []
     - rid: 4229861110881977016
       type: {class: AlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
         id: 
-        mainOptions: []
         canvasGroupAnim:
           rid: -2
         graphicAnim:
@@ -182,11 +184,6 @@ MonoBehaviour:
       type: {class: PivotPosYAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
         id: 
-        mainOptions: []
-        needInit: 1
-        duration: 0.1
-        startValue: 0.5
-        endValue: 0.2
         options: []
         targets:
         - rid: 3873715256608162180
@@ -196,15 +193,14 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+        needInit: 1
+        duration: 0.1
+        startValue: 0.5
+        endValue: 0.2
     - rid: 4229861110881977031
       type: {class: GraphicAlphaAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
         id: 
-        mainOptions: []
-        needInit: 1
-        duration: 0.3
-        startValue: 0
-        endValue: 1
         options: []
         targets:
         - rid: 3873715256608162184
@@ -214,15 +210,14 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+        needInit: 1
+        duration: 0.3
+        startValue: 0
+        endValue: 1
     - rid: 4229861110881977156
       type: {class: LocalPosByTransformAnim, ns: LSCore.AnimationsModule.Animations, asm: LSCore.AnimationsModule}
       data:
         id: 
-        mainOptions: []
-        needInit: 0
-        duration: 0.3
-        startValue: {fileID: 0}
-        endValue: {fileID: 0}
         options: []
         targets:
         - rid: 3873715256608162188
@@ -241,6 +236,10 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+        needInit: 0
+        duration: 0.3
+        startValue: {fileID: 0}
+        endValue: {fileID: 0}
 --- !u!224 &8826213721951690112 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9216084108510085809, guid: 2edd93313184491408f94e86a08ff665, type: 3}

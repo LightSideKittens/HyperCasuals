@@ -85,9 +85,6 @@ MonoBehaviour:
   ignoreSLAAAAYout: 0
   uiControl:
     rid: 1000
-  clickActions:
-    actions: []
-    isClickSoundOverride: 0
   references:
     version: 2
     RefIds:
@@ -102,11 +99,16 @@ MonoBehaviour:
           rid: 1249993174685319935
     - rid: 1249993174685319865
       type: {class: DefaultUIControlAnim, ns: LSCore, asm: LSCore.UIModule}
-      data: 
+      data:
+        sound:
+          prefab: {fileID: 0}
+          clip: {fileID: 0}
     - rid: 1249993174685319866
       type: {class: DefaultUIControlDoIter, ns: LSCore, asm: LSCore.UIModule}
       data:
         onActivate: []
     - rid: 1249993174685319935
       type: {class: DefaultUIControlSelectBehaviour, ns: LSCore, asm: LSCore.UIModule}
-      data: 
+      data:
+        selectOnPress: 1
+        selectOnHover: 0

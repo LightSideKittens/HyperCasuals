@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2f0101526ef0d5144a7cdd1d5d8aeb9f, type: 2}
   m_sharedMaterial: {fileID: 5878962532139945507, guid: 2f0101526ef0d5144a7cdd1d5d8aeb9f, type: 2}
@@ -136,7 +136,10 @@ MonoBehaviour:
   m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
-  localizationKey: 
-  tableData: {fileID: 0}
-  <Number>k__BackingField: 100
+  textFormat: '{0}'
+  numberFormat: 
+  number: 0
   <Id>k__BackingField: {fileID: 0}
+  changeTextColorIfNotEnough: 0
+  notEnoughColorId: {fileID: 0}
+  enoughColorId: {fileID: 0}

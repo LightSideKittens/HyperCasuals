@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8869142001010808229, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_Name
-      value: BaseClickableText
+      value: BaseLocalizationClickableText
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -57,11 +57,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e276e61ee44cbe9ad61eda6787ea01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim:
-    isDisabled: 0
-  clickActions:
-    actions: []
-    isClickSoundOverride: 0
+  uiControl:
+    rid: 1000
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1000
+      type: {class: DefaultUIControl, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        anim:
+          rid: -2
+        doIter:
+          rid: 1001
+        selectBehaviour:
+          rid: -2
+    - rid: 1001
+      type: {class: DefaultUIControlDoIter, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        onActivate: []

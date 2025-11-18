@@ -51,16 +51,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHideAnim:
     rid: 4216535286403302077
-  clickActions: []
-  <HomeButton>k__BackingField: {fileID: 0}
-  <BackButton>k__BackingField: {fileID: 0}
+  blockSystemGoBack: 0
+  systemGoBackOverride:
+    rid: -2
   onShowing: []
-  onHiding: []
   onShowed: []
+  onHiding: []
   onHidden: []
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4216535286403302077
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:

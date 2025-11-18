@@ -288,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4619624241055375339, guid: 71148fe5894a275448faacf4902eeeb0, type: 3}
       propertyPath: m_text
-      value: 2000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4619624241055375339, guid: 71148fe5894a275448faacf4902eeeb0, type: 3}
       propertyPath: m_fontSize
@@ -579,12 +579,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400417130813264742, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 400417130813264742, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: localizationData.tableData
       value: 
       objectReference: {fileID: 11400000, guid: c50aa1a869a4a6240aacb9cd8d61e025, type: 2}
     - target: {fileID: 400417130813264742, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: localizationData.arguments.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400417130813264742, guid: 623be12bd4367314b9e8311433882948, type: 3}
+      propertyPath: 'localizationData.arguments.Array.data[0]'
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 405438111595204419, guid: 623be12bd4367314b9e8311433882948, type: 3}
       propertyPath: m_Name

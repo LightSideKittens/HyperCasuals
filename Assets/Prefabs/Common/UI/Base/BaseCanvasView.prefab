@@ -53,6 +53,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHideAnim:
     rid: 4216535028436041740
+  blockSystemGoBack: 0
+  systemGoBackOverride:
+    rid: -2
   onShowing: []
   onShowed: []
   onHiding: []
@@ -60,6 +63,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4216535028436041740
       type: {class: DefaultUIViewAnimation, ns: LSCore, asm: LSCore.UIModule}
       data:

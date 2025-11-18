@@ -175,9 +175,6 @@ MonoBehaviour:
   onHiding: []
   onHidden: []
   confetti: {fileID: 1037732913396569704, guid: c95237d1d83200d4692104636dc9c5f1, type: 3}
-  sound:
-    prefab: {fileID: 124978471103678096, guid: 92b1036c0ce958645970f8e2151cc86f, type: 3}
-    clip: {fileID: 8300000, guid: 0f6b1291a5fb32e428c34cce554a64e6, type: 3}
   claimButton: {fileID: 2527172157387592948}
   reward: {fileID: 5868659293778942594}
   rewardX2: {fileID: 0}
@@ -950,6 +947,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseFundText
       objectReference: {fileID: 0}
+    - target: {fileID: 4619624241055375339, guid: 71148fe5894a275448faacf4902eeeb0, type: 3}
+      propertyPath: m_fontSize
+      value: 35.35
+      objectReference: {fileID: 0}
     - target: {fileID: 1087483639760342171, guid: 5cfa27a46c689564fbd6b30d462d799f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1003,10 +1004,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7370679368218626573, guid: 32211a55c5f9cb74393647ff8f7b9d45, type: 3}
-      propertyPath: m_fontSize
-      value: 35.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 4619624241055375339, guid: 71148fe5894a275448faacf4902eeeb0, type: 3}
       propertyPath: m_fontSize
       value: 35.35
       objectReference: {fileID: 0}

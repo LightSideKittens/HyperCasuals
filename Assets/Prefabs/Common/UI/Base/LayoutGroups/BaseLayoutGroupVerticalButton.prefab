@@ -83,11 +83,23 @@ MonoBehaviour:
   mirror: {x: 1, y: 0}
   combineFilledWithSliced: 0
   ignoreSLAAAAYout: 0
-  anim:
-    isDisabled: 0
-  clickActions:
-    actions: []
-    isClickSoundOverride: 0
+  uiControl:
+    rid: 1000
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1000
+      type: {class: DefaultUIControl, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        anim:
+          rid: -2
+        doIter:
+          rid: 1001
+        selectBehaviour:
+          rid: -2
+    - rid: 1001
+      type: {class: DefaultUIControlDoIter, ns: LSCore, asm: LSCore.UIModule}
+      data:
+        onActivate: []
