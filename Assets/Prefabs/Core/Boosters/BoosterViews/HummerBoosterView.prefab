@@ -191,38 +191,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4442935211897039605, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442935211897039605, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442935211897039605, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442935211897039605, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442935211897039605, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442935211897039605, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442935211897039605, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442935211897039605, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4934524878184496764, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -307,10 +275,6 @@ PrefabInstance:
       propertyPath: managedReferences[1249993579436179456].rect
       value: 
       objectReference: {fileID: 1704212140712261305}
-    - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: managedReferences[1249993579436179535].view
-      value: 
-      objectReference: {fileID: 1805466206585280858}
     - target: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: managedReferences[2877982196833976545].data
       value: 
@@ -691,22 +655,6 @@ PrefabInstance:
       propertyPath: managedReferences[2877982196833976544].timeOffsetPerTarget.m_Curve.Array.data[0].weightedMode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6413825744915403851, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: 'managedReferences[5237655153313055015]'
-      value: Core FreezeTimer
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413825744915403851, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: uiControl.doIter.onActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413825744915403851, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: 'uiControl.doIter.onActivate.Array.data[0]'
-      value: 5237655153313055015
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413825744915403851, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: managedReferences[5237655153313055015].seconds
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7559956239606128159, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_fontSize
       value: 90.25
@@ -719,10 +667,6 @@ PrefabInstance:
       propertyPath: localizationData.id
       value: 75275172771258368
       objectReference: {fileID: 0}
-    - target: {fileID: 7559956239606128159, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: localizationData.key
-      value: hummerBooster
-      objectReference: {fileID: 0}
     - target: {fileID: 8239419584517572656, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_Name
       value: HummerBoosterView
@@ -734,10 +678,6 @@ PrefabInstance:
     - target: {fileID: 8486638328108309995, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: localizationData.id
       value: 75275300106133504
-      objectReference: {fileID: 0}
-    - target: {fileID: 8486638328108309995, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-      propertyPath: localizationData.key
-      value: hummerBoosterDesc
       objectReference: {fileID: 0}
     - target: {fileID: 8828403685229840290, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       propertyPath: m_Pivot.x
@@ -836,8 +776,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5002423420089708930, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8912259299809769784, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
       insertIndex: -1
@@ -849,17 +788,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6739369253570913966, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
   m_PrefabInstance: {fileID: 5341725766843846679}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1805466206585280858 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5994241327460223309, guid: a58e57144fc50304a9040ee3209339b6, type: 3}
-  m_PrefabInstance: {fileID: 5341725766843846679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf27d99893cb484db4b964e9e11a6cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3571121226226231599 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8912259299809769784, guid: a58e57144fc50304a9040ee3209339b6, type: 3}

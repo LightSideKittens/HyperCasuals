@@ -445,10 +445,6 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: music
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -731,17 +727,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
   m_PrefabInstance: {fileID: 358947556059845995}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8483012029101470476 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
-  m_PrefabInstance: {fileID: 358947556059845995}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &515100009129751598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -966,10 +951,6 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: sound
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -1168,10 +1149,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 3bbee97ec5b214e4bafebc8294f2b499, type: 3}
-      propertyPath: 'managedReferences[4229860960537411794]'
-      value: LSCore.LifecycleSystem LSCore.LifecycleSystem.LifecycleObject/ActionWrapper
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 3bbee97ec5b214e4bafebc8294f2b499, type: 3}
       propertyPath: 'managedReferences[4229860960537411795]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -1188,10 +1165,6 @@ PrefabInstance:
       value: 4229860960537411795
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 3bbee97ec5b214e4bafebc8294f2b499, type: 3}
-      propertyPath: managedReferences[4229860960537411794].action
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: 3bbee97ec5b214e4bafebc8294f2b499, type: 3}
       propertyPath: managedReferences[4229860960537411795].option
       value: 0
       objectReference: {fileID: 0}
@@ -1199,10 +1172,6 @@ PrefabInstance:
       propertyPath: managedReferences[4229860960537411795].prefab
       value: 
       objectReference: {fileID: 3101030846031512032, guid: b5b82b742fb5f6f4a99c96f7c6fe95a2, type: 3}
-    - target: {fileID: 1859483897607432842, guid: 3bbee97ec5b214e4bafebc8294f2b499, type: 3}
-      propertyPath: managedReferences[4229860960537411795].showOnlyWhenCreated
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: 3bbee97ec5b214e4bafebc8294f2b499, type: 3}
       propertyPath: managedReferences[1249993174685319192].onActivate.Array.size
       value: 1
@@ -1282,16 +1251,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: 'managedReferences[4229860960537411798]'
-      value: LSCore.LifecycleSystem LSCore.LifecycleSystem.LifecycleObject/ActionWrapper
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: 'managedReferences[4229860960537411802]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: 'managedReferences[6254766682654900326]'
-      value: LSCore.WindowModule LSCore.SetBool
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: 'managedReferences[6254766682654900402]'
@@ -1318,22 +1279,6 @@ PrefabInstance:
       value: 4229860960537411802
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: 'uiControl.doIter.onActivate.Array.data[1]'
-      value: 4229860960537411798
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[6254766682654900403].root
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[6254766682654900326].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411798].action
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[4229860960537411802].option
       value: 0
       objectReference: {fileID: 0}
@@ -1342,51 +1287,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3101030846031512032, guid: 48b8cbbcba565bf4594ae95c69c83e97, type: 3}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[6254766682654900326].method
-      value: set_active
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[6254766682654900402].option
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[6254766682654900402].prefab
       value: 
-      objectReference: {fileID: 3820585858121548723, guid: 00cd16d182c3e43438c5221fe4683245, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[6254766682654900403].usePath
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[6254766682654900403].pathToObject
-      value: ..
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042588].settings.clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d2dc2b00d006a4844989e8946ae0fcd6, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042588].settings.loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042588].settings.group
-      value: 
-      objectReference: {fileID: 4589851771290346213, guid: 72496f9913afa6746a6f16a28a67d8b3, type: 2}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042588].settings.volume
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[6254766682654900403].worldPositionStays
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411802].showOnlyWhenCreated
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[6254766682654900402].showOnlyWhenCreated
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
@@ -1440,10 +1349,6 @@ PrefabInstance:
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4287450655
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: localizationData.key
-      value: selectedLanguage
       objectReference: {fileID: 0}
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: localizationData.tableData
@@ -1612,10 +1517,6 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: deleteProfile
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
@@ -1746,17 +1647,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
---- !u!114 &5836008928122688859 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
-  m_PrefabInstance: {fileID: 2431699343246799676}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7367476946030207667 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
@@ -2015,10 +1905,6 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: haptic
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -2145,17 +2031,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
---- !u!114 &6878744481122754717 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
-  m_PrefabInstance: {fileID: 3329496242949736186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7617020344280307573 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
@@ -2254,10 +2129,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: 'managedReferences[4229860960537411797]'
-      value: LSCore.LifecycleSystem LSCore.LifecycleSystem.LifecycleObject/ActionWrapper
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: 'managedReferences[4229860960537411801]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -2274,10 +2145,6 @@ PrefabInstance:
       value: 4229860960537411801
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411797].action
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[4229860960537411801].option
       value: 0
       objectReference: {fileID: 0}
@@ -2285,26 +2152,6 @@ PrefabInstance:
       propertyPath: managedReferences[4229860960537411801].prefab
       value: 
       objectReference: {fileID: 3101030846031512032, guid: b5b82b742fb5f6f4a99c96f7c6fe95a2, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042591].settings.clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d2dc2b00d006a4844989e8946ae0fcd6, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042591].settings.loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042591].settings.group
-      value: 
-      objectReference: {fileID: 4589851771290346213, guid: 72496f9913afa6746a6f16a28a67d8b3, type: 2}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042591].settings.volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411801].showOnlyWhenCreated
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[1249993174685319192].onActivate.Array.size
       value: 1
@@ -2328,10 +2175,6 @@ PrefabInstance:
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: m_fontSizeMax
       value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: localizationData.key
-      value: helpAndSupport
       objectReference: {fileID: 0}
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: localizationData.tableData
@@ -2484,10 +2327,6 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: playerID
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -2500,24 +2339,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e0d621d1ef7248d4c85dfa1657580628, type: 2}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.ints.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: localizationData.arguments.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: 'localizationData.arguments.Array.data[0]'
       value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.ints.Array.data[0].value
-      value: 1223
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: managedReferences[6254766662218678295].value
-      value: -12312
       objectReference: {fileID: 0}
     - target: {fileID: 8869142001010808229, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_Name
@@ -2624,10 +2451,6 @@ PrefabInstance:
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_fontSize
       value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: language
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -2782,10 +2605,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
-      propertyPath: anim.isDisabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710949144462791051, guid: bd2613e153f00c5408c598d78d28b811, type: 3}
       propertyPath: 'managedReferences[1724297593403211858]'
       value: LSCore.WindowModule LSCore.GoBack
       objectReference: {fileID: 0}
@@ -2916,22 +2735,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].root
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].root
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].target
-      value: 
-      objectReference: {fileID: 5836008928122688859}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].target
-      value: 
-      objectReference: {fileID: 346413723149164002}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].duration
       value: 0.3
       objectReference: {fileID: 0}
@@ -2960,40 +2763,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].targetPath
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855045].startValue
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].targetPath
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855031].graphicAnim
       value: 3302317827636855033
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].useMultiple
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855043].graphicAnim
       value: 3302317827636855045
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].useMultiple
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].useTargetPath
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].useTargetPath
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855031].canvasGroupAnim
@@ -3004,19 +2783,11 @@ PrefabInstance:
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855031].options.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].options.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].targets.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855043].options.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
@@ -3034,30 +2805,6 @@ PrefabInstance:
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855045].timeOffsetPerTarget
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855031].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855043].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].targetsPaths.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].targetsPaths.Array.size
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317731496591862].animation.animsData.Array.size
@@ -3266,22 +3013,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].root
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].root
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].target
-      value: 
-      objectReference: {fileID: 6878744481122754717}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].target
-      value: 
-      objectReference: {fileID: 812103583936981028}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].duration
       value: 0.3
       objectReference: {fileID: 0}
@@ -3310,40 +3041,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].targetPath
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855045].startValue
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].targetPath
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855031].graphicAnim
       value: 3302317827636855033
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].useMultiple
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855043].graphicAnim
       value: 3302317827636855045
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].useMultiple
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].useTargetPath
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].useTargetPath
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855031].canvasGroupAnim
@@ -3354,19 +3061,11 @@ PrefabInstance:
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855031].options.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].options.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].targets.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855043].options.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
@@ -3384,30 +3083,6 @@ PrefabInstance:
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855045].timeOffsetPerTarget
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855031].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855043].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].targetsPaths.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].targetsPaths.Array.size
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317731496591862].animation.animsData.Array.size
@@ -3616,10 +3291,6 @@ PrefabInstance:
       value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: settings
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -3732,10 +3403,6 @@ PrefabInstance:
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_fontSize
       value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: newProfile
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -3869,17 +3536,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
   m_PrefabInstance: {fileID: 5820940622127930834}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2416929142342155189 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
-  m_PrefabInstance: {fileID: 5820940622127930834}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5947512286674361805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3989,22 +3645,6 @@ PrefabInstance:
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: 'managedReferences[-2]'
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042587].settings.clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d2dc2b00d006a4844989e8946ae0fcd6, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042587].settings.loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042587].settings.group
-      value: 
-      objectReference: {fileID: 4589851771290346213, guid: 72496f9913afa6746a6f16a28a67d8b3, type: 2}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042587].settings.volume
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: m_text
@@ -4340,10 +3980,6 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
-      propertyPath: localizationData.key
-      value: saveProgressDiscription
-      objectReference: {fileID: 0}
-    - target: {fileID: 6261081114330575899, guid: 69d6d4041670e97428283fc2670534f1, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
@@ -4588,22 +4224,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].root
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].root
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].target
-      value: 
-      objectReference: {fileID: 8483012029101470476}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].target
-      value: 
-      objectReference: {fileID: 2416929142342155189}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].duration
       value: 0.3
       objectReference: {fileID: 0}
@@ -4632,40 +4252,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].targetPath
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855045].startValue
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].targetPath
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855031].graphicAnim
       value: 3302317827636855033
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].useMultiple
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855043].graphicAnim
       value: 3302317827636855045
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].useMultiple
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].useTargetPath
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].useTargetPath
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855031].canvasGroupAnim
@@ -4676,19 +4272,11 @@ PrefabInstance:
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855031].options.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].options.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855033].targets.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855043].options.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
@@ -4706,30 +4294,6 @@ PrefabInstance:
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317827636855045].timeOffsetPerTarget
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855031].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855043].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].mainOptions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855033].targetsPaths.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
-      propertyPath: managedReferences[3302317827636855045].targetsPaths.Array.size
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5474000553809326013, guid: d338946f69818944c8d8c2fea4a6042c, type: 3}
       propertyPath: managedReferences[3302317731496591862].animation.animsData.Array.size
@@ -4902,10 +4466,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: 'managedReferences[4229860960537411809]'
-      value: LSCore.LifecycleSystem LSCore.LifecycleSystem.LifecycleObject/ActionWrapper
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: 'managedReferences[4229860960537411811]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -4922,10 +4482,6 @@ PrefabInstance:
       value: 4229860960537411811
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411809].action
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[4229860960537411811].option
       value: 0
       objectReference: {fileID: 0}
@@ -4933,10 +4489,6 @@ PrefabInstance:
       propertyPath: managedReferences[4229860960537411811].prefab
       value: 
       objectReference: {fileID: 3101030846031512032, guid: b5b82b742fb5f6f4a99c96f7c6fe95a2, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411811].showOnlyWhenCreated
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[1249993174685319192].onActivate.Array.size
       value: 1
@@ -4952,10 +4504,6 @@ PrefabInstance:
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: m_fontSize
       value: 64.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: localizationData.key
-      value: start
       objectReference: {fileID: 0}
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: localizationData.tableData
@@ -5032,10 +4580,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: 'managedReferences[4229860960537411808]'
-      value: LSCore.LifecycleSystem LSCore.LifecycleSystem.LifecycleObject/ActionWrapper
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: 'managedReferences[4229860960537411810]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -5052,10 +4596,6 @@ PrefabInstance:
       value: 4229860960537411810
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411808].action
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[4229860960537411810].option
       value: 0
       objectReference: {fileID: 0}
@@ -5063,10 +4603,6 @@ PrefabInstance:
       propertyPath: managedReferences[4229860960537411810].prefab
       value: 
       objectReference: {fileID: 3101030846031512032, guid: b5b82b742fb5f6f4a99c96f7c6fe95a2, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411810].showOnlyWhenCreated
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[1249993174685319192].onActivate.Array.size
       value: 1
@@ -5082,10 +4618,6 @@ PrefabInstance:
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: m_fontSize
       value: 52.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: localizationData.key
-      value: delete
       objectReference: {fileID: 0}
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: localizationData.tableData
@@ -5166,10 +4698,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: 'managedReferences[4229860960537411796]'
-      value: LSCore.LifecycleSystem LSCore.LifecycleSystem.LifecycleObject/ActionWrapper
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: 'managedReferences[4229860960537411800]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -5186,10 +4714,6 @@ PrefabInstance:
       value: 4229860960537411800
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411796].action
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[4229860960537411800].option
       value: 0
       objectReference: {fileID: 0}
@@ -5197,26 +4721,6 @@ PrefabInstance:
       propertyPath: managedReferences[4229860960537411800].prefab
       value: 
       objectReference: {fileID: 3101030846031512032, guid: b5b82b742fb5f6f4a99c96f7c6fe95a2, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042589].settings.clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d2dc2b00d006a4844989e8946ae0fcd6, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042589].settings.loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042589].settings.group
-      value: 
-      objectReference: {fileID: 4589851771290346213, guid: 72496f9913afa6746a6f16a28a67d8b3, type: 2}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042589].settings.volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411800].showOnlyWhenCreated
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[1249993174685319192].onActivate.Array.size
       value: 1
@@ -5240,10 +4744,6 @@ PrefabInstance:
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: m_fontSizeMax
       value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: localizationData.key
-      value: privacyPolicy
       objectReference: {fileID: 0}
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: localizationData.tableData
@@ -5420,17 +4920,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
---- !u!114 &346413723149164002 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
-  m_PrefabInstance: {fileID: 8470215275472763781}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3606705445229570570 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
@@ -5537,17 +5026,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
---- !u!114 &812103583936981028 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8161237861665105511, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
-  m_PrefabInstance: {fileID: 8793174301775154755}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed241b6043c849b0a807a08b0de04447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &4433241759134441420 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5152584803132117391, guid: 7dcdd2e6125cbff4ab407b7dff71d128, type: 3}
@@ -5578,10 +5056,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: 'managedReferences[4229860960537411799]'
-      value: LSCore.LifecycleSystem LSCore.LifecycleSystem.LifecycleObject/ActionWrapper
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: 'managedReferences[4229860960537411803]'
       value: LSCore.WindowModule LSCore.CreateOrShowCanvasView
       objectReference: {fileID: 0}
@@ -5598,10 +5072,6 @@ PrefabInstance:
       value: 4229860960537411803
       objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411799].action
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[4229860960537411803].option
       value: 0
       objectReference: {fileID: 0}
@@ -5609,26 +5079,6 @@ PrefabInstance:
       propertyPath: managedReferences[4229860960537411803].prefab
       value: 
       objectReference: {fileID: 3101030846031512032, guid: b5b82b742fb5f6f4a99c96f7c6fe95a2, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042590].settings.clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d2dc2b00d006a4844989e8946ae0fcd6, type: 3}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042590].settings.loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042590].settings.group
-      value: 
-      objectReference: {fileID: 4589851771290346213, guid: 72496f9913afa6746a6f16a28a67d8b3, type: 2}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4216535028436042590].settings.volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: managedReferences[4229860960537411803].showOnlyWhenCreated
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1859483897607432842, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: managedReferences[1249993174685319192].onActivate.Array.size
       value: 1
@@ -5652,10 +5102,6 @@ PrefabInstance:
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: m_fontSizeMax
       value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
-      propertyPath: localizationData.key
-      value: termsOfUse
       objectReference: {fileID: 0}
     - target: {fileID: 4061825190820478645, guid: f3d725f412b4aeb469cbfa4f5314b19c, type: 3}
       propertyPath: localizationData.tableData

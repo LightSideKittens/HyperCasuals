@@ -149,81 +149,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doIts:
-  - rid: 5237654867536249117
-  - rid: 5237654867536249119
-  - rid: 5237654867536249120
-  - rid: 5237654867536249121
-  - rid: 5237654867536249122
-  - rid: 5237654867536249128
+  - rid: -2
+  - rid: -2
+  - rid: -2
+  - rid: -2
+  - rid: -2
+  - rid: -2
   references:
     version: 2
     RefIds:
-    - rid: 5237654867536249117
-      type: {class: 'SetKeyBuffer`1[[UnityEngine.UI.Image, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
-      data:
-        root: {fileID: 51005426}
-        key: Image1
-        data:
-          rid: 5237654867536249123
-    - rid: 5237654867536249119
-      type: {class: 'SetKeyBuffer`1[[UnityEngine.UI.Image, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
-      data:
-        root: {fileID: 51005426}
-        key: Image2
-        data:
-          rid: 5237654867536249124
-    - rid: 5237654867536249120
-      type: {class: 'SetKeyBuffer`1[[UnityEngine.UI.Image, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
-      data:
-        root: {fileID: 51005426}
-        key: Image3
-        data:
-          rid: 5237654867536249125
-    - rid: 5237654867536249121
-      type: {class: 'SetKeyBuffer`1[[TMPro.TMP_Text, Unity.TextMeshPro]]', ns: , asm: LSCore.DoIt}
-      data:
-        root: {fileID: 51005426}
-        key: Text1
-        data:
-          rid: 5237654867536249126
-    - rid: 5237654867536249122
-      type: {class: 'SetKeyBuffer`1[[TMPro.TMP_Text, Unity.TextMeshPro]]', ns: , asm: LSCore.DoIt}
-      data:
-        root: {fileID: 51005426}
-        key: Text2
-        data:
-          rid: 5237654867536249127
-    - rid: 5237654867536249123
-      type: {class: 'SerializeField`1[[UnityEngine.UI.Image, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 864013672}
-    - rid: 5237654867536249124
-      type: {class: 'SerializeField`1[[UnityEngine.UI.Image, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 150792704}
-    - rid: 5237654867536249125
-      type: {class: 'SerializeField`1[[UnityEngine.UI.Image, UnityEngine.UI]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 1853352442}
-    - rid: 5237654867536249126
-      type: {class: 'SerializeField`1[[TMPro.TMP_Text, Unity.TextMeshPro]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 349218581}
-    - rid: 5237654867536249127
-      type: {class: 'SerializeField`1[[TMPro.TMP_Text, Unity.TextMeshPro]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 969952540}
-    - rid: 5237654867536249128
-      type: {class: 'SetKeyBuffer`1[[TMPro.TMP_Text, Unity.TextMeshPro]]', ns: , asm: LSCore.DoIt}
-      data:
-        root: {fileID: 51005426}
-        key: Text3
-        data:
-          rid: 5237654867536249129
-    - rid: 5237654867536249129
-      type: {class: 'SerializeField`1[[TMPro.TMP_Text, Unity.TextMeshPro]]', ns: , asm: LSCore.DoIt}
-      data:
-        data: {fileID: 65839146}
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!4 &51005427
 Transform:
   m_ObjectHideFlags: 0
@@ -923,6 +859,8 @@ MonoBehaviour:
   - {fileID: 3336885545345226480, guid: 4f3b657ef6de4c7488a53c92b10b5e91, type: 3}
   - {fileID: 1103241595844779425, guid: 18ebb76ec1804484f97218fb7e1836c6, type: 3}
   onAwake: []
+  onInit: []
+  background: {fileID: 0}
   references:
     version: 2
     RefIds: []
