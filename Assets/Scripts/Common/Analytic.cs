@@ -67,6 +67,7 @@ public static class Analytic
         });
     }
     
+    
     private static void SetUserProperty(string name, string value)
     {
         Burger.Log($"{log} SetUserProperty {name} = {value}");

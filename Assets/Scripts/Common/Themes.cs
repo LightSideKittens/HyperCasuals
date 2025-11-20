@@ -19,7 +19,7 @@ public partial class Themes : SingleScriptableObject<Themes>
     
     public static void PlayMusic()
     {
-        GameSave.Config["theme"].ListenAndCall(Instance.Internal_PlayMusic);
+        GameSave.Config.ListenAndCall("theme", Instance.Internal_PlayMusic);
     }
 
     private void Internal_PlayMusic()

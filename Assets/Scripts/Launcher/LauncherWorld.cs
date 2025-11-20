@@ -1,6 +1,7 @@
 ﻿using LSCore;
 using LSCore.Extensions;
 using Newtonsoft.Json.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,10 +22,10 @@ namespace Launcher
                 GameSave.currentLevel = null;
             }
         }
-
+        
         private void Init()
         {
-            GameSave.Config["theme"].ListenAndCall(UpdateBackground);
+            GameSave.Config.ListenAndCall("theme", UpdateBackground);
             MainWindow.AsHome();
             MainWindow.Show();
             
@@ -34,7 +35,7 @@ namespace Launcher
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            GameSave.Config["theme"].UnListen(UpdateBackground);
+            GameSave.Config.UnListen("theme", UpdateBackground);
         }
 
         private void UpdateBackground()
