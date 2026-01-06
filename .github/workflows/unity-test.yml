@@ -1,0 +1,118 @@
+name: Unity Build & Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      unity_version:
+        description: 'Unity Version'
+        type: choice
+        default: '2022.3'
+        options:
+          - '2021.3'
+          - '2022.3'
+          - '6000.0'
+          - 'all'
+
+      platform:
+        description: 'Build Platform'
+        type: choice
+        default: 'StandaloneWindows64'
+        options:
+          - 'StandaloneWindows64'
+          - 'StandaloneOSX'
+          - 'StandaloneLinux64'
+          - 'WebGL'
+          - 'all'
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
+jobs:
+  # Determine which configurations to run
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          UNITY_VERSION="${{ github.event.inputs.unity_version }}"
+          PLATFORM="${{ github.event.inputs.platform }}"
+
+          # Define all versions and platforms
+          ALL_VERSIONS='["2021.3", "2022.3", "6000.0"]'
+          ALL_PLATFORMS='["StandaloneWindows64", "StandaloneOSX", "StandaloneLinux64", "WebGL"]'
+
+          # Determine versions to use
+          if [ "$UNITY_VERSION" = "all" ]; then
+            VERSIONS=$ALL_VERSIONS
+          else
+            VERSIONS="[\"$UNITY_VERSION\"]"
+          fi
+
+          # Determine platforms to use
+          if [ "$PLATFORM" = "all" ]; then
+            PLATFORMS=$ALL_PLATFORMS
+          else
+            PLATFORMS="[\"$PLATFORM\"]"
+          fi
+
+          # Create matrix JSON
+          MATRIX="{\"unity_version\": $VERSIONS, \"platform\": $PLATFORMS}"
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+          echo "Generated matrix: $MATRIX"
+
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Cache Unity Library
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ matrix.platform }}-${{ matrix.unity_version }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-${{ matrix.platform }}-${{ matrix.unity_version }}-
+            Library-${{ matrix.platform }}-
+            Library-
+
+      - name: Build Unity Project
+        uses: game-ci/unity-builder@v4
+        with:
+          unityVersion: ${{ matrix.unity_version }}
+          targetPlatform: ${{ matrix.platform }}
+          buildName: LittleLand
+          buildsPath: build
+          allowDirtyBuild: true
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-${{ matrix.unity_version }}-${{ matrix.platform }}
+          path: build
+          retention-days: 7
+
+  # Summary job
+  summary:
+    needs: build
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Build Summary
+        run: |
+          echo "## Build Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Unity Version | Platform | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------------|----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "Configuration: ${{ github.event.inputs.unity_version }} / ${{ github.event.inputs.platform }}" >> $GITHUB_STEP_SUMMARY

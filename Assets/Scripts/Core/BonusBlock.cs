@@ -1,11 +1,12 @@
 ﻿using DG.Tweening;
+using LSCore;
 using LSCore.AnimationsModule;
 using TMPro;
 using UnityEngine;
 
 public class BonusBlock : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro text;
+    [SerializeField] private LSText text;
     public AnimSequencer appearAnim;
     public AnimSequencer changeAnim;
     public AnimSequencer destroyAnim;

@@ -77,7 +77,7 @@ public class Dragger : MonoBehaviour
             
             if (needMove)
             {
-                currentShape.transform.position = touchPosition + (Vector3) touchOffset + offset + (touchPosition - startTouchPos) / 2;
+                currentShape.transform.position = touchPosition + (Vector3) touchOffset + offset + (touchPosition - startTouchPos) / 4;
             }
         }
     }
